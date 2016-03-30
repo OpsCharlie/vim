@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/carl/vagrant/s/ubu14_04_lamp_ansible/roles/nginx'
+let g:netrw_dirhist_2='/home/carl/vagrant/s/ubu14_04_lamp_ansible/roles/nginx/tasks'
+let g:netrw_dirhist_3='/home/carl/vagrant/ubu14_04_lamp_ansible'
+let g:netrw_dirhist_4='/home/carl/vagrant/ubu14_04_lamp_ansible/roles/xdebug/tasks'
+let g:netrw_dirhist_5='/home/carl/Notebooks/ansible/roles/awstats/meta'
+let g:netrw_dirhist_6='/home/carl/.tmux'
+let g:netrw_dirhist_7='/home/carl'
+let g:netrw_dirhist_8='/home/carl/.nano'
+let g:netrw_dirhist_9='/home/carl'
