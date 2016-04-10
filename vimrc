@@ -127,3 +127,54 @@ let g:auto_save = 0                  " enable AutoSave on Vim startup
 "let g:auto_save_in_insert_mode = 0   " do not save while in insert mode
 "let g:auto_save_silent = 1           " do not display the auto-save notification
 "let g:auto_save_postsave_hook = 'TagsGenerate'  " this will run :TagsGenerate after each save
+
+
+
+" toggle comment with control e
+let s:comment_map = { 
+    \   "c": '\/\/',
+    \   "cpp": '\/\/',
+    \   "go": '\/\/',
+    \   "java": '\/\/',
+    \   "javascript": '\/\/',
+    \   "scala": '\/\/',
+    \   "php": '\/\/',
+    \   "python": '#',
+    \   "ruby": '#',
+    \   "sh": '#',
+    \   "desktop": '#',
+    \   "fstab": '#',
+    \   "conf": '#',
+    \   "profile": '#',
+    \   "bashrc": '#',
+    \   "bash_profile": '#',
+    \   "mail": '>',
+    \   "eml": '>',
+    \   "bat": 'REM',
+    \   "ahk": ';',
+    \   "vim": '"',
+    \   "tex": '%',
+    \ }
+
+function! ToggleComment()
+    if has_key(s:comment_map, &filetype)
+        let comment_leader = s:comment_map[&filetype]
+    if getline('.') =~ "^\\s*" . comment_leader . " " 
+        " Uncomment the line
+        execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
+    else 
+        if getline('.') =~ "^\\s*" . comment_leader
+            " Uncomment the line
+            execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
+        else
+            " Comment the line
+            execute "silent s/^\\(\\s*\\)/\\1" . comment_leader . " /"
+        end
+    end
+    else
+        echo "No comment leader found for filetype"
+    end
+endfunction
+
+nnoremap <C-e> :call ToggleComment()<cr>
+vnoremap <C-e> :call ToggleComment()<cr>
