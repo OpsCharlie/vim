@@ -87,8 +87,8 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 "NERDTree start if no files are selected
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "NERDTRee ctrl-n
 map <C-n> :NERDTreeToggle<CR>
