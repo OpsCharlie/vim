@@ -154,6 +154,7 @@ let s:comment_map = {
     \   "ahk": ';',
     \   "vim": '"',
     \   "tex": '%',
+    \   "ansible": '#',
     \ }
 
 function! ToggleComment()
