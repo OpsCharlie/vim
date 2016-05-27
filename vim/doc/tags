@@ -11,6 +11,12 @@ g:SuperTabMappingTabLiteral	supertab.txt	/*g:SuperTabMappingTabLiteral*
 g:SuperTabNoCompleteAfter	supertab.txt	/*g:SuperTabNoCompleteAfter*
 g:SuperTabNoCompleteBefore	supertab.txt	/*g:SuperTabNoCompleteBefore*
 g:SuperTabRetainCompletionDuration	supertab.txt	/*g:SuperTabRetainCompletionDuration*
+insertlessly	insertlessly.txt	/*insertlessly*
+insertlessly-author	insertlessly.txt	/*insertlessly-author*
+insertlessly-configuration	insertlessly.txt	/*insertlessly-configuration*
+insertlessly-features	insertlessly.txt	/*insertlessly-features*
+insertlessly-issues	insertlessly.txt	/*insertlessly-issues*
+insertlessly.txt	insertlessly.txt	/*insertlessly.txt*
 supertab	supertab.txt	/*supertab*
 supertab-closepreviewonpopupclose	supertab.txt	/*supertab-closepreviewonpopupclose*
 supertab-completionchaining	supertab.txt	/*supertab-completionchaining*
