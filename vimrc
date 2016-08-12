@@ -19,7 +19,7 @@ set showmatch       "Show matching brackets when text indicator is over them
 set expandtab       "Use spaces instead of tabs
 set smarttab        "Be smart when using tabs
 set shiftwidth=4    "retab 1 tab == 4 spaces
-set tabstop=4       "number of space 
+set tabstop=4       "number of space
 "set ai              "Auto indent
 "set si              "Smart indent
 set wrap            "Wrap lines
@@ -131,7 +131,7 @@ let g:auto_save = 0                  " enable AutoSave on Vim startup
 
 
 " toggle comment with control e
-let s:comment_map = { 
+let s:comment_map = {
     \   "c": '\/\/',
     \   "cpp": '\/\/',
     \   "go": '\/\/',
@@ -155,15 +155,16 @@ let s:comment_map = {
     \   "vim": '"',
     \   "tex": '%',
     \   "ansible": '#',
+    \   "nginx": '#',
     \ }
 
 function! ToggleComment()
     if has_key(s:comment_map, &filetype)
         let comment_leader = s:comment_map[&filetype]
-    if getline('.') =~ "^\\s*" . comment_leader . " " 
+    if getline('.') =~ "^\\s*" . comment_leader . " "
         " Uncomment the line
         execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
-    else 
+    else
         if getline('.') =~ "^\\s*" . comment_leader
             " Uncomment the line
             execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
