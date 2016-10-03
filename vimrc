@@ -6,9 +6,9 @@ syntax enable       "Enable syntax highlighting
 set history=700     "Sets how many lines of history VIM has to remember
 set autoread        " Set to auto read when a file is changed from the outside
 set term=xterm      "for byobu/tmux control arrow keys
-set nu              "set numbers
+set relativenumber  "set numbers
 set wildmenu        "turnon wildmenu
-set showcmd
+set showcmd         "display incomplete commands
 set hlsearch        "Highlight search results
 set ruler           "Always show current position
 set mouse=a         "use mouse
@@ -26,6 +26,7 @@ set wrap            "Wrap lines
 set laststatus=2    "Always show the status line
 set clipboard=unnamedplus  "use system clipboard
 set timeoutlen=500 ttimeoutlen=0    "disable escape timeout
+set scrolloff=4     " keep at least 3 lines below or above cursor
 
 
 
@@ -51,6 +52,8 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 set t_Co=256
 colorscheme railscasts
+highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
 
 
 " Put plugins and dictionaries in this dir
@@ -111,9 +114,10 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
 
 
 ""Autosave files when focus is lost
@@ -180,3 +184,12 @@ endfunction
 
 nnoremap <C-e> :call ToggleComment()<cr>
 vnoremap <C-e> :call ToggleComment()<cr>
+
+
+" airline
+let g:airline_theme='term'
+let g:airline_powerline_fonts=0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#whitespace#enabled = 0
+

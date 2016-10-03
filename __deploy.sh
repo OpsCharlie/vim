@@ -5,10 +5,12 @@ DIR=$(dirname $(readlink -f $0))
 
 if [ -z $P ]; then
     echo copy files to homedir
-    mv ~/.vim ~/.vim.bak
-    mv ~/.vimrc ~/.vimrc.bak
-    ln -s $DIR/vim ~/.vim
-    ln -s $DIR/vimrc ~/.vimrc
+    #mv ~/.vim ~/.vim.bak
+    #mv ~/.vimrc ~/.vimrc.bak
+    #ln -s $DIR/vim ~/.vim
+    #ln -s $DIR/vimrc ~/.vimrc
+    cp -a $DIR/vim ~/.vim
+    cp -a $DIR/vimrc ~/.vimrc
     exit $?
 fi
 
