@@ -159,6 +159,7 @@ let s:comment_map = {
     \   "vim": '"',
     \   "tex": '%',
     \   "ansible": '#',
+    \   "ansible_hosts": '#',
     \   "nginx": '#',
     \ }
 
