@@ -9,7 +9,7 @@ if [ -z $P ]; then
     #mv ~/.vimrc ~/.vimrc.bak
     #ln -s $DIR/vim ~/.vim
     #ln -s $DIR/vimrc ~/.vimrc
-    cp -a $DIR/vim ~/.vim
+    cp -a $DIR/vim/ ~/.vim/
     cp -a $DIR/vimrc ~/.vimrc
     exit $?
 fi
