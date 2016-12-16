@@ -1,3 +1,24 @@
+" Install plugins: :PluginInstall or vim +PluginInstall +qall
+" set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'chase/vim-ansible-yaml'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
 filetype plugin on  "Enable filetype plugins
 filetype indent on
 
@@ -27,6 +48,10 @@ set laststatus=2    "Always show the status line
 set clipboard=unnamedplus  "use system clipboard
 set timeoutlen=500 ttimeoutlen=0    "disable escape timeout
 set scrolloff=4     " keep at least 3 lines below or above cursor
+set t_Co=256
+colorscheme railscasts
+highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
 
 
 
@@ -40,32 +65,10 @@ endfunction
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l " Format the status line
 
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
-set t_Co=256
-colorscheme railscasts
-highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-
-
-
-" Put plugins and dictionaries in this dir
-let vimDir = '$HOME/.vim'
-let &runtimepath.=','.vimDir
-
-
-execute pathogen#infect()
-call pathogen#helptags()
-
 
 " Keep undo history across sessions by storing it in a file
+"let vimDir = '$HOME/.vim'
+"let &runtimepath.=','.vimDir
 "if has('persistent_undo')
 "    let myUndoDir = expand(vimDir . '/undodir')
 "    " Create dirs
@@ -102,6 +105,13 @@ nnoremap <C-S-t> :tabprevious<CR>
 nnoremap <C-t>   :tabnext<CR>
 inoremap <C-S-t> <Esc>:tabprevious<CR>i
 inoremap <C-t>   <Esc>:tabnext<CR>i
+
+"Easy buffers
+nnoremap <C-S-b> :bprevious<CR>
+nnoremap <C-b>   :bnext<CR>
+inoremap <C-S-b> <Esc>:bprevious<CR>i
+inoremap <C-b>   <Esc>:bnext<CR>i
+
 
 
 "Ansible
@@ -194,3 +204,5 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#whitespace#enabled = 0
 
+" put quotes around bash variable
+nnoremap sq :silent! normal mpea"<Esc>bhi"<Esc>`pl
