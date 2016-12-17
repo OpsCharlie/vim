@@ -5,7 +5,7 @@ DIR=$(dirname $(readlink -f $0))
 
 if [ -z "$P" ]; then
     echo copy files to homedir
-    cp -a "$DIR/vim/" ~/.vim/
+    rsync -a --delete "$DIR/vim/" ~/.vim/
     cp -a "$DIR/vimrc" ~/.vimrc
     vim +PluginInstall +qall
     exit $?

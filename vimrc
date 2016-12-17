@@ -206,3 +206,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " put quotes around bash variable
 nnoremap sq :silent! normal mpea"<Esc>bhi"<Esc>`pl
+
+" put box around comment
+let @b='^i# $a #yypVr#yykP'
+
