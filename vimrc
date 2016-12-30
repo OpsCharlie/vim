@@ -28,6 +28,7 @@ set history=700     "Sets how many lines of history VIM has to remember
 set autoread        " Set to auto read when a file is changed from the outside
 set term=xterm      "for byobu/tmux control arrow keys
 set relativenumber  "set numbers
+set number          "set numbers
 set wildmenu        "turnon wildmenu
 set showcmd         "display incomplete commands
 set hlsearch        "Highlight search results
