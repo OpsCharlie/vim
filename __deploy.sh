@@ -18,7 +18,9 @@ if [ "$(expr match "$P" '.*\(:\)')" = ":" ]; then
     exit 1
 fi
 
-rsync -avz --delete --exclude ".git" "$DIR/vim/" "$P":~/.vim
-rsync -avz --delete --exclude ".git" "$DIR"/vimrc "$P":~/.vimrc
+# rsync -avz --delete --exclude ".git" "$DIR/vim/" "$P":~/.vim
+# rsync -avz --delete --exclude ".git" "$DIR"/vimrc "$P":~/.vimrc
+rsync -avz --delete "$DIR/vim/" "$P":~/.vim
+rsync -avz --delete "$DIR"/vimrc "$P":~/.vimrc
 # ssh "$P" "vim +PluginInstall +qall"
 
