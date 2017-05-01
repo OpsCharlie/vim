@@ -12,7 +12,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'chase/vim-ansible-yaml'
-
+Plugin 'christoomey/vim-tmux-navigator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -113,6 +113,11 @@ nnoremap <C-b>   :bnext<CR>
 inoremap <C-S-b> <Esc>:bprevious<CR>i
 inoremap <C-b>   <Esc>:bnext<CR>i
 
+"Easy moving windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 
 "Ansible
