@@ -7,7 +7,6 @@ if [ -z "$P" ]; then
     echo copy files to homedir
     rsync -a --delete "$DIR/vim/" ~/.vim/
     cp -a "$DIR/vimrc" ~/.vimrc
-    vim +PluginInstall +qall
     exit $?
 fi
 

@@ -1,22 +1,29 @@
 " Install plugins: :PluginInstall or vim +PluginInstall +qall
-" set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'chase/vim-ansible-yaml'
-Plugin 'christoomey/vim-tmux-navigator'
+" vim-plug (https://github.com/junegunn/vim-plug) settings
+" Automatically install vim-plug and run PlugInstall if vim-plug not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'vim-syntastic/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chase/vim-ansible-yaml'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dahu/Insertlessly'
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/vim-auto-save'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
+
 
 
 filetype plugin on  "Enable filetype plugins
@@ -67,17 +74,25 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 
 
 
+" Save temporary/backup files not in the local directory, but in your ~/.vim
+" directory, to keep them out of git repos.
+" But first mkdir backup, swap, and undo first to make this work
+call system('mkdir ~/.vim')
+call system('mkdir ~/.vim/backup')
+call system('mkdir ~/.vim/swap')
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
 " Keep undo history across sessions by storing it in a file
-"let vimDir = '$HOME/.vim'
-"let &runtimepath.=','.vimDir
-"if has('persistent_undo')
-"    let myUndoDir = expand(vimDir . '/undodir')
-"    " Create dirs
-"    call system('mkdir ' . vimDir)
-"    call system('mkdir ' . myUndoDir)
-"    let &undodir = myUndoDir
-"    set undofile
-"endif
+if has('persistent_undo')
+    call system('mkdir ~/.vim/undo')
+    set undodir=~/.vim/undo//
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
+
+
 
 
 "ctrl-c ctrl-v capabilities
@@ -87,11 +102,16 @@ vmap <C-v> c<ESC>"+p
 imap <C-v> <C-r><C-o>+
 imap <C-z> <ESC>ui
 
+
+
 "write with sudo
 cmap w!! w !sudo tee % >/dev/null
 
+
 "clear highlight from selection/search
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
+
+
 
 "NERDTree start if no files are selected
 "autocmd StdinReadPre * let s:std_in=1
@@ -99,6 +119,7 @@ nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 "NERDTRee ctrl-n
 map <C-n> :NERDTreeToggle<CR>
+
 
 
 "Easy tabs
