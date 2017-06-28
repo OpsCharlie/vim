@@ -12,14 +12,15 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dahu/Insertlessly'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/vim-auto-save'
+Plug 'dhruvasagar/vim-table-mode'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -48,6 +49,7 @@ set showmatch       "Show matching brackets when text indicator is over them
 set expandtab       "Use spaces instead of tabs
 set smarttab        "Be smart when using tabs
 set shiftwidth=4    "retab 1 tab == 4 spaces
+set shiftround      " use multiple of shiftwidth when indenting with '<' and '>'"
 set tabstop=4       "number of space
 "set ai              "Auto indent
 "set si              "Smart indent
@@ -56,21 +58,41 @@ set laststatus=2    "Always show the status line
 set clipboard=unnamedplus  "use system clipboard
 set timeoutlen=500 ttimeoutlen=0    "disable escape timeout
 set scrolloff=4     " keep at least 3 lines below or above cursor
+set list
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·   "highlight whitespaces
 set t_Co=256
+"set paste           " disable indent on copy
+
 colorscheme railscasts
 highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 
 
 
-" Returns true if paste mode is enabled
+" STATUS LINE
 function! HasPaste()
     if &paste
-        return 'PASTE MODE   '
+        return 'PASTE MODE '
     en
     return ''
 endfunction
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l " Format the status line
+
+function! HasTable()
+    if tablemode#IsActive()
+        return 'TABLE MODE '
+    en
+    return ''
+endfunction
+
+" Format the status line
+set statusline=\ %{HasPaste()}   " PASTE mode enabled
+set statusline+=\ %{HasTable()}  " TABLE mode enabled
+set statusline+=%.40F            " file name
+set statusline+=%m%r%h\ %w       " flags
+set statusline+=\ FileType:\ %y  " file type
+set statusline+=%=               " right align
+set statusline+=%c,%l/%L         " column, linenumber/linenumbers
+set statusline+=\ %P             " percent through file
 
 
 
@@ -91,7 +113,6 @@ if has('persistent_undo')
     set undolevels=1000
     set undoreload=10000
 endif
-
 
 
 
