@@ -10,17 +10,25 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'roxma/vim-paste-easy'
 Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'chase/vim-ansible-yaml'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dahu/Insertlessly'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
-Plug 'vim-scripts/vim-auto-save'
+" Plug 'vim-scripts/vim-auto-save'
 Plug 'dhruvasagar/vim-table-mode'
+
+" Plug 'SirVer/ultisnips'
+" Plug 'phenomenes/ansible-snippets'
+" Plug 'micahelliott/rocannon'
+Plug 'pearofducks/ansible-vim'
+" Plug 'chase/vim-ansible-yaml'
+
+Plug 'fatih/vim-nginx'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -69,30 +77,30 @@ highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 
 
 
-" STATUS LINE
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE '
-    en
-    return ''
-endfunction
-
-function! HasTable()
-    if tablemode#IsActive()
-        return 'TABLE MODE '
-    en
-    return ''
-endfunction
-
-" Format the status line
-set statusline=\ %{HasPaste()}   " PASTE mode enabled
-set statusline+=\ %{HasTable()}  " TABLE mode enabled
-set statusline+=%.40F            " file name
-set statusline+=%m%r%h\ %w       " flags
-set statusline+=\ FileType:\ %y  " file type
-set statusline+=%=               " right align
-set statusline+=%c,%l/%L         " column, linenumber/linenumbers
-set statusline+=\ %P             " percent through file
+""" STATUS LINE
+""function! HasPaste()
+""    if &paste
+""        return 'PASTE MODE '
+""    en
+""    return ''
+""endfunction
+""
+""function! HasTable()
+""    if tablemode#IsActive()
+""        return 'TABLE MODE '
+""    en
+""    return ''
+""endfunction
+""
+""" Format the status line
+""set statusline=\ %{HasPaste()}   " PASTE mode enabled
+""set statusline+=\ %{HasTable()}  " TABLE mode enabled
+""set statusline+=%.40F            " file name
+""set statusline+=%m%r%h\ %w       " flags
+""set statusline+=\ FileType:\ %y  " file type
+""set statusline+=%=               " right align
+""set statusline+=%c,%l/%L         " column, linenumber/linenumbers
+""set statusline+=\ %P             " percent through file
 
 
 
@@ -167,9 +175,9 @@ let g:ansible_options = {'ignore_blank_lines': 0}
 
 "Syntastic
 "au BufNewFile,BufRead *.yml set filetype=ansible
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
