@@ -158,10 +158,10 @@ inoremap <C-S-t> <Esc>:tabprevious<CR>i
 inoremap <C-t>   <Esc>:tabnext<CR>i
 
 "Easy buffers
-nnoremap <C-S-b> :bprevious<CR>
-nnoremap <C-b>   :bnext<CR>
-inoremap <C-S-b> <Esc>:bprevious<CR>i
-inoremap <C-b>   <Esc>:bnext<CR>i
+" nnoremap <C-S-b> :bprevious<CR>
+" nnoremap <C-b>   :bnext<CR>
+" inoremap <C-S-b> <Esc>:bprevious<CR>i
+" inoremap <C-b>   <Esc>:bnext<CR>i
 
 "Easy moving windows
 nnoremap <C-J> <C-W><C-J>
