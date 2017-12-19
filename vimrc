@@ -10,7 +10,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'roxma/vim-paste-easy'
+" Plug 'roxma/vim-paste-easy'
 Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
@@ -169,6 +169,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"Center search result
+nnoremap n nzz
+nnoremap N Nzz
+
 
 "Ansible
 let g:ansible_options = {'ignore_blank_lines': 0}
@@ -227,6 +231,7 @@ let s:comment_map = {
     \   "ansible": '#',
     \   "ansible_hosts": '#',
     \   "nginx": '#',
+    \   "yaml": '#',
     \ }
 
 function! ToggleComment()
