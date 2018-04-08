@@ -25,8 +25,8 @@ Plug 'dhruvasagar/vim-table-mode'
 " Plug 'SirVer/ultisnips'
 " Plug 'phenomenes/ansible-snippets'
 " Plug 'micahelliott/rocannon'
-Plug 'pearofducks/ansible-vim'
-" Plug 'chase/vim-ansible-yaml'
+" Plug 'pearofducks/ansible-vim'
+Plug 'chase/vim-ansible-yaml'
 
 Plug 'fatih/vim-nginx'
 
