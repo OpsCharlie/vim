@@ -30,8 +30,9 @@ Plug 'chase/vim-ansible-yaml'
 
 Plug 'fatih/vim-nginx'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'vim-vdebug/vdebug'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'vim-vdebug/vdebug'
+" Plug 'WolfgangMehner/bash-support'
 
 Plug 'c0r73x/vimdir.vim'
 " All of your Plugins must be added before the following line
