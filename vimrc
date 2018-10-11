@@ -277,3 +277,5 @@ nnoremap sq :silent! normal mpea"<Esc>bhi"<Esc>`pl
 " put box around comment
 let @b='^i# $a #yypVr#yykP'
 
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsEditSplit="vertical"
