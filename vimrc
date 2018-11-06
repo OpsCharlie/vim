@@ -279,3 +279,6 @@ let @b='^i# $a #yypVr#yykP'
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
+
+let g:BASH_MapLeader  = ','
+let g:BASH_Ctrl_j = 'no'
