@@ -22,19 +22,19 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'vim-scripts/vim-auto-save'
 Plug 'dhruvasagar/vim-table-mode'
 
-" Plug 'SirVer/ultisnips'
-" Plug 'phenomenes/ansible-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'phenomenes/ansible-snippets'
 " Plug 'micahelliott/rocannon'
-" Plug 'pearofducks/ansible-vim'
-Plug 'chase/vim-ansible-yaml'
+Plug 'pearofducks/ansible-vim'
+" Plug 'chase/vim-ansible-yaml'
 
 Plug 'fatih/vim-nginx'
 
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plug 'vim-vdebug/vdebug'
-" Plug 'WolfgangMehner/bash-support'
 
 Plug 'c0r73x/vimdir.vim'
+Plug 'WolfgangMehner/bash-support'
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -181,6 +181,9 @@ nnoremap N Nzz
 
 "Ansible
 let g:ansible_options = {'ignore_blank_lines': 0}
+au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
+let g:ansible_unindent_after_newline = 1
 
 "Syntastic
 "au BufNewFile,BufRead *.yml set filetype=ansible
@@ -235,6 +238,7 @@ let s:comment_map = {
     \   "tex": '%',
     \   "ansible": '#',
     \   "ansible.yaml": '#',
+    \   "yaml.ansible": '#',
     \   "ansible_hosts": '#',
     \   "nginx": '#',
     \   "yaml": '#',
