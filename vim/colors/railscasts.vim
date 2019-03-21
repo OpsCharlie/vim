@@ -33,7 +33,8 @@
 "     term screen-256color-bce
 
 if has("gui_running")
-  set background=dark
+  " set background=dark
+  set background=light
 endif
 hi clear
 if exists("syntax_on")

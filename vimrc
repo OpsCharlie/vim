@@ -21,10 +21,12 @@ Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'vim-scripts/vim-auto-save'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'SirVer/ultisnips'
 Plug 'phenomenes/ansible-snippets'
 " Plug 'micahelliott/rocannon'
+
 Plug 'pearofducks/ansible-vim'
 " Plug 'chase/vim-ansible-yaml'
 
@@ -180,22 +182,23 @@ nnoremap N Nzz
 
 
 "Ansible
-let g:ansible_options = {'ignore_blank_lines': 0}
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
 let g:ansible_unindent_after_newline = 1
 
 "Syntastic
-"au BufNewFile,BufRead *.yml set filetype=ansible
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+" pip install ansible-lint
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+" ignore: [204] Lines should be no longer than 160 chars
+let g:syntastic_ansible_ansible_lint_args = '-x 204'
 
 
 ""Autosave files when focus is lost
@@ -234,6 +237,7 @@ let s:comment_map = {
     \   "eml": '>',
     \   "bat": 'REM',
     \   "ahk": ';',
+    \   "apache": '#',
     \   "vim": '"',
     \   "tex": '%',
     \   "ansible": '#',
