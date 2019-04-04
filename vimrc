@@ -198,7 +198,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 " ignore: [204] Lines should be no longer than 160 chars
-let g:syntastic_ansible_ansible_lint_args = '-x 204'
+let g:syntastic_ansible_ansible_lint_args = '-x 204,301,305'
 
 
 ""Autosave files when focus is lost
