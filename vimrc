@@ -10,34 +10,33 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Plug 'roxma/vim-paste-easy'
-Plug 'ConradIrwin/vim-bracketed-paste'    "set paste when pasting with C-S-v
-Plug 'vim-syntastic/syntastic'
-Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline'
+Plug 'lilydjwg/colorizer'                   "Colorize all text in the form #rgb,...
+Plug 'ConradIrwin/vim-bracketed-paste'      "Set paste when pasting with C-S-v
+Plug 'sheerun/vim-polyglot'                 "File type
+Plug 'vim-syntastic/syntastic'              "Sytax checker
+Plug 'scrooloose/nerdtree'                  "A tree explorer
+Plug 'vim-airline/vim-airline'              "Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dahu/Insertlessly'
-Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
-" Plug 'vim-scripts/vim-auto-save'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'       "Seamless navigation between tmux panes and vim splits
+Plug 'dahu/Insertlessly'                    "Inserts space/enter in norma mode
+Plug 'ervandew/supertab'                    "Allows you to use <Tab> for all your insert completion
+Plug 'jiangmiao/auto-pairs'                 "Insert or delete brackets, parens, quotes in pair
+" Plug 'vim-scripts/vim-auto-save'            "Automatically save changes to disk
+Plug 'dhruvasagar/vim-table-mode'           "Instant table creation
+Plug 'airblade/vim-gitgutter'               "Shows a git diff in the sign column
 
-Plug 'SirVer/ultisnips'
-Plug 'phenomenes/ansible-snippets'
-" Plug 'micahelliott/rocannon'
+Plug 'SirVer/ultisnips'                     "Snippet solution for Vim
+Plug 'phenomenes/ansible-snippets'          "Ansible Vim snippets
+" Plug 'micahelliott/rocannon'                "Vim for Ansible playbooks
+" Plug 'pearofducks/ansible-vim'              "Syntax highlighting Ansible's common filetypes
 
-Plug 'pearofducks/ansible-vim'
-" Plug 'chase/vim-ansible-yaml'
+Plug 'fatih/vim-nginx'                      "Nginx syntax files
 
-Plug 'fatih/vim-nginx'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } "A code-completion engine for Vim
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-" Plug 'vim-vdebug/vdebug'
+Plug 'c0r73x/vimdir.vim'                    "Manage files and directories in vim
+Plug 'WolfgangMehner/bash-support'          "Insert code snippets, run, check, and debug the code
 
-Plug 'c0r73x/vimdir.vim'
-Plug 'WolfgangMehner/bash-support'
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -47,16 +46,20 @@ filetype plugin on  "Enable filetype plugins
 filetype indent on
 
 syntax enable       "Enable syntax highlighting
+syntax sync minlines=300
+set synmaxcol=300
 
 set history=700     "Sets how many lines of history VIM has to remember
 set autoread        "Set to auto read when a file is changed from the outside
 set term=xterm      "for byobu/tmux control arrow keys
-set termguicolors
 set relativenumber  "set numbers
 set number          "set numbers
 set wildmenu        "turnon wildmenu
+" set colorcolumn=80,120    " show column 80 and 120 in different color
+set wildmode=longest,full " command completion longest common part, then all.
 set showcmd         "display incomplete commands
 set hlsearch        "Highlight search results
+set linespace=0     " stick together (usefull for nfo files)
 set ruler           "Always show current position
 set mouse=a         "use mouse
 set ignorecase      "search case insensitive
@@ -79,9 +82,13 @@ set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·   "highlight whitespaces
 set t_Co=256
 
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 colorscheme railscasts
 " highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight clear SignColumn
 
 
 
@@ -119,7 +126,6 @@ imap <C-z> <ESC>ui
 "write with sudo
 cmap w!! w !sudo tee % >/dev/null
 cmap W  silent w !sudo tee % > /dev/null <CR>:edit!<CR>
-" command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 
 
@@ -279,11 +285,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#whitespace#enabled = 0
 
+
 " put quotes around bash variable
 nnoremap sq :silent! normal mpea"<Esc>bhi"<Esc>`pl
 
-" put box around comment
-let @b='^i# $a #yypVr#yykP'
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
