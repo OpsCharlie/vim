@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'lilydjwg/colorizer'                   "Colorize all text in the form #rgb,...
 Plug 'ConradIrwin/vim-bracketed-paste'      "Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 "File type
-Plug 'vim-syntastic/syntastic'              "Sytax checker
+Plug 'vim-syntastic/syntastic'              "Syntax checker
 Plug 'scrooloose/nerdtree'                  "A tree explorer
 Plug 'vim-airline/vim-airline'              "Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
