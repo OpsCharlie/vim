@@ -15,6 +15,9 @@ Plug 'ConradIrwin/vim-bracketed-paste'      "Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 "File type
 Plug 'vim-syntastic/syntastic'              "Syntax checker
 Plug 'scrooloose/nerdtree'                  "A tree explorer
+Plug 'tyok/nerdtree-ack'                    "Search function for nerdtree
+Plug 'mileszs/ack.vim'                      "Search function dependeny
+Plug 'Xuyuanp/nerdtree-git-plugin'          "Git plugin for NERDTree
 Plug 'vim-airline/vim-airline'              "Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'       "Seamless navigation between tmux panes and vim splits
