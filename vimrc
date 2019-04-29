@@ -20,6 +20,7 @@ Plug 'mileszs/ack.vim'                      "Search function dependeny
 Plug 'Xuyuanp/nerdtree-git-plugin'          "Git plugin for NERDTree
 Plug 'vim-airline/vim-airline'              "Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'                   "Git Wrapper
 Plug 'christoomey/vim-tmux-navigator'       "Seamless navigation between tmux panes and vim splits
 Plug 'dahu/Insertlessly'                    "Inserts space/enter in norma mode
 Plug 'ervandew/supertab'                    "Allows you to use <Tab> for all your insert completion
@@ -282,7 +283,7 @@ vnoremap <C-e> :call ToggleComment()<cr>
 
 
 " airline
-let g:airline_theme='term'
+let g:airline_theme='luna'
 let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
