@@ -13,7 +13,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'lilydjwg/colorizer'                   "Colorize all text in the form #rgb,...
 Plug 'ConradIrwin/vim-bracketed-paste'      "Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 "File type
-"Plug 'vim-syntastic/syntastic'              "Syntax checker
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'                  "A tree explorer
 Plug 'scrooloose/nerdcommenter'             "NERD Commenter script
@@ -27,18 +26,13 @@ Plug 'christoomey/vim-tmux-navigator'       "Seamless navigation between tmux pa
 Plug 'dahu/Insertlessly'                    "Inserts space/enter in norma mode
 Plug 'ervandew/supertab'                    "Allows you to use <Tab> for all your insert completion
 Plug 'jiangmiao/auto-pairs'                 "Insert or delete brackets, parens, quotes in pair
-" Plug 'vim-scripts/vim-auto-save'            "Automatically save changes to disk
 Plug 'dhruvasagar/vim-table-mode'           "Instant table creation
 Plug 'airblade/vim-gitgutter'               "Shows a git diff in the sign column
-
 Plug 'SirVer/ultisnips'                     "Snippet solution for Vim
 Plug 'phenomenes/ansible-snippets'          "Ansible Vim snippets
-" Plug 'micahelliott/rocannon'                "Vim for Ansible playbooks
-" Plug 'pearofducks/ansible-vim'              "Syntax highlighting Ansible's common filetypes
-
 Plug 'fatih/vim-nginx'                      "Nginx syntax files
-
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } "A code-completion engine for Vim
+Plug 'c0r73x/vimdir.vim'                    "Manage files and directories in vim
+Plug 'WolfgangMehner/bash-support'          "Insert code snippets, run, check, and debug the code
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -49,8 +43,6 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'c0r73x/vimdir.vim'                    "Manage files and directories in vim
-Plug 'WolfgangMehner/bash-support'          "Insert code snippets, run, check, and debug the code
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -94,7 +86,7 @@ set clipboard=unnamedplus  "use system clipboard
 set timeoutlen=500 ttimeoutlen=0    "disable escape timeout
 set scrolloff=4     " keep at least 3 lines below or above cursor
 set list
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·   "highlight whitespaces
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·   "highlight whitespaces, tab...
 set t_Co=256
 
 if (has("termguicolors"))
@@ -102,7 +94,6 @@ if (has("termguicolors"))
 endif
 
 colorscheme railscasts
-" highlight LineNr term=bold cterm=none ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 highlight clear SignColumn
 
 
@@ -117,7 +108,6 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 
 
-
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
     call system('mkdir ~/.vim/undo')
@@ -127,21 +117,20 @@ if has('persistent_undo')
     set undoreload=10000
 endif
 
+
 " set leader to ,
 let mapleader = ","
-
-
-"ctrl-c ctrl-v capabilities
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <C-r><C-o>+
-imap <C-z> <ESC>ui
 
 
 
 "write with sudo
 cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
+
+
+
+" Zoom/unzoom split
+noremap <Leader>Z <C-W>\| <C-W>_
+noremap <Leader>z <c-w>=
 
 
 
@@ -165,18 +154,6 @@ nnoremap <C-t>   :tabnext<CR>
 inoremap <C-S-t> <Esc>:tabprevious<CR>i
 inoremap <C-t>   <Esc>:tabnext<CR>i
 
-"Easy buffers
-" nnoremap <C-S-b> :bprevious<CR>
-" nnoremap <C-b>   :bnext<CR>
-" inoremap <C-S-b> <Esc>:bprevious<CR>i
-" inoremap <C-b>   <Esc>:bnext<CR>i
-
-"Easy moving windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 
 
 "Center search result
@@ -191,11 +168,6 @@ xnoremap >  >gv
 
 
 
-"Reload .vimtc file on saving
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
-
-
-
 "Restore cursor position when opening file
 autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -203,24 +175,12 @@ autocmd BufReadPost *
     \ endif
 
 
+
 "Ansible
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
 let g:ansible_unindent_after_newline = 1
 
-"Syntastic
-" pip install ansible-lint
-"""set statusline+=%#warningmsg#
-"""set statusline+=%{SyntasticStatuslineFlag()}
-"""set statusline+=%*
-"""let g:syntastic_always_populate_loc_list = 1
-"""let g:syntastic_auto_loc_list = 1
-"""let g:syntastic_check_on_open = 0
-"""let g:syntastic_check_on_wq = 0
-"""let g:syntastic_error_symbol = "✗"
-"""let g:syntastic_warning_symbol = "⚠"
-"""" ignore: [204] Lines should be no longer than 160 chars
-"""let g:syntastic_ansible_ansible_lint_args = '-x 204,301,305'
 
 
 " Ale settings
@@ -229,75 +189,6 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_list_window_size = 5
 
-""Autosave files when focus is lost
-"au FocusLost * silent! wa
-
-
-"Autosave plugin
-"AutoSave is disabled by default, run :AutoSaveToggle to enable/disable it.
-let g:auto_save = 0                  " enable AutoSave on Vim startup
-"let g:auto_save_no_updatetime = 1    " do not change the 'updatetime' option
-"let g:auto_save_in_insert_mode = 0   " do not save while in insert mode
-"let g:auto_save_silent = 1           " do not display the auto-save notification
-"let g:auto_save_postsave_hook = 'TagsGenerate'  " this will run :TagsGenerate after each save
-
-
-
-"" toggle comment with control e
-"let s:comment_map = {
-"    \   "c": '\/\/',
-"    \   "cpp": '\/\/',
-"    \   "go": '\/\/',
-"    \   "java": '\/\/',
-"    \   "javascript": '\/\/',
-"    \   "scala": '\/\/',
-"    \   "php": '\/\/',
-"    \   "python": '#',
-"    \   "ruby": '#',
-"    \   "sh": '#',
-"    \   "desktop": '#',
-"    \   "fstab": '#',
-"    \   "conf": '#',
-"    \   "profile": '#',
-"    \   "bashrc": '#',
-"    \   "bash_profile": '#',
-"    \   "mail": '>',
-"    \   "eml": '>',
-"    \   "bat": 'REM',
-"    \   "ahk": ';',
-"    \   "apache": '#',
-"    \   "vim": '"',
-"    \   "tex": '%',
-"    \   "ansible": '#',
-"    \   "ansible.yaml": '#',
-"    \   "yaml.ansible": '#',
-"    \   "ansible_hosts": '#',
-"    \   "nginx": '#',
-"    \   "yaml": '#',
-"    \ }
-"
-"function! ToggleComment()
-"    if has_key(s:comment_map, &filetype)
-"        let comment_leader = s:comment_map[&filetype]
-"    if getline('.') =~ "^\\s*" . comment_leader . " "
-"        " Uncomment the line
-"        execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
-"    else
-"        if getline('.') =~ "^\\s*" . comment_leader
-"            " Uncomment the line
-"            execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
-"        else
-"            " Comment the line
-"            execute "silent s/^\\(\\s*\\)/\\1" . comment_leader . " /"
-"        end
-"    end
-"    else
-"        echo "No comment leader found for filetype"
-"    end
-"endfunction
-"
-"nnoremap <C-e> :call ToggleComment()<cr>
-"vnoremap <C-e> :call ToggleComment()<cr>
 
 
 " airline
@@ -308,18 +199,23 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#whitespace#enabled = 0
 
 
-" put quotes around bash variable
-nnoremap sq :silent! normal mpea"<Esc>bhi"<Esc>`pl
 
-
+" UltiSnip
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
 
+
+
+" bash-support
 let g:BASH_MapLeader  = ','
 let g:BASH_Ctrl_j = 'no'
 
+
+
+" Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
 
 
 " NERDTree Commenter
@@ -329,3 +225,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
+" C-e to toggle comment
+nmap <C-e> <leader>c<space>
+vmap <C-e> <leader>c<space>
