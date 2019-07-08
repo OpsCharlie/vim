@@ -13,8 +13,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'lilydjwg/colorizer'                   "Colorize all text in the form #rgb,...
 Plug 'ConradIrwin/vim-bracketed-paste'      "Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 "File type
-Plug 'vim-syntastic/syntastic'              "Syntax checker
+"Plug 'vim-syntastic/syntastic'              "Syntax checker
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'                  "A tree explorer
+Plug 'scrooloose/nerdcommenter'             "NERD Commenter script
 Plug 'tyok/nerdtree-ack'                    "Search function for nerdtree
 Plug 'mileszs/ack.vim'                      "Search function dependeny
 Plug 'Xuyuanp/nerdtree-git-plugin'          "Git plugin for NERDTree
@@ -36,7 +38,16 @@ Plug 'phenomenes/ansible-snippets'          "Ansible Vim snippets
 
 Plug 'fatih/vim-nginx'                      "Nginx syntax files
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } "A code-completion engine for Vim
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } "A code-completion engine for Vim
+
+" Deoplete completion framework  "pip3 install pynvim
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 Plug 'c0r73x/vimdir.vim'                    "Manage files and directories in vim
 Plug 'WolfgangMehner/bash-support'          "Insert code snippets, run, check, and debug the code
@@ -116,6 +127,8 @@ if has('persistent_undo')
     set undoreload=10000
 endif
 
+" set leader to ,
+let mapleader = ","
 
 
 "ctrl-c ctrl-v capabilities
@@ -128,8 +141,7 @@ imap <C-z> <ESC>ui
 
 
 "write with sudo
-cmap w!! w !sudo tee % >/dev/null
-cmap W  silent w !sudo tee % > /dev/null <CR>:edit!<CR>
+cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
 
@@ -198,18 +210,24 @@ let g:ansible_unindent_after_newline = 1
 
 "Syntastic
 " pip install ansible-lint
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
-" ignore: [204] Lines should be no longer than 160 chars
-let g:syntastic_ansible_ansible_lint_args = '-x 204,301,305'
+"""set statusline+=%#warningmsg#
+"""set statusline+=%{SyntasticStatuslineFlag()}
+"""set statusline+=%*
+"""let g:syntastic_always_populate_loc_list = 1
+"""let g:syntastic_auto_loc_list = 1
+"""let g:syntastic_check_on_open = 0
+"""let g:syntastic_check_on_wq = 0
+"""let g:syntastic_error_symbol = "✗"
+"""let g:syntastic_warning_symbol = "⚠"
+"""" ignore: [204] Lines should be no longer than 160 chars
+"""let g:syntastic_ansible_ansible_lint_args = '-x 204,301,305'
 
+
+" Ale settings
+let g:ale_open_list = 1 " show list when errors are found
+let g:ale_lint_on_text_changed = 'normal'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_list_window_size = 5
 
 ""Autosave files when focus is lost
 "au FocusLost * silent! wa
@@ -225,61 +243,61 @@ let g:auto_save = 0                  " enable AutoSave on Vim startup
 
 
 
-" toggle comment with control e
-let s:comment_map = {
-    \   "c": '\/\/',
-    \   "cpp": '\/\/',
-    \   "go": '\/\/',
-    \   "java": '\/\/',
-    \   "javascript": '\/\/',
-    \   "scala": '\/\/',
-    \   "php": '\/\/',
-    \   "python": '#',
-    \   "ruby": '#',
-    \   "sh": '#',
-    \   "desktop": '#',
-    \   "fstab": '#',
-    \   "conf": '#',
-    \   "profile": '#',
-    \   "bashrc": '#',
-    \   "bash_profile": '#',
-    \   "mail": '>',
-    \   "eml": '>',
-    \   "bat": 'REM',
-    \   "ahk": ';',
-    \   "apache": '#',
-    \   "vim": '"',
-    \   "tex": '%',
-    \   "ansible": '#',
-    \   "ansible.yaml": '#',
-    \   "yaml.ansible": '#',
-    \   "ansible_hosts": '#',
-    \   "nginx": '#',
-    \   "yaml": '#',
-    \ }
-
-function! ToggleComment()
-    if has_key(s:comment_map, &filetype)
-        let comment_leader = s:comment_map[&filetype]
-    if getline('.') =~ "^\\s*" . comment_leader . " "
-        " Uncomment the line
-        execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
-    else
-        if getline('.') =~ "^\\s*" . comment_leader
-            " Uncomment the line
-            execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
-        else
-            " Comment the line
-            execute "silent s/^\\(\\s*\\)/\\1" . comment_leader . " /"
-        end
-    end
-    else
-        echo "No comment leader found for filetype"
-    end
-endfunction
-
-nnoremap <C-e> :call ToggleComment()<cr>
-vnoremap <C-e> :call ToggleComment()<cr>
+"" toggle comment with control e
+"let s:comment_map = {
+"    \   "c": '\/\/',
+"    \   "cpp": '\/\/',
+"    \   "go": '\/\/',
+"    \   "java": '\/\/',
+"    \   "javascript": '\/\/',
+"    \   "scala": '\/\/',
+"    \   "php": '\/\/',
+"    \   "python": '#',
+"    \   "ruby": '#',
+"    \   "sh": '#',
+"    \   "desktop": '#',
+"    \   "fstab": '#',
+"    \   "conf": '#',
+"    \   "profile": '#',
+"    \   "bashrc": '#',
+"    \   "bash_profile": '#',
+"    \   "mail": '>',
+"    \   "eml": '>',
+"    \   "bat": 'REM',
+"    \   "ahk": ';',
+"    \   "apache": '#',
+"    \   "vim": '"',
+"    \   "tex": '%',
+"    \   "ansible": '#',
+"    \   "ansible.yaml": '#',
+"    \   "yaml.ansible": '#',
+"    \   "ansible_hosts": '#',
+"    \   "nginx": '#',
+"    \   "yaml": '#',
+"    \ }
+"
+"function! ToggleComment()
+"    if has_key(s:comment_map, &filetype)
+"        let comment_leader = s:comment_map[&filetype]
+"    if getline('.') =~ "^\\s*" . comment_leader . " "
+"        " Uncomment the line
+"        execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
+"    else
+"        if getline('.') =~ "^\\s*" . comment_leader
+"            " Uncomment the line
+"            execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
+"        else
+"            " Comment the line
+"            execute "silent s/^\\(\\s*\\)/\\1" . comment_leader . " /"
+"        end
+"    end
+"    else
+"        echo "No comment leader found for filetype"
+"    end
+"endfunction
+"
+"nnoremap <C-e> :call ToggleComment()<cr>
+"vnoremap <C-e> :call ToggleComment()<cr>
 
 
 " airline
@@ -299,3 +317,15 @@ let g:UltiSnipsEditSplit="vertical"
 
 let g:BASH_MapLeader  = ','
 let g:BASH_Ctrl_j = 'no'
+
+let g:deoplete#enable_at_startup = 1
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+
+" NERDTree Commenter
+" ,cc       Comment out the current line or text selected in visual mode
+" ,c<space> Toggles the comment state of the selected line(s)
+" ,cu       Uncomments the selected line(s)
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
