@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'lilydjwg/colorizer'                   "Colorize all text in the form #rgb,...
 Plug 'ConradIrwin/vim-bracketed-paste'      "Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 "File type
-Plug 'w0rp/ale'
+Plug 'w0rp/ale'                             "Syntax checker
 Plug 'scrooloose/nerdtree'                  "A tree explorer
 Plug 'scrooloose/nerdcommenter'             "NERD Commenter script
 Plug 'tyok/nerdtree-ack'                    "Search function for nerdtree
@@ -127,6 +127,11 @@ let mapleader = ","
 cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
+"pretty print
+command! PrettyPrintJSON %!python -m json.tool
+command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
+command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
+
 
 " Zoom/unzoom split
 noremap <Leader>Z <C-W>\| <C-W>_
@@ -213,8 +218,10 @@ let g:BASH_Ctrl_j = 'no'
 
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:SuperTabDefaultCompletionType = "<c-n>"
+if v:version > 704
+  let g:deoplete#enable_at_startup = 1
+  let g:SuperTabDefaultCompletionType = "<c-n>"
+endif
 
 
 
