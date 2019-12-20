@@ -33,6 +33,7 @@ Plug 'phenomenes/ansible-snippets'          " Ansible Vim snippets
 Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vim
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
+Plug 'severin-lemaignan/vim-minimap'
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
