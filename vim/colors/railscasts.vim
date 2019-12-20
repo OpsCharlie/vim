@@ -33,7 +33,7 @@
 "     term screen-256color-bce
 
 if has("gui_running")
-  " set background=dark
+"   " set background=dark
   set background=light
 endif
 hi clear
@@ -55,62 +55,62 @@ hi StatusLine                guifg=#444444 guibg=#cccccc gui=bold ctermbg=233 ct
 hi StatusLineNC              guifg=#444444 guibg=#aaaaaa gui=none ctermbg=233 cterm=none
 hi VertSplit                 guifg=Black   guibg=#aabbee gui=bold ctermfg=237   ctermbg=237 cterm=none
 
-hi Comment                   guifg=#BC9458 ctermfg=180 gui=italic
-hi Constant                  guifg=#6D9CBE ctermfg=73
+hi Comment                   guifg=#D7AF87 ctermfg=180 gui=italic
+hi Constant                  guifg=#5FAFAF ctermfg=73
 hi link Identifier rubyConstant
-hi Define                    guifg=#CC7833 ctermfg=173 gui=NONE cterm=NONE
-hi Statement                 guifg=#CC7833 ctermfg=173 gui=NONE cterm=NONE
-hi Error                     guifg=#FFC66D ctermfg=221 guibg=#990000 ctermbg=88
-hi Function                  guifg=#FFC66D ctermfg=221 gui=NONE cterm=NONE
-hi Keyword                   guifg=#CC7833 ctermfg=173 cterm=NONE
+hi Define                    guifg=#D7875F ctermfg=173 gui=NONE cterm=NONE
+hi Statement                 guifg=#D7875F ctermfg=173 gui=NONE cterm=NONE
+hi Error                     guifg=#FFD75F ctermfg=221 guibg=#990000 ctermbg=88
+hi Function                  guifg=#FFD75F ctermfg=221 gui=NONE cterm=NONE
+hi Keyword                   guifg=#D7875F ctermfg=173 cterm=NONE
 hi link Include              Statement
 hi link PreCondit            Statement
 hi Todo                      ctermbg=NONE ctermfg=160 guifg=#d70000 guibg=NONE gui=bold
 
-hi LineNr                    guifg=#555555 ctermfg=236
-hi String                    guifg=#A5C261 ctermfg=107
+hi LineNr                    guifg=#303030 ctermfg=236
+hi String                    guifg=#87af5f ctermfg=107
 hi link Number String
-hi PreProc                   guifg=#E6E1DC ctermfg=103
-hi Search                    guifg=NONE    ctermfg=NONE guibg=#444444 ctermbg=235
+hi PreProc                   guifg=#8787af ctermfg=103
+hi Search                    guifg=NONE    ctermfg=NONE guibg=#262626 ctermbg=235
 hi IncSearch                 guifg=White   guibg=Black ctermfg=White ctermbg=Black
 hi link Search IncSearch
 hi Title                     guifg=#FFFFFF ctermfg=15
-hi Type                      guifg=#DA4939 ctermfg=167 gui=NONE cterm=NONE
-hi Visual                    guibg=#5A647E ctermbg=60
+hi Type                      guifg=#d75f5f ctermfg=167 gui=NONE cterm=NONE
+hi Visual                    guibg=#5f5f87 ctermbg=60
 
 hi link diffAdded            String
 hi link diffRemoved          Type
 hi link diffLine             PreProc
 hi link diffSubname          Comment
 
-hi DiffAdd                   guifg=#E6E1DC ctermfg=7 guibg=#519F50 ctermbg=59
-hi DiffDelete                guifg=#E6E1DC ctermfg=7 guibg=#660000 ctermbg=52
-hi Special                   guifg=#DA4939 ctermfg=167
+hi DiffAdd                   guifg=#c0c0c0 ctermfg=7 guibg=#519F50 ctermbg=59
+hi DiffDelete                guifg=#c0c0c0 ctermfg=7 guibg=#660000 ctermbg=52
+hi Special                   guifg=#d75f5f ctermfg=167
 
-hi pythonBuiltin             guifg=#6D9CBE ctermfg=73 gui=NONE cterm=NONE
+hi pythonBuiltin             guifg=#5fafaf ctermfg=73 gui=NONE cterm=NONE
 hi rubyBlockParameter        guifg=#FFFFFF ctermfg=15
 hi link rubyConstant           Type
 hi link rubyCapitalizedMethod  rubyConstant
 hi link rubyPredefinedConstant Type
-hi rubyInstanceVariable      guifg=#D0D0FF ctermfg=189
-hi rubyInterpolation         guifg=#519F50 ctermfg=107
-hi rubyLocalVariableOrMethod guifg=#D0D0FF ctermfg=189
-hi rubyPseudoVariable        guifg=#FFC66D ctermfg=221
+hi rubyInstanceVariable      guifg=#d7d7ff ctermfg=189
+hi rubyInterpolation         guifg=#87af5f ctermfg=107
+hi rubyLocalVariableOrMethod guifg=#d7d7ff ctermfg=189
+hi rubyPseudoVariable        guifg=#ff87af ctermfg=221
 hi link rubyStringDelimiter  String
 
-hi NonText                   guifg=#404040 ctermfg=8
-hi SpecialKey                guifg=#404040 ctermfg=8
+hi NonText                   guifg=#808080 ctermfg=8
+hi SpecialKey                guifg=#808080 ctermfg=8
 
-hi xmlTag                    guifg=#E8BF6A ctermfg=179
-hi xmlTagName                guifg=#E8BF6A ctermfg=179
-hi xmlEndTag                 guifg=#E8BF6A ctermfg=179
+hi xmlTag                    guifg=#d7af5f ctermfg=179
+hi xmlTagName                guifg=#d7af5f ctermfg=179
+hi xmlEndTag                 guifg=#d7af5f ctermfg=179
 
-hi mailSubject               guifg=#A5C261 ctermfg=107
-hi mailHeaderKey             guifg=#FFC66D ctermfg=221
-hi mailEmail                 guifg=#A5C261 ctermfg=107 gui=italic cterm=underline
+hi mailSubject               guifg=#87af5f ctermfg=107
+hi mailHeaderKey             guifg=#ffd75f ctermfg=221
+hi mailEmail                 guifg=#87af5f ctermfg=107 gui=italic cterm=underline
 
 hi SpellBad                  guifg=#D70000 ctermfg=160 ctermbg=NONE cterm=underline
-hi SpellRare                 guifg=#D75F87 ctermfg=168 guibg=NONE ctermbg=NONE gui=underline cterm=underline
+hi SpellRare                 guifg=#d75f87 ctermfg=168 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 hi SpellCap                  guifg=#D0D0FF ctermfg=189 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 hi MatchParen                guifg=#FFFFFF ctermfg=15 guibg=#005f5f ctermbg=23
 
@@ -124,9 +124,9 @@ hi FoldColumn                none
 hi link FoldColumn           Folded
 
 hi Pmenu                     guifg=#F6F3E8 guibg=#444444 gui=NONE ctermbg=238 ctermfg=White cterm=NONE
-hi PmenuSel                  guifg=#000000 guibg=#A5C261 gui=NONE ctermbg=150 ctermfg=Black
-hi PMenuSbar                 guibg=#5A647E gui=NONE ctermbg=66  cterm=NONE
-hi PMenuThumb                guibg=#AAAAAA gui=NONE ctermbg=248 cterm=NONE
+hi PmenuSel                  guifg=#000000 guibg=#afd787 gui=NONE ctermbg=150 ctermfg=Black
+hi PMenuSbar                 guibg=#5f8787 gui=NONE ctermbg=66  cterm=NONE
+hi PMenuThumb                guibg=#a8a8a8 gui=NONE ctermbg=248 cterm=NONE
 
 " Vim 7.3+
-hi ColorColumn               guibg=#444444 ctermbg=235
+hi ColorColumn               guibg=#262626 ctermbg=235
