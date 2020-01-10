@@ -188,7 +188,7 @@ autocmd BufReadPost *
     \ endif
 
 
-"Ansible
+" Ansible
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
 let g:ansible_unindent_after_newline = 1
@@ -218,6 +218,9 @@ let g:UltiSnipsEditSplit="vertical"
 let g:BASH_MapLeader  = ','
 let g:BASH_Ctrl_j = 'no'
 
+" gitgutter
+set updatetime=500
+let g:gitgutter_preview_win_floating = 1
 
 " Deoplete
 if v:version > 704
