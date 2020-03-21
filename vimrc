@@ -33,7 +33,8 @@ Plug 'phenomenes/ansible-snippets'          " Ansible Vim snippets
 Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vim
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
-Plug 'severin-lemaignan/vim-minimap'
+Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
+Plug 'lifepillar/vim-solarized8'            " Improved solarized colorscheme
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -58,7 +59,6 @@ set synmaxcol=300
 
 set history=700     " Sets how many lines of history VIM has to remember
 set autoread        " Set to auto read when a file is changed from the outside
-set term=xterm      " for byobu/tmux control arrow keys
 set relativenumber  " set numbers
 set number          " set numbers
 set wildmenu        " turnon wildmenu
@@ -89,11 +89,22 @@ set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·   " highlight whitespaces, tab...
 set t_Co=256
 
-if (has("termguicolors"))
-    set termguicolors
+" only set term when in vim
+if has('nvim')
+else
+    set term=xterm      " for byobu/tmux control arrow keys
+endif
+" if (has("termguicolors"))
+"     set termguicolors
+" endif
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
 endif
 
-colorscheme railscasts
+set background=dark
+colorscheme solarized8
 highlight clear SignColumn
 
 
