@@ -85,6 +85,7 @@ hi link diffSubname          Comment
 
 hi DiffAdd                   guifg=#c0c0c0 ctermfg=7 guibg=#519F50 ctermbg=59
 hi DiffDelete                guifg=#c0c0c0 ctermfg=7 guibg=#660000 ctermbg=52
+hi DiffChange                guifg=#c0c0c0 ctermfg=7 guibg=#D7875F ctermbg=173
 hi Special                   guifg=#d75f5f ctermfg=167
 
 hi pythonBuiltin             guifg=#5fafaf ctermfg=73 gui=NONE cterm=NONE
