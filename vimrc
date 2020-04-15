@@ -34,7 +34,8 @@ Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vim
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
 Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
-Plug 'lifepillar/vim-solarized8'            " Improved solarized colorscheme
+Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
+Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -103,9 +104,16 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-set background=dark
-colorscheme solarized8
+set background=light
+colorscheme railscasts
+" set background=dark
+" colorscheme solarized8
 highlight clear SignColumn
+
+" ColorStepper Keys
+nmap <F6> <Plug>ColorstepPrev
+nmap <F7> <Plug>ColorstepNext
+nmap <S-F7> <Plug>ColorstepReload
 
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim

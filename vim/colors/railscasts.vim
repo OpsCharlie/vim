@@ -55,7 +55,7 @@ hi StatusLine                guifg=#444444 guibg=#cccccc gui=bold ctermbg=233 ct
 hi StatusLineNC              guifg=#444444 guibg=#aaaaaa gui=none ctermbg=233 cterm=none
 hi VertSplit                 guifg=Black   guibg=#aabbee gui=bold ctermfg=237   ctermbg=237 cterm=none
 
-hi Comment                   guifg=#D7AF87 ctermfg=180 gui=italic
+hi Comment                   guifg=#D7AF87 ctermfg=180 gui=italic cterm=italic
 hi Constant                  guifg=#5FAFAF ctermfg=73
 hi link Identifier rubyConstant
 hi Define                    guifg=#D7875F ctermfg=173 gui=NONE cterm=NONE
