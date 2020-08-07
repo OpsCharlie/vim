@@ -35,7 +35,7 @@ Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vi
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
 Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
-Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme
+Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -60,7 +60,7 @@ set synmaxcol=300
 
 set history=700     " Sets how many lines of history VIM has to remember
 set autoread        " Set to auto read when a file is changed from the outside
-set relativenumber  " set numbers
+" set relativenumber  " set numbers
 set number          " set numbers
 set wildmenu        " turnon wildmenu
 " set colorcolumn=80,120    " show column 80 and 120 in different color
@@ -105,7 +105,8 @@ if exists('+termguicolors')
 endif
 
 set background=light
-colorscheme railscasts
+" colorscheme railscasts
+colorscheme OceanicNext
 " set background=dark
 " colorscheme solarized8
 highlight clear SignColumn
