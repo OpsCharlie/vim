@@ -54,6 +54,9 @@ call plug#end()
 filetype plugin on  "Enable filetype plugins
 filetype indent on
 
+scriptencoding utf-8
+set encoding=utf-8
+
 syntax enable       "Enable syntax highlighting
 syntax sync minlines=300
 set synmaxcol=300
@@ -88,7 +91,6 @@ set timeoutlen=500 ttimeoutlen=0    " disable escape timeout
 set scrolloff=4     " keep at least 3 lines below or above cursor
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·   " highlight whitespaces, tab...
-set t_Co=256
 
 " only set term when in vim
 if has('nvim')
@@ -104,6 +106,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+set t_Co=256
 set background=light
 " colorscheme railscasts
 colorscheme OceanicNext
