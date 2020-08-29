@@ -18,12 +18,12 @@ Plug 'scrooloose/nerdtree'                  " A tree explorer
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
 Plug 'tyok/nerdtree-ack'                    " Search function for nerdtree
 Plug 'mileszs/ack.vim'                      " Search function dependeny
-Plug 'Xuyuanp/nerdtree-git-plugin'          " Git plugin for NERDTree
+Plug 'Xuyuanp/nerdtree-git-plugin'          " Git icons plugin for NERDTree
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'                   " Git Wrapper
 Plug 'christoomey/vim-tmux-navigator'       " Seamless navigation between tmux panes and vim splits
-Plug 'dahu/Insertlessly'                    " Inserts space/enter in norma mode
+Plug 'dahu/Insertlessly'                    " Inserts space/enter in normal mode
 Plug 'ervandew/supertab'                    " Allows you to use <Tab> for all your insert completion
 Plug 'jiangmiao/auto-pairs'                 " Insert or delete brackets, parens, quotes in pair
 Plug 'dhruvasagar/vim-table-mode'           " Instant table creation
@@ -170,6 +170,9 @@ nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 " NERDTRee ctrl-n
 map <C-n> :NERDTreeToggle<CR>
+" Close vim when there is only NERDTRee
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 
 
 " NERDTree Commenter
