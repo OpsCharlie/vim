@@ -233,7 +233,7 @@ function! FindAnsibleRoleUnderCursor()
   if l:found_role_path == ""
     echo l:tasks_main . " not found"
   else
-    execute "edit " . fnameescape(l:found_role_path) | silent! lcd %:p:h
+    execute "edit " . fnameescape(l:found_role_path) | silent! lcd %:p:h/.. | NERDTreeCWD
   endif
 endfunction
 au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
