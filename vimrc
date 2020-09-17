@@ -119,6 +119,10 @@ nmap <F6> <Plug>ColorstepPrev
 nmap <F7> <Plug>ColorstepNext
 nmap <S-F7> <Plug>ColorstepReload
 
+" Disable delete trailing space when md files
+autocmd BufNewFile,BufRead *.md
+    \ let g:insertlessly_cleanup_trailing_ws = 0 |
+    \ let g:insertlessly_cleanup_all_ws = 0
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos.
