@@ -36,6 +36,7 @@ Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, 
 Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
 Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
+Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
