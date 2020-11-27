@@ -35,8 +35,10 @@ Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vi
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
 Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
-Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
+"Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
+Plug 'junegunn/fzf'                         " To set up FZF in Vim
+Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -83,8 +85,8 @@ set smarttab        " Be smart when using tabs
 set shiftwidth=4    " retab 1 tab == 4 spaces
 set shiftround      " use multiple of shiftwidth when indenting with '<' and '>'"
 set tabstop=4       " number of space
-"set ai              " Auto indent
-"set si              " Smart indent
+set ai              " Auto indent
+set si              " Smart indent
 set wrap            " Wrap lines
 set laststatus=2    " Always show the status line
 set clipboard=unnamedplus  " use system clipboard
@@ -278,3 +280,19 @@ if v:version > 704
   let g:deoplete#enable_at_startup = 1
   let g:SuperTabDefaultCompletionType = "<c-n>"
 endif
+
+" FZF and ripgrep
+" Use ctrl-p to find files
+" Use ctrl-gf to find files
+" Use ctrl-gg to grep in files
+" When searching use ctrl-X/V/T to open
+" Prevent files opening in Nerdtree pane
+function! FZFOpen(command_str)
+  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+    exe "normal! \<c-w>\<c-w>"
+  endif
+  exe 'normal! ' . a:command_str . "\<cr>"
+endfunction
+nnoremap <silent> <C-p> :call FZFOpen(':Files')<CR>
+nnoremap <silent> <C-g>f :call FZFOpen(':Files')<CR>
+nnoremap <silent> <C-g>g :call FZFOpen(':Rg')<CR>
