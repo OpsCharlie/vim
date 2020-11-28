@@ -33,7 +33,7 @@ Plug 'phenomenes/ansible-snippets'          " Ansible Vim snippets
 Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vim
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
-Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
+" Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
 "Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
@@ -151,20 +151,22 @@ endif
 " set leader to ,
 let mapleader = ","
 
+" Zoom/unzoom split
+noremap <Leader>Z <C-W>\| <C-W>_
+noremap <Leader>z <c-w>=
+
+" Set path to file location
+set autochdir
 
 " write with sudo
 cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
 " pretty print
-command! PrettyPrintJSON %!python -m json.tool
+command! PrettyPrintJSON %!jq '.'
+command! UnPrettyPrintJSON %!jq -c '.'
 command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
 command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
-
-
-" Zoom/unzoom split
-noremap <Leader>Z <C-W>\| <C-W>_
-noremap <Leader>z <c-w>=
 
 
 " clear highlight from selection/search
@@ -283,10 +285,10 @@ if v:version > 704
   let g:SuperTabDefaultCompletionType = "<c-n>"
 endif
 
+
 " FZF and ripgrep
-" Use ctrl-p to find files
-" Use ctrl-gf to find files
-" Use ctrl-gg to grep in files
+" Use ff files find
+" Use gf to find grep
 " When searching use ctrl-X/V/T to open
 " Prevent files opening in Nerdtree pane
 function! FZFOpen(command_str)
@@ -295,6 +297,5 @@ function! FZFOpen(command_str)
   endif
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
-nnoremap <silent> <C-p> :call FZFOpen(':Files')<CR>
-nnoremap <silent> <C-g>f :call FZFOpen(':Files')<CR>
-nnoremap <silent> <C-g>g :call FZFOpen(':Rg')<CR>
+nnoremap <silent> ff :call FZFOpen(':Files')<CR>
+nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
