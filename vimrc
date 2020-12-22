@@ -39,6 +39,7 @@ Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
 Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
+Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that uses vim's tabs feature to zoom into a window.
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -152,8 +153,7 @@ endif
 let mapleader = ","
 
 " Zoom/unzoom split
-noremap <Leader>Z <C-W>\| <C-W>_
-noremap <Leader>z <c-w>=
+noremap <C-w>z :ZoomWinTabToggle<CR>
 
 " Set path to file location
 set autochdir
