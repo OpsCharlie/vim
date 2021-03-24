@@ -40,6 +40,7 @@ Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration 
 Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
 Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that uses vim's tabs feature to zoom into a window.
+Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -68,6 +69,7 @@ set synmaxcol=300
 set history=700     " Sets how many lines of history VIM has to remember
 set autoread        " Set to auto read when a file is changed from the outside
 " set relativenumber  " set numbers
+set nofoldenable    " disable folding
 set number          " set numbers
 set wildmenu        " turnon wildmenu
 " set colorcolumn=80,120    " show column 80 and 120 in different color
@@ -86,6 +88,8 @@ set smarttab        " Be smart when using tabs
 set shiftwidth=4    " retab 1 tab == 4 spaces
 set shiftround      " use multiple of shiftwidth when indenting with '<' and '>'"
 set tabstop=4       " number of space
+set splitbelow      " split under current buffer
+set splitright      " split right of current buffer
 set ai              " Auto indent
 set si              " Smart indent
 set wrap            " Wrap lines
@@ -299,3 +303,7 @@ function! FZFOpen(command_str)
 endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
+
+
+" Default Limelight Dim
+let g:limelight_default_coefficient = 0.7
