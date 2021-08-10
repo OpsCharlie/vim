@@ -41,6 +41,7 @@ Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
 Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that uses vim's tabs feature to zoom into a window.
 Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
@@ -129,9 +130,12 @@ nmap <F7> <Plug>ColorstepNext
 nmap <S-F7> <Plug>ColorstepReload
 
 " Disable delete trailing space when md files
+" Toggles markdown preview
 autocmd BufNewFile,BufRead *.md
     \ let g:insertlessly_cleanup_trailing_ws = 0 |
-    \ let g:insertlessly_cleanup_all_ws = 0
+    \ let g:insertlessly_cleanup_all_ws = 0 |
+    \ nmap <C-p> <Plug>MarkdownPreviewToggle
+
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos.
@@ -307,3 +311,7 @@ nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
 
 " Default Limelight Dim
 let g:limelight_default_coefficient = 0.7
+
+
+" spell check on gitcommit
+autocmd FileType gitcommit setlocal spell
