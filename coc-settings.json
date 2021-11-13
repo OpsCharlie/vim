@@ -1,0 +1,12 @@
+{
+    "ansible.ansible.useFullyQualifiedCollectionNames": false,
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.formatOnType": true,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.enableMessage": "jump",
+    "diagnostic.floatConfig": { "border": true },
+    "diagnostic.messageTarget": "float",
+    "diagnostic.virtualText": true,
+    "hover.floatConfig": { "border": true },
+    "snippets.snipmate.enable": false
+}
