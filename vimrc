@@ -309,6 +309,7 @@ function! FZFOpen(command_str)
 endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
+let NERDTreeShowBookmarks=1
 
 
 " Default Limelight Dim
