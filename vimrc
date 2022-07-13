@@ -311,7 +311,12 @@ function! FZFOpen(command_str)
   if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
-  exe 'normal! ' . a:command_str . "\<cr>"
+  " find git root directory
+  let path = system('git rev-parse --show-toplevel | tr -d "\n"')
+  if !isdirectory(path)
+    let path = expand('%:p:h')
+  endif
+  exe 'normal! ' . a:command_str . path . "\<cr>"
 endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
