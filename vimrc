@@ -270,6 +270,9 @@ let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: dis
 let g:airline#extensions#ale#enabled = 1
 let g:ale_list_window_size = 5
 
+" Close quickfix windows when buffer is closed
+autocmd QuitPre * if empty(&bt) | lclose | endif
+
 
 " airline
 let g:airline_theme='luna'
