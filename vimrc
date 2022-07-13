@@ -127,12 +127,14 @@ colorscheme OceanicNext
 " colorscheme solarized8
 highlight clear SignColumn
 
+
 " ColorStepper Keys
 nmap <F6> <Plug>ColorstepPrev
 nmap <F7> <Plug>ColorstepNext
 nmap <S-F7> <Plug>ColorstepReload
 
-" tmux
+
+" Tmux
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
@@ -162,7 +164,7 @@ if has('persistent_undo')
 endif
 
 
-" set leader to ,
+" Set leader to ,
 let mapleader = ","
 
 " Zoom/unzoom split
@@ -171,30 +173,39 @@ noremap <C-w>z :ZoomWinTabToggle<CR>
 " Set path to file location
 set autochdir
 
-" write with sudo
+" Write with sudo
 cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
-" pretty print
+" Pretty print
 command! PrettyPrintJSON %!jq '.'
 command! UnPrettyPrintJSON %!jq -c '.'
 command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
 command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 
 
-" clear highlight from selection/search
+" Clear highlight from selection/search
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 
-" NERDTree start if no files are selected
+" NERDTRee
+" Start if no files are selected
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" NERDTRee ctrl-n
+" Set toggle
 map <C-n> :NERDTreeToggle<CR>
 " Close vim when there is only NERDTRee
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" Nerdtree-git-plugin
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+" Go to location of buffer
+map <leader>n :NERDTreeFind<cr>
+
+" Show bookmarks
+let NERDTreeShowBookmarks=1
 
 
 " NERDTree Commenter
@@ -274,7 +285,7 @@ let g:ale_list_window_size = 5
 autocmd QuitPre * if empty(&bt) | lclose | endif
 
 
-" airline
+" Airline settings
 let g:airline_theme='luna'
 let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
@@ -282,18 +293,20 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#whitespace#enabled = 0
 
 
-" UltiSnip
+" UltiSnip settings
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
 
 
-" bash-support
+" Bash-support
 let g:BASH_MapLeader  = ','
 let g:BASH_Ctrl_j = 'no'
 
-" gitgutter
+
+" Gitgutter
 set updatetime=500
 let g:gitgutter_preview_win_floating = 1
+
 
 " Deoplete
 if v:version > 704
@@ -321,11 +334,6 @@ endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
 
-" Go to location of buffer
-map <leader>n :NERDTreeFind<cr>
-
-let NERDTreeShowBookmarks=1
-
 
 " Default Limelight Dim
 let g:limelight_default_coefficient = 0.7
@@ -334,6 +342,3 @@ let g:limelight_default_coefficient = 0.7
 " spell check on gitcommit
 autocmd FileType gitcommit setlocal spell
 
-
-" nerdtree-git-plugin
-let g:NERDTreeGitStatusUseNerdFonts = 1
