@@ -333,3 +333,7 @@ let g:limelight_default_coefficient = 0.7
 
 " spell check on gitcommit
 autocmd FileType gitcommit setlocal spell
+
+
+" nerdtree-git-plugin
+let g:NERDTreeGitStatusUseNerdFonts = 1
