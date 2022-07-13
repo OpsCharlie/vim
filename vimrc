@@ -320,6 +320,10 @@ function! FZFOpen(command_str)
 endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
+
+" Go to location of buffer
+map <leader>n :NERDTreeFind<cr>
+
 let NERDTreeShowBookmarks=1
 
 
