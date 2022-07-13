@@ -41,7 +41,10 @@ Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
 Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that uses vim's tabs feature to zoom into a window.
 Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
+Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' } " This is a vim syntax plugin for Ansible 2.x
+Plug 'ryanoasis/vim-devicons'
 
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
