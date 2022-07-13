@@ -14,6 +14,9 @@ Plug 'lilydjwg/colorizer'                   " Colorize all text in the form #rgb
 Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
 Plug 'w0rp/ale'                             " Syntax checker
+" Plug 'scrooloose/nerdtree'                  " A tree explorer
+" Plug 'tyok/nerdtree-ack'                    " Search function for nerdtree
+" Plug 'Xuyuanp/nerdtree-git-plugin'          " Git icons plugin for NERDTree
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
 Plug 'mileszs/ack.vim'                      " Search function dependeny
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
@@ -130,7 +133,7 @@ nmap <F6> <Plug>ColorstepPrev
 nmap <F7> <Plug>ColorstepNext
 nmap <S-F7> <Plug>ColorstepReload
 
-" Tmux
+" tmux
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
@@ -160,7 +163,7 @@ if has('persistent_undo')
 endif
 
 
-" Set leader to ,
+" set leader to ,
 let mapleader = ","
 
 " Zoom/unzoom split
@@ -169,11 +172,11 @@ noremap <C-w>z :ZoomWinTabToggle<CR>
 " Set path to file location
 set autochdir
 
-" Write with sudo
+" write with sudo
 cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
-" Pretty print
+" pretty print
 command! PrettyPrintJSON %!jq '.'
 command! UnPrettyPrintJSON %!jq -c '.'
 command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
@@ -182,6 +185,24 @@ command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 
 " clear highlight from selection/search
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
+
+"" NERDTree
+"" NERDTree start if no files are selected
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"
+"" NERDTRee ctrl-n
+"map <C-n> :NERDTreeToggle<CR>
+"" Close vim when there is only NERDTRee
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"
+"" nerdtree-git-plugin
+"let g:NERDTreeGitStatusUseNerdFonts = 1
+"
+" go to folder where file is
+"map <leader>n :NERDTreeFind<cr><CR>
+"
+"let NERDTreeShowBookmarks=1
 
 
 " CHADtree
@@ -273,7 +294,7 @@ let g:ale_list_window_size = 5
 autocmd QuitPre * if empty(&bt) | lclose | endif
 
 
-" Airline settings
+" airline
 let g:airline_theme='luna'
 let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
@@ -281,20 +302,20 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#whitespace#enabled = 0
 
 
-" UltiSnip settings
+" UltiSnip
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
 
 
-" Bash-support
+" bash-support
 let g:BASH_MapLeader  = ','
 let g:BASH_Ctrl_j = 'no'
 
-" Gitgutter settings
+" gitgutter
 set updatetime=500
 let g:gitgutter_preview_win_floating = 1
 
-" Deoplete settings
+" Deoplete
 if v:version > 704
   let g:deoplete#enable_at_startup = 1
   let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -315,7 +336,8 @@ function! FZFOpen(command_str)
   if !isdirectory(path)
     let path = expand('%:p:h')
   endif
-  exe 'normal! ' . a:command_str . path . "\<cr>"
+  exe 'cd' fnameescape(path)
+  exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
