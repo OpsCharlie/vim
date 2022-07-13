@@ -14,11 +14,8 @@ Plug 'lilydjwg/colorizer'                   " Colorize all text in the form #rgb
 Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
 Plug 'w0rp/ale'                             " Syntax checker
-Plug 'scrooloose/nerdtree'                  " A tree explorer
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
-Plug 'tyok/nerdtree-ack'                    " Search function for nerdtree
 Plug 'mileszs/ack.vim'                      " Search function dependeny
-Plug 'Xuyuanp/nerdtree-git-plugin'          " Git icons plugin for NERDTree
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'                   " Git Wrapper
@@ -44,6 +41,7 @@ Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' } " This is a vim syntax plugin for Ansible 2.x
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'} " Nerdtree but better
 Plug 'ryanoasis/vim-devicons'
 
 " Deoplete completion framework  "pip3 install pynvim
@@ -127,12 +125,10 @@ colorscheme OceanicNext
 " colorscheme solarized8
 highlight clear SignColumn
 
-
 " ColorStepper Keys
 nmap <F6> <Plug>ColorstepPrev
 nmap <F7> <Plug>ColorstepNext
 nmap <S-F7> <Plug>ColorstepReload
-
 
 " Tmux
 " automatically rebalance windows on vim resize
@@ -184,28 +180,21 @@ command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
 command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 
 
-" Clear highlight from selection/search
+" clear highlight from selection/search
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 
-" NERDTRee
-" Start if no files are selected
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" CHADtree
+" Toggle
+map <C-n> :CHADopen<CR>
 
-" Set toggle
-map <C-n> :NERDTreeToggle<CR>
-" Close vim when there is only NERDTRee
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" Nerdtree-git-plugin
-let g:NERDTreeGitStatusUseNerdFonts = 1
-
-" Go to location of buffer
-map <leader>n :NERDTreeFind<cr>
-
-" Show bookmarks
-let NERDTreeShowBookmarks=1
+" Hide hidden files by default
+let g:chadtree_settings = { "ignore.name_glob": [".*"],
+                          \ "keymap.tertiary": ["<c-t>", "<m-enter>", "<middlemouse>"],
+                          \ "view.sort_by": ["is_folder", "file_name", "ext"],
+                          \ "keymap.v_split": ["w"],
+                          \ "keymap.h_split": ["W"]
+                          \ }
 
 
 " NERDTree Commenter
@@ -280,7 +269,6 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: disable}}"'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_list_window_size = 5
-
 " Close quickfix windows when buffer is closed
 autocmd QuitPre * if empty(&bt) | lclose | endif
 
@@ -302,13 +290,11 @@ let g:UltiSnipsEditSplit="vertical"
 let g:BASH_MapLeader  = ','
 let g:BASH_Ctrl_j = 'no'
 
-
-" Gitgutter
+" Gitgutter settings
 set updatetime=500
 let g:gitgutter_preview_win_floating = 1
 
-
-" Deoplete
+" Deoplete settings
 if v:version > 704
   let g:deoplete#enable_at_startup = 1
   let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -341,4 +327,3 @@ let g:limelight_default_coefficient = 0.7
 
 " spell check on gitcommit
 autocmd FileType gitcommit setlocal spell
-
