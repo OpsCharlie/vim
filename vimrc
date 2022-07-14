@@ -329,7 +329,8 @@ function! FZFOpen(command_str)
   if !isdirectory(path)
     let path = expand('%:p:h')
   endif
-  exe 'normal! ' . a:command_str . path . "\<cr>"
+  exe 'cd' fnameescape(path)
+  exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 nnoremap <silent> ff :call FZFOpen(':Files')<CR>
 nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
