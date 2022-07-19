@@ -46,6 +46,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' } " This is a vim syntax plugin for Ansible 2.x
 Plug 'ryanoasis/vim-devicons'
 
+
 " Deoplete completion framework  "pip3 install pynvim
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
