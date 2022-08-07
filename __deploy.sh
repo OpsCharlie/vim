@@ -4,9 +4,10 @@ P=$1
 DIR=$(dirname $(readlink -f $0))
 
 if [ -z "$P" ]; then
-    echo copy files to homedir
-    rsync -a --delete "$DIR/vim/" ~/.vim/
-    cp -a "$DIR/vimrc" ~/.vimrc
+    mv ~/.config/nvim{,_bak}
+    mv ~/.local/share/nvim{,_bak}
+    ln -s "$DIR" ~/.config/nvim
+    echo Configure neovim lua
     exit $?
 fi
 
@@ -19,7 +20,7 @@ fi
 
 # rsync -avz --delete --exclude ".git" "$DIR/vim/" "$P":~/.vim
 # rsync -avz --delete --exclude ".git" "$DIR"/vimrc "$P":~/.vimrc
-rsync -avz --delete "$DIR/vim/" "$P":~/.vim
-rsync -avz --delete "$DIR"/vimrc "$P":~/.vimrc
+rsync -avz --delete --exclude .git "$DIR/" "$P":~/.config/nvim
+# rsync -avz --delete "$DIR"/vimrc "$P":~/.vimrc
 # ssh "$P" "vim +PluginInstall +qall"
 
