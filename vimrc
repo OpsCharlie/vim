@@ -14,11 +14,12 @@ Plug 'lilydjwg/colorizer'                   " Colorize all text in the form #rgb
 Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
 Plug 'w0rp/ale'                             " Syntax checker
-Plug 'scrooloose/nerdtree'                  " A tree explorer
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
-Plug 'tyok/nerdtree-ack'                    " Search function for nerdtree
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'mileszs/ack.vim'                      " Search function dependeny
-Plug 'Xuyuanp/nerdtree-git-plugin'          " Git icons plugin for NERDTree
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'                   " Git Wrapper
@@ -29,13 +30,10 @@ Plug 'jiangmiao/auto-pairs'                 " Insert or delete brackets, parens,
 Plug 'dhruvasagar/vim-table-mode'           " Instant table creation
 Plug 'airblade/vim-gitgutter'               " Shows a git diff in the sign column
 Plug 'SirVer/ultisnips'                     " Snippet solution for Vim
-Plug 'phenomenes/ansible-snippets'          " Ansible Vim snippets
 Plug 'fatih/vim-nginx'                      " Nginx syntax files
-Plug 'c0r73x/vimdir.vim'                    " Manage files and directories in vim
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
-" Plug 'severin-lemaignan/vim-minimap'        " Minimap on the right side <leader>mm  <leader>mc
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
-"Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
+Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
 Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
@@ -43,7 +41,7 @@ Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that u
 Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' } " This is a vim syntax plugin for Ansible 2.x
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh --output yaml.snippets --style dictionary --no-description' } " This is a vim syntax plugin for Ansible 2.x
 Plug 'ryanoasis/vim-devicons'
 
 " Deoplete completion framework  "pip3 install pynvim
@@ -70,6 +68,7 @@ syntax enable       "Enable syntax highlighting
 syntax sync minlines=300
 set synmaxcol=300
 
+set nocompatible
 set history=700     " Sets how many lines of history VIM has to remember
 set autoread        " Set to auto read when a file is changed from the outside
 " set relativenumber  " set numbers
@@ -120,8 +119,11 @@ endif
 
 set t_Co=256
 set t_ut=
-set background=light
+" set background=light
 " colorscheme railscasts
+" set background=dark
+" colorscheme gruvbox
+set background=light
 colorscheme OceanicNext
 " set background=dark
 " colorscheme solarized8
@@ -188,24 +190,62 @@ command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 
-" NERDTRee
-" Start if no files are selected
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" lambdalisue/fern.vim
+" Disable netrw.
+let g:loaded_netrw  = 1
+let g:loaded_netrwPlugin = 1
+let g:loaded_netrwSettings = 1
+let g:loaded_netrwFileHandlers = 1
+let g:fern#renderer = "nerdfont"
 
-" Set toggle
-map <C-n> :NERDTreeToggle<CR>
-" Close vim when there is only NERDTRee
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup my-fern-hijack
+  autocmd!
+  autocmd BufEnter * ++nested call s:hijack_directory()
+augroup END
 
-" Nerdtree-git-plugin
-let g:NERDTreeGitStatusUseNerdFonts = 1
+function! s:hijack_directory() abort
+  let path = expand('%:p')
+  if !isdirectory(path)
+    return
+  endif
+  bwipeout %
+  execute printf('Fern %s', fnameescape(path))
+endfunction
 
-" Go to location of buffer
-map <leader>n :NERDTreeFind<cr>
+" Custom settings and mappings.
+let g:fern#disable_default_mappings = 1
 
-" Show bookmarks
-let NERDTreeShowBookmarks=1
+noremap <silent> <C-n> :Fern . -drawer -reveal=% -toggle -width=35<CR><C-w>=
+
+function! FernInit() abort
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-open-expand-collapse)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-action-open:select)",
+        \   "\<Plug>(fern-action-expand)",
+        \   "\<Plug>(fern-action-collapse)",
+        \ )
+  nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> n <Plug>(fern-action-new-path)
+  nmap <buffer> d <Plug>(fern-action-remove)
+  nmap <buffer> p <Plug>(fern-action-copy)
+  nmap <buffer> m <Plug>(fern-action-move)
+  nmap <buffer> M <Plug>(fern-action-rename)
+  nmap <buffer> H <Plug>(fern-action-hidden:toggle)
+  nmap <buffer> r <Plug>(fern-action-reload)
+  "nmap <buffer> k <Plug>(fern-action-mark-toggle)
+  nmap <buffer> <C-x> <Plug>(fern-action-open:split)
+  nmap <buffer> <C-v> <Plug>(fern-action-open:vsplit)
+  nmap <buffer> <C-t> <Plug>(fern-action-open:tabedit)
+  nmap <buffer><nowait> < <Plug>(fern-action-leave)
+  nmap <buffer><nowait> > <Plug>(fern-action-enter)
+endfunction
+
+augroup FernGroup
+  autocmd!
+  autocmd FileType fern call FernInit()
+augroup END
 
 
 " NERDTree Commenter
@@ -270,7 +310,6 @@ function! FindAnsibleRoleUnderCursor()
   endif
 endfunction
 au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
-au BufRead,BufNewFile */ansible/*.yml vnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
 
 
 " Ale settings
@@ -332,8 +371,8 @@ function! FZFOpen(command_str)
   exe 'cd' fnameescape(path)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
-nnoremap <silent> ff :call FZFOpen(':Files')<CR>
-nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
+nnoremap <silent> <leader>f :call FZFOpen(':Files')<CR>
+nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
 
 
 " Default Limelight Dim
