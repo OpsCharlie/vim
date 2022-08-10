@@ -8,5 +8,16 @@
     "diagnostic.messageTarget": "float",
     "diagnostic.virtualText": true,
     "hover.floatConfig": { "border": true },
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.icon.enableVimDevicons": false,
+    "explorer.keyMappings.global": {
+        "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
+        "<C-V>": "open:vsplit",
+        "<C-X>": "open:split",
+        "<C-T>": "open:tab",
+        "C": "cd"
+    },
+    "explorer.file.reveal.auto": true,
     "snippets.snipmate.enable": false
 }

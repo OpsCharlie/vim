@@ -11,7 +11,7 @@ let g:fzf_colors = { 'border':      ['fg', 'Comment'] }
 " When searching use ctrl-X/V/T to open
 " Prevent files opening in Nerdtree pane
 function! FZFOpenAnsible(command_str)
-  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+  if (expand('%') =~# 'Coc Explorer' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
   silent! lcd ~/ansible/lxd/roles
@@ -20,15 +20,15 @@ function! FZFOpenAnsible(command_str)
 endfunction
 
 function! FZFOpen(command_str)
-  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+  if (expand('%') =~# 'Coc Explorer' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
 
-nnoremap <silent> ff :call FZFOpen(':Files')<CR>
-nnoremap <silent> fg :call FZFOpen(':Rg')<CR>
+nnoremap <silent> <leader>f :call FZFOpen(':Files')<CR>
+nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
 nmap <Leader>af :call FZFOpenAnsible(':Files')<CR>
 nmap <Leader>ag :call FZFOpenAnsible(':Rg')<CR>
 

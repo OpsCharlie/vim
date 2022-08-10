@@ -1,4 +1,6 @@
-Plug 'phenomenes/ansible-snippets'          " Ansible Vim snippets
+" Plug 'phenomenes/ansible-snippets'          " Ansible Vim snippets
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh --output yaml.snippets --style dictionary --no-description' } " This is a vim syntax plugin for Ansible 2.x
+
 
 
 " Ansible
@@ -23,6 +25,5 @@ function! FindAnsibleRoleUnderCursor()
   endif
 endfunction
 au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
-au BufRead,BufNewFile */ansible/*.yml vnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
 " au BufRead,BufNewFile */ansible/*.yml nnoremap K :!ansible-doc <C-R><C-W><CR>
 

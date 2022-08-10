@@ -73,13 +73,23 @@ set directory=~/.vim/swap//
 
 
 " Keep undo history across sessions by storing it in a file
-if has('persistent_undo')
-    call system('mkdir ~/.vim/undo')
-    set undodir=~/.vim/undo//
-    set undofile
-    set undolevels=1000
-    set undoreload=10000
-endif
+augroup LargeFile
+  let g:large_file = 10485760 " 10MB
+  au BufReadPre *
+  \ let f=expand("<afile>") |
+  \ if getfsize(f) > g:large_file |
+    \ set eventignore+=FileType |
+    \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+  \ else |
+    \ if has('persistent_undo') |
+      \ call system('mkdir ~/.vim/undo') |
+      \ set undodir=~/.vim/undo// |
+      \ set undofile |
+      \ set undolevels=1000 |
+      \ set undoreload=10000 |
+    \ endif |
+  \ endif
+augroup END
 
 
 " set leader to ,
@@ -138,15 +148,21 @@ autocmd FileType gitcommit setlocal spell
 
 
 " Install plugins: :PluginInstall or vim +PluginInstall +qall
-" vim-plug (https://github.com/junegunn/vim-plug) settings
-" Automatically install vim-plug and run PlugInstall if vim-plug not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if !filereadable(vimplug_exists)
+  if !executable("curl")
+    echoerr "You have to install curl or first install vim-plug by yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finis_vimplug = "yes"
+  autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.vim/plugged')
+
+call plug#begin(expand('~/.config/nvim/plugged'))
 
 " source ~/.config/nvim/plugins/ack.vim
 " source ~/.config/nvim/plugins/ale.vim
@@ -177,9 +193,9 @@ source ~/.config/nvim/plugins/vim-rooter.vim
 source ~/.config/nvim/plugins/vim-table-mode.vim
 source ~/.config/nvim/plugins/vim-tmux-navigator.vim
 source ~/.config/nvim/plugins/vim-yaml-folds.vim
-source ~/.config/nvim/plugins/vimdir.vim
+" source ~/.config/nvim/plugins/vimdir.vim
 source ~/.config/nvim/plugins/zoomwintab.vim
-
+source ~/.config/nvim/plugins/vim-devicons.vim
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -187,10 +203,12 @@ call plug#end()
 
 doautocmd User PlugLoaded
 
-
-set background=light
+let g:gruvbox_italic=1
+set bg=dark
+color gruvbox
+" set background=light
 " colorscheme railscasts
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " set background=dark
 " colorscheme solarized8
 highlight clear SignColumn
