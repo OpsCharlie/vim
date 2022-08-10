@@ -4,9 +4,9 @@ P=$1
 DIR=$(dirname $(readlink -f $0))
 
 if [ -z "$P" ]; then
-    mv ~/.config/nvim{,_bak}
-    mv ~/.local/share/nvim{,_bak}
-    ln -s "$DIR" ~/.config/nvim
+    rm ~/.config/nvim
+    rm -rf ~/.local/share/nvim
+    ln -s "$DIR" "$HOME/.config/nvim"
     echo Configure neovim lua
     exit $?
 fi
