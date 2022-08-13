@@ -125,10 +125,10 @@ set t_Co=256
 set t_ut=
 " set background=light
 " colorscheme railscasts
-" set background=dark
-" colorscheme gruvbox
-set background=light
-colorscheme OceanicNext
+set background=dark
+colorscheme gruvbox
+" set background=light
+" colorscheme OceanicNext
 " set background=dark
 " colorscheme solarized8
 highlight clear SignColumn
@@ -480,4 +480,3 @@ let g:startify_lists = [
 function! StartifyEntryFormat()
   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
 endfunction
-
