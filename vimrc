@@ -15,7 +15,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
 Plug 'w0rp/ale'                             " Syntax checker
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
-Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern.vim'                 " Asynchronous tree viewer
 Plug 'lambdalisue/fern-git-status.vim'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
@@ -33,7 +33,7 @@ Plug 'SirVer/ultisnips'                     " Snippet solution for Vim
 Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
-Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
+" Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
 Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
@@ -42,9 +42,12 @@ Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh --output yaml.snippets --style dictionary --no-description' } " This is a vim syntax plugin for Ansible 2.x
+Plug 'folke/which-key.nvim'
+Plug 'kdheepak/lazygit.nvim'
+Plug 'kevinhwang91/nvim-hlslens'           " helps you better glance at matched information
+Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
-
-" Deoplete completion framework  "pip3 install pynvim
+" Deoplete completion framework
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -52,6 +55,7 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+
 
 
 " All of your Plugins must be added before the following line
@@ -131,9 +135,9 @@ highlight clear SignColumn
 
 
 " ColorStepper Keys
-nmap <F6> <Plug>ColorstepPrev
-nmap <F7> <Plug>ColorstepNext
-nmap <S-F7> <Plug>ColorstepReload
+" nmap <F6> <Plug>ColorstepPrev
+" nmap <F7> <Plug>ColorstepNext
+" nmap <S-F7> <Plug>ColorstepReload
 
 
 " Tmux
@@ -294,7 +298,7 @@ au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
 let g:ansible_unindent_after_newline = 1
 
 " <leader>gr   goto role under cursor
-let g:ansible_goto_role_paths = './roles,../inventories/roles'
+let g:ansible_goto_role_paths = './roles,../roles'
 function! FindAnsibleRoleUnderCursor()
   if exists("g:ansible_goto_role_paths")
     let l:role_paths = g:ansible_goto_role_paths
@@ -313,12 +317,16 @@ au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleU
 
 
 " Ale settings
-let g:ale_open_list = 1 " show list when errors are found
+let g:ale_open_list = 0 " show list when errors are found
 let g:ale_lint_on_text_changed = 'normal'
 " let g:ale_echo_msg_format = '%linter% says %s'
 let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: disable}}"'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_list_window_size = 5
+let g:ale_floating_preview = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+" open diagnostic list
+nnoremap <silent> <leader>d :lopen<CR>
 
 " Close quickfix windows when buffer is closed
 autocmd QuitPre * if empty(&bt) | lclose | endif
@@ -330,6 +338,7 @@ let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#ale#enabled = 1
 
 
 " UltiSnip settings
@@ -360,7 +369,7 @@ endif
 " When searching use ctrl-X/V/T to open
 " Prevent files opening in Nerdtree pane
 function! FZFOpen(command_str)
-  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+  if (expand('%') =~# 'fern' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
   " find git root directory
@@ -373,6 +382,8 @@ function! FZFOpen(command_str)
 endfunction
 nnoremap <silent> <leader>f :call FZFOpen(':Files')<CR>
 nnoremap <silent> <leader>r :call FZFOpen(':Rg')<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+let g:fzf_buffers_jump = 1
 
 
 " Default Limelight Dim
@@ -381,4 +392,92 @@ let g:limelight_default_coefficient = 0.7
 
 " spell check on gitcommit
 autocmd FileType gitcommit setlocal spell
+
+
+" Which key
+lua << EOF
+require("which-key").setup({
+  window = {
+    border = "single",
+  },
+})
+EOF
+
+
+" Lazy git
+nnoremap <silent> <leader>gg :LazyGit<CR>
+
+
+" Hlslens
+lua << EOF
+require('hlslens').setup({
+  calm_down = true,
+  override_lens = function(render, plist, nearest, idx, r_idx)
+    local sfw = vim.v.searchforward == 1
+    local indicator, text, chunks
+    local abs_r_idx = math.abs(r_idx)
+    if abs_r_idx > 1 then
+      indicator = string.format('%d%s', abs_r_idx, sfw ~= (r_idx > 1) and '' or '')
+    elseif abs_r_idx == 1 then
+      indicator = sfw ~= (r_idx == 1) and '' or ''
+    else
+      indicator = ''
+    end
+
+    local lnum, col = unpack(plist[idx])
+    if nearest then
+      local cnt = #plist
+      if indicator ~= '' then
+        text = string.format('[%s %d/%d]', indicator, idx, cnt)
+      else
+        text = string.format('[%d/%d]', idx, cnt)
+      end
+      chunks = {{' ', 'Ignore'}, {text, 'HlSearchLensNear'}}
+    else
+      text = string.format('[%s %d]', indicator, idx)
+      chunks = {{' ', 'Ignore'}, {text, 'HlSearchLens'}}
+    end
+    render.set_virt(0, lnum - 1, col - 1, chunks, nearest)
+  end
+})
+EOF
+
+
+" Startify
+let g:startify_files_number = 8
+" let g:startify_session_autoload = 1
+let g:startify_padding_left = 3
+let g:webdevicons_enable_startify = 1
+let g:startify_session_delete_buffers = 1 " delete all buffers when loading or closing a session, ignore unsaved buffers
+let g:startify_session_remove_lines = ['setlocal', 'winheight'] " lines matching any of the patterns in this list, will be removed from the session file
+let g:startify_session_sort = 1 " sort sessions by alphabet or modification time
+let g:startify_update_oldfiles = 1
+let g:startify_change_to_dir = 1 " when opening a file or bookmark, change to its directory
+let g:startify_fortune_use_unicode = 1 " beautiful symbols
+" let g:startify_padding_left = 3 " the number of spaces used for left padding
+let g:startify_session_sort = 1 " sort sessions by alphabet or modification time"
+let g:startify_bookmarks = [
+      \ {'a': '~/apps/ansible/'},
+      \ {'t': '~/.tmux/'},
+      \ {'v': '~/.vimrc'},
+      \ {'b': '~/.bashrc'}
+      \ ]
+let g:startify_custom_header = [
+      \' ███╗   ██╗██╗   ██╗      ██╗██████╗ ███████╗',
+      \' ████╗  ██║██║   ██║      ██║██╔══██╗██╔════╝',
+      \' ██╔██╗ ██║██║   ██║█████╗██║██║  ██║█████╗  ',
+      \' ██║╚██╗██║╚██╗ ██╔╝╚════╝██║██║  ██║██╔══╝  ',
+      \' ██║ ╚████║ ╚████╔╝       ██║██████╔╝███████╗',
+      \' ╚═╝  ╚═══╝  ╚═══╝        ╚═╝╚═════╝ ╚══════╝',
+      \ ]
+let g:startify_lists = [
+      \ { 'type': 'bookmarks', 'header': ["  Bookmarks"]      },
+      \ { 'type': 'files',     'header': ["  MRU Files"]            },
+      \ { 'type': 'dir',       'header': ["  MRU Files in ". getcwd()] },
+      \ { 'type': 'commands',  'header': ["  Commands"]       },
+      \ ]
+
+function! StartifyEntryFormat()
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
 
