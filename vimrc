@@ -191,7 +191,7 @@ command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 
 
 " Clear highlight from selection/search
-nnoremap <silent> <Esc><Esc> :let @/=""<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 
 " lambdalisue/fern.vim
