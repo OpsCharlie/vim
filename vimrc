@@ -1,15 +1,16 @@
+" curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " Install plugins: :PluginInstall or vim +PluginInstall +qall
 
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings
 " Automatically install vim-plug and run PlugInstall if vim-plug not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 Plug 'lilydjwg/colorizer'                   " Colorize all text in the form #rgb,...
 Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
@@ -41,6 +42,7 @@ Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that u
 Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh --output yaml.snippets --style dictionary --no-description' } " This is a vim syntax plugin for Ansible 2.x
 Plug 'folke/which-key.nvim'
 Plug 'kdheepak/lazygit.nvim'
@@ -437,7 +439,7 @@ let g:startify_session_sort = 1 " sort sessions by alphabet or modification time
 let g:startify_bookmarks = [
       \ {'a': '~/apps/ansible/'},
       \ {'t': '~/.tmux/'},
-      \ {'v': '~/.vimrc'},
+      \ {'v': '~/.config/nvim/init.vim'},
       \ {'b': '~/.bashrc'}
       \ ]
 let g:startify_custom_header = [
