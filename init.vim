@@ -183,6 +183,7 @@ source ~/.config/nvim/plugins/git.vim
 source ~/.config/nvim/plugins/indentline.vim
 source ~/.config/nvim/plugins/insertlessly.vim
 source ~/.config/nvim/plugins/limelight.vim
+source ~/.config/nvim/plugins/lazygit.vim
 source ~/.config/nvim/plugins/markdown-preview.vim
 source ~/.config/nvim/plugins/nerdtreecommenter.vim
 source ~/.config/nvim/plugins/ultisnips.vim
