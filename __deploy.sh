@@ -6,7 +6,7 @@ DIR=$(dirname $(readlink -f $0))
 if [ -z "$P" ]; then
     rm ~/.config/nvim
     ln -s "$DIR" "$HOME/.config/nvim"
-    echo Configure Coc neovim
+    echo Configure nvim-tree
     exit $?
 fi
 
