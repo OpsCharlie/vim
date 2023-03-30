@@ -1,25 +1,31 @@
-" curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " Install plugins: :PluginInstall or vim +PluginInstall +qall
 
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings
 " Automatically install vim-plug and run PlugInstall if vim-plug not found
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if !filereadable(vimplug_exists)
+  if !executable("curl")
+    echoerr "You have to install curl or first install vim-plug by yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finis_vimplug = "yes"
+  autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'lilydjwg/colorizer'                   " Colorize all text in the form #rgb,...
+
+call plug#begin(expand('~/.config/nvim/plugged'))
+" Plug 'lilydjwg/colorizer'                   " Colorize all text in the form #rgb,...
 Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
 Plug 'w0rp/ale'                             " Syntax checker
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
-Plug 'lambdalisue/fern.vim'                 " Asynchronous tree viewer
-Plug 'lambdalisue/fern-git-status.vim'
-Plug 'lambdalisue/nerdfont.vim'
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+
 Plug 'mileszs/ack.vim'                      " Search function dependeny
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
@@ -34,7 +40,7 @@ Plug 'SirVer/ultisnips'                     " Snippet solution for Vim
 Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
-" Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
+Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
 Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
@@ -42,10 +48,10 @@ Plug 'troydm/zoomwintab.vim'                " A simple zoom window plugin that u
 Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh --output yaml.snippets --style dictionary --no-description' } " This is a vim syntax plugin for Ansible 2.x
 Plug 'folke/which-key.nvim'
 Plug 'kdheepak/lazygit.nvim'
+Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'kevinhwang91/nvim-hlslens'           " helps you better glance at matched information
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
@@ -127,19 +133,19 @@ set t_Co=256
 set t_ut=
 " set background=light
 " colorscheme railscasts
-set background=dark
-colorscheme gruvbox
-" set background=light
-" colorscheme OceanicNext
+" set background=dark
+" colorscheme gruvbox
+set background=light
+colorscheme OceanicNext
 " set background=dark
 " colorscheme solarized8
 highlight clear SignColumn
 
 
 " ColorStepper Keys
-" nmap <F6> <Plug>ColorstepPrev
-" nmap <F7> <Plug>ColorstepNext
-" nmap <S-F7> <Plug>ColorstepReload
+nmap <F6> <Plug>ColorstepPrev
+nmap <F7> <Plug>ColorstepNext
+nmap <S-F7> <Plug>ColorstepReload
 
 
 " Tmux
@@ -196,62 +202,48 @@ command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 
-" lambdalisue/fern.vim
-" Disable netrw.
-let g:loaded_netrw  = 1
-let g:loaded_netrwPlugin = 1
-let g:loaded_netrwSettings = 1
-let g:loaded_netrwFileHandlers = 1
-let g:fern#renderer = "nerdfont"
-
-augroup my-fern-hijack
-  autocmd!
-  autocmd BufEnter * ++nested call s:hijack_directory()
-augroup END
-
-function! s:hijack_directory() abort
-  let path = expand('%:p')
-  if !isdirectory(path)
-    return
-  endif
-  bwipeout %
-  execute printf('Fern %s', fnameescape(path))
-endfunction
-
-" Custom settings and mappings.
-let g:fern#disable_default_mappings = 1
-
-noremap <silent> <C-n> :Fern . -drawer -reveal=% -toggle -width=35<CR><C-w>=
-
-function! FernInit() abort
-  nmap <buffer><expr>
-        \ <Plug>(fern-my-open-expand-collapse)
-        \ fern#smart#leaf(
-        \   "\<Plug>(fern-action-open:select)",
-        \   "\<Plug>(fern-action-expand)",
-        \   "\<Plug>(fern-action-collapse)",
-        \ )
-  nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
-  nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
-  nmap <buffer> n <Plug>(fern-action-new-path)
-  nmap <buffer> d <Plug>(fern-action-remove)
-  nmap <buffer> p <Plug>(fern-action-copy)
-  nmap <buffer> m <Plug>(fern-action-move)
-  nmap <buffer> M <Plug>(fern-action-rename)
-  nmap <buffer> H <Plug>(fern-action-hidden:toggle)
-  nmap <buffer> r <Plug>(fern-action-reload)
-  "nmap <buffer> k <Plug>(fern-action-mark-toggle)
-  nmap <buffer> <C-x> <Plug>(fern-action-open:split)
-  nmap <buffer> <C-v> <Plug>(fern-action-open:vsplit)
-  nmap <buffer> <C-t> <Plug>(fern-action-open:tabedit)
-  nmap <buffer><nowait> < <Plug>(fern-action-leave)
-  nmap <buffer><nowait> > <Plug>(fern-action-enter)
-endfunction
-
-augroup FernGroup
-  autocmd!
-  autocmd FileType fern call FernInit()
-augroup END
+" nvim-tree
+lua << EOF
+vim.g.nvim_tree_auto_ignore_ft = 'startify'
+-- following options are the default
+require'nvim-web-devicons'.setup()
+require'nvim-tree'.setup {
+  disable_netrw       = true,
+  hijack_netrw        = true,
+  open_on_setup       = false,
+  ignore_ft_on_setup  = {},
+  open_on_tab         = false,
+  hijack_cursor       = false,
+  update_cwd          = false,
+  diagnostics = { enable = false, },
+  update_focused_file = {
+    enable      = true,
+    update_cwd  = false,
+    ignore_list = {}
+  },
+  system_open = {
+    cmd  = nil,
+    args = {}
+  },
+  view = {
+    width = 40,
+    height = 30,
+    side = 'left',
+    mappings = {
+      custom_only = false,
+      list = {
+        { key = "C", action = "cd" },
+        { key = ">", action = "cd" },
+        { key = "<", action = "dir_up" },
+      }
+    }
+  },
+    filters = {
+    dotfiles = true,
+  },
+}
+vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = false, silent = true})
+EOF
 
 
 " NERDTree Commenter
@@ -312,8 +304,8 @@ function! FindAnsibleRoleUnderCursor()
   if l:found_role_path == ""
     echo l:tasks_main . " not found"
   else
-    execute "edit " . fnameescape(l:found_role_path) | silent! lcd %:p:h/.. | NERDTreeCWD
-  endif
+    execute "edit " . fnameescape(l:found_role_path) | silent! lcd %:p:h/..
+endif
 endfunction
 au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
 
@@ -426,7 +418,7 @@ EOF
 " Startify
 let g:startify_files_number = 8
 " let g:startify_session_autoload = 1
-let g:startify_padding_left = 3
+let g:startify_padding_left = 4
 let g:webdevicons_enable_startify = 1
 let g:startify_session_delete_buffers = 1 " delete all buffers when loading or closing a session, ignore unsaved buffers
 let g:startify_session_remove_lines = ['setlocal', 'winheight'] " lines matching any of the patterns in this list, will be removed from the session file
@@ -434,12 +426,12 @@ let g:startify_session_sort = 1 " sort sessions by alphabet or modification time
 let g:startify_update_oldfiles = 1
 let g:startify_change_to_dir = 1 " when opening a file or bookmark, change to its directory
 let g:startify_fortune_use_unicode = 1 " beautiful symbols
-" let g:startify_padding_left = 3 " the number of spaces used for left padding
 let g:startify_session_sort = 1 " sort sessions by alphabet or modification time"
 let g:startify_bookmarks = [
-      \ {'a': '~/apps/ansible/'},
+      \ {'a': '~/ansible/lxd/'},
+      \ {'r': '~/ansible/lxd/roles/'},
       \ {'t': '~/.tmux/'},
-      \ {'v': '~/.config/nvim/init.vim'},
+      \ {'v': '~/.vimrc'},
       \ {'b': '~/.bashrc'}
       \ ]
 let g:startify_custom_header = [
