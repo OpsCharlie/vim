@@ -13,6 +13,7 @@ let g:coc_global_extensions = [
     \ 'coc-sh',
     \ 'coc-snippets',
     \ 'coc-sql',
+    \ 'coc-python',
     \ 'coc-lists',
     \ '@yaegassy/coc-ansible',
     \ '@yaegassy/coc-nginx',
