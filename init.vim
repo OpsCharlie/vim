@@ -23,8 +23,8 @@ Plug 'ConradIrwin/vim-bracketed-paste'      " Set paste when pasting with C-S-v
 Plug 'sheerun/vim-polyglot'                 " File type
 Plug 'w0rp/ale'                             " Syntax checker
 Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
+Plug 'kyazdani42/nvim-tree.lua'             " File explorer
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'mileszs/ack.vim'                      " Search function dependeny
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
@@ -32,15 +32,15 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'                   " Git Wrapper
 Plug 'christoomey/vim-tmux-navigator'       " Seamless navigation between tmux panes and vim splits
 Plug 'dahu/Insertlessly'                    " Inserts space/enter in normal mode
-Plug 'ervandew/supertab'                    " Allows you to use <Tab> for all your insert completion
+" Plug 'ervandew/supertab'                    " Allows you to use <Tab> for all your insert completion
 Plug 'jiangmiao/auto-pairs'                 " Insert or delete brackets, parens, quotes in pair
 Plug 'dhruvasagar/vim-table-mode'           " Instant table creation
 Plug 'airblade/vim-gitgutter'               " Shows a git diff in the sign column
 Plug 'SirVer/ultisnips'                     " Snippet solution for Vim
-Plug 'fatih/vim-nginx'                      " Nginx syntax files
+" Plug 'fatih/vim-nginx'                      " Nginx syntax files
 Plug 'WolfgangMehner/bash-support'          " Insert code snippets, run, check, and debug the code
 Plug 'rafi/awesome-vim-colorschemes'        " Collection of colorschemes
-Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
+" Plug 'qualiabyte/vim-colorstepper'          " Easy change colorscheme F7/F6: next/prev  SHIFT F7: reload
 Plug 'pedrohdz/vim-yaml-folds'              " Very simple folding configuration for YAML
 Plug 'junegunn/fzf'                         " To set up FZF in Vim
 Plug 'junegunn/fzf.vim'                     " To search for files inside Vim
@@ -49,20 +49,15 @@ Plug 'junegunn/limelight.vim'               " Hyperfocus-writing in Vim
 Plug 'Yggdroot/indentLine'                  " Display thin vertical lines at each indentation level.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh --output yaml.snippets --style dictionary --no-description' } " This is a vim syntax plugin for Ansible 2.x
-Plug 'folke/which-key.nvim'
-Plug 'kdheepak/lazygit.nvim'
+Plug 'folke/which-key.nvim'                 " displays a popup with possible key bindings of the command you started typing
+Plug 'kdheepak/lazygit.nvim'                " Plugin for calling lazygit from within neovim
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'kevinhwang91/nvim-hlslens'           " helps you better glance at matched information
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'mhinz/vim-startify'
+" Plug 'ryanoasis/vim-devicons'
+
 " Deoplete completion framework
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 
@@ -151,6 +146,9 @@ nmap <S-F7> <Plug>ColorstepReload
 " Tmux
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+" Disable tmux navigator when zooming the Vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
+
 
 " Disable delete trailing space when md files
 " Toggles markdown preview
@@ -202,48 +200,6 @@ command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 
-" nvim-tree
-lua << EOF
-vim.g.nvim_tree_auto_ignore_ft = 'startify'
--- following options are the default
-require'nvim-web-devicons'.setup()
-require'nvim-tree'.setup {
-  disable_netrw       = true,
-  hijack_netrw        = true,
-  open_on_setup       = false,
-  ignore_ft_on_setup  = {},
-  open_on_tab         = false,
-  hijack_cursor       = false,
-  update_cwd          = false,
-  diagnostics = { enable = false, },
-  update_focused_file = {
-    enable      = true,
-    update_cwd  = false,
-    ignore_list = {}
-  },
-  system_open = {
-    cmd  = nil,
-    args = {}
-  },
-  view = {
-    width = 40,
-    height = 30,
-    side = 'left',
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = "C", action = "cd" },
-        { key = ">", action = "cd" },
-        { key = "<", action = "dir_up" },
-      }
-    }
-  },
-    filters = {
-    dotfiles = true,
-  },
-}
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = false, silent = true})
-EOF
 
 
 " NERDTree Commenter
@@ -291,6 +247,7 @@ au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
 let g:ansible_unindent_after_newline = 1
 
+
 " <leader>gr   goto role under cursor
 let g:ansible_goto_role_paths = './roles,../roles'
 function! FindAnsibleRoleUnderCursor()
@@ -317,8 +274,8 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: disable}}"'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_list_window_size = 5
-let g:ale_floating_preview = 1
-let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = ''
 " open diagnostic list
 nnoremap <silent> <leader>d :lopen<CR>
 
@@ -351,10 +308,10 @@ let g:gitgutter_preview_win_floating = 1
 
 
 " Deoplete
-if v:version > 704
-  let g:deoplete#enable_at_startup = 1
-  let g:SuperTabDefaultCompletionType = "<c-n>"
-endif
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+call deoplete#custom#var('file', 'enable_slash_completion', 1)
+call deoplete#custom#option({ 'smart_case': v:true })
 
 
 " FZF and ripgrep
@@ -384,35 +341,21 @@ let g:fzf_buffers_jump = 1
 let g:limelight_default_coefficient = 0.7
 
 
+" Auto-pairs
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+
+" Indent line
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
 " spell check on gitcommit
 autocmd FileType gitcommit setlocal spell
-
-
-" Which key
-lua << EOF
-require("which-key").setup({
-  window = {
-    border = "single",
-  },
-})
-EOF
 
 
 " Lazy git
 nnoremap <silent> <leader>gg :LazyGit<CR>
 
-
-" Hlslens
-lua << EOF
-local kopts = {noremap = true, silent = true}
-
-vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-EOF
 
 
 " Startify
@@ -452,3 +395,65 @@ let g:startify_lists = [
 function! StartifyEntryFormat()
   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
 endfunction
+
+
+" LUA
+lua << EOF
+-- Hlslens
+require('hlslens').setup()
+local kopts = {noremap = true, silent = true}
+
+vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+-- Which key
+require("which-key").setup({
+  window = {
+    border = "single",
+  },
+})
+
+-- nvim-tree
+vim.g.nvim_tree_auto_ignore_ft = 'startify'
+-- following options are the default
+require'nvim-web-devicons'.setup()
+require'nvim-tree'.setup {
+  disable_netrw       = true,
+  hijack_netrw        = true,
+  open_on_setup       = false,
+  ignore_ft_on_setup  = {},
+  open_on_tab         = false,
+  hijack_cursor       = false,
+  update_cwd          = false,
+  diagnostics = { enable = false, },
+  update_focused_file = {
+    enable      = true,
+    update_cwd  = false,
+    ignore_list = {}
+  },
+  system_open = {
+    cmd  = nil,
+    args = {}
+  },
+  view = {
+    width = 40,
+    side = 'left',
+    mappings = {
+      custom_only = false,
+      list = {
+        { key = "C", action = "cd" },
+        { key = ">", action = "cd" },
+        { key = "<", action = "dir_up" },
+      }
+    }
+  },
+    filters = {
+      dotfiles = true,
+  },
+}
+vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = false, silent = true})
+EOF
