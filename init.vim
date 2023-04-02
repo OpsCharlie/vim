@@ -246,6 +246,7 @@ function! FernInit() abort
   nmap <buffer> <C-t> <Plug>(fern-action-open:tabedit)
   nmap <buffer><nowait> < <Plug>(fern-action-leave)
   nmap <buffer><nowait> > <Plug>(fern-action-enter)
+  setlocal nonumber
 endfunction
 
 augroup FernGroup
