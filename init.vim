@@ -190,7 +190,7 @@ cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
 " Pretty print
-command! PrettyPrintJSON %!jq '.'
+command! PrettyPrintJSON %!ppjson.py|jq '.'
 command! UnPrettyPrintJSON %!jq -c '.'
 command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
 command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
@@ -243,6 +243,7 @@ autocmd BufReadPost *
 
 
 " Ansible
+set colorcolumn=160
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
 let g:ansible_unindent_after_newline = 1
