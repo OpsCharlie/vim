@@ -53,6 +53,7 @@ Plug 'folke/which-key.nvim'                 " displays a popup with possible key
 Plug 'kdheepak/lazygit.nvim'                " Plugin for calling lazygit from within neovim
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'kevinhwang91/nvim-hlslens'           " helps you better glance at matched information
+Plug 'mogelbrod/vim-jsonpath'
 " Plug 'mhinz/vim-startify'
 " Plug 'ryanoasis/vim-devicons'
 
@@ -190,7 +191,8 @@ cmap w!! silent w !sudo tee % >/dev/null <CR>:edit!<CR>
 
 
 " Pretty print
-command! PrettyPrintJSON %!ppjson.py|jq '.'
+command! PrettyPrintJSON %!jq '.'
+command! PrettyPrintAnsibleJSON %!ppjson.py|jq '.'
 command! UnPrettyPrintJSON %!jq -c '.'
 command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
 command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
@@ -243,6 +245,10 @@ autocmd BufReadPost *
 
 
 " Ansible
+nnoremap <silent> <leader>n i%<BS><BS><BS><BS> \| <ESC>
+nnoremap <silent> <leader>N :%s/- name: /- name: %<BS><BS><BS><BS> \| /<CR>
+nnoremap <silent> <leader>a biansible.builtin.<ESC>
+inoremap <silent> <leader>n %<BS><BS><BS><BS> \|
 set colorcolumn=160
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */ansible/hosts set filetype=yaml.ansible
@@ -269,10 +275,13 @@ au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleU
 
 
 " Ale settings
+let g:ale_linters_ignore = {
+            \ 'yaml': ['yaml-language-server', 'spectral',  'ansible-language-server'],
+            \ }
 let g:ale_open_list = 0 " show list when errors are found
 let g:ale_lint_on_text_changed = 'normal'
 " let g:ale_echo_msg_format = '%linter% says %s'
-let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: disable}}"'
+" let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: disable}}"'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_list_window_size = 5
 let g:ale_sign_error = '✗'
@@ -343,7 +352,7 @@ let g:limelight_default_coefficient = 0.7
 
 
 " Auto-pairs
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 
@@ -357,6 +366,14 @@ autocmd FileType gitcommit setlocal spell
 " Lazy git
 nnoremap <silent> <leader>gg :LazyGit<CR>
 
+
+" Json Path
+" Optionally copy path to a named register (* in this case) when calling :JsonPath
+let g:jsonpath_register = '*'
+
+" Define mappings for json buffers
+au FileType json noremap <buffer> <silent> <leader>j :call jsonpath#echo()<CR>
+au FileType json noremap <buffer> <silent> <leader>gj :call jsonpath#goto()<CR>
 
 
 " Startify
