@@ -3,11 +3,10 @@ local M = {}
 
 M.general = {
   n = {
-    [";"] = { ":", "enter command mode", opts = { nowait = true } },
-
     ["<leader>lg"] = { "<cmd>LazyGit<CR>", "Open lazygit" },
+    ["<leader>n"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
     ["<C-w>z"] = { "<cmd>ZoomWinTabToggle<CR>", "Toggle Zoom Window" },
-    ["<CR>"] = { "o<Esc>" },
+    ["<CR>"] = { "O<Esc>j" },
     ["<space>"] = { "i <Esc>l" },
     ["<C-e>"] = {
       function()
@@ -39,7 +38,7 @@ M.general = {
   },
   v = {
     [">"] = { ">gv", "indent"},
-    ["<C-e>/"] = {
+    ["<C-e>"] = {
       "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
       "Toggle comment",
     },
@@ -50,6 +49,12 @@ M.general = {
 M.disabled = {
   n = {
     ["<leader>q"] = "",
+    ["<leader>/"] = "",
+    ["<leader>rn"] = "",
+  },
+
+  v = {
+    ["<leader>/"] = "",
   },
 
   x = {
