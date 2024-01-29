@@ -34,11 +34,11 @@ return {
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-      vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {})
-      vim.keymap.set("n", "<leader>D", vim.diagnostic.setloclist, {})
+      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
+      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+      vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "LSP Diagnostic Float" })
+      vim.keymap.set("n", "<leader>D", vim.diagnostic.setloclist, { desc = "LSP Diagnostic List" })
     end,
   },
 }
