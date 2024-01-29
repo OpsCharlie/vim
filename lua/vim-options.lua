@@ -46,11 +46,11 @@ opt.whichwrap:append("<>")
 os.execute("mkdir -p ~/.vim")
 os.execute("mkdir -p ~/.vim/backup")
 os.execute("mkdir -p ~/.vim/swap")
-vim.cmd("set backupdir=/home/carl/.vim/backup//")
-vim.cmd("set directory=/home/carl/.vim/swap//")
+vim.cmd("set backupdir=/home/$USER/.vim/backup//")
+vim.cmd("set directory=/home/$USER/.vim/swap//")
 
-os.execute("mkdir /home/carl/.vim/undo")
-vim.cmd("set undodir=/home/carl/.vim/undo//")
+os.execute("mkdir /home/$USER/.vim/undo")
+vim.cmd("set undodir=/home/$USER/.vim/undo//")
 vim.cmd("set undofile")
 vim.cmd("set undolevels=1000")
 vim.cmd("set undoreload=10000")
@@ -58,8 +58,8 @@ vim.cmd("set undoreload=10000")
 vim.keymap.set("n", "<ESC><ESC>", ":nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<CR>", "i<CR><ESC>", { silent = true })
 vim.keymap.set("n", "<SPACE>", "i <ESC>l", { silent = true })
-vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Indent line"})
-vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent line"})
+vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Indent line" })
+vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent line" })
 -- vim.wo.number = true
 
 -------------------------------------- autocmds ------------------------------------------
@@ -67,26 +67,26 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- dont list quickfix buffers
 autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		vim.opt_local.buflisted = false
-	end,
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.buflisted = false
+  end,
 })
 
 autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = { "*/ansible/*.yml", "*/ansible/hosts" },
-	command = "set filetype=yaml.ansible",
+  pattern = { "*/ansible/*.yml", "*/ansible/hosts" },
+  command = "set filetype=yaml.ansible",
 })
 
 autocmd("FileType", {
-	pattern = "yaml.ansible",
-	callback = function()
-		vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
-		vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { silent = true })
-		vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>", { silent = true })
-		vim.keymap.set("n", "<leader>a", "biansible.builtin.<ESC>", { silent = true })
-		vim.opt.colorcolumn = "160"
-	end,
+  pattern = "yaml.ansible",
+  callback = function()
+    vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
+    vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { silent = true })
+    vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>a", "biansible.builtin.<ESC>", { silent = true })
+    vim.opt.colorcolumn = "160"
+  end,
 })
 
 -------------------------------------- user commands ------------------------------------------
