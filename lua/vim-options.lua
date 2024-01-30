@@ -49,7 +49,7 @@ os.execute("mkdir -p ~/.vim/swap")
 vim.cmd("set backupdir=/home/$USER/.vim/backup//")
 vim.cmd("set directory=/home/$USER/.vim/swap//")
 
-os.execute("mkdir /home/$USER/.vim/undo")
+os.execute("mkdir -p /home/$USER/.vim/undo")
 vim.cmd("set undodir=/home/$USER/.vim/undo//")
 vim.cmd("set undofile")
 vim.cmd("set undolevels=1000")
@@ -81,8 +81,8 @@ autocmd({ "BufRead", "BufNewFile" }, {
 autocmd("FileType", {
   pattern = "yaml.ansible",
   callback = function()
-    vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
-    vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { silent = true })
+    vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
+    vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { silent = true })
     vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>", { silent = true })
     vim.keymap.set("n", "<leader>a", "biansible.builtin.<ESC>", { silent = true })
     vim.opt.colorcolumn = "160"
