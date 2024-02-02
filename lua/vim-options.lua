@@ -83,7 +83,7 @@ autocmd("FileType", {
   callback = function()
     vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
     vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { silent = true })
-    vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>", { silent = true })
     vim.keymap.set("n", "<leader>a", "biansible.builtin.<ESC>", { silent = true })
     vim.opt.colorcolumn = "160"
   end,
