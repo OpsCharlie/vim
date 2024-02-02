@@ -26,7 +26,7 @@ Plug 'scrooloose/nerdcommenter'             " NERD Commenter script
 Plug 'kyazdani42/nvim-tree.lua'             " File explorer
 Plug 'kyazdani42/nvim-web-devicons'
 
-Plug 'mileszs/ack.vim'                      " Search function dependeny
+Plug 'mileszs/ack.vim'                      " Search function dependency
 Plug 'vim-airline/vim-airline'              " Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'                   " Git Wrapper
@@ -87,7 +87,7 @@ set wildmenu        " turnon wildmenu
 set wildmode=longest,full " command completion longest common part, then all.
 set showcmd         " display incomplete commands
 set hlsearch        " Highlight search results
-set linespace=0     " stick together (usefull for nfo files)
+set linespace=0     " stick together (useful for nfo files)
 set ruler           " Always show current position
 set mouse=a         " use mouse
 set ignorecase      " search case insensitive
@@ -364,7 +364,7 @@ autocmd FileType gitcommit setlocal spell
 
 
 " Lazy git
-nnoremap <silent> <leader>gg :LazyGit<CR>
+nnoremap <silent> <leader>lg :LazyGit<CR>
 
 
 " Json Path
