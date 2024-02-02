@@ -1,6 +1,6 @@
 return {
   {
-    "hrsh7th/cmp-nvim-lsp"
+    "hrsh7th/cmp-nvim-lsp",
   },
   {
     "L3MON4D3/LuaSnip",
@@ -12,7 +12,8 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/cmp-buffer"
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
     },
     config = function()
       local cmp = require("cmp")
@@ -28,28 +29,26 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
+        preselect = cmp.PreselectMode.None,
         mapping = {
-          ['<CR>'] = function(fallback)
-            if cmp.visible() then
-              cmp.confirm()
-            else
-              fallback() -- If you use vim-endwise, this fallback will behave the same as vim-endwise.
-            end
-          end,
-          ['<S-Tab>'] = function(fallback)
+          ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = false,
+          }),
+          ["<S-Tab>"] = function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             else
               fallback()
             end
           end,
-          ['<Tab>'] = function(fallback)
+          ["<Tab>"] = function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             else
               fallback()
             end
-          end
+          end,
         },
         -- mapping = cmp.mapping.preset.insert({
         --   ["<C-b>"] = cmp.mapping.scroll_docs(-4),
