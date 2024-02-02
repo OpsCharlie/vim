@@ -42,7 +42,7 @@ opt.updatetime = 250
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append("<>")
 
--- persistant undo
+-- persistent undo
 os.execute("mkdir -p ~/.vim")
 os.execute("mkdir -p ~/.vim/backup")
 os.execute("mkdir -p ~/.vim/swap")
@@ -65,7 +65,7 @@ vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent line" })
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
--- dont list quickfix buffers
+-- don't list quickfix buffers
 autocmd("FileType", {
   pattern = "qf",
   callback = function()

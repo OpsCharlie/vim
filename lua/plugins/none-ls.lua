@@ -5,7 +5,7 @@ return {
     null_ls.setup({
       sources = {
         -- Python
-        null_ls.builtins.formatting.isort,
+        -- null_ls.builtins.formatting.isort,
         null_ls.builtins.diagnostics.pylama,
 
         -- Shell
@@ -16,7 +16,7 @@ return {
 
         -- JS yaml html markdown
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.yamllint,
+        -- null_ls.builtins.diagnostics.yamllint,
         null_ls.builtins.diagnostics.markdownlint,
         null_ls.builtins.formatting.jq,
 
