@@ -1,0 +1,1304 @@
+{
+  "add_host": {
+    "prefix": "add_host",
+    "description": "Add a host (and alternatively a group) to the ansible-playbook in-memory inventory",
+    "body": [
+      "ansible.builtin.add_host:",
+      "  name: #",
+      "  groups: #"
+    ],
+    "luasnip": {
+      "priority": -50
+    }
+  },
+  "apt": {
+    "prefix": "apt",
+    "description": "Manages apt-packages",
+    "body": [
+      "ansible.builtin.apt:",
+      "  allow_change_held_packages: #",
+      "  allow_downgrade: #",
+      "  allow_unauthenticated: #",
+      "  autoclean: #",
+      "  autoremove: #",
+      "  cache_valid_time: #",
+      "  clean: #",
+      "  deb: #",
+      "  default_release: #",
+      "  dpkg_options: #",
+      "  fail_on_autoremove: #",
+      "  force: #",
+      "  force_apt_get: #",
+      "  install_recommends: #",
+      "  lock_timeout: #",
+      "  name: #",
+      "  only_upgrade: #",
+      "  policy_rc_d: #",
+      "  purge: #",
+      "  state: #",
+      "  update_cache: #",
+      "  update_cache_retries: #",
+      "  update_cache_retry_max_delay: #",
+      "  upgrade: #"
+    ]
+  },
+  "apt_key": {
+    "prefix": "apt_key",
+    "description": "Add or remove an apt key",
+    "body": [
+      "ansible.builtin.apt_key:",
+      "  data: #",
+      "  file: #",
+      "  id: #",
+      "  keyring: #",
+      "  keyserver: #",
+      "  state: #",
+      "  url: #",
+      "  validate_certs: #"
+    ]
+  },
+  "apt_repository": {
+    "prefix": "apt_repository",
+    "description": "Add and remove APT repositories",
+    "body": [
+      "ansible.builtin.apt_repository:",
+      "  repo: #",
+      "  codename: #",
+      "  filename: #",
+      "  install_python_apt: #",
+      "  mode: #",
+      "  state: #",
+      "  update_cache: #",
+      "  update_cache_retries: #",
+      "  update_cache_retry_max_delay: #",
+      "  validate_certs: #"
+    ]
+  },
+  "assemble": {
+    "prefix": "assemble",
+    "description": "Assemble configuration files from fragments",
+    "body": [
+      "ansible.builtin.assemble:",
+      "  dest: #",
+      "  src: #",
+      "  attributes: #",
+      "  backup: #",
+      "  decrypt: #",
+      "  delimiter: #",
+      "  group: #",
+      "  ignore_hidden: #",
+      "  mode: #",
+      "  owner: #",
+      "  regexp: #",
+      "  remote_src: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  unsafe_writes: #",
+      "  validate: #"
+    ]
+  },
+  "assert": {
+    "prefix": "assert",
+    "description": "Asserts given expressions are true",
+    "body": [
+      "ansible.builtin.assert:",
+      "  that: #",
+      "  fail_msg: #",
+      "  quiet: #",
+      "  success_msg: #"
+    ]
+  },
+  "async_status": {
+    "prefix": "async_status",
+    "description": "Obtain status of asynchronous task",
+    "body": [
+      "ansible.builtin.async_status:",
+      "  jid: #",
+      "  mode: #"
+    ]
+  },
+  "blockinfile": {
+    "prefix": "blockinfile",
+    "description": "Insert/update/remove a text block surrounded by marker lines",
+    "body": [
+      "ansible.builtin.blockinfile:",
+      "  path: #",
+      "  append_newline: #",
+      "  attributes: #",
+      "  backup: #",
+      "  block: #",
+      "  create: #",
+      "  group: #",
+      "  insertafter: #",
+      "  insertbefore: #",
+      "  marker: #",
+      "  marker_begin: #",
+      "  marker_end: #",
+      "  mode: #",
+      "  owner: #",
+      "  prepend_newline: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  state: #",
+      "  unsafe_writes: #",
+      "  validate: #"
+    ]
+  },
+  "command": {
+    "prefix": "command",
+    "description": "Execute commands on targets",
+    "body": [
+      "ansible.builtin.command:",
+      "  argv: #",
+      "  chdir: #",
+      "  cmd: #",
+      "  creates: #",
+      "  expand_argument_vars: #",
+      "  removes: #",
+      "  stdin: #",
+      "  stdin_add_newline: #",
+      "  strip_empty_ends: #"
+    ]
+  },
+  "copy": {
+    "prefix": "copy",
+    "description": "Copy files to remote locations",
+    "body": [
+      "ansible.builtin.copy:",
+      "  dest: #",
+      "  attributes: #",
+      "  backup: #",
+      "  checksum: #",
+      "  content: #",
+      "  decrypt: #",
+      "  directory_mode: #",
+      "  follow: #",
+      "  force: #",
+      "  group: #",
+      "  local_follow: #",
+      "  mode: #",
+      "  owner: #",
+      "  remote_src: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  src: #",
+      "  unsafe_writes: #",
+      "  validate: #"
+    ]
+  },
+  "cron": {
+    "prefix": "cron",
+    "description": "Manage cron.d and crontab entries",
+    "body": [
+      "ansible.builtin.cron:",
+      "  name: #",
+      "  backup: #",
+      "  cron_file: #",
+      "  day: #",
+      "  disabled: #",
+      "  env: #",
+      "  hour: #",
+      "  insertafter: #",
+      "  insertbefore: #",
+      "  job: #",
+      "  minute: #",
+      "  month: #",
+      "  special_time: #",
+      "  state: #",
+      "  user: #",
+      "  weekday: #"
+    ]
+  },
+  "deb822_repository": {
+    "prefix": "deb822_repository",
+    "description": "Add and remove deb822 formatted repositories",
+    "body": [
+      "ansible.builtin.deb822_repository:",
+      "  name: #",
+      "  allow_downgrade_to_insecure: #",
+      "  allow_insecure: #",
+      "  allow_weak: #",
+      "  architectures: #",
+      "  by_hash: #",
+      "  check_date: #",
+      "  check_valid_until: #",
+      "  components: #",
+      "  date_max_future: #",
+      "  enabled: #",
+      "  inrelease_path: #",
+      "  languages: #",
+      "  mode: #",
+      "  pdiffs: #",
+      "  signed_by: #",
+      "  state: #",
+      "  suites: #",
+      "  targets: #",
+      "  trusted: #",
+      "  types: #",
+      "  uris: #"
+    ]
+  },
+  "debconf": {
+    "prefix": "debconf",
+    "description": "Configure a .deb package",
+    "body": [
+      "ansible.builtin.debconf:",
+      "  name: #",
+      "  question: #",
+      "  unseen: #",
+      "  value: #",
+      "  vtype: #"
+    ]
+  },
+  "debug": {
+    "prefix": "debug",
+    "description": "Print statements during execution",
+    "body": [
+      "ansible.builtin.debug:",
+      "  msg: #",
+      "  verbosity: #"
+    ]
+  },
+  "dnf": {
+    "prefix": "dnf",
+    "description": "Manages packages with the I(dnf) package manager",
+    "body": [
+      "ansible.builtin.dnf:",
+      "  allow_downgrade: #",
+      "  allowerasing: #",
+      "  autoremove: #",
+      "  bugfix: #",
+      "  cacheonly: #",
+      "  conf_file: #",
+      "  disable_excludes: #",
+      "  disable_gpg_check: #",
+      "  disable_plugin: #",
+      "  disablerepo: #",
+      "  download_dir: #",
+      "  download_only: #",
+      "  enable_plugin: #",
+      "  enablerepo: #",
+      "  exclude: #",
+      "  install_repoquery: #",
+      "  install_weak_deps: #",
+      "  installroot: #",
+      "  list: #",
+      "  lock_timeout: #",
+      "  name: #",
+      "  nobest: #",
+      "  releasever: #",
+      "  security: #",
+      "  skip_broken: #",
+      "  sslverify: #",
+      "  state: #",
+      "  update_cache: #",
+      "  update_only: #",
+      "  use_backend: #",
+      "  validate_certs: #"
+    ]
+  },
+  "dnf5": {
+    "prefix": "dnf5",
+    "description": "Manages packages with the I(dnf5) package manager",
+    "body": [
+      "ansible.builtin.dnf5:",
+      "  allow_downgrade: #",
+      "  allowerasing: #",
+      "  autoremove: #",
+      "  bugfix: #",
+      "  cacheonly: #",
+      "  conf_file: #",
+      "  disable_excludes: #",
+      "  disable_gpg_check: #",
+      "  disable_plugin: #",
+      "  disablerepo: #",
+      "  download_dir: #",
+      "  download_only: #",
+      "  enable_plugin: #",
+      "  enablerepo: #",
+      "  exclude: #",
+      "  install_repoquery: #",
+      "  install_weak_deps: #",
+      "  installroot: #",
+      "  list: #",
+      "  lock_timeout: #",
+      "  name: #",
+      "  nobest: #",
+      "  releasever: #",
+      "  security: #",
+      "  skip_broken: #",
+      "  sslverify: #",
+      "  state: #",
+      "  update_cache: #",
+      "  update_only: #",
+      "  validate_certs: #"
+    ]
+  },
+  "dpkg_selections": {
+    "prefix": "dpkg_selections",
+    "description": "Dpkg package selection selections",
+    "body": [
+      "ansible.builtin.dpkg_selections:",
+      "  name: #",
+      "  selection: #"
+    ]
+  },
+  "expect": {
+    "prefix": "expect",
+    "description": "Executes a command and responds to prompts",
+    "body": [
+      "ansible.builtin.expect:",
+      "  command: #",
+      "  responses: #",
+      "  chdir: #",
+      "  creates: #",
+      "  echo: #",
+      "  removes: #",
+      "  timeout: #"
+    ]
+  },
+  "fail": {
+    "prefix": "fail",
+    "description": "Fail with custom message",
+    "body": [
+      "ansible.builtin.fail:",
+      "  msg: #"
+    ]
+  },
+  "fetch": {
+    "prefix": "fetch",
+    "description": "Fetch files from remote nodes",
+    "body": [
+      "ansible.builtin.fetch:",
+      "  dest: #",
+      "  src: #",
+      "  fail_on_missing: #",
+      "  flat: #",
+      "  validate_checksum: #"
+    ]
+  },
+  "file": {
+    "prefix": "file",
+    "description": "Manage files and file properties",
+    "body": [
+      "ansible.builtin.file:",
+      "  path: #",
+      "  access_time: #",
+      "  access_time_format: #",
+      "  attributes: #",
+      "  follow: #",
+      "  force: #",
+      "  group: #",
+      "  mode: #",
+      "  modification_time: #",
+      "  modification_time_format: #",
+      "  owner: #",
+      "  recurse: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  src: #",
+      "  state: #",
+      "  unsafe_writes: #"
+    ]
+  },
+  "find": {
+    "prefix": "find",
+    "description": "Return a list of files based on specific criteria",
+    "body": [
+      "ansible.builtin.find:",
+      "  paths: #",
+      "  age: #",
+      "  age_stamp: #",
+      "  contains: #",
+      "  depth: #",
+      "  exact_mode: #",
+      "  excludes: #",
+      "  file_type: #",
+      "  follow: #",
+      "  get_checksum: #",
+      "  hidden: #",
+      "  mode: #",
+      "  patterns: #",
+      "  read_whole_file: #",
+      "  recurse: #",
+      "  size: #",
+      "  use_regex: #"
+    ]
+  },
+  "gather_facts": {
+    "prefix": "gather_facts",
+    "description": "Gathers facts about remote hosts",
+    "body": [
+      "ansible.builtin.gather_facts:",
+      "  parallel: #"
+    ]
+  },
+  "get_url": {
+    "prefix": "get_url",
+    "description": "Downloads files from HTTP, HTTPS, or FTP to node",
+    "body": [
+      "ansible.builtin.get_url:",
+      "  dest: #",
+      "  url: #",
+      "  attributes: #",
+      "  backup: #",
+      "  checksum: #",
+      "  ciphers: #",
+      "  client_cert: #",
+      "  client_key: #",
+      "  decompress: #",
+      "  force: #",
+      "  force_basic_auth: #",
+      "  group: #",
+      "  headers: #",
+      "  http_agent: #",
+      "  mode: #",
+      "  owner: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  timeout: #",
+      "  tmp_dest: #",
+      "  unredirected_headers: #",
+      "  unsafe_writes: #",
+      "  url_password: #",
+      "  url_username: #",
+      "  use_gssapi: #",
+      "  use_netrc: #",
+      "  use_proxy: #",
+      "  validate_certs: #"
+    ]
+  },
+  "getent": {
+    "prefix": "getent",
+    "description": "A wrapper to the unix getent utility",
+    "body": [
+      "ansible.builtin.getent:",
+      "  database: #",
+      "  fail_key: #",
+      "  key: #",
+      "  service: #",
+      "  split: #"
+    ]
+  },
+  "git": {
+    "prefix": "git",
+    "description": "Deploy software (or files) from git checkouts",
+    "body": [
+      "ansible.builtin.git:",
+      "  dest: #",
+      "  repo: #",
+      "  accept_hostkey: #",
+      "  accept_newhostkey: #",
+      "  archive: #",
+      "  archive_prefix: #",
+      "  bare: #",
+      "  clone: #",
+      "  depth: #",
+      "  executable: #",
+      "  force: #",
+      "  gpg_whitelist: #",
+      "  key_file: #",
+      "  recursive: #",
+      "  reference: #",
+      "  refspec: #",
+      "  remote: #",
+      "  separate_git_dir: #",
+      "  single_branch: #",
+      "  ssh_opts: #",
+      "  track_submodules: #",
+      "  umask: #",
+      "  update: #",
+      "  verify_commit: #",
+      "  version: #"
+    ]
+  },
+  "group": {
+    "prefix": "group",
+    "description": "Add or remove groups",
+    "body": [
+      "ansible.builtin.group:",
+      "  name: #",
+      "  force: #",
+      "  gid: #",
+      "  local: #",
+      "  non_unique: #",
+      "  state: #",
+      "  system: #"
+    ]
+  },
+  "group_by": {
+    "prefix": "group_by",
+    "description": "Create Ansible groups based on facts",
+    "body": [
+      "ansible.builtin.group_by:",
+      "  key: #",
+      "  parents: #"
+    ]
+  },
+  "hostname": {
+    "prefix": "hostname",
+    "description": "Manage hostname",
+    "body": [
+      "ansible.builtin.hostname:",
+      "  name: #",
+      "  use: #"
+    ]
+  },
+  "import_playbook": {
+    "prefix": "import_playbook",
+    "description": "Import a playbook",
+    "body": [
+      "ansible.builtin.import_playbook:",
+      "  free-form: #"
+    ]
+  },
+  "import_role": {
+    "prefix": "import_role",
+    "description": "Import a role into a play",
+    "body": [
+      "ansible.builtin.import_role:",
+      "  name: #",
+      "  allow_duplicates: #",
+      "  defaults_from: #",
+      "  handlers_from: #",
+      "  rolespec_validate: #",
+      "  tasks_from: #",
+      "  vars_from: #"
+    ]
+  },
+  "import_tasks": {
+    "prefix": "import_tasks",
+    "description": "Import a task list",
+    "body": [
+      "ansible.builtin.import_tasks:",
+      "  file: #",
+      "  free-form: #",
+      "Most keywords, including loops and conditionals, only apply to the imported tasks, not to this statement itself.If you need any of those to apply, use M(ansible.builtin.include_tasks) instead.}"
+    ]
+  },
+  "include_role": {
+    "prefix": "include_role",
+    "description": "Load and execute a role",
+    "body": [
+      "ansible.builtin.include_role:",
+      "  name: #",
+      "  allow_duplicates: #",
+      "  apply: #",
+      "  defaults_from: #",
+      "  handlers_from: #",
+      "  public: #",
+      "  rolespec_validate: #",
+      "  tasks_from: #",
+      "  vars_from: #"
+    ]
+  },
+  "include_tasks": {
+    "prefix": "include_tasks",
+    "description": "Dynamically include a task list",
+    "body": [
+      "ansible.builtin.include_tasks:",
+      "  apply: #",
+      "  file: #",
+      "  free-form: #",
+      "Is the equivalent of specifying an argument for the O(file) parameter.Most keywords, including loop, with_items, and conditionals, apply to this statement unlike M(ansible.builtin.import_tasks).The do-until loop is not supported.}"
+    ]
+  },
+  "include_vars": {
+    "prefix": "include_vars",
+    "description": "Load variables from files, dynamically within a task",
+    "body": [
+      "ansible.builtin.include_vars:",
+      "  depth: #",
+      "  dir: #",
+      "  extensions: #",
+      "  file: #",
+      "  files_matching: #",
+      "  free-form: #",
+      "  hash_behaviour: #",
+      "  ignore_files: #",
+      "  ignore_unknown_extensions: #",
+      "  name: #"
+    ]
+  },
+  "iptables": {
+    "prefix": "iptables",
+    "description": "Modify iptables rules",
+    "body": [
+      "ansible.builtin.iptables:",
+      "  action: #",
+      "  chain: #",
+      "  chain_management: #",
+      "  comment: #",
+      "  ctstate: #",
+      "  destination: #",
+      "  destination_port: #",
+      "  destination_ports: #",
+      "  dst_range: #",
+      "  flush: #",
+      "  fragment: #",
+      "  gateway: #",
+      "  gid_owner: #",
+      "  goto: #",
+      "  icmp_type: #",
+      "  in_interface: #",
+      "  ip_version: #",
+      "  jump: #",
+      "  limit: #",
+      "  limit_burst: #",
+      "  log_level: #",
+      "  log_prefix: #",
+      "  match: #",
+      "  match_set: #",
+      "  match_set_flags: #",
+      "  numeric: #",
+      "  out_interface: #",
+      "  policy: #",
+      "  protocol: #",
+      "  reject_with: #",
+      "  rule_num: #",
+      "  set_counters: #",
+      "  set_dscp_mark: #",
+      "  set_dscp_mark_class: #",
+      "  source: #",
+      "  source_port: #",
+      "  src_range: #",
+      "  state: #",
+      "  syn: #",
+      "  table: #",
+      "  tcp_flags: #",
+      "  to_destination: #",
+      "  to_ports: #",
+      "  to_source: #",
+      "  uid_owner: #",
+      "  wait: #"
+    ]
+  },
+  "known_hosts": {
+    "prefix": "known_hosts",
+    "description": "Add or remove a host from the C(known_hosts) file",
+    "body": [
+      "ansible.builtin.known_hosts:",
+      "  name: #",
+      "  hash_host: #",
+      "  key: #",
+      "  path: #",
+      "  state: #"
+    ]
+  },
+  "lineinfile": {
+    "prefix": "lineinfile",
+    "description": "Manage lines in text files",
+    "body": [
+      "ansible.builtin.lineinfile:",
+      "  path: #",
+      "  attributes: #",
+      "  backrefs: #",
+      "  backup: #",
+      "  create: #",
+      "  firstmatch: #",
+      "  group: #",
+      "  insertafter: #",
+      "  insertbefore: #",
+      "  line: #",
+      "  mode: #",
+      "  others: #",
+      "  owner: #",
+      "  regexp: #",
+      "  search_string: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  state: #",
+      "  unsafe_writes: #",
+      "  validate: #"
+    ]
+  },
+  "meta": {
+    "prefix": "meta",
+    "description": "Execute Ansible 'actions'",
+    "body": [
+      "ansible.builtin.meta:",
+      "  ${1:free_form=clear_facts|clear_host_errors|end_host|end_play|flush_handlers|noop|refresh_inventory|reset_connection|end_batch}"
+    ]
+  },
+  "package": {
+    "prefix": "package",
+    "description": "Generic OS package manager",
+    "body": [
+      "ansible.builtin.package:",
+      "  name: #",
+      "  state: #",
+      "  use: #"
+    ]
+  },
+  "package_facts": {
+    "prefix": "package_facts",
+    "description": "Package information as facts",
+    "body": [
+      "ansible.builtin.package_facts:",
+      "  manager: #",
+      "  strategy: #"
+    ]
+  },
+  "pause": {
+    "prefix": "pause",
+    "description": "Pause playbook execution",
+    "body": [
+      "ansible.builtin.pause:",
+      "  echo: #",
+      "  minutes: #",
+      "  prompt: #",
+      "  seconds: #"
+    ]
+  },
+  "ping": {
+    "prefix": "ping",
+    "description": "Try to connect to host, verify a usable python and return V(pong) on success",
+    "body": [
+      "ansible.builtin.ping:",
+      "  data: #"
+    ]
+  },
+  "pip": {
+    "prefix": "pip",
+    "description": "Manages Python library dependencies",
+    "body": [
+      "ansible.builtin.pip:",
+      "  chdir: #",
+      "  editable: #",
+      "  executable: #",
+      "  extra_args: #",
+      "  name: #",
+      "  requirements: #",
+      "  state: #",
+      "  umask: #",
+      "  version: #",
+      "  virtualenv: #",
+      "  virtualenv_command: #",
+      "  virtualenv_python: #",
+      "  virtualenv_site_packages: #"
+    ]
+  },
+  "raw": {
+    "prefix": "raw",
+    "description": "Executes a low-down and dirty command",
+    "body": [
+      "ansible.builtin.raw:",
+      "  executable: #"
+    ]
+  },
+  "reboot": {
+    "prefix": "reboot",
+    "description": "Reboot a machine",
+    "body": [
+      "ansible.builtin.reboot:",
+      "  boot_time_command: #",
+      "  connect_timeout: #",
+      "  msg: #",
+      "  post_reboot_delay: #",
+      "  pre_reboot_delay: #",
+      "  reboot_command: #",
+      "  reboot_timeout: #",
+      "  search_paths: #",
+      "  test_command: #"
+    ]
+  },
+  "replace": {
+    "prefix": "replace",
+    "description": "Replace all instances of a particular string in a file using a back-referenced regular expression",
+    "body": [
+      "ansible.builtin.replace:",
+      "  path: #",
+      "  regexp: #",
+      "  after: #",
+      "  attributes: #",
+      "  backup: #",
+      "  before: #",
+      "  encoding: #",
+      "  group: #",
+      "  mode: #",
+      "  others: #",
+      "  owner: #",
+      "  replace: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  unsafe_writes: #",
+      "  validate: #"
+    ]
+  },
+  "rpm_key": {
+    "prefix": "rpm_key",
+    "description": "Adds or removes a gpg key from the rpm db",
+    "body": [
+      "ansible.builtin.rpm_key:",
+      "  key: #",
+      "  fingerprint: #",
+      "  state: #",
+      "  validate_certs: #"
+    ]
+  },
+  "script": {
+    "prefix": "script",
+    "description": "Runs a local script on a remote node after transferring it",
+    "body": [
+      "ansible.builtin.script:",
+      "  chdir: #",
+      "  cmd: #",
+      "  creates: #",
+      "  decrypt: #",
+      "  executable: #",
+      "  removes: #"
+    ]
+  },
+  "service": {
+    "prefix": "service",
+    "description": "Manage services",
+    "body": [
+      "ansible.builtin.service:",
+      "  name: #",
+      "  arguments: #",
+      "  enabled: #",
+      "  pattern: #",
+      "  runlevel: #",
+      "  sleep: #",
+      "  state: #",
+      "  use: #"
+    ]
+  },
+  "service_facts": {
+    "prefix": "service_facts",
+    "description": "Return service state information as fact data",
+    "body": "ansible.builtin.service_facts::"
+  },
+  "set_fact": {
+    "prefix": "set_fact",
+    "description": "Set host variable(s) and fact(s).",
+    "body": [
+      "ansible.builtin.set_fact:",
+      "  key_value: #",
+      "  cacheable: #"
+    ]
+  },
+  "set_stats": {
+    "prefix": "set_stats",
+    "description": "Define and display stats for the current ansible run",
+    "body": [
+      "ansible.builtin.set_stats:",
+      "  data: #",
+      "  aggregate: #",
+      "  per_host: #"
+    ]
+  },
+  "setup": {
+    "prefix": "setup",
+    "description": "Gathers facts about remote hosts",
+    "body": [
+      "ansible.builtin.setup:",
+      "  fact_path: #",
+      "  filter: #",
+      "  gather_subset: #",
+      "  gather_timeout: #"
+    ]
+  },
+  "shell": {
+    "prefix": "shell",
+    "description": "Execute shell commands on targets",
+    "body": [
+      "ansible.builtin.shell:",
+      "  chdir: #",
+      "  cmd: #",
+      "  creates: #",
+      "  executable: #",
+      "  removes: #",
+      "  stdin: #",
+      "  stdin_add_newline: #"
+    ]
+  },
+  "slurp": {
+    "prefix": "slurp",
+    "description": "Slurps a file from remote nodes",
+    "body": [
+      "ansible.builtin.slurp:",
+      "  src: #"
+    ]
+  },
+  "stat": {
+    "prefix": "stat",
+    "description": "Retrieve file or file system status",
+    "body": [
+      "ansible.builtin.stat:",
+      "  path: #",
+      "  checksum_algorithm: #",
+      "  follow: #",
+      "  get_attributes: #",
+      "  get_checksum: #",
+      "  get_mime: #"
+    ]
+  },
+  "subversion": {
+    "prefix": "subversion",
+    "description": "Deploys a subversion repository",
+    "body": [
+      "ansible.builtin.subversion:",
+      "  repo: #",
+      "  checkout: #",
+      "  dest: #",
+      "  executable: #",
+      "  export: #",
+      "  force: #",
+      "  in_place: #",
+      "  password: #",
+      "  revision: #",
+      "  switch: #",
+      "  update: #",
+      "  username: #",
+      "  validate_certs: #"
+    ]
+  },
+  "systemd_service": {
+    "prefix": "systemd_service",
+    "description": "Manage systemd units",
+    "body": [
+      "ansible.builtin.systemd_service:",
+      "  daemon_reexec: #",
+      "  daemon_reload: #",
+      "  enabled: #",
+      "  force: #",
+      "  masked: #",
+      "  name: #",
+      "  no_block: #",
+      "  scope: #",
+      "  state: #"
+    ]
+  },
+  "sysvinit": {
+    "prefix": "sysvinit",
+    "description": "Manage SysV services.",
+    "body": [
+      "ansible.builtin.sysvinit:",
+      "  name: #",
+      "  arguments: #",
+      "  daemonize: #",
+      "  enabled: #",
+      "  pattern: #",
+      "  runlevels: #",
+      "  sleep: #",
+      "  state: #"
+    ]
+  },
+  "tempfile": {
+    "prefix": "tempfile",
+    "description": "Creates temporary files and directories",
+    "body": [
+      "ansible.builtin.tempfile:",
+      "  path: #",
+      "  prefix: #",
+      "  state: #",
+      "  suffix: #"
+    ]
+  },
+  "template": {
+    "prefix": "template",
+    "description": "Template a file out to a target host",
+    "body": [
+      "ansible.builtin.template:",
+      "  dest: #",
+      "  src: #",
+      "  attributes: #",
+      "  backup: #",
+      "  block_end_string: #",
+      "  block_start_string: #",
+      "  comment_end_string: #",
+      "  comment_start_string: #",
+      "  follow: #",
+      "  force: #",
+      "  group: #",
+      "  lstrip_blocks: #",
+      "  mode: #",
+      "  newline_sequence: #",
+      "  output_encoding: #",
+      "  owner: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  trim_blocks: #",
+      "  unsafe_writes: #",
+      "  validate: #",
+      "  variable_end_string: #",
+      "  variable_start_string: #"
+    ]
+  },
+  "unarchive": {
+    "prefix": "unarchive",
+    "description": "Unpacks an archive after (optionally) copying it from the local machine",
+    "body": [
+      "ansible.builtin.unarchive:",
+      "  dest: #",
+      "  src: #",
+      "  attributes: #",
+      "  copy: #",
+      "  creates: #",
+      "  decrypt: #",
+      "  exclude: #",
+      "  extra_opts: #",
+      "  group: #",
+      "  include: #",
+      "  io_buffer_size: #",
+      "  keep_newer: #",
+      "  list_files: #",
+      "  mode: #",
+      "  owner: #",
+      "  remote_src: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  unsafe_writes: #",
+      "  validate_certs: #"
+    ]
+  },
+  "uri": {
+    "prefix": "uri",
+    "description": "Interacts with webservices",
+    "body": [
+      "ansible.builtin.uri:",
+      "  url: #",
+      "  attributes: #",
+      "  body: #",
+      "  body_format: #",
+      "  ca_path: #",
+      "  ciphers: #",
+      "  client_cert: #",
+      "  client_key: #",
+      "  creates: #",
+      "  decompress: #",
+      "  dest: #",
+      "  follow_redirects: #",
+      "  force: #",
+      "  force_basic_auth: #",
+      "  group: #",
+      "  headers: #",
+      "  http_agent: #",
+      "  method: #",
+      "  mode: #",
+      "  owner: #",
+      "  remote_src: #",
+      "  removes: #",
+      "  return_content: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  src: #",
+      "  status_code: #",
+      "  timeout: #",
+      "  unix_socket: #",
+      "  unredirected_headers: #",
+      "  unsafe_writes: #",
+      "  url_password: #",
+      "  url_username: #",
+      "  use_gssapi: #",
+      "  use_netrc: #",
+      "  use_proxy: #",
+      "  validate_certs: #"
+    ]
+  },
+  "user": {
+    "prefix": "user",
+    "description": "Manage user accounts",
+    "body": [
+      "ansible.builtin.user:",
+      "  name: #",
+      "  append: #",
+      "  authorization: #",
+      "  comment: #",
+      "  create_home: #",
+      "  expires: #",
+      "  force: #",
+      "  generate_ssh_key: #",
+      "  group: #",
+      "  groups: #",
+      "  hidden: #",
+      "  home: #",
+      "  local: #",
+      "  login_class: #",
+      "  move_home: #",
+      "  non_unique: #",
+      "  password: #",
+      "  password_expire_max: #",
+      "  password_expire_min: #",
+      "  password_expire_warn: #",
+      "  password_lock: #",
+      "  profile: #",
+      "  remove: #",
+      "  role: #",
+      "  seuser: #",
+      "  shell: #",
+      "  skeleton: #",
+      "  ssh_key_bits: #",
+      "  ssh_key_comment: #",
+      "  ssh_key_file: #",
+      "  ssh_key_passphrase: #",
+      "  ssh_key_type: #",
+      "  state: #",
+      "  system: #",
+      "  uid: #",
+      "  umask: #",
+      "  update_password: #"
+    ]
+  },
+  "validate_argument_spec": {
+    "prefix": "validate_argument_spec",
+    "description": "Validate role argument specs.",
+    "body": [
+      "ansible.builtin.validate_argument_spec:",
+      "  argument_spec: #",
+      "  provided_arguments: #"
+    ]
+  },
+  "wait_for": {
+    "prefix": "wait_for",
+    "description": "Waits for a condition before continuing",
+    "body": [
+      "ansible.builtin.wait_for:",
+      "  active_connection_states: #",
+      "  connect_timeout: #",
+      "  delay: #",
+      "  exclude_hosts: #",
+      "  host: #",
+      "  msg: #",
+      "  path: #",
+      "  port: #",
+      "  search_regex: #",
+      "  sleep: #",
+      "  state: #",
+      "  timeout: #"
+    ]
+  },
+  "wait_for_connection": {
+    "prefix": "wait_for_connection",
+    "description": "Waits until remote system is reachable/usable",
+    "body": [
+      "ansible.builtin.wait_for_connection:",
+      "  connect_timeout: #",
+      "  delay: #",
+      "  sleep: #",
+      "  timeout: #"
+    ]
+  },
+  "yum": {
+    "prefix": "yum",
+    "description": "Manages packages with the I(yum) package manager",
+    "body": [
+      "ansible.builtin.yum:",
+      "  allow_downgrade: #",
+      "  autoremove: #",
+      "  bugfix: #",
+      "  cacheonly: #",
+      "  conf_file: #",
+      "  disable_excludes: #",
+      "  disable_gpg_check: #",
+      "  disable_plugin: #",
+      "  disablerepo: #",
+      "  download_dir: #",
+      "  download_only: #",
+      "  enable_plugin: #",
+      "  enablerepo: #",
+      "  exclude: #",
+      "  install_repoquery: #",
+      "  install_weak_deps: #",
+      "  installroot: #",
+      "  list: #",
+      "  lock_timeout: #",
+      "  name: #",
+      "  releasever: #",
+      "  security: #",
+      "  skip_broken: #",
+      "  sslverify: #",
+      "  state: #",
+      "  update_cache: #",
+      "  update_only: #",
+      "  use_backend: #",
+      "  validate_certs: #"
+    ]
+  },
+  "yum_repository": {
+    "prefix": "yum_repository",
+    "description": "Add or remove YUM repositories",
+    "body": [
+      "ansible.builtin.yum_repository:",
+      "  name: #",
+      "  async: #",
+      "  attributes: #",
+      "  bandwidth: #",
+      "  baseurl: #",
+      "  cost: #",
+      "  deltarpm_metadata_percentage: #",
+      "  deltarpm_percentage: #",
+      "  description: #",
+      "  enabled: #",
+      "  enablegroups: #",
+      "  exclude: #",
+      "  failovermethod: #",
+      "  file: #",
+      "  gpgcakey: #",
+      "  gpgcheck: #",
+      "  gpgkey: #",
+      "  group: #",
+      "  http_caching: #",
+      "  include: #",
+      "  includepkgs: #",
+      "  ip_resolve: #",
+      "  keepalive: #",
+      "  keepcache: #",
+      "  metadata_expire: #",
+      "  metadata_expire_filter: #",
+      "  metalink: #",
+      "  mirrorlist: #",
+      "  mirrorlist_expire: #",
+      "  mode: #",
+      "  module_hotfixes: #",
+      "  owner: #",
+      "  password: #",
+      "  priority: #",
+      "  protect: #",
+      "  proxy: #",
+      "  proxy_password: #",
+      "  proxy_username: #",
+      "  repo_gpgcheck: #",
+      "  reposdir: #",
+      "  retries: #",
+      "  s3_enabled: #",
+      "  selevel: #",
+      "  serole: #",
+      "  setype: #",
+      "  seuser: #",
+      "  skip_if_unavailable: #",
+      "  ssl_check_cert_permissions: #",
+      "  sslcacert: #",
+      "  sslclientcert: #",
+      "  sslclientkey: #",
+      "  sslverify: #",
+      "  state: #",
+      "  throttle: #",
+      "  timeout: #",
+      "  ui_repoid_vars: #",
+      "  unsafe_writes: #",
+      "  username: #"
+    ]
+  }
+}
