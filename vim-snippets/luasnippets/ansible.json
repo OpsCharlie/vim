@@ -1303,5 +1303,24 @@
       "\t#unsafe_writes: ${57:false}",
       "\t#username: ${58:}"
     ]
+  },
+  "redhat_manifest": {
+    "prefix": "redhat_manifest",
+    "description": "Interact with a Red Hat Satellite Subscription Manifest",
+    "body": [
+      "theforeman.foreman.redhat_manifest:",
+      "\tpassword: ${1:}",
+      "\tusername: ${2:}",
+      "\t#content_access_mode: ${3:org_environment|#entitlement}",
+      "\t#name: ${4:}",
+      "\t#path: ${5:}",
+      "\t#pool_id: ${6:}",
+      "\t#pool_state: ${7:#present|absent}",
+      "\t#portal: ${8:https://subscription.rhsm.redhat.com}",
+      "\t#quantity: ${9:1}",
+      "\t#state: ${10:#present|absent}",
+      "\t#uuid: ${11:}",
+      "\t#validate_certs: ${12:true}"
+    ]
   }
 }

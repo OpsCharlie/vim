@@ -75,7 +75,6 @@ def get_files_collections(user: bool = False) -> List[str]:
             for file_name in files_without_symlinks
             if file_name.endswith(".py") and not file_name.startswith("__init__") and "plugins/modules" in root
         ]
-
     return sorted(file_names)
 
 
@@ -94,7 +93,6 @@ def get_module_docstring(file_path: str) -> Any:
         (in dict form), excluding those that are marked as deprecated.
 
     """
-
     docstring = get_docstring(file_path, fragment_loader)[0]
 
     if docstring and not docstring.get("deprecated"):
@@ -308,7 +306,7 @@ def get_collection_name(filepath:str) -> str:
     collection_namespace = path_splitted[collection_top_folder_index + 1]
     collection_name = path_splitted[collection_top_folder_index + 2]
 
-    #  print(f"{collection_namespace}.{collection_name}")
+    print(f"{collection_namespace}.{collection_name}")
     return f"{collection_namespace}.{collection_name}"
 
 
@@ -375,11 +373,14 @@ if __name__ == "__main__":
     if args.user:
         user_modules_paths = get_files_collections(user=True)
         for f in user_modules_paths:
-            docstring_user = get_module_docstring(f)
-            if docstring_user and docstring_user not in modules_docstrings:
-                collection_name = get_collection_name(f)
-                docstring_user['collection_name'] = collection_name
-                modules_docstrings.append(docstring_user)
+            try:
+                docstring_user = get_module_docstring(f)
+                if docstring_user and docstring_user not in modules_docstrings:
+                    collection_name = get_collection_name(f)
+                    docstring_user['collection_name'] = collection_name
+                    modules_docstrings.append(docstring_user)
+            except:
+                print("Error ", f)
 
     with open(args.output, "w") as f:
         f.writelines(f"{header}\n" for header in HEADER)

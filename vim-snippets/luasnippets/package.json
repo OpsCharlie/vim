@@ -5,8 +5,7 @@
     "snippets": [
       {
         "language": [
-          "ansible",
-          "yaml.ansible"
+          "ansible"
         ],
         "path": "./ansible.json"
       }
