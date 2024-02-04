@@ -1,0 +1,1307 @@
+{
+  "add_host": {
+    "prefix": "add_host",
+    "description": "Add a host (and alternatively a group) to the ansible-playbook in-memory inventory",
+    "body": [
+      "ansible.builtin.add_host:",
+      "\tname: ${1:}",
+      "\t#groups: ${2:}"
+    ],
+    "luasnip": {
+      "priority": -50
+    }
+  },
+  "apt": {
+    "prefix": "apt",
+    "description": "Manages apt-packages",
+    "body": [
+      "ansible.builtin.apt:",
+      "\t#allow_change_held_packages: ${1:false}",
+      "\t#allow_downgrade: ${2:false}",
+      "\t#allow_unauthenticated: ${3:false}",
+      "\t#autoclean: ${4:false}",
+      "\t#autoremove: ${5:false}",
+      "\t#cache_valid_time: ${6:0}",
+      "\t#clean: ${7:false}",
+      "\t#deb: ${8:}",
+      "\t#default_release: ${9:}",
+      "\t#dpkg_options: ${10:force-confdef,force-confold}",
+      "\t#fail_on_autoremove: ${11:false}",
+      "\t#force: ${12:false}",
+      "\t#force_apt_get: ${13:false}",
+      "\t#install_recommends: ${14:}",
+      "\t#lock_timeout: ${15:60}",
+      "\t#name: ${16:}",
+      "\t#only_upgrade: ${17:false}",
+      "\t#policy_rc_d: ${18:}",
+      "\t#purge: ${19:false}",
+      "\t#state: ${20:absent|build-dep|latest|#present|fixed}",
+      "\t#update_cache: ${21:}",
+      "\t#update_cache_retries: ${22:5}",
+      "\t#update_cache_retry_max_delay: ${23:12}",
+      "\t#upgrade: ${24:dist|full|#no|safe|yes}"
+    ]
+  },
+  "apt_key": {
+    "prefix": "apt_key",
+    "description": "Add or remove an apt key",
+    "body": [
+      "ansible.builtin.apt_key:",
+      "\t#data: ${1:}",
+      "\t#file: ${2:}",
+      "\t#id: ${3:}",
+      "\t#keyring: ${4:}",
+      "\t#keyserver: ${5:}",
+      "\t#state: ${6:absent|#present}",
+      "\t#url: ${7:}",
+      "\t#validate_certs: ${8:true}"
+    ]
+  },
+  "apt_repository": {
+    "prefix": "apt_repository",
+    "description": "Add and remove APT repositories",
+    "body": [
+      "ansible.builtin.apt_repository:",
+      "\trepo: ${1:}",
+      "\t#codename: ${2:}",
+      "\t#filename: ${3:}",
+      "\t#install_python_apt: ${4:true}",
+      "\t#mode: ${5:}",
+      "\t#state: ${6:absent|#present}",
+      "\t#update_cache: ${7:true}",
+      "\t#update_cache_retries: ${8:5}",
+      "\t#update_cache_retry_max_delay: ${9:12}",
+      "\t#validate_certs: ${10:true}"
+    ]
+  },
+  "assemble": {
+    "prefix": "assemble",
+    "description": "Assemble configuration files from fragments",
+    "body": [
+      "ansible.builtin.assemble:",
+      "\tdest: ${1:}",
+      "\tsrc: ${2:}",
+      "\t#attributes: ${3:}",
+      "\t#backup: ${4:false}",
+      "\t#decrypt: ${5:true}",
+      "\t#delimiter: ${6:}",
+      "\t#group: ${7:}",
+      "\t#ignore_hidden: ${8:false}",
+      "\t#mode: ${9:}",
+      "\t#owner: ${10:}",
+      "\t#regexp: ${11:}",
+      "\t#remote_src: ${12:true}",
+      "\t#selevel: ${13:}",
+      "\t#serole: ${14:}",
+      "\t#setype: ${15:}",
+      "\t#seuser: ${16:}",
+      "\t#unsafe_writes: ${17:false}",
+      "\t#validate: ${18:}"
+    ]
+  },
+  "assert": {
+    "prefix": "assert",
+    "description": "Asserts given expressions are true",
+    "body": [
+      "ansible.builtin.assert:",
+      "\tthat: ${1:}",
+      "\t#fail_msg: ${2:}",
+      "\t#quiet: ${3:false}",
+      "\t#success_msg: ${4:}"
+    ]
+  },
+  "async_status": {
+    "prefix": "async_status",
+    "description": "Obtain status of asynchronous task",
+    "body": [
+      "ansible.builtin.async_status:",
+      "\tjid: ${1:}",
+      "\t#mode: ${2:cleanup|#status}"
+    ]
+  },
+  "blockinfile": {
+    "prefix": "blockinfile",
+    "description": "Insert/update/remove a text block surrounded by marker lines",
+    "body": [
+      "ansible.builtin.blockinfile:",
+      "\tpath: ${1:}",
+      "\t#append_newline: ${2:false}",
+      "\t#attributes: ${3:}",
+      "\t#backup: ${4:false}",
+      "\t#block: ${5:\"\"}",
+      "\t#create: ${6:false}",
+      "\t#group: ${7:}",
+      "\t#insertafter: ${8:#EOF|*regex*}",
+      "\t#insertbefore: ${9:BOF|*regex*}",
+      "\t#marker: \\${10:# {mark\\} ANSIBLE MANAGED BLOCK\\}",
+      "\t#marker_begin: ${11:BEGIN}",
+      "\t#marker_end: ${12:END}",
+      "\t#mode: ${13:}",
+      "\t#owner: ${14:}",
+      "\t#prepend_newline: ${15:false}",
+      "\t#selevel: ${16:}",
+      "\t#serole: ${17:}",
+      "\t#setype: ${18:}",
+      "\t#seuser: ${19:}",
+      "\t#state: ${20:absent|#present}",
+      "\t#unsafe_writes: ${21:false}",
+      "\t#validate: ${22:}"
+    ]
+  },
+  "command": {
+    "prefix": "command",
+    "description": "Execute commands on targets",
+    "body": [
+      "ansible.builtin.command:",
+      "\t#argv: ${1:}",
+      "\t#chdir: ${2:}",
+      "\t#cmd: ${3:}",
+      "\t#creates: ${4:}",
+      "\t#expand_argument_vars: ${5:true}",
+      "\t#${6:free_form: }",
+      "\t#removes: ${7:}",
+      "\t#stdin: ${8:}",
+      "\t#stdin_add_newline: ${9:true}",
+      "\t#strip_empty_ends: ${10:true}"
+    ]
+  },
+  "copy": {
+    "prefix": "copy",
+    "description": "Copy files to remote locations",
+    "body": [
+      "ansible.builtin.copy:",
+      "\tdest: ${1:}",
+      "\t#attributes: ${2:}",
+      "\t#backup: ${3:false}",
+      "\t#checksum: ${4:}",
+      "\t#content: ${5:}",
+      "\t#decrypt: ${6:true}",
+      "\t#directory_mode: ${7:}",
+      "\t#follow: ${8:false}",
+      "\t#force: ${9:true}",
+      "\t#group: ${10:}",
+      "\t#local_follow: ${11:true}",
+      "\t#mode: ${12:}",
+      "\t#owner: ${13:}",
+      "\t#remote_src: ${14:false}",
+      "\t#selevel: ${15:}",
+      "\t#serole: ${16:}",
+      "\t#setype: ${17:}",
+      "\t#seuser: ${18:}",
+      "\t#src: ${19:}",
+      "\t#unsafe_writes: ${20:false}",
+      "\t#validate: ${21:}"
+    ]
+  },
+  "cron": {
+    "prefix": "cron",
+    "description": "Manage cron.d and crontab entries",
+    "body": [
+      "ansible.builtin.cron:",
+      "\tname: ${1:}",
+      "\t#backup: ${2:false}",
+      "\t#cron_file: ${3:}",
+      "\t#day: ${4:*}",
+      "\t#disabled: ${5:false}",
+      "\t#env: ${6:false}",
+      "\t#hour: ${7:*}",
+      "\t#insertafter: ${8:}",
+      "\t#insertbefore: ${9:}",
+      "\t#job: ${10:}",
+      "\t#minute: ${11:*}",
+      "\t#month: ${12:*}",
+      "\t#special_time: ${13:annually|daily|hourly|monthly|reboot|weekly|yearly}",
+      "\t#state: ${14:absent|#present}",
+      "\t#user: ${15:}",
+      "\t#weekday: ${16:*}"
+    ]
+  },
+  "deb822_repository": {
+    "prefix": "deb822_repository",
+    "description": "Add and remove deb822 formatted repositories",
+    "body": [
+      "ansible.builtin.deb822_repository:",
+      "\tname: ${1:}",
+      "\t#allow_downgrade_to_insecure: ${2:}",
+      "\t#allow_insecure: ${3:}",
+      "\t#allow_weak: ${4:}",
+      "\t#architectures: ${5:}",
+      "\t#by_hash: ${6:}",
+      "\t#check_date: ${7:}",
+      "\t#check_valid_until: ${8:}",
+      "\t#components: ${9:}",
+      "\t#date_max_future: ${10:}",
+      "\t#enabled: ${11:}",
+      "\t#inrelease_path: ${12:}",
+      "\t#languages: ${13:}",
+      "\t#mode: ${14:0644}",
+      "\t#pdiffs: ${15:}",
+      "\t#signed_by: ${16:}",
+      "\t#state: ${17:absent|#present}",
+      "\t#suites: ${18:}",
+      "\t#targets: ${19:}",
+      "\t#trusted: ${20:}",
+      "\t#types: ${21:['#deb', 'deb-src']}",
+      "\t#uris: ${22:}"
+    ]
+  },
+  "debconf": {
+    "prefix": "debconf",
+    "description": "Configure a .deb package",
+    "body": [
+      "ansible.builtin.debconf:",
+      "\tname: ${1:}",
+      "\t#question: ${2:}",
+      "\t#unseen: ${3:false}",
+      "\t#value: ${4:}",
+      "\t#vtype: ${5:boolean|error|multiselect|note|password|seen|select|string|text|title}"
+    ]
+  },
+  "debug": {
+    "prefix": "debug",
+    "description": "Print statements during execution",
+    "body": [
+      "ansible.builtin.debug:",
+      "\t#msg: ${1:Hello world!}",
+      "\t#var: ${2:}",
+      "\t#verbosity: ${3:0}"
+    ]
+  },
+  "dnf": {
+    "prefix": "dnf",
+    "description": "Manages packages with the I(dnf) package manager",
+    "body": [
+      "ansible.builtin.dnf:",
+      "\t#allow_downgrade: ${1:false}",
+      "\t#allowerasing: ${2:false}",
+      "\t#autoremove: ${3:false}",
+      "\t#bugfix: ${4:false}",
+      "\t#cacheonly: ${5:false}",
+      "\t#conf_file: ${6:}",
+      "\t#disable_excludes: ${7:}",
+      "\t#disable_gpg_check: ${8:false}",
+      "\t#disable_plugin: ${9:[]}",
+      "\t#disablerepo: ${10:[]}",
+      "\t#download_dir: ${11:}",
+      "\t#download_only: ${12:false}",
+      "\t#enable_plugin: ${13:[]}",
+      "\t#enablerepo: ${14:[]}",
+      "\t#exclude: ${15:[]}",
+      "\t#install_repoquery: ${16:true}",
+      "\t#install_weak_deps: ${17:true}",
+      "\t#installroot: ${18:/}",
+      "\t#list: ${19:}",
+      "\t#lock_timeout: ${20:30}",
+      "\t#name: ${21:[]}",
+      "\t#nobest: ${22:false}",
+      "\t#releasever: ${23:}",
+      "\t#security: ${24:false}",
+      "\t#skip_broken: ${25:false}",
+      "\t#sslverify: ${26:true}",
+      "\t#state: ${27:absent|present|installed|removed|latest}",
+      "\t#update_cache: ${28:false}",
+      "\t#update_only: ${29:false}",
+      "\t#use_backend: ${30:#auto|dnf4|dnf5}",
+      "\t#validate_certs: ${31:true}"
+    ]
+  },
+  "dnf5": {
+    "prefix": "dnf5",
+    "description": "Manages packages with the I(dnf5) package manager",
+    "body": [
+      "ansible.builtin.dnf5:",
+      "\t#allow_downgrade: ${1:false}",
+      "\t#allowerasing: ${2:false}",
+      "\t#autoremove: ${3:false}",
+      "\t#bugfix: ${4:false}",
+      "\t#cacheonly: ${5:false}",
+      "\t#conf_file: ${6:}",
+      "\t#disable_excludes: ${7:}",
+      "\t#disable_gpg_check: ${8:false}",
+      "\t#disable_plugin: ${9:[]}",
+      "\t#disablerepo: ${10:[]}",
+      "\t#download_dir: ${11:}",
+      "\t#download_only: ${12:false}",
+      "\t#enable_plugin: ${13:[]}",
+      "\t#enablerepo: ${14:[]}",
+      "\t#exclude: ${15:[]}",
+      "\t#install_repoquery: ${16:true}",
+      "\t#install_weak_deps: ${17:true}",
+      "\t#installroot: ${18:/}",
+      "\t#list: ${19:}",
+      "\t#lock_timeout: ${20:30}",
+      "\t#name: ${21:[]}",
+      "\t#nobest: ${22:false}",
+      "\t#releasever: ${23:}",
+      "\t#security: ${24:false}",
+      "\t#skip_broken: ${25:false}",
+      "\t#sslverify: ${26:true}",
+      "\t#state: ${27:absent|present|installed|removed|latest}",
+      "\t#update_cache: ${28:false}",
+      "\t#update_only: ${29:false}",
+      "\t#validate_certs: ${30:true}"
+    ]
+  },
+  "dpkg_selections": {
+    "prefix": "dpkg_selections",
+    "description": "Dpkg package selection selections",
+    "body": [
+      "ansible.builtin.dpkg_selections:",
+      "\tname: ${1:}",
+      "\tselection: ${2:install|hold|deinstall|purge}"
+    ]
+  },
+  "expect": {
+    "prefix": "expect",
+    "description": "Executes a command and responds to prompts",
+    "body": [
+      "ansible.builtin.expect:",
+      "\tcommand: ${1:}",
+      "\tresponses: ${2:}",
+      "\t#chdir: ${3:}",
+      "\t#creates: ${4:}",
+      "\t#echo: ${5:false}",
+      "\t#removes: ${6:}",
+      "\t#timeout: ${7:30}"
+    ]
+  },
+  "fail": {
+    "prefix": "fail",
+    "description": "Fail with custom message",
+    "body": [
+      "ansible.builtin.fail:",
+      "\t#msg: ${1:Failed as requested from task}"
+    ]
+  },
+  "fetch": {
+    "prefix": "fetch",
+    "description": "Fetch files from remote nodes",
+    "body": [
+      "ansible.builtin.fetch:",
+      "\tdest: ${1:}",
+      "\tsrc: ${2:}",
+      "\t#fail_on_missing: ${3:true}",
+      "\t#flat: ${4:false}",
+      "\t#validate_checksum: ${5:true}"
+    ]
+  },
+  "file": {
+    "prefix": "file",
+    "description": "Manage files and file properties",
+    "body": [
+      "ansible.builtin.file:",
+      "\tpath: ${1:}",
+      "\t#access_time: ${2:}",
+      "\t#access_time_format: ${3:%Y%m%d%H%M.%S}",
+      "\t#attributes: ${4:}",
+      "\t#follow: ${5:true}",
+      "\t#force: ${6:false}",
+      "\t#group: ${7:}",
+      "\t#mode: ${8:}",
+      "\t#modification_time: ${9:}",
+      "\t#modification_time_format: ${10:%Y%m%d%H%M.%S}",
+      "\t#owner: ${11:}",
+      "\t#recurse: ${12:false}",
+      "\t#selevel: ${13:}",
+      "\t#serole: ${14:}",
+      "\t#setype: ${15:}",
+      "\t#seuser: ${16:}",
+      "\t#src: ${17:}",
+      "\t#state: ${18:absent|directory|file|hard|link|touch}",
+      "\t#unsafe_writes: ${19:false}"
+    ]
+  },
+  "find": {
+    "prefix": "find",
+    "description": "Return a list of files based on specific criteria",
+    "body": [
+      "ansible.builtin.find:",
+      "\tpaths: ${1:}",
+      "\t#age: ${2:}",
+      "\t#age_stamp: ${3:atime|ctime|#mtime}",
+      "\t#contains: ${4:}",
+      "\t#depth: ${5:}",
+      "\t#exact_mode: ${6:true}",
+      "\t#excludes: ${7:}",
+      "\t#file_type: ${8:any|directory|#file|link}",
+      "\t#follow: ${9:false}",
+      "\t#get_checksum: ${10:false}",
+      "\t#hidden: ${11:false}",
+      "\t#mode: ${12:}",
+      "\t#patterns: ${13:[]}",
+      "\t#read_whole_file: ${14:false}",
+      "\t#recurse: ${15:false}",
+      "\t#size: ${16:}",
+      "\t#use_regex: ${17:false}"
+    ]
+  },
+  "gather_facts": {
+    "prefix": "gather_facts",
+    "description": "Gathers facts about remote hosts",
+    "body": [
+      "ansible.builtin.gather_facts:",
+      "\t#parallel: ${1:}"
+    ]
+  },
+  "get_url": {
+    "prefix": "get_url",
+    "description": "Downloads files from HTTP, HTTPS, or FTP to node",
+    "body": [
+      "ansible.builtin.get_url:",
+      "\tdest: ${1:}",
+      "\turl: ${2:}",
+      "\t#attributes: ${3:}",
+      "\t#backup: ${4:false}",
+      "\t#checksum: ${5:\"\"}",
+      "\t#ciphers: ${6:}",
+      "\t#client_cert: ${7:}",
+      "\t#client_key: ${8:}",
+      "\t#decompress: ${9:true}",
+      "\t#force: ${10:false}",
+      "\t#force_basic_auth: ${11:false}",
+      "\t#group: ${12:}",
+      "\t#headers: ${13:}",
+      "\t#http_agent: ${14:ansible-httpget}",
+      "\t#mode: ${15:}",
+      "\t#owner: ${16:}",
+      "\t#selevel: ${17:}",
+      "\t#serole: ${18:}",
+      "\t#setype: ${19:}",
+      "\t#seuser: ${20:}",
+      "\t#timeout: ${21:10}",
+      "\t#tmp_dest: ${22:}",
+      "\t#unredirected_headers: ${23:[]}",
+      "\t#unsafe_writes: ${24:false}",
+      "\t#url_password: ${25:}",
+      "\t#url_username: ${26:}",
+      "\t#use_gssapi: ${27:false}",
+      "\t#use_netrc: ${28:true}",
+      "\t#use_proxy: ${29:true}",
+      "\t#validate_certs: ${30:true}"
+    ]
+  },
+  "getent": {
+    "prefix": "getent",
+    "description": "A wrapper to the unix getent utility",
+    "body": [
+      "ansible.builtin.getent:",
+      "\tdatabase: ${1:}",
+      "\t#fail_key: ${2:true}",
+      "\t#key: ${3:}",
+      "\t#service: ${4:}",
+      "\t#split: ${5:}"
+    ]
+  },
+  "git": {
+    "prefix": "git",
+    "description": "Deploy software (or files) from git checkouts",
+    "body": [
+      "ansible.builtin.git:",
+      "\tdest: ${1:}",
+      "\trepo: ${2:}",
+      "\t#accept_hostkey: ${3:false}",
+      "\t#accept_newhostkey: ${4:false}",
+      "\t#archive: ${5:}",
+      "\t#archive_prefix: ${6:}",
+      "\t#bare: ${7:false}",
+      "\t#clone: ${8:true}",
+      "\t#depth: ${9:}",
+      "\t#executable: ${10:}",
+      "\t#force: ${11:false}",
+      "\t#gpg_whitelist: ${12:[]}",
+      "\t#key_file: ${13:}",
+      "\t#recursive: ${14:true}",
+      "\t#reference: ${15:}",
+      "\t#refspec: ${16:}",
+      "\t#remote: ${17:origin}",
+      "\t#separate_git_dir: ${18:}",
+      "\t#single_branch: ${19:false}",
+      "\t#ssh_opts: ${20:}",
+      "\t#track_submodules: ${21:false}",
+      "\t#umask: ${22:}",
+      "\t#update: ${23:true}",
+      "\t#verify_commit: ${24:false}",
+      "\t#version: ${25:HEAD}"
+    ]
+  },
+  "group": {
+    "prefix": "group",
+    "description": "Add or remove groups",
+    "body": [
+      "ansible.builtin.group:",
+      "\tname: ${1:}",
+      "\t#force: ${2:false}",
+      "\t#gid: ${3:}",
+      "\t#local: ${4:false}",
+      "\t#non_unique: ${5:false}",
+      "\t#state: ${6:absent|#present}",
+      "\t#system: ${7:false}"
+    ]
+  },
+  "group_by": {
+    "prefix": "group_by",
+    "description": "Create Ansible groups based on facts",
+    "body": [
+      "ansible.builtin.group_by:",
+      "\tkey: ${1:}",
+      "\t#parents: ${2:all}"
+    ]
+  },
+  "hostname": {
+    "prefix": "hostname",
+    "description": "Manage hostname",
+    "body": [
+      "ansible.builtin.hostname:",
+      "\tname: ${1:}",
+      "\t#use: ${2:alpine|debian|freebsd|generic|macos|macosx|darwin|openbsd|openrc|redhat|sles|solaris|systemd}"
+    ]
+  },
+  "import_playbook": {
+    "prefix": "import_playbook",
+    "description": "Import a playbook",
+    "body": [
+      "ansible.builtin.import_playbook:",
+      "\t#free-form: ${1:}"
+    ]
+  },
+  "import_role": {
+    "prefix": "import_role",
+    "description": "Import a role into a play",
+    "body": [
+      "ansible.builtin.import_role:",
+      "\tname: ${1:}",
+      "\t#allow_duplicates: ${2:true}",
+      "\t#defaults_from: ${3:main}",
+      "\t#handlers_from: ${4:main}",
+      "\t#rolespec_validate: ${5:true}",
+      "\t#tasks_from: ${6:main}",
+      "\t#vars_from: ${7:main}"
+    ]
+  },
+  "import_tasks": {
+    "prefix": "import_tasks",
+    "description": "Import a task list",
+    "body": [
+      "ansible.builtin.import_tasks:",
+      "\t#file: ${1:}",
+      "\t#free-form: ${2:}"
+    ]
+  },
+  "include_role": {
+    "prefix": "include_role",
+    "description": "Load and execute a role",
+    "body": [
+      "ansible.builtin.include_role:",
+      "\tname: ${1:}",
+      "\t#allow_duplicates: ${2:true}",
+      "\t#apply: ${3:}",
+      "\t#defaults_from: ${4:main}",
+      "\t#handlers_from: ${5:main}",
+      "\t#public: ${6:false}",
+      "\t#rolespec_validate: ${7:true}",
+      "\t#tasks_from: ${8:main}",
+      "\t#vars_from: ${9:main}"
+    ]
+  },
+  "include_tasks": {
+    "prefix": "include_tasks",
+    "description": "Dynamically include a task list",
+    "body": [
+      "ansible.builtin.include_tasks:",
+      "\t#apply: ${1:}",
+      "\t#file: ${2:}",
+      "\t#free-form: ${3:}"
+    ]
+  },
+  "include_vars": {
+    "prefix": "include_vars",
+    "description": "Load variables from files, dynamically within a task",
+    "body": [
+      "ansible.builtin.include_vars:",
+      "\t#depth: ${1:0}",
+      "\t#dir: ${2:}",
+      "\t#extensions: ${3:['json', 'yaml', 'yml']}",
+      "\t#file: ${4:}",
+      "\t#files_matching: ${5:}",
+      "\t#free-form: ${6:}",
+      "\t#hash_behaviour: ${7:replace|merge}",
+      "\t#ignore_files: ${8:}",
+      "\t#ignore_unknown_extensions: ${9:false}",
+      "\t#name: ${10:}"
+    ]
+  },
+  "iptables": {
+    "prefix": "iptables",
+    "description": "Modify iptables rules",
+    "body": [
+      "ansible.builtin.iptables:",
+      "\t#action: ${1:#append|insert}",
+      "\t#chain: ${2:}",
+      "\t#chain_management: ${3:false}",
+      "\t#comment: ${4:}",
+      "\t#ctstate: ${5:[]}",
+      "\t#destination: ${6:}",
+      "\t#destination_port: ${7:}",
+      "\t#destination_ports: ${8:[]}",
+      "\t#dst_range: ${9:}",
+      "\t#flush: ${10:false}",
+      "\t#fragment: ${11:}",
+      "\t#gateway: ${12:}",
+      "\t#gid_owner: ${13:}",
+      "\t#goto: ${14:}",
+      "\t#icmp_type: ${15:}",
+      "\t#in_interface: ${16:}",
+      "\t#ip_version: ${17:#ipv4|ipv6}",
+      "\t#jump: ${18:}",
+      "\t#limit: ${19:}",
+      "\t#limit_burst: ${20:}",
+      "\t#log_level: ${21:0|1|2|3|4|5|6|7|emerg|alert|crit|error|warning|notice|info|debug}",
+      "\t#log_prefix: ${22:}",
+      "\t#match: ${23:[]}",
+      "\t#match_set: ${24:}",
+      "\t#match_set_flags: ${25:src|dst|src,dst|dst,src}",
+      "\t#numeric: ${26:false}",
+      "\t#out_interface: ${27:}",
+      "\t#policy: ${28:ACCEPT|DROP|QUEUE|RETURN}",
+      "\t#protocol: ${29:}",
+      "\t#reject_with: ${30:}",
+      "\t#rule_num: ${31:}",
+      "\t#set_counters: ${32:}",
+      "\t#set_dscp_mark: ${33:}",
+      "\t#set_dscp_mark_class: ${34:}",
+      "\t#source: ${35:}",
+      "\t#source_port: ${36:}",
+      "\t#src_range: ${37:}",
+      "\t#state: ${38:absent|#present}",
+      "\t#syn: ${39:#ignore|match|negate}",
+      "\t#table: ${40:#filter|nat|mangle|raw|security}",
+      "\t#tcp_flags: ${41:}",
+      "\t#to_destination: ${42:}",
+      "\t#to_ports: ${43:}",
+      "\t#to_source: ${44:}",
+      "\t#uid_owner: ${45:}",
+      "\t#wait: ${46:}"
+    ]
+  },
+  "known_hosts": {
+    "prefix": "known_hosts",
+    "description": "Add or remove a host from the C(known_hosts) file",
+    "body": [
+      "ansible.builtin.known_hosts:",
+      "\tname: ${1:}",
+      "\t#hash_host: ${2:false}",
+      "\t#key: ${3:}",
+      "\t#path: ${4:~/.ssh/known_hosts}",
+      "\t#state: ${5:absent|#present}"
+    ]
+  },
+  "lineinfile": {
+    "prefix": "lineinfile",
+    "description": "Manage lines in text files",
+    "body": [
+      "ansible.builtin.lineinfile:",
+      "\tpath: ${1:}",
+      "\t#attributes: ${2:}",
+      "\t#backrefs: ${3:false}",
+      "\t#backup: ${4:false}",
+      "\t#create: ${5:false}",
+      "\t#firstmatch: ${6:false}",
+      "\t#group: ${7:}",
+      "\t#insertafter: ${8:#EOF|*regex*}",
+      "\t#insertbefore: ${9:BOF|*regex*}",
+      "\t#line: ${10:}",
+      "\t#mode: ${11:}",
+      "\t#others: ${12:}",
+      "\t#owner: ${13:}",
+      "\t#regexp: ${14:}",
+      "\t#search_string: ${15:}",
+      "\t#selevel: ${16:}",
+      "\t#serole: ${17:}",
+      "\t#setype: ${18:}",
+      "\t#seuser: ${19:}",
+      "\t#state: ${20:absent|#present}",
+      "\t#unsafe_writes: ${21:false}",
+      "\t#validate: ${22:}"
+    ]
+  },
+  "meta": {
+    "prefix": "meta",
+    "description": "Execute Ansible 'actions'",
+    "body": [
+      "ansible.builtin.meta:",
+      "\t${1:free_form: clear_facts|clear_host_errors|end_host|end_play|flush_handlers|noop|refresh_inventory|reset_connection|end_batch}"
+    ]
+  },
+  "package": {
+    "prefix": "package",
+    "description": "Generic OS package manager",
+    "body": [
+      "ansible.builtin.package:",
+      "\tname: ${1:}",
+      "\tstate: ${2:}",
+      "\t#use: ${3:auto}"
+    ]
+  },
+  "package_facts": {
+    "prefix": "package_facts",
+    "description": "Package information as facts",
+    "body": [
+      "ansible.builtin.package_facts:",
+      "\t#manager: ${1:['#auto', 'rpm', 'apt', 'portage', 'pkg', 'pacman', 'apk', 'pkg_info']}",
+      "\t#strategy: ${2:#first|all}"
+    ]
+  },
+  "pause": {
+    "prefix": "pause",
+    "description": "Pause playbook execution",
+    "body": [
+      "ansible.builtin.pause:",
+      "\t#echo: ${1:true}",
+      "\t#minutes: ${2:}",
+      "\t#prompt: ${3:}",
+      "\t#seconds: ${4:}"
+    ]
+  },
+  "ping": {
+    "prefix": "ping",
+    "description": "Try to connect to host, verify a usable python and return V(pong) on success",
+    "body": [
+      "ansible.builtin.ping:",
+      "\t#data: ${1:pong}"
+    ]
+  },
+  "pip": {
+    "prefix": "pip",
+    "description": "Manages Python library dependencies",
+    "body": [
+      "ansible.builtin.pip:",
+      "\t#chdir: ${1:}",
+      "\t#editable: ${2:false}",
+      "\t#executable: ${3:}",
+      "\t#extra_args: ${4:}",
+      "\t#name: ${5:}",
+      "\t#requirements: ${6:}",
+      "\t#state: ${7:absent|forcereinstall|latest|#present}",
+      "\t#umask: ${8:}",
+      "\t#version: ${9:}",
+      "\t#virtualenv: ${10:}",
+      "\t#virtualenv_command: ${11:virtualenv}",
+      "\t#virtualenv_python: ${12:}",
+      "\t#virtualenv_site_packages: ${13:false}"
+    ]
+  },
+  "raw": {
+    "prefix": "raw",
+    "description": "Executes a low-down and dirty command",
+    "body": [
+      "ansible.builtin.raw:",
+      "\t${1:free_form: }",
+      "\t#executable: ${2:}"
+    ]
+  },
+  "reboot": {
+    "prefix": "reboot",
+    "description": "Reboot a machine",
+    "body": [
+      "ansible.builtin.reboot:",
+      "\t#boot_time_command: ${1:cat /proc/sys/kernel/random/boot_id}",
+      "\t#connect_timeout: ${2:}",
+      "\t#msg: ${3:Reboot initiated by Ansible}",
+      "\t#post_reboot_delay: ${4:0}",
+      "\t#pre_reboot_delay: ${5:0}",
+      "\t#reboot_command: ${6:[determined based on target OS]}",
+      "\t#reboot_timeout: ${7:600}",
+      "\t#search_paths: ${8:['/sbin', '/bin', '/usr/sbin', '/usr/bin', '/usr/local/sbin']}",
+      "\t#test_command: ${9:whoami}"
+    ]
+  },
+  "replace": {
+    "prefix": "replace",
+    "description": "Replace all instances of a particular string in a file using a back-referenced regular expression",
+    "body": [
+      "ansible.builtin.replace:",
+      "\tpath: ${1:}",
+      "\tregexp: ${2:}",
+      "\t#after: ${3:}",
+      "\t#attributes: ${4:}",
+      "\t#backup: ${5:false}",
+      "\t#before: ${6:}",
+      "\t#encoding: ${7:utf-8}",
+      "\t#group: ${8:}",
+      "\t#mode: ${9:}",
+      "\t#others: ${10:}",
+      "\t#owner: ${11:}",
+      "\t#replace: ${12:\"\"}",
+      "\t#selevel: ${13:}",
+      "\t#serole: ${14:}",
+      "\t#setype: ${15:}",
+      "\t#seuser: ${16:}",
+      "\t#unsafe_writes: ${17:false}",
+      "\t#validate: ${18:}"
+    ]
+  },
+  "rpm_key": {
+    "prefix": "rpm_key",
+    "description": "Adds or removes a gpg key from the rpm db",
+    "body": [
+      "ansible.builtin.rpm_key:",
+      "\tkey: ${1:}",
+      "\t#fingerprint: ${2:}",
+      "\t#state: ${3:absent|#present}",
+      "\t#validate_certs: ${4:true}"
+    ]
+  },
+  "script": {
+    "prefix": "script",
+    "description": "Runs a local script on a remote node after transferring it",
+    "body": [
+      "ansible.builtin.script:",
+      "\t#chdir: ${1:}",
+      "\t#cmd: ${2:}",
+      "\t#creates: ${3:}",
+      "\t#decrypt: ${4:true}",
+      "\t#executable: ${5:}",
+      "\t#${6:free_form: }",
+      "\t#removes: ${7:}"
+    ]
+  },
+  "service": {
+    "prefix": "service",
+    "description": "Manage services",
+    "body": [
+      "ansible.builtin.service:",
+      "\tname: ${1:}",
+      "\t#arguments: ${2:\"\"}",
+      "\t#enabled: ${3:}",
+      "\t#pattern: ${4:}",
+      "\t#runlevel: ${5:default}",
+      "\t#sleep: ${6:}",
+      "\t#state: ${7:reloaded|restarted|started|stopped}",
+      "\t#use: ${8:auto}"
+    ]
+  },
+  "service_facts": {
+    "prefix": "service_facts",
+    "description": "Return service state information as fact data",
+    "body": "ansible.builtin.service_facts:"
+  },
+  "set_fact": {
+    "prefix": "set_fact",
+    "description": "Set host variable(s) and fact(s).",
+    "body": [
+      "ansible.builtin.set_fact:",
+      "\tkey_value: ${1:}",
+      "\t#cacheable: ${2:false}"
+    ]
+  },
+  "set_stats": {
+    "prefix": "set_stats",
+    "description": "Define and display stats for the current ansible run",
+    "body": [
+      "ansible.builtin.set_stats:",
+      "\tdata: ${1:}",
+      "\t#aggregate: ${2:true}",
+      "\t#per_host: ${3:false}"
+    ]
+  },
+  "setup": {
+    "prefix": "setup",
+    "description": "Gathers facts about remote hosts",
+    "body": [
+      "ansible.builtin.setup:",
+      "\t#fact_path: ${1:/etc/ansible/facts.d}",
+      "\t#filter: ${2:[]}",
+      "\t#gather_subset: ${3:all}",
+      "\t#gather_timeout: ${4:10}"
+    ]
+  },
+  "shell": {
+    "prefix": "shell",
+    "description": "Execute shell commands on targets",
+    "body": [
+      "ansible.builtin.shell:",
+      "\t#chdir: ${1:}",
+      "\t#cmd: ${2:}",
+      "\t#creates: ${3:}",
+      "\t#executable: ${4:}",
+      "\t#${5:free_form: }",
+      "\t#removes: ${6:}",
+      "\t#stdin: ${7:}",
+      "\t#stdin_add_newline: ${8:true}"
+    ]
+  },
+  "slurp": {
+    "prefix": "slurp",
+    "description": "Slurps a file from remote nodes",
+    "body": [
+      "ansible.builtin.slurp:",
+      "\tsrc: ${1:}"
+    ]
+  },
+  "stat": {
+    "prefix": "stat",
+    "description": "Retrieve file or file system status",
+    "body": [
+      "ansible.builtin.stat:",
+      "\tpath: ${1:}",
+      "\t#checksum_algorithm: ${2:md5|#sha1|sha224|sha256|sha384|sha512}",
+      "\t#follow: ${3:false}",
+      "\t#get_attributes: ${4:true}",
+      "\t#get_checksum: ${5:true}",
+      "\t#get_mime: ${6:true}"
+    ]
+  },
+  "subversion": {
+    "prefix": "subversion",
+    "description": "Deploys a subversion repository",
+    "body": [
+      "ansible.builtin.subversion:",
+      "\trepo: ${1:}",
+      "\t#checkout: ${2:true}",
+      "\t#dest: ${3:}",
+      "\t#executable: ${4:}",
+      "\t#export: ${5:false}",
+      "\t#force: ${6:false}",
+      "\t#in_place: ${7:false}",
+      "\t#password: ${8:}",
+      "\t#revision: ${9:HEAD}",
+      "\t#switch: ${10:true}",
+      "\t#update: ${11:true}",
+      "\t#username: ${12:}",
+      "\t#validate_certs: ${13:false}"
+    ]
+  },
+  "systemd_service": {
+    "prefix": "systemd_service",
+    "description": "Manage systemd units",
+    "body": [
+      "ansible.builtin.systemd_service:",
+      "\t#daemon_reexec: ${1:false}",
+      "\t#daemon_reload: ${2:false}",
+      "\t#enabled: ${3:}",
+      "\t#force: ${4:}",
+      "\t#masked: ${5:}",
+      "\t#name: ${6:}",
+      "\t#no_block: ${7:false}",
+      "\t#scope: ${8:#system|user|global}",
+      "\t#state: ${9:reloaded|restarted|started|stopped}"
+    ]
+  },
+  "sysvinit": {
+    "prefix": "sysvinit",
+    "description": "Manage SysV services.",
+    "body": [
+      "ansible.builtin.sysvinit:",
+      "\tname: ${1:}",
+      "\t#arguments: ${2:}",
+      "\t#daemonize: ${3:false}",
+      "\t#enabled: ${4:}",
+      "\t#pattern: ${5:}",
+      "\t#runlevels: ${6:}",
+      "\t#sleep: ${7:1}",
+      "\t#state: ${8:started|stopped|restarted|reloaded}"
+    ]
+  },
+  "tempfile": {
+    "prefix": "tempfile",
+    "description": "Creates temporary files and directories",
+    "body": [
+      "ansible.builtin.tempfile:",
+      "\t#path: ${1:}",
+      "\t#prefix: ${2:ansible.}",
+      "\t#state: ${3:directory|#file}",
+      "\t#suffix: ${4:\"\"}"
+    ]
+  },
+  "template": {
+    "prefix": "template",
+    "description": "Template a file out to a target host",
+    "body": [
+      "ansible.builtin.template:",
+      "\tdest: ${1:}",
+      "\tsrc: ${2:}",
+      "\t#attributes: ${3:}",
+      "\t#backup: ${4:false}",
+      "\t#block_end_string: ${5:%\\}}",
+      "\t#block_start_string: \\${6:{%\\}",
+      "\t#comment_end_string: ${7:}",
+      "\t#comment_start_string: ${8:}",
+      "\t#follow: ${9:false}",
+      "\t#force: ${10:true}",
+      "\t#group: ${11:}",
+      "\t#lstrip_blocks: ${12:false}",
+      "\t#mode: ${13:}",
+      "\t#newline_sequence: ${14:#\\n|\\r|\\r\\n}",
+      "\t#output_encoding: ${15:utf-8}",
+      "\t#owner: ${16:}",
+      "\t#selevel: ${17:}",
+      "\t#serole: ${18:}",
+      "\t#setype: ${19:}",
+      "\t#seuser: ${20:}",
+      "\t#trim_blocks: ${21:true}",
+      "\t#unsafe_writes: ${22:false}",
+      "\t#validate: ${23:}",
+      "\t#variable_end_string: ${24:\\}\\}}",
+      "\t#variable_start_string: \\${25:{{\\}"
+    ]
+  },
+  "unarchive": {
+    "prefix": "unarchive",
+    "description": "Unpacks an archive after (optionally) copying it from the local machine",
+    "body": [
+      "ansible.builtin.unarchive:",
+      "\tdest: ${1:}",
+      "\tsrc: ${2:}",
+      "\t#attributes: ${3:}",
+      "\t#copy: ${4:true}",
+      "\t#creates: ${5:}",
+      "\t#decrypt: ${6:true}",
+      "\t#exclude: ${7:[]}",
+      "\t#extra_opts: ${8:[]}",
+      "\t#group: ${9:}",
+      "\t#include: ${10:[]}",
+      "\t#io_buffer_size: ${11:65536}",
+      "\t#keep_newer: ${12:false}",
+      "\t#list_files: ${13:false}",
+      "\t#mode: ${14:}",
+      "\t#owner: ${15:}",
+      "\t#remote_src: ${16:false}",
+      "\t#selevel: ${17:}",
+      "\t#serole: ${18:}",
+      "\t#setype: ${19:}",
+      "\t#seuser: ${20:}",
+      "\t#unsafe_writes: ${21:false}",
+      "\t#validate_certs: ${22:true}"
+    ]
+  },
+  "uri": {
+    "prefix": "uri",
+    "description": "Interacts with webservices",
+    "body": [
+      "ansible.builtin.uri:",
+      "\turl: ${1:}",
+      "\t#attributes: ${2:}",
+      "\t#body: ${3:}",
+      "\t#body_format: ${4:form-urlencoded|json|#raw|form-multipart}",
+      "\t#ca_path: ${5:}",
+      "\t#ciphers: ${6:}",
+      "\t#client_cert: ${7:}",
+      "\t#client_key: ${8:}",
+      "\t#creates: ${9:}",
+      "\t#decompress: ${10:true}",
+      "\t#dest: ${11:}",
+      "\t#follow_redirects: ${12:all|no|none|#safe|urllib2|yes}",
+      "\t#force: ${13:false}",
+      "\t#force_basic_auth: ${14:false}",
+      "\t#group: ${15:}",
+      "\t#headers: ${16:{\\}}",
+      "\t#http_agent: ${17:ansible-httpget}",
+      "\t#method: ${18:GET}",
+      "\t#mode: ${19:}",
+      "\t#owner: ${20:}",
+      "\t#remote_src: ${21:false}",
+      "\t#removes: ${22:}",
+      "\t#return_content: ${23:false}",
+      "\t#selevel: ${24:}",
+      "\t#serole: ${25:}",
+      "\t#setype: ${26:}",
+      "\t#seuser: ${27:}",
+      "\t#src: ${28:}",
+      "\t#status_code: ${29:[200]}",
+      "\t#timeout: ${30:30}",
+      "\t#unix_socket: ${31:}",
+      "\t#unredirected_headers: ${32:[]}",
+      "\t#unsafe_writes: ${33:false}",
+      "\t#url_password: ${34:}",
+      "\t#url_username: ${35:}",
+      "\t#use_gssapi: ${36:false}",
+      "\t#use_netrc: ${37:true}",
+      "\t#use_proxy: ${38:true}",
+      "\t#validate_certs: ${39:true}"
+    ]
+  },
+  "user": {
+    "prefix": "user",
+    "description": "Manage user accounts",
+    "body": [
+      "ansible.builtin.user:",
+      "\tname: ${1:}",
+      "\t#append: ${2:false}",
+      "\t#authorization: ${3:}",
+      "\t#comment: ${4:}",
+      "\t#create_home: ${5:true}",
+      "\t#expires: ${6:}",
+      "\t#force: ${7:false}",
+      "\t#generate_ssh_key: ${8:false}",
+      "\t#group: ${9:}",
+      "\t#groups: ${10:}",
+      "\t#hidden: ${11:}",
+      "\t#home: ${12:}",
+      "\t#local: ${13:false}",
+      "\t#login_class: ${14:}",
+      "\t#move_home: ${15:false}",
+      "\t#non_unique: ${16:false}",
+      "\t#password: ${17:}",
+      "\t#password_expire_max: ${18:}",
+      "\t#password_expire_min: ${19:}",
+      "\t#password_expire_warn: ${20:}",
+      "\t#password_lock: ${21:}",
+      "\t#profile: ${22:}",
+      "\t#remove: ${23:false}",
+      "\t#role: ${24:}",
+      "\t#seuser: ${25:}",
+      "\t#shell: ${26:}",
+      "\t#skeleton: ${27:}",
+      "\t#ssh_key_bits: ${28:}",
+      "\t#ssh_key_comment: ${29:ansible-generated on \\$HOSTNAME}",
+      "\t#ssh_key_file: ${30:}",
+      "\t#ssh_key_passphrase: ${31:}",
+      "\t#ssh_key_type: ${32:rsa}",
+      "\t#state: ${33:absent|#present}",
+      "\t#system: ${34:false}",
+      "\t#uid: ${35:}",
+      "\t#umask: ${36:}",
+      "\t#update_password: ${37:#always|on_create}"
+    ]
+  },
+  "validate_argument_spec": {
+    "prefix": "validate_argument_spec",
+    "description": "Validate role argument specs.",
+    "body": [
+      "ansible.builtin.validate_argument_spec:",
+      "\targument_spec: ${1:}",
+      "\t#provided_arguments: ${2:}"
+    ]
+  },
+  "wait_for": {
+    "prefix": "wait_for",
+    "description": "Waits for a condition before continuing",
+    "body": [
+      "ansible.builtin.wait_for:",
+      "\t#active_connection_states: ${1:['ESTABLISHED', 'FIN_WAIT1', 'FIN_WAIT2', 'SYN_RECV', 'SYN_SENT', 'TIME_WAIT']}",
+      "\t#connect_timeout: ${2:5}",
+      "\t#delay: ${3:0}",
+      "\t#exclude_hosts: ${4:}",
+      "\t#host: ${5:127.0.0.1}",
+      "\t#msg: ${6:}",
+      "\t#path: ${7:}",
+      "\t#port: ${8:}",
+      "\t#search_regex: ${9:}",
+      "\t#sleep: ${10:1}",
+      "\t#state: ${11:absent|drained|present|#started|stopped}",
+      "\t#timeout: ${12:300}"
+    ]
+  },
+  "wait_for_connection": {
+    "prefix": "wait_for_connection",
+    "description": "Waits until remote system is reachable/usable",
+    "body": [
+      "ansible.builtin.wait_for_connection:",
+      "\t#connect_timeout: ${1:5}",
+      "\t#delay: ${2:0}",
+      "\t#sleep: ${3:1}",
+      "\t#timeout: ${4:600}"
+    ]
+  },
+  "yum": {
+    "prefix": "yum",
+    "description": "Manages packages with the I(yum) package manager",
+    "body": [
+      "ansible.builtin.yum:",
+      "\t#allow_downgrade: ${1:false}",
+      "\t#autoremove: ${2:false}",
+      "\t#bugfix: ${3:false}",
+      "\t#cacheonly: ${4:false}",
+      "\t#conf_file: ${5:}",
+      "\t#disable_excludes: ${6:}",
+      "\t#disable_gpg_check: ${7:false}",
+      "\t#disable_plugin: ${8:[]}",
+      "\t#disablerepo: ${9:[]}",
+      "\t#download_dir: ${10:}",
+      "\t#download_only: ${11:false}",
+      "\t#enable_plugin: ${12:[]}",
+      "\t#enablerepo: ${13:[]}",
+      "\t#exclude: ${14:[]}",
+      "\t#install_repoquery: ${15:true}",
+      "\t#install_weak_deps: ${16:true}",
+      "\t#installroot: ${17:/}",
+      "\t#list: ${18:}",
+      "\t#lock_timeout: ${19:30}",
+      "\t#name: ${20:[]}",
+      "\t#releasever: ${21:}",
+      "\t#security: ${22:false}",
+      "\t#skip_broken: ${23:false}",
+      "\t#sslverify: ${24:true}",
+      "\t#state: ${25:absent|installed|latest|present|removed}",
+      "\t#update_cache: ${26:false}",
+      "\t#update_only: ${27:false}",
+      "\t#use_backend: ${28:#auto|yum|yum4|dnf|dnf4|dnf5}",
+      "\t#validate_certs: ${29:true}"
+    ]
+  },
+  "yum_repository": {
+    "prefix": "yum_repository",
+    "description": "Add or remove YUM repositories",
+    "body": [
+      "ansible.builtin.yum_repository:",
+      "\tname: ${1:}",
+      "\t#async: ${2:}",
+      "\t#attributes: ${3:}",
+      "\t#bandwidth: ${4:}",
+      "\t#baseurl: ${5:}",
+      "\t#cost: ${6:}",
+      "\t#deltarpm_metadata_percentage: ${7:}",
+      "\t#deltarpm_percentage: ${8:}",
+      "\t#description: ${9:}",
+      "\t#enabled: ${10:}",
+      "\t#enablegroups: ${11:}",
+      "\t#exclude: ${12:}",
+      "\t#failovermethod: ${13:roundrobin|priority}",
+      "\t#file: ${14:}",
+      "\t#gpgcakey: ${15:}",
+      "\t#gpgcheck: ${16:}",
+      "\t#gpgkey: ${17:}",
+      "\t#group: ${18:}",
+      "\t#http_caching: ${19:all|packages|none}",
+      "\t#include: ${20:}",
+      "\t#includepkgs: ${21:}",
+      "\t#ip_resolve: ${22:4|6|IPv4|IPv6|whatever}",
+      "\t#keepalive: ${23:}",
+      "\t#keepcache: ${24:0|1}",
+      "\t#metadata_expire: ${25:}",
+      "\t#metadata_expire_filter: ${26:never|read-only:past|read-only:present|read-only:future}",
+      "\t#metalink: ${27:}",
+      "\t#mirrorlist: ${28:}",
+      "\t#mirrorlist_expire: ${29:}",
+      "\t#mode: ${30:}",
+      "\t#module_hotfixes: ${31:}",
+      "\t#owner: ${32:}",
+      "\t#password: ${33:}",
+      "\t#priority: ${34:}",
+      "\t#protect: ${35:}",
+      "\t#proxy: ${36:}",
+      "\t#proxy_password: ${37:}",
+      "\t#proxy_username: ${38:}",
+      "\t#repo_gpgcheck: ${39:}",
+      "\t#reposdir: ${40:/etc/yum.repos.d}",
+      "\t#retries: ${41:}",
+      "\t#s3_enabled: ${42:}",
+      "\t#selevel: ${43:}",
+      "\t#serole: ${44:}",
+      "\t#setype: ${45:}",
+      "\t#seuser: ${46:}",
+      "\t#skip_if_unavailable: ${47:}",
+      "\t#ssl_check_cert_permissions: ${48:}",
+      "\t#sslcacert: ${49:}",
+      "\t#sslclientcert: ${50:}",
+      "\t#sslclientkey: ${51:}",
+      "\t#sslverify: ${52:}",
+      "\t#state: ${53:absent|#present}",
+      "\t#throttle: ${54:}",
+      "\t#timeout: ${55:}",
+      "\t#ui_repoid_vars: ${56:}",
+      "\t#unsafe_writes: ${57:false}",
+      "\t#username: ${58:}"
+    ]
+  }
+}
