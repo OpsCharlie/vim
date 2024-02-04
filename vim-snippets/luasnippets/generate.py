@@ -62,7 +62,7 @@ def get_files_collections(user: bool = False) -> List[str]:
     if user:
         collection_path = '~/.ansible/collections/ansible_collections/'
     else:
-        collection_path = '/usr/share/ansible/collections/ansible_collections/'
+        collection_path = '~/.local/lib/python3.11/site-packages/ansible_collections'
 
     file_names: List[str] = []
     for root, dirs, files in os.walk(os.path.expanduser(collection_path)):
@@ -364,11 +364,14 @@ if __name__ == "__main__":
 
     system_modules_paths = get_files_collections()
     for f in system_modules_paths:
-        docstring_system = get_module_docstring(f)
-        if docstring_system and docstring_system not in modules_docstrings:
-            collection_name = get_collection_name(f)
-            docstring_system['collection_name'] = collection_name
-            modules_docstrings.append(docstring_system)
+        try:
+            docstring_system = get_module_docstring(f)
+            if docstring_system and docstring_system not in modules_docstrings:
+                collection_name = get_collection_name(f)
+                docstring_system['collection_name'] = collection_name
+                modules_docstrings.append(docstring_system)
+        except:
+            print("Error ", f)
 
     if args.user:
         user_modules_paths = get_files_collections(user=True)

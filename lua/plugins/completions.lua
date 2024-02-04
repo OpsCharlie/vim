@@ -13,13 +13,13 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load({
-        paths = vim.fn.stdpath("config") .. "/vim-snippets/luasnippets"
+        paths = vim.fn.stdpath("config") .. "/vim-snippets/luasnippets",
       })
 
       cmp.setup({
-              completion = {
-        completeopt = "menu,menuone,preview,noselect",
-      },
+        completion = {
+          completeopt = "menu,menuone,preview,noselect",
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -63,7 +63,7 @@ return {
         --
         sources = {
           { name = "nvim_lsp" },
-          { name = "luasnip" }, -- For luasnip users.
+          { name = "luasnip", priority = 10 }, -- For luasnip users.
           { name = "buffer" },
           { name = "nvim_lua" },
           { name = "path" },

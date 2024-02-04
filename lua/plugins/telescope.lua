@@ -3,11 +3,16 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
   },
   {
+    "benfowler/telescope-luasnip.nvim",
+    module = "telescope._extensions.luasnip",
+  },
+  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("telescope").setup({
+        require('telescope').load_extension('luasnip'),
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({}),
