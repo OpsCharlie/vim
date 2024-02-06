@@ -62,6 +62,11 @@ vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Indent line" })
 vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent line" })
 -- vim.wo.number = true
 
+-- folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
+
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -88,6 +93,7 @@ autocmd("FileType", {
     vim.opt.colorcolumn = "160"
   end,
 })
+
 
 -------------------------------------- user commands ------------------------------------------
 local user_command = vim.api.nvim_create_user_command
