@@ -62,7 +62,8 @@ def get_files_collections(user: bool = False) -> List[str]:
     if user:
         collection_path = '~/.ansible/collections/ansible_collections/'
     else:
-        collection_path = '~/.local/lib/python3.11/site-packages/ansible_collections'
+        # collection_path = '~/.local/lib/python3.11/site-packages/ansible_collections'
+        collection_path = '/usr/share/ansible/collections/ansible_collections/'
 
     file_names: List[str] = []
     for root, dirs, files in os.walk(os.path.expanduser(collection_path)):
