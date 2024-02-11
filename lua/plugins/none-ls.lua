@@ -38,7 +38,5 @@ return {
         }),
       },
     })
-
-    vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "LSP Format File" })
   end,
 }

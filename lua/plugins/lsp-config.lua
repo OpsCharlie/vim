@@ -9,6 +9,8 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
+    event = {'BufReadPost', 'BufNewFile'},
     config = function()
       local handlers = {
         function(server_name)
@@ -53,6 +55,7 @@ return {
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
       vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "LSP Diagnostic Float" })
       vim.keymap.set("n", "<leader>D", vim.diagnostic.setloclist, { desc = "LSP Diagnostic List" })
+      vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "LSP Format File" })
     end,
   },
 }
