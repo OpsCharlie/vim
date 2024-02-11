@@ -1,6 +1,6 @@
 return {
   "iamcco/markdown-preview.nvim",
-  event = "VeryLazy",
+  lazy = true,
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
   ft = { "markdown" },
   build = function()

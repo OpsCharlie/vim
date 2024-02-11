@@ -67,6 +67,10 @@ opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
 
+-- Nvimtree
+vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
+vim.keymap.set("n", "<A-n>", ":NvimTreeFocus<CR>", { silent = true })
+
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 

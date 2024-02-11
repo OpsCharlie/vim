@@ -4,6 +4,8 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
 
+  lazy = true,
+  cmd = { "NvimTreeToggle", "NvimTreeFocus" },
   config = function()
     local nvim_tree_api = require("nvim-tree.api")
     local function on_attach(bufnr)
@@ -46,8 +48,8 @@ return {
         dotfiles = true,
       },
     })
-    vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
-    vim.keymap.set("n", "<A-n>", ":NvimTreeFocus<CR>", { silent = true })
+    -- vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
+    -- vim.keymap.set("n", "<A-n>", ":NvimTreeFocus<CR>", { silent = true })
   end,
 }
 -- return {

@@ -1,5 +1,10 @@
 return {
   "nvimtools/none-ls.nvim",
+  lazy = true,
+  event = {'BufReadPost', 'BufNewFile'},
+  keys = {
+    { "<leader>ff", mode = "n", desc = "LSP Format File" },
+  },
   config = function()
     local null_ls = require("null-ls")
     null_ls.setup({
@@ -31,7 +36,6 @@ return {
         null_ls.builtins.diagnostics.codespell.with({
           args = { "--builtin", "clear,rare,code", "-" },
         }),
-
       },
     })
 

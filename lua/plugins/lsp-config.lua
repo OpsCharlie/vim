@@ -1,14 +1,14 @@
 return {
   {
     "williamboman/mason.nvim",
-    lazy = false,
+    lazy = true,
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     config = function()
       require("mason").setup()
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = false,
     config = function()
       local handlers = {
         function(server_name)
@@ -22,10 +22,8 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-    },
-    lazy = false,
+    lazy = true,
+    event = "User FilePost",
     config = function()
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
       --

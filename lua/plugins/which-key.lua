@@ -1,6 +1,7 @@
 return {
   "folke/which-key.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
   init = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 300
@@ -8,5 +9,4 @@ return {
   config = function ()
     require("which-key").setup()
   end
-  -- keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
 }

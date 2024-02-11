@@ -1,4 +1,5 @@
 return {
   "mogelbrod/vim-jsonpath",
-  event = "VeryLazy",
+  lazy = true,
+  ft = { "json" },
 }

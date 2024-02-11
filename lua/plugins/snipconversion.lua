@@ -2,7 +2,8 @@
 -- Used for ansible snippets from https://github.com/pearofducks/ansible-vim
 return {
   "smjonas/snippet-converter.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  cmd = { "ConvertSnippets" },
   config = function()
     local template = {
       sources = {

@@ -1,15 +1,20 @@
 return {
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-  },
-  {
-    "benfowler/telescope-luasnip.nvim",
-    module = "telescope._extensions.luasnip",
-  },
-  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+      {
+    "benfowler/telescope-luasnip.nvim",
+    module = "telescope._extensions.luasnip",
+      },
+    },
+    lazy = true,
+    cmd = "Telescope",
+    keys = {
+      { "<leader>fg", mode = "n", desc = "File grep" },
+      { "<C-p>", mode = "n", desc = "File file" },
+    },
     config = function()
       require("telescope").setup({
         require('telescope').load_extension('luasnip'),
@@ -26,5 +31,4 @@ return {
 
       require("telescope").load_extension("ui-select")
     end,
-  },
-}
+  }
