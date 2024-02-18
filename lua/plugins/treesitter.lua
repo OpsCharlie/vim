@@ -9,8 +9,14 @@ return {
       local config = require("nvim-treesitter.configs")
       config.setup({
         auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
+        highlight = {
+          enable = true,
+          disable = { "yaml" }
+        },
+        indent = {
+          enable = true,
+          disable = { "yaml" }
+        },
       })
     end,
   },

@@ -2,6 +2,7 @@ return {
   "tpope/vim-fugitive",
   lazy = true,
   cmd = {
+    "Gread",
     "GRemove",
     "GDelete",
     "GMove",
