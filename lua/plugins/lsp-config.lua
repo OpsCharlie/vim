@@ -10,7 +10,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = true,
-    event = {'BufReadPost', 'BufNewFile'},
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       local handlers = {
         function(server_name)
@@ -49,7 +49,17 @@ return {
       --   capabilities = capabilities
       -- })
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.diagnostic.config({
+        float = {
+          header = false,
+          border = "rounded",
+          focusable = true,
+        },
+      })
+
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Document" })
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
