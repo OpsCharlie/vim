@@ -15,7 +15,7 @@ return {
 
         -- Shell
         null_ls.builtins.formatting.shellharden,
-        null_ls.builtins.diagnostics.shellcheck,
+        -- null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.code_actions.shellcheck,
         -- null_ls.builtins.formatting.beautysh,
 

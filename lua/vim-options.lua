@@ -55,17 +55,28 @@ vim.cmd("set undofile")
 vim.cmd("set undolevels=1000")
 vim.cmd("set undoreload=10000")
 
-vim.keymap.set("n", "<ESC><ESC>", ":nohlsearch<CR>", { silent = true })
-vim.keymap.set("n", "<CR>", "i<CR><ESC>", { silent = true })
-vim.keymap.set("n", "<SPACE>", "i <ESC>l", { silent = true })
+vim.keymap.set("n", "<ESC><ESC>", ":nohlsearch<CR>", { silent = true, desc = "Clear search" })
+vim.keymap.set("n", "<CR>", "i<CR><ESC>", { silent = true, desc = "New line in normal mode" })
+vim.keymap.set("n", "<SPACE>", "i <ESC>l", { silent = true, desc = "Add space in normal mode" })
 vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Indent line" })
 vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent line" })
+vim.keymap.set("n", "<C-t>", ":tabnext<CR>", { silent = true })
+vim.keymap.set("n", "<C-S-t>", ":tabprevious<CR>", { silent = true })
+vim.keymap.set("i", "<C-t>", "<ESC>:tabnext<CR>i", { silent = true })
+vim.keymap.set("i", "<C-S-t>", "<ESC>:tabprevious<CR>i", { silent = true })
+vim.keymap.set("n", "n", "nzz", { desc = "Center search result" })
+vim.keymap.set("n", "N", "Nzz", { desc = "Center search result" })
 -- vim.wo.number = true
 
 -- folding
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldenable = false
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldenable = false
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.foldcolumn = '1' -- '0' is not bad
+opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+opt.foldlevelstart = 99
+opt.foldenable = true
 
 -- Nvimtree
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
