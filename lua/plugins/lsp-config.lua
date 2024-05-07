@@ -12,13 +12,12 @@ return {
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      local handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup({})
+      local lspconfig = require('lspconfig')
+      require('mason').setup({})
+      require('mason-lspconfig').setup_handlers({
+        function(server)
+          lspconfig[server].setup({})
         end,
-      }
-      require("mason-lspconfig").setup({
-        handlers = handlers,
       })
     end,
   },
