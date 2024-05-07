@@ -2,9 +2,9 @@ return {
   "nvimtools/none-ls.nvim",
   lazy = true,
   event = {'BufReadPost', 'BufNewFile'},
-  keys = {
-    { "<leader>ff", mode = "n", desc = "LSP Format File" },
-  },
+  -- keys = {
+  --   { "<leader>ff", mode = "n", desc = "LSP Format File" },
+  -- },
   config = function()
     local null_ls = require("null-ls")
     null_ls.setup({
