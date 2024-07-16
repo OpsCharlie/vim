@@ -3,6 +3,7 @@ return {
   lazy = true,
   cmd = {
     "Gread",
+    "Gwrite",
     "GRemove",
     "GDelete",
     "GMove",
