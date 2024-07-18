@@ -11,6 +11,7 @@ return {
   end,
   config = function()
     require("which-key").setup({
+      preset = "modern",
       -- window = {
       --   border = "single",      -- none, single, double, shadow
       --   position = "bottom",  -- bottom, top
