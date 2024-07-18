@@ -32,7 +32,8 @@ return {
         -- null_ls.builtins.formatting.stylua,
 
         -- Spelling
-        -- null_ls.builtins.completion.spell,
+        null_ls.builtins.completion.spell,
+        null_ls.builtins.formatting.codespell,
         null_ls.builtins.diagnostics.codespell.with({
           args = { "--builtin", "clear,rare,code", "-" },
         }),
