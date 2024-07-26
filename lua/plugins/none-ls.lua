@@ -29,7 +29,7 @@ return {
         null_ls.builtins.diagnostics.golangci_lint,
 
         -- Lua
-        -- null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.stylua,
 
         -- Spelling
         null_ls.builtins.completion.spell,

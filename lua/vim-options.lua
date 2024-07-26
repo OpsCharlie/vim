@@ -66,6 +66,7 @@ vim.keymap.set("i", "<C-t>", "<ESC>:tabnext<CR>i", { silent = true })
 vim.keymap.set("i", "<C-S-t>", "<ESC>:tabprevious<CR>i", { silent = true })
 vim.keymap.set("n", "n", "nzz", { desc = "Center search result" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Center search result" })
+vim.keymap.set("n", "<leader>r", ":exec &nu==&rnu? 'se nu!' : 'se rnu!'<CR>", { desc = "Toggle numbers" })
 -- vim.wo.number = true
 
 -- folding
