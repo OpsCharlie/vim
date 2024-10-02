@@ -1,6 +1,8 @@
 return {
     "robbles/logstash.vim",
     -- highlights configuration files for logstash
+    lazy = true,
+    ft = { "logstash" },
     config = function()
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
