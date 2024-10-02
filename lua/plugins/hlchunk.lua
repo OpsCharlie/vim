@@ -1,12 +1,13 @@
 return {
     "shellRaining/hlchunk.nvim",
+    -- shellRaining/hlchunk.nvim
     event = { "UIEnter" },
     config = function()
         require("hlchunk").setup({
             chunk = {
                 enable = true,
                 notify = false,
-                use_treesitter = true, -- important as I dont want the RED line
+                use_treesitter = true, -- important as I do not want the RED line
                 -- details about support_filetypes and exclude_filetypes in https://github.com/shellRaining/hlchunk.nvim/blob/main/lua/hlchunk/utils/filetype.lua
                 -- support_filetypes = ft.support_filetypes,
                 -- exclude_filetypes = ft.exclude_filetypes,

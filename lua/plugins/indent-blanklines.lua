@@ -1,5 +1,6 @@
 -- return {
 --   "echasnovski/mini.indentscope",
+--   -- Visualize scope with animated vertical line.
 --   version = "*",
 --   lazy = true,
 --   event = { "BufReadPost", "BufNewFile" },
@@ -22,6 +23,7 @@
 -- }
 -- return {
 --     "lukas-reineke/indent-blankline.nvim",
+--     -- Indent guides for Neovim
 --     lazy = true,
 --     event = { 'BufReadPost', 'BufNewFile' },
 --     main = "ibl",

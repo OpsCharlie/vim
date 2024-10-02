@@ -1,5 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
+  -- Git integration for buffers
   ft = { "gitcommit", "diff" },
   init = function()
     -- load gitsigns only when a git file is opened

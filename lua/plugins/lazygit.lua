@@ -1,7 +1,8 @@
 return {
-  "kdheepak/lazygit.nvim",
-  lazy = true,
-  keys = {
-    { "<leader>lg", ":LazyGit<CR>",  desc = "LazyGit"  },
-  },
+    "kdheepak/lazygit.nvim",
+    -- Plugin for calling lazygit from within neovim.
+    lazy = true,
+    keys = {
+        { "<leader>lg", ":LazyGit<CR>", desc = "LazyGit" },
+    },
 }

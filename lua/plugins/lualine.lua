@@ -1,40 +1,41 @@
 return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function()
-    require("lualine").setup({
-      options = {
-        theme = "auto",
-        -- theme = "catppuccin",
-        globalstatus = true,
-      },
-      sections = {
-        -- lualine_c = {
-        --   {
-        --     "filename",
-        --     path = 2,
-        --     -- color = "#B22222"
-        --   },
-        -- },
-        lualine_c = {
-          {
-            function()
-              local bg = "#404040" -- not modified
-              if vim.bo.modified then
-                bg = "#B22222" -- unsaved
-              elseif vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(0), "readonly") then
-                bg = "#b26a22" -- readonly
-              end
-              vim.cmd("hi! lualine_filename_status guibg=" .. bg)
-              return vim.fn.expand("%:p")
-            end,
-            "filename",
-            color = "lualine_filename_status",
-          },
-        },
-      },
-    })
-  end,
+    "nvim-lualine/lualine.nvim",
+    -- A blazing fast and easy to configure Neovim statusline
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+        require("lualine").setup({
+            options = {
+                theme = "auto",
+                -- theme = "catppuccin",
+                globalstatus = true,
+            },
+            sections = {
+                -- lualine_c = {
+                --   {
+                --     "filename",
+                --     path = 2,
+                --     -- color = "#B22222"
+                --   },
+                -- },
+                lualine_c = {
+                    {
+                        function()
+                            local bg = "#404040" -- not modified
+                            if vim.bo.modified then
+                                bg = "#B22222" -- unsaved
+                            elseif vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(0), "readonly") then
+                                bg = "#b26a22" -- readonly
+                            end
+                            vim.cmd("hi! lualine_filename_status guibg=" .. bg)
+                            return vim.fn.expand("%:p")
+                        end,
+                        "filename",
+                        color = "lualine_filename_status",
+                    },
+                },
+            },
+        })
+    end,
 }
 
 -- return {
