@@ -23,6 +23,7 @@ opt.scrolloff = 4
 
 -- Numbers
 opt.number = true
+opt.relativenumber = true
 -- opt.numberwidth = 2
 -- opt.ruler = false
 
