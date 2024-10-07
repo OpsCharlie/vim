@@ -64,7 +64,6 @@ return {
             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
             vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "LSP Diagnostic Float" })
-            vim.keymap.set("n", "<leader>D", vim.diagnostic.setloclist, { desc = "LSP Diagnostic List" })
             vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "LSP Format File" })
         end,
     },
