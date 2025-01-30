@@ -1,6 +1,6 @@
 return {
 	"andymass/vim-matchup",
-	-- match-up is a plugin that lets you highlight, navigate, and operate on sets of matching text.
+	-- match-up is a plugin that let's you highlight, navigate, and operate on sets of matching text.
 	event = "BufReadPost",
 	config = function()
 		vim.g.matchup_matchparen_offscreen = { method = "popup" }

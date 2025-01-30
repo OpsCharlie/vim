@@ -23,7 +23,9 @@ return {
                 -- JS yaml html markdown
                 null_ls.builtins.formatting.prettier,
                 -- null_ls.builtins.diagnostics.yamllint,
-                null_ls.builtins.diagnostics.markdownlint,
+                null_ls.builtins.diagnostics.markdownlint.with({
+                  extra_args = { "-c", "~/.config/markdownlint.yaml" },
+                }),
                 -- null_ls.builtins.formatting.jq,
 
                 -- Go
