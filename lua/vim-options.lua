@@ -81,6 +81,8 @@ opt.foldlevelstart = 99
 opt.foldenable = true
 
 -- Nvimtree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
 vim.keymap.set("n", "<A-n>", ":NvimTreeFocus<CR>", { silent = true })
 
