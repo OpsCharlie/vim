@@ -12,10 +12,11 @@ return {
     lazy = true,
     cmd = "Telescope",
     keys = {
-        { "<leader>fg", mode = "n", desc = "Find grep" },
-        { "<leader>fG", mode = "n", desc = "Find Git grep" },
+        { "<leader>gf", mode = "n", desc = "Grep Files Current Dir" },
+        { "<leader>gg", mode = "n", desc = "Grep Git Repo" },
         { "<leader>fb", mode = "n", desc = "Find buffers" },
         { "<C-p>",      mode = "n", desc = "Find Git files" },
+        { "<C-S-p>", mode = "n", desc = "Find Files Current Dir" },
     },
     config = function()
         require("telescope").setup({
@@ -62,11 +63,13 @@ return {
 
         vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 
-        -- vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
         vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Find git files" })
-        vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
+        vim.keymap.set("n", "<C-S-p>", builtin.find_files, { desc = "Find files" })
         vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
-        vim.keymap.set("n", "<leader>fG", ":LiveGrepGitRoot<cr>", { desc = "Find git grep" })
+        vim.keymap.set("n", "<leader>gg", ":LiveGrepGitRoot<cr>", { desc = "Grep Git Repo" })
+        vim.keymap.set("n", "<leader>gf", builtin.live_grep, { desc = "Grep Files Current Dir" })
+        vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
+        vim.keymap.set("n", "<leader>gg", ":LiveGrepGitRoot<cr>", { desc = "Grep Git repo" })
 
         require("telescope").load_extension("ui-select")
     end,
