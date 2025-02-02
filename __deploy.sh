@@ -1,7 +1,7 @@
 #!/bin/bash
 
 P=$1
-DIR="$(dirname $(readlink -f $0))"
+DIR=$(dirname "$(readlink -f "$0")")
 
 if [ -z "$P" ]; then
     echo copy files to homedir
@@ -16,4 +16,4 @@ if [ "$(expr match "$P" '.*\(:\)')" = ":" ]; then
     exit 1
 fi
 
-ln -s $DIR/vim ~/.config/nvim
+ln -s "$DIR"/vim ~/.config/nvim
