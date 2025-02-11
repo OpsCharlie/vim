@@ -37,7 +37,7 @@ return {
                 args = {},
             },
             view = {
-                width = 40,
+                width = 30,
                 side = "left",
             },
             actions = {
