@@ -5,7 +5,7 @@ return {
   opts = {},
   keys = {
     {
-      "<leader>D",
+      "<leader>dD",
       "<cmd>Trouble diagnostics toggle<cr>",
       desc = "Diagnostics (Trouble)",
     },
