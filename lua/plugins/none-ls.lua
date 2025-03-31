@@ -13,6 +13,7 @@ return {
                 -- Python
                 -- null_ls.builtins.formatting.isort,
                 null_ls.builtins.diagnostics.pylint,
+                null_ls.builtins.diagnostics.golangci_lint,
 
                 -- Shell
                 -- null_ls.builtins.formatting.shellharden,
@@ -30,6 +31,7 @@ return {
 
                 -- Go
                 null_ls.builtins.diagnostics.golangci_lint,
+                null_ls.builtins.formatting.gofmt,
 
                 -- Lua
                 null_ls.builtins.formatting.stylua,
