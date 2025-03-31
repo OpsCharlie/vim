@@ -2,8 +2,8 @@
 
 ## Dependencies
 
-```txt
-curl git gcc jq python3-pip python3-venv ripgrep
+```bash
+sudo apt install curl git gcc jq python3-pip python3-venv ripgrep
 ```
 
 ### python env
@@ -30,24 +30,48 @@ source ~/.bashrc
 nvm install --lts
 ```
 
+### golang
+
+```bash
+# install go
+sudo apt install golang
+
+# set go bin in path in .bashrc or .zshrc
+if [ -d "$HOME/go/bin/" ]; then
+    PATH="$HOME/go/bin/:$PATH"
+fi
+
+# install delve
+go install github.com/go-delve/delve/cmd/dlv@latest
+
+# install golangci-lint
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.64.7
+```
+
 ## Mason
 
 ```ini
 ansible-language-server
+bash-debug-adapter
 bash-language-server
 beautysh
+codelldb
 codespell
+debugpy
 djlint
 docker-compose-language-service
+flake8
 golangci-lint
 json-lsp
 lua-language-server
 markdownlint
+php-debug-adapter
+powershell-editor-services
 prettier
 pylama
-python-lsp-server
+pylint
 shellcheck
+shfmt
 stylua
 systemdlint
-yaml-language-server
 ```
