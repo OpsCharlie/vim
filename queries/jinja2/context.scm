@@ -1,0 +1,11 @@
+([
+  (for_statement)
+  (c_style_for_statement)
+  (if_statement)
+  (else_if_clause)
+  (else_clause)
+  (case_statement)
+  (case_item)
+  (while_statement)
+  (pair)
+] @context)
