@@ -28,7 +28,7 @@ opt.relativenumber = true
 -- opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append("sI")
+opt.shortmess:append({ s = true, I = true })
 
 opt.signcolumn = "yes"
 opt.splitbelow = true
@@ -44,17 +44,17 @@ opt.updatetime = 250
 opt.whichwrap:append("<>")
 
 -- persistent undo
-os.execute("mkdir -p ~/.vim")
-os.execute("mkdir -p ~/.vim/backup")
-os.execute("mkdir -p ~/.vim/swap")
-vim.cmd("set backupdir=/home/$USER/.vim/backup//")
-vim.cmd("set directory=/home/$USER/.vim/swap//")
+local home = os.getenv("HOME")
+vim.fn.mkdir(home .. "/.vim/backup", "p")
+vim.fn.mkdir(home .. "/.vim/swap", "p")
+vim.fn.mkdir(home .. "/.vim/undo", "p")
 
-os.execute("mkdir -p /home/$USER/.vim/undo")
-vim.cmd("set undodir=/home/$USER/.vim/undo//")
-vim.cmd("set undofile")
-vim.cmd("set undolevels=1000")
-vim.cmd("set undoreload=10000")
+opt.backupdir = home .. "/.vim/backup//"
+opt.directory = home .. "/.vim/swap//"
+opt.undodir = home .. "/.vim/undo//"
+opt.undofile = true
+opt.undolevels = 1000
+opt.undoreload = 10000
 
 vim.keymap.set("n", "<ESC><ESC>", ":nohlsearch<CR>", { silent = true, desc = "Clear search" })
 vim.keymap.set("n", "<CR>", "i<CR><ESC>", { silent = true, desc = "New line in normal mode" })
@@ -75,7 +75,7 @@ vim.keymap.set("n", "<leader>n", ":exec &nu==&rnu? 'se nu!' : 'se rnu!'<CR>", { 
 -- opt.foldmethod = "expr"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldenable = false
-opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
 opt.foldcolumn = '1' -- '0' is not bad
 opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 opt.foldlevelstart = 99
