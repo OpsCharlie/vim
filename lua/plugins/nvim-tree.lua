@@ -5,7 +5,7 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
 
-    lazy = true,
+    event = "VeryLazy",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     config = function()
         local nvim_tree_api = require("nvim-tree.api")

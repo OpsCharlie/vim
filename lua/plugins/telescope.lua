@@ -9,7 +9,7 @@ return {
             module = "telescope._extensions.luasnip",
         },
     },
-    lazy = true,
+    event = "VeryLazy",
     cmd = "Telescope",
     keys = {
         { "<leader>gf", mode = "n", desc = "Grep Files Current Dir" },

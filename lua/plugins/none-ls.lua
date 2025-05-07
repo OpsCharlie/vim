@@ -13,7 +13,7 @@ return {
                 -- Python
                 -- null_ls.builtins.formatting.isort,
                 null_ls.builtins.diagnostics.pylint,
-                null_ls.builtins.diagnostics.golangci_lint,
+                null_ls.builtins.formatting.black,
 
                 -- Shell
                 -- null_ls.builtins.formatting.shellharden,
