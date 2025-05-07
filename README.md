@@ -55,12 +55,12 @@ ansible-language-server
 bash-debug-adapter
 bash-language-server
 beautysh
+black
 codelldb
 codespell
 debugpy
 djlint
 docker-compose-language-service
-flake8
 golangci-lint
 json-lsp
 lua-language-server
@@ -68,8 +68,8 @@ markdownlint
 php-debug-adapter
 powershell-editor-services
 prettier
-pylama
 pylint
+ruff
 shellcheck
 shfmt
 stylua
