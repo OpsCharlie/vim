@@ -5,6 +5,7 @@ return {
 			stages = "fade",
 			-- background_colour = "FloatShadow",
 			timeout = 3000,
+      merge_duplicates = true,
 		})
 		vim.notify = require("notify")
 	end,
