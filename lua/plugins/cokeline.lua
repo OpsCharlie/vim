@@ -55,7 +55,7 @@ return {
           text = " ",
         },
         {
-            text = "",
+            text = "X",
             delete_buffer_on_left_click = true,
         },
       },
