@@ -98,6 +98,7 @@ if vim.g.neovide == true then
   vim.api.nvim_set_keymap("n", "<C-+>", ":lua vim.g.neovide_transparency = math.min(vim.g.neovide_transparency + 0.05, 1.0)<CR>", { silent = true })
   vim.api.nvim_set_keymap("n", "<C-_>", ":lua vim.g.neovide_transparency = math.max(vim.g.neovide_transparency - 0.05, 0.0)<CR>", { silent = true })
 end
+
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -135,6 +136,108 @@ autocmd("FileType", {
   end,
 })
 
+autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+  callback = function(event)
+    vim.diagnostic.config({
+    virtual_lines = {
+      current_line = true
+    },
+    virtual_text = false,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        header = "",
+        border = "rounded",
+        source = true,
+        focusable = true,
+    },
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.INFO] = "󰋽 ",
+            [vim.diagnostic.severity.HINT] = "󰌶 ",
+        },
+    },
+})
+
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Document" })
+    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
+    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "LSP Code Format File" })
+    local diagnostic_float_autocmd_id = nil
+    vim.keymap.set("n", "<leader>D", function()
+      local state = vim.g._diagnostic_toggle_state or 1
+      -- 1: virtual lines, 2: float, 3: disabled
+      if state == 1 then
+        -- Show float for current line
+        diagnostic_float_autocmd_id = vim.api.nvim_create_autocmd(
+            { "CursorHold", "CursorHoldI" },
+            {
+              callback = function()
+                vim.diagnostic.open_float(nil, { focus = false, scope = "line"})
+              end,
+            }
+        )
+        vim.diagnostic.config({ virtual_lines = false})
+        vim.g._diagnostic_toggle_state = 2
+        vim.o.updatetime = 100
+        vim.notify("Diagnostic float enabled", vim.log.levels.INFO, { render = "minimal" })
+      elseif state == 2 then
+        -- Disable diagnostics
+        vim.diagnostic.config({ virtual_lines = false})
+        vim.g._diagnostic_toggle_state = 3
+        vim.api.nvim_del_autocmd(diagnostic_float_autocmd_id)
+        vim.notify("Diagnostic disabled", vim.log.levels.INFO, { render = "minimal" })
+      else
+        -- Enable virtual lines for current line
+        vim.diagnostic.config({ virtual_lines = { current_line = true }})
+        vim.g._diagnostic_toggle_state = 1
+        vim.notify("Diagnostic Virtual lines", vim.log.levels.INFO, { render = "minimal" })
+      end
+    end, { desc = "Toggle Diagnostic Display" })
+
+    local function client_supports_method(client, method, bufnr)
+      if vim.fn.has 'nvim-0.11' == 1 then
+        return client:supports_method(method, bufnr)
+      else
+        return client.supports_method(method, { bufnr = bufnr })
+      end
+    end
+
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+      local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
+
+      -- When cursor stops moving: Highlights all instances of the symbol under the cursor
+      -- When cursor moves: Clears the highlighting
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = event.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = event.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.clear_references,
+      })
+
+      -- When LSP detaches: Clears the highlighting
+      vim.api.nvim_create_autocmd('LspDetach', {
+        group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+        callback = function(event2)
+          vim.lsp.buf.clear_references()
+          vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
+        end,
+      })
+    end
+  end,
+
+})
 -------------------------------------- user commands ------------------------------------------
 local user_command = vim.api.nvim_create_user_command
 user_command("PrettyPrintJSON", "%!jq '.'", { desc = "PrettyPrintJSON" })
