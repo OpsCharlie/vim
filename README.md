@@ -3,7 +3,7 @@
 ## Dependencies
 
 ```bash
-sudo apt install curl git gcc jq python3-pip python3-venv ripgrep
+sudo apt install curl git gcc jq python3-pip python3-venv ripgrep fd-find
 ```
 
 ### python env
@@ -27,7 +27,7 @@ ln -s nvim-linux-x86_64.appimage nvim
 # https://github.com/nvm-sh/nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 source ~/.bashrc
-nvm install --lts
+nvm install --lts --default
 ```
 
 ### golang
@@ -66,7 +66,7 @@ json-lsp
 lua-language-server
 markdownlint
 php-debug-adapter
-powershell-editor-services
+powershell-editor-services (sudo snap install powershell)
 prettier
 pylint
 ruff
