@@ -11,26 +11,21 @@ return {
         null_ls.setup({
             sources = {
                 -- Python
-                -- null_ls.builtins.formatting.isort,
                 null_ls.builtins.diagnostics.pylint,
                 null_ls.builtins.formatting.black,
 
                 -- Shell
-                -- null_ls.builtins.formatting.shellharden,
-                -- null_ls.builtins.diagnostics.shellcheck,
-                -- null_ls.builtins.code_actions.shellcheck,
                 null_ls.builtins.formatting.shfmt,
 
                 -- JS yaml html markdown
                 null_ls.builtins.formatting.prettier,
-                -- null_ls.builtins.diagnostics.yamllint,
                 null_ls.builtins.diagnostics.markdownlint.with({
                   extra_args = { "-c", "~/.config/markdownlint.yaml" },
                 }),
-                -- null_ls.builtins.formatting.jq,
 
                 -- Go
                 null_ls.builtins.diagnostics.golangci_lint,
+                null_ls.builtins.diagnostics.djlint,
                 null_ls.builtins.formatting.gofmt,
 
                 -- Lua
@@ -38,7 +33,7 @@ return {
 
                 -- Spelling
                 null_ls.builtins.completion.spell,
-                null_ls.builtins.formatting.codespell,
+                -- null_ls.builtins.formatting.codespell,
                 null_ls.builtins.diagnostics.codespell.with({
                     args = { "--builtin", "clear,rare,code", "-" },
                 }),
