@@ -16,6 +16,7 @@ echo '[ -f ~/venv/3.12.3/bin/activate ] && source ~/venv/3.12.3/bin/activate' >>
 ### neovim
 
 ```bash
+# This is done via the __deploy.sh script
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
 chmod +x nvim-linux-x86_64.appimage
 ln -s nvim-linux-x86_64.appimage nvim
@@ -35,17 +36,13 @@ nvm install --lts --default
 ```bash
 # install go
 sudo apt install golang
-
 # set go bin in path in .bashrc or .zshrc
 if [ -d "$HOME/go/bin/" ]; then
     PATH="$HOME/go/bin/:$PATH"
 fi
 
-# install delve
-go install github.com/go-delve/delve/cmd/dlv@latest
-
-# install golangci-lint
-curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.64.7
+# or install go via snap
+sudo snap install go --classic
 ```
 
 ## Mason
@@ -54,24 +51,27 @@ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install
 ansible-language-server
 bash-debug-adapter
 bash-language-server
-beautysh
 black
-codelldb
 codespell
 debugpy
+delve
 djlint
 docker-compose-language-service
 golangci-lint
+gopls
+grammarly-languageserver
+jq-lsp
 json-lsp
 lua-language-server
 markdownlint
 php-debug-adapter
 powershell-editor-services (sudo snap install powershell)
 prettier
-pylint
+pyright
 ruff
 shellcheck
 shfmt
 stylua
+systemd-language-server
 systemdlint
 ```
