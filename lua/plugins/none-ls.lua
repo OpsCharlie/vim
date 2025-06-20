@@ -28,8 +28,8 @@ return {
                 null_ls.builtins.diagnostics.djlint,
                 null_ls.builtins.formatting.gofmt,
 
-                -- Lua
-                null_ls.builtins.formatting.stylua,
+        -- Lua
+        -- null_ls.builtins.formatting.stylua,
 
                 -- Spelling
                 null_ls.builtins.completion.spell,
