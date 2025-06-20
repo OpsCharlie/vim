@@ -71,7 +71,6 @@ pyright
 ruff
 shellcheck
 shfmt
-stylua
 systemd-language-server
 systemdlint
 ```
