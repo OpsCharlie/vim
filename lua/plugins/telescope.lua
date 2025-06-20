@@ -1,6 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  -- a highly extendable fuzzy finder over lists
+  -- A highly extendable fuzzy finder over lists
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-ui-select.nvim",

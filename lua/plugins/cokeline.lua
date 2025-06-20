@@ -34,14 +34,14 @@ return {
           end,
         },
         {
-            text = function(buffer)
-                local diagnostics = vim.diagnostic.get(buffer.number)
-                local errors = #vim.tbl_filter(function(d)
-                    return d.severity == vim.diagnostic.severity.ERROR
-                end, diagnostics)
-                return errors > 0 and "  " .. errors .. " " or ""
-            end,
-            fg = "#ff0000",
+          text = function(buffer)
+            local diagnostics = vim.diagnostic.get(buffer.number)
+            local errors = #vim.tbl_filter(function(d)
+              return d.severity == vim.diagnostic.severity.ERROR
+            end, diagnostics)
+            return errors > 0 and "  " .. errors .. " " or ""
+          end,
+          fg = "#ff0000",
         },
         {
           text = function(buffer)
@@ -55,8 +55,8 @@ return {
           text = " ",
         },
         {
-            text = "X",
-            delete_buffer_on_left_click = true,
+          text = "X",
+          delete_buffer_on_left_click = true,
         },
       },
     })

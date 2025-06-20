@@ -16,9 +16,9 @@ return {
             function()
               local bg = "#404040" -- not modified
               if vim.bo.modified then
-                bg = "#B22222" -- unsaved
+                bg = "#B22222"     -- unsaved
               elseif vim.bo.readonly then
-                bg = "#b26a22" -- readonly
+                bg = "#b26a22"     -- readonly
               end
               vim.cmd("hi! lualine_filename_status guibg=" .. bg)
               return vim.fn.expand("%:p")
@@ -28,7 +28,7 @@ return {
           },
         },
       },
-    extensions = { "nvim-tree", "quickfix", "nvim-dap-ui", "toggleterm" },
+      extensions = { "nvim-tree", "quickfix", "nvim-dap-ui", "toggleterm" },
     })
   end,
 }

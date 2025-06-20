@@ -1,6 +1,7 @@
 return {
   {
     "github/copilot.vim",
+    -- GitHub Copilot for Vim
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     config = function()
@@ -13,6 +14,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    -- Brings GitHub Copilot Chat capabilities directly into your editor
     dependencies = {
       { "github/copilot.vim" },
       { "nvim-lua/plenary.nvim" },
@@ -20,7 +22,7 @@ return {
     },
     build = "make tiktoken",
     keys = {
-      { "<leader>cc", ":CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" }
+      { "<leader>cc", ":CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" },
     },
     opts = {
       -- See Configuration section for options

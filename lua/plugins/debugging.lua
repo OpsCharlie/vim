@@ -1,5 +1,5 @@
--- Docs at https://github.com/mfussenegger/nvim-dap-python are useful.
 return {
+  -- Debugging setup using nvim-dap and nvim-dap-ui
   {
     "mfussenegger/nvim-dap",
     lazy = true,
@@ -31,7 +31,8 @@ return {
       },
     },
     config = function()
-      vim.fn.sign_define("DapBreakpoint", {text = "⏺", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl="DapBreakpoint"})
+      vim.fn.sign_define("DapBreakpoint",
+        { text = "⏺", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
     end,
   },
   {
@@ -81,6 +82,7 @@ return {
       },
       {
         "mfussenegger/nvim-dap-python",
+        -- Docs at https://github.com/mfussenegger/nvim-dap-python are useful.
         lazy = true,
         config = function()
           local python = vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
@@ -105,80 +107,3 @@ return {
     },
   },
 }
--- return {
---   {
---     "mfussenegger/nvim-dap",
---     lazy = true,
---     dependencies = {
---       "rcarriga/nvim-dap-ui",
---       "leoluz/nvim-dap-go",
---       "nvim-neotest/nvim-nio"
---     },
---     keys = {
---       {
---         "<leader>db",
---         function() require("dap").toggle_breakpoint() end,
---         desc = "Toggle Breakpoint"
---       },
---
---       {
---         "<leader>dc",
---         function() require("dap").continue() end,
---         desc = "Continue"
---       },
---
---       {
---         "<leader>dC",
---         function() require("dap").run_to_cursor() end,
---         desc = "Run to Cursor"
---       },
---
---       {
---         "<leader>dT",
---         function() require("dap").terminate() end,
---         desc = "Terminate"
---       },
---     },
---   },
---   config = function()
---     local dap, dapui = require("dap"), require("dapui")
---
---     require("dapui").setup()
---     require("dap-go").setup()
---
---
---     dap.listeners.before.attach.dapui_config = function()
---       dapui.open()
---     end
---     dap.listeners.before.launch.dapui_config = function()
---       dapui.open()
---     end
---     dap.listeners.before.event_terminated.dapui_config = function()
---       dapui.close()
---     end
---     dap.listeners.before.event_exited.dapui_config = function()
---       dapui.close()
---     end
---
---     -- vim.keymap.set("n", "<Leader>dt", ":DapUiToggle<CR>", { desc = "Dap Toggle UI" })
---     -- vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Dap Toggle Breakpoint" })
---     -- vim.keymap.set("n", "<Leader>di", dap.continue, { desc = "Dap Step Into" })
---     -- vim.keymap.set("n", "<Leader>dc", dap.continue, { desc = "Dap Continue" })
---     -- vim.keymap.set("n", "<Leader>dr", ":lua require('dapui').open({reset = true})<CR>", { desc = "Dap Restart" })
---
---     vim.fn.sign_define("DapBreakpoint", {text = "⏺", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl="DapBreakpoint"})
---   end,
--- },
---   {
---     "mfussenegger/nvim-dap-python",
---     ft = "python",
---     dependencies = {
---       "mfussenegger/nvim-dap",
---     },
---     config = function(_, opts)
---       local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python3"
---       require("dap-python").setup(path)
---       -- require("core.utils").load_mappings("dap_python")
---     end,
---   },
--- }

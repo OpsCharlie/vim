@@ -1,12 +1,5 @@
 return {
-  -- {
-  --   "qualiabyte/vim-colorstepper",
-  --   lazy = false,
-  --   config = function()
-  --     vim.keymap.set("n", "<F6>", "<cmd>call StepColorPrev()<cr>")
-  --     vim.keymap.set("n", "<F7>", "<cmd>call StepColorNext()<cr>")
-  --   end,
-  -- },
+  -- Use `:Telescope colorscheme` to preview colorschemes
   {
     "catppuccin/nvim",
     lazy = false,
@@ -40,8 +33,8 @@ return {
       require("bamboo").setup({
         style = "vulgaris",
         colors = {
-          bg0 = "#151515"
-        }
+          bg0 = "#151515",
+        },
       })
       vim.cmd.colorscheme("bamboo")
     end,

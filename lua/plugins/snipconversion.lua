@@ -1,7 +1,7 @@
--- This converts UltiSnips to luasnips.
--- Used for ansible snippets from https://github.com/pearofducks/ansible-vim
 return {
   "smjonas/snippet-converter.nvim",
+  -- This converts UltiSnips to luasnips.
+  -- Used for ansible snippets from https://github.com/pearofducks/ansible-vim
   lazy = true,
   cmd = { "ConvertSnippets" },
   config = function()
