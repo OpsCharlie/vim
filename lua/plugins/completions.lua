@@ -8,9 +8,12 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-nvim-lua",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      "hrsh7th/cmp-emoji",
     },
     config = function()
       local cmp = require("cmp")
@@ -38,16 +41,20 @@ return {
             behavior = cmp.ConfirmBehavior.Insert,
             select = false,
           }),
-          ["<S-Tab>"] = function(fallback)
+          ["<Tab>"] = function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item()
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
             else
               fallback()
             end
           end,
-          ["<Tab>"] = function(fallback)
+          ["<S-Tab>"] = function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
@@ -56,11 +63,14 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
         },
         sources = {
-          { name = "nvim_lsp" },
-          { name = "luasnip", priority = 10 }, -- For luasnip users.
+          { name = "nvim_lsp",                priority = 100 },
+          { name = "luasnip",                 priority = 90 }, -- For luasnip users.
+          { name = "nvim_lsp_signature_help", priority = 85 },
           {
             name = "buffer",
+            priority = 80,
             option = {
+              -- Returns a list of buffer numbers that are currently visible in open windows.
               get_bufnrs = function()
                 local bufs = {}
                 for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -70,8 +80,9 @@ return {
               end,
             },
           },
-          { name = "nvim_lua" },
-          { name = "path" },
+          { name = "nvim_lua", priority = 70 },
+          { name = "path",     priority = 60 },
+          { name = "emoji",  priority = 20 },
         },
       })
     end,
