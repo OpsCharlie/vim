@@ -3,6 +3,8 @@ return {
   -- A File Explorer For Neovim
   dependencies = {
     "nvim-tree/nvim-web-devicons",
+    -- Provides Nerd Font 1 icons (glyphs) for use by Neovim plugins
+    -- https://www.nerdfonts.com/font-downloads
   },
 
   event = "VeryLazy",
