@@ -3,7 +3,7 @@ return {
     "mason-org/mason.nvim",
     -- Neovim package manager for LSP servers, DAP servers, linters, and formatters.
     lazy = true,
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    cmd = { "Mason", "MasonInstall", "MasonUpdate" },
     opts = {},
   },
   {
