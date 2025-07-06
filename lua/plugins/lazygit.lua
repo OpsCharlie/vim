@@ -2,6 +2,13 @@ return {
   "kdheepak/lazygit.nvim",
   -- Plugin for calling lazygit from within neovim.
   lazy = true,
+  cmd = {
+    "LazyGit",
+    "LazyGitConfig",
+    "LazyGitCurrentFile",
+    "LazyGitFilter",
+    "LazyGitFilterCurrentFile",
+  },
   keys = {
     { "<leader>lg", ":LazyGit<CR>", desc = "LazyGit" },
   },
