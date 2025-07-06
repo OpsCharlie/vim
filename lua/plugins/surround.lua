@@ -1,5 +1,5 @@
 return {
-  "echanovski/mini.surround",
+  "echasnovski/mini.surround",
   -- Fast and feature-rich surrounding.
   version = '*',
   lazy = true,
