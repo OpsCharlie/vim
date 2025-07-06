@@ -5,4 +5,12 @@ return {
   keys = {
     { "<leader>lg", ":LazyGit<CR>", desc = "LazyGit" },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("TermOpen", {
+      pattern = "term://*lazygit*",
+      callback = function(args)
+        vim.api.nvim_buf_set_keymap(args.buf, "t", "<esc>", "<esc>", { noremap = true, silent = true })
+      end,
+    })
+  end,
 }
