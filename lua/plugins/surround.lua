@@ -16,5 +16,6 @@ return {
     },
     search_method = "cover",
     n_lines = 20,
+    highlight_duration = 2000,
   },
 }
