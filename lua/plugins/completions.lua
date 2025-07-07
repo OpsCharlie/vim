@@ -63,12 +63,12 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
         },
         sources = {
-          { name = "nvim_lsp",                priority = 100 },
-          { name = "luasnip",                 priority = 90 }, -- For luasnip users.
-          { name = "nvim_lsp_signature_help", priority = 85 },
+          { name = "luasnip",                 priority = 100 }, -- For luasnip users.
+          { name = "nvim_lsp",                priority = 90 },
+          { name = "nvim_lsp_signature_help", priority = 80 },
           {
             name = "buffer",
-            priority = 80,
+            priority = 95,
             option = {
               -- Returns a list of buffer numbers that are currently visible in open windows.
               get_bufnrs = function()
