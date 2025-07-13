@@ -111,6 +111,16 @@ autocmd("FileType", {
   end,
 })
 
+-- open nvim-tree on startup if no files are opened
+autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      require('nvim-tree.api').tree.open()
+    end
+  end,
+})
+
+-- set filetype for specific file patterns
 autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*/ansible/*.yml", "*/ansible/hosts" },
   command = "set filetype=yaml.ansible",
