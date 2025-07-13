@@ -90,6 +90,11 @@ return {
       function() require("telescope.builtin").marks() end,
       mode = "n",
       desc = "List marks",
+    },
+    {
+      "<leader>/",
+      function() require("telescope.builtin").current_buffer_fuzzy_find() end,
+      desc = "Search current buffer",
     }
   },
   config = function()
