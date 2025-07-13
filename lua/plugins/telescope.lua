@@ -14,13 +14,83 @@ return {
   event = "VeryLazy",
   cmd = "Telescope",
   keys = {
-    { "<C-S-p>",    mode = "n", desc = "Find Files Current Dir" },
-    { "<leader>ff", mode = "n", desc = "Find files" },
-    { "<C-p>",      mode = "n", desc = "Find Git files" },
-    { "<leader>fg", mode = "n", desc = "Find Git files" },
-    { "<leader>fb", mode = "n", desc = "Find buffers" },
-    { "<leader>gf", mode = "n", desc = "Grep Files Current Dir" },
-    { "<leader>gg", mode = "n", desc = "Grep Git Repo" },
+    {
+      "<C-S-p>",
+      function() require("telescope.builtin").find_files() end,
+      mode = "n",
+      desc = "Find files",
+    },
+    {
+      "<leader>ff",
+      function() require("telescope.builtin").find_files() end,
+      mode = "n",
+      desc = "Find files",
+    },
+    {
+      "<C-p>",
+      function() require("telescope.builtin").git_files() end,
+      mode = "n",
+      desc = "Find git files",
+    },
+    {
+      "<leader>fg",
+      function() require("telescope.builtin").git_files() end,
+      mode = "n",
+      desc = "Find git files",
+    },
+    {
+      "<leader>fb",
+      function() require("telescope.builtin").buffers() end,
+      mode = "n",
+      desc = "Find buffers",
+    },
+    {
+      "<leader>gf",
+      function() require("telescope.builtin").live_grep() end,
+      mode = "n",
+      desc = "Grep Files Current Dir",
+    },
+    {
+      "<leader>gg",
+      function()
+        local ok, gg = pcall(require, "git_grep")
+        if ok then
+          gg.live_grep()
+        else
+          vim.notify("git_grep extension not available", vim.log.levels.ERROR)
+        end
+      end,
+      mode = "n",
+      desc = "Grep Git repo",
+    },
+    {
+      "<leader>lr",
+      function() require("telescope.builtin").lsp_references() end,
+      desc = "LSP References",
+    },
+    {
+      "<leader>ld",
+      function() require("telescope.builtin").lsp_definitions() end,
+      desc = "LSP Definitions",
+    },
+    {
+      "<leader>fd",
+      function() require("telescope.builtin").diagnostics() end,
+      mode = "n",
+      desc = "File Diagnostics",
+    },
+    {
+      "<leader>ls",
+      function() require("telescope.builtin").lsp_document_symbols() end,
+      mode = "n",
+      desc = "List document Symbols",
+    },
+    {
+      "<leader>lm",
+      function() require("telescope.builtin").marks() end,
+      mode = "n",
+      desc = "List marks",
+    }
   },
   config = function()
     require("telescope").setup({
@@ -42,13 +112,5 @@ return {
     require("telescope").load_extension("fzy_native")
     require("telescope").load_extension("git_grep")
     require("telescope").load_extension("lsp_handlers")
-
-    vim.keymap.set("n", "<C-S-p>", builtin.find_files, { desc = "Find files" })
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
-    vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Find git files" })
-    vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Find git files" })
-    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
-    vim.keymap.set("n", "<leader>gf", builtin.live_grep, { desc = "Grep Files Current Dir" })
-    vim.keymap.set('n', '<leader>gg', function() require('git_grep').live_grep() end, { desc = "Grep Git repo" })
   end,
 }
