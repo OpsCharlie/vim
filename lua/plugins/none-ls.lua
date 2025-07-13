@@ -8,14 +8,17 @@ return {
   -- },
   config = function()
     local null_ls = require("null-ls")
+    local formatting = null_ls.builtins.formatting
+    local diagnostics = null_ls.builtins.diagnostics
+    local completion = null_ls.builtins.completion
     null_ls.setup({
       sources = {
         -- Python
-        null_ls.builtins.diagnostics.pylint,
-        null_ls.builtins.formatting.black,
+        diagnostics.pylint,
+        formatting.black,
 
         -- Shell
-        null_ls.builtins.formatting.shfmt,
+        formatting.shfmt,
 
         -- JS yaml html markdown
         null_ls.builtins.formatting.prettier,
@@ -24,17 +27,21 @@ return {
         }),
 
         -- Go
-        null_ls.builtins.diagnostics.golangci_lint,
-        null_ls.builtins.diagnostics.djlint,
-        null_ls.builtins.formatting.gofmt,
+        diagnostics.golangci_lint.with({
+          command = "golangci-lint",
+          args = { "run", "--out-format", "json", "--path-prefix", "$ROOT" },
+          timeout = 5000,
+        }),
+        diagnostics.djlint,
+        formatting.gofmt,
 
         -- Lua
-        -- null_ls.builtins.formatting.stylua,
+        -- formatting.stylua,
 
         -- Spelling
-        null_ls.builtins.completion.spell,
+        completion.spell,
         -- null_ls.builtins.formatting.codespell,
-        null_ls.builtins.diagnostics.codespell.with({
+        diagnostics.codespell.with({
           args = { "--builtin", "clear,rare,code", "-" },
         }),
       },
