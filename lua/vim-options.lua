@@ -100,17 +100,54 @@ end
 
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
+local function augroup(name)
+	return vim.api.nvim_create_augroup(name, { clear = true })
+end
 
 -- don't list quickfix buffers
 autocmd("FileType", {
+	group = augroup('quickfix'),
   pattern = "qf",
   callback = function()
     vim.opt_local.buflisted = false
   end,
 })
 
+
+-- disable swap/undo/backup files in temp directories or shm
+autocmd({ 'BufNewFile', 'BufReadPre' }, {
+	group = augroup('disable_undo_swap_backup'),
+	pattern = { '/tmp/*', '*.tmp', 'COMMIT_EDITMSG', 'MERGE_MSG' },
+	callback = function()
+		vim.opt_local.undofile = false
+		vim.opt_local.swapfile = false
+		vim.opt_global.backup = false
+		vim.opt_global.writebackup = false
+	end,
+})
+
+-- disable swap/undo/backup files for large files
+autocmd({ "BufReadPre" }, {
+  group = augroup('large_file_group'),
+  callback = function()
+    local max_size = 1024 * 1024 * 100  -- 100 MB in bytes
+    local file = vim.fn.expand("<afile>")
+    local size = vim.fn.getfsize(file)
+    if size > max_size then
+      vim.opt_local.swapfile = false
+      vim.opt_local.undofile = false
+      vim.opt_local.backup = false
+      vim.opt_local.writebackup = false
+      vim.cmd("syntax off")
+      vim.bo.filetype = ""
+    end
+  end,
+})
+
+
 -- open nvim-tree on startup if no files are opened
 autocmd("VimEnter", {
+	group = augroup('open_nvim_tree'),
   callback = function()
     if vim.fn.argc() == 0 then
       require('nvim-tree.api').tree.open()
@@ -120,11 +157,13 @@ autocmd("VimEnter", {
 
 -- set filetype for specific file patterns
 autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup('set_filetype'),
   pattern = { "*/ansible/*.yml", "*/ansible/hosts" },
   command = "set filetype=yaml.ansible",
 })
 
 autocmd("FileType", {
+  group = augroup('yaml_ansible_filetype'),
   pattern = "yaml.ansible",
   callback = function()
     vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
@@ -136,6 +175,7 @@ autocmd("FileType", {
 })
 
 autocmd("FileType", {
+  group = augroup('go_filetype'),
   pattern = "go",
   callback = function()
     vim.opt_local.expandtab = false
@@ -146,7 +186,7 @@ autocmd("FileType", {
 })
 
 autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+  group = augroup('lsp_attach'),
   callback = function(event)
     vim.diagnostic.config({
     virtual_lines = {
@@ -178,19 +218,17 @@ autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
     vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "LSP Code Format File" })
-    local diagnostic_float_autocmd_id = nil
     vim.keymap.set("n", "<leader>D", function()
       local state = vim.g._diagnostic_toggle_state or 1
       -- 1: virtual lines, 2: float, 3: disabled
       if state == 1 then
         -- Show float for current line
-        diagnostic_float_autocmd_id = vim.api.nvim_create_autocmd(
-            { "CursorHold", "CursorHoldI" },
-            {
-              callback = function()
-                vim.diagnostic.open_float(nil, { focus = false, scope = "line"})
-              end,
-            }
+        autocmd( { "CursorHold", "CursorHoldI" }, {
+          group = augroup('diagnostic_float'),
+          callback = function()
+            vim.diagnostic.open_float(nil, { focus = false, scope = "line"})
+          end,
+          }
         )
         vim.diagnostic.config({ virtual_lines = false})
         vim.g._diagnostic_toggle_state = 2
@@ -200,7 +238,7 @@ autocmd("LspAttach", {
         -- Disable diagnostics
         vim.diagnostic.config({ virtual_lines = false})
         vim.g._diagnostic_toggle_state = 3
-        vim.api.nvim_del_autocmd(diagnostic_float_autocmd_id)
+        vim.api.nvim_clear_autocmd({ group = 'diagnostic_float'})
         vim.notify("Diagnostic disabled", vim.log.levels.INFO, { render = "minimal" })
       else
         -- Enable virtual lines for current line
@@ -224,20 +262,20 @@ autocmd("LspAttach", {
 
       -- When cursor stops moving: Highlights all instances of the symbol under the cursor
       -- When cursor moves: Clears the highlighting
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = event.buf,
         group = highlight_augroup,
         callback = vim.lsp.buf.document_highlight,
       })
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+      autocmd({ 'CursorMoved', 'CursorMovedI' }, {
         buffer = event.buf,
         group = highlight_augroup,
         callback = vim.lsp.buf.clear_references,
       })
 
       -- When LSP detaches: Clears the highlighting
-      vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+      autocmd('LspDetach', {
+        group = augroup('lsp-detach'),
         callback = function(event2)
           vim.lsp.buf.clear_references()
           vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
@@ -245,7 +283,28 @@ autocmd("LspAttach", {
       })
     end
   end,
+})
 
+
+-- Go to last loc when opening a buffer, see ':h last-position-jump'
+autocmd('BufReadPost', {
+	group = augroup('last_loc'),
+	callback = function(event)
+		local exclude = { 'gitcommit', 'commit', 'gitrebase' }
+		local buf = event.buf
+		if
+			vim.tbl_contains(exclude, vim.bo[buf].filetype)
+			or vim.b[buf].lazyvim_last_loc
+		then
+			return
+		end
+		vim.b[buf].lazyvim_last_loc = true
+		local mark = vim.api.nvim_buf_get_mark(buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
 })
 -------------------------------------- user commands ------------------------------------------
 local user_command = vim.api.nvim_create_user_command
