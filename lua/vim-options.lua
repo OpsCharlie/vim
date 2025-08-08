@@ -100,6 +100,11 @@ if vim.g.neovide == true then
   -- vim.api.nvim_set_keymap("n", "<C-_>", ":lua vim.g.neovide_transparency = math.max(vim.g.neovide_transparency - 0.05, 0.0)<CR>", { silent = true })
 end
 
+
+-- Set max size before bigfiles options are applied in MB
+vim.g.bigfile_size_limit = 50
+
+
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 local function augroup(name)
@@ -125,24 +130,7 @@ autocmd({ 'BufNewFile', 'BufReadPre' }, {
     vim.opt_local.swapfile = false
     vim.opt_global.backup = false
     vim.opt_global.writebackup = false
-  end,
-})
-
--- disable swap/undo/backup files for large files
-autocmd({ "BufReadPre" }, {
-  group = augroup('large_file_group'),
-  callback = function()
-    local max_size = 1024 * 1024 * 100 -- 100 MB in bytes
-    local file = vim.fn.expand("<afile>")
-    local size = vim.fn.getfsize(file)
-    if size > max_size then
-      vim.opt_local.swapfile = false
-      vim.opt_local.undofile = false
-      vim.opt_local.backup = false
-      vim.opt_local.writebackup = false
-      vim.cmd("syntax off")
-      vim.bo.filetype = ""
-    end
+    vim.notify("Swap and undo disabled", vim.log.levels.INFO, { title = "Temp File" })
   end,
 })
 

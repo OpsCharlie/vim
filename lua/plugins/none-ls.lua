@@ -3,48 +3,54 @@ return {
   -- Bridge that gap and simplify the process of creating, sharing, and setting up LSP sources
   lazy = true,
   event = { "BufReadPost", "BufNewFile" },
-  -- keys = {
-  --   { "<leader>ff", mode = "n", desc = "LSP Format File" },
-  -- },
   config = function()
+    local max_size = vim.g.bigfile_size_limit * 1024 * 1024 -- Convert MB to bytes
+    local file = vim.fn.expand("%:p")
+    local size = vim.fn.getfsize(file)
+
     local null_ls = require("null-ls")
     local formatting = null_ls.builtins.formatting
     local diagnostics = null_ls.builtins.diagnostics
     local completion = null_ls.builtins.completion
+
+    -- Default sources
+    local sources = {
+      -- Python
+      diagnostics.pylint,
+      formatting.black,
+
+      -- Shell
+      formatting.shfmt,
+
+      -- JS, YAML, HTML, Markdown
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.diagnostics.markdownlint.with({
+        extra_args = { "-c", "~/.config/markdownlint.yaml" },
+      }),
+
+      -- Go
+      diagnostics.golangci_lint.with({
+        command = "golangci-lint",
+        args = { "run", "--out-format", "json", "--path-prefix", "$ROOT" },
+        timeout = 5000,
+      }),
+      diagnostics.djlint,
+      formatting.gofmt,
+
+      -- Spelling
+      completion.spell,
+      diagnostics.codespell.with({
+        args = { "--builtin", "clear,rare,code", "-" },
+      }),
+    }
+
+    if size > max_size then
+      sources = {} -- Disable all null-ls sources
+    end
+
     null_ls.setup({
-      sources = {
-        -- Python
-        diagnostics.pylint,
-        formatting.black,
-
-        -- Shell
-        formatting.shfmt,
-
-        -- JS yaml html markdown
-        null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.markdownlint.with({
-          extra_args = { "-c", "~/.config/markdownlint.yaml" },
-        }),
-
-        -- Go
-        diagnostics.golangci_lint.with({
-          command = "golangci-lint",
-          args = { "run", "--out-format", "json", "--path-prefix", "$ROOT" },
-          timeout = 5000,
-        }),
-        diagnostics.djlint,
-        formatting.gofmt,
-
-        -- Lua
-        -- formatting.stylua,
-
-        -- Spelling
-        completion.spell,
-        -- null_ls.builtins.formatting.codespell,
-        diagnostics.codespell.with({
-          args = { "--builtin", "clear,rare,code", "-" },
-        }),
-      },
+      sources = sources,
     })
   end,
 }
+
