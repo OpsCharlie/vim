@@ -77,7 +77,7 @@ vim.keymap.set("n", "<leader>n", ":exec &nu==&rnu? 'se nu!' : 'se rnu!'<CR>", { 
 -- opt.foldenable = false
 opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
 opt.foldcolumn = '1' -- '0' is not bad
-opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 opt.foldlevelstart = 99
 opt.foldenable = true
 
@@ -88,10 +88,12 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Neovide scaling
 if vim.g.neovide == true then
-  vim.api.nvim_set_keymap("n", "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>",
+    { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>",
+    { silent = true })
   vim.api.nvim_set_keymap("n", "<C-=>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
---   vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
+  --   vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
   -- vim.api.nvim_set_keymap("n", "<C-=>", ":lua vim.g.neovide_scale_factor = math.min(vim.g.neovide_scale_factor + 0.1,  1.0)<CR>", { silent = true })
   -- vim.api.nvim_set_keymap("n", "<C-->", ":lua vim.g.neovide_scale_factor = math.max(vim.g.neovide_scale_factor - 0.1,  0.1)<CR>", { silent = true })
   -- vim.api.nvim_set_keymap("n", "<C-+>", ":lua vim.g.neovide_transparency = math.min(vim.g.neovide_transparency + 0.05, 1.0)<CR>", { silent = true })
@@ -101,12 +103,12 @@ end
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 local function augroup(name)
-	return vim.api.nvim_create_augroup(name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 -- don't list quickfix buffers
 autocmd("FileType", {
-	group = augroup('quickfix'),
+  group = augroup('quickfix'),
   pattern = "qf",
   callback = function()
     vim.opt_local.buflisted = false
@@ -116,21 +118,21 @@ autocmd("FileType", {
 
 -- disable swap/undo/backup files in temp directories or shm
 autocmd({ 'BufNewFile', 'BufReadPre' }, {
-	group = augroup('disable_undo_swap_backup'),
-	pattern = { '/tmp/*', '*.tmp', 'COMMIT_EDITMSG', 'MERGE_MSG' },
-	callback = function()
-		vim.opt_local.undofile = false
-		vim.opt_local.swapfile = false
-		vim.opt_global.backup = false
-		vim.opt_global.writebackup = false
-	end,
+  group = augroup('disable_undo_swap_backup'),
+  pattern = { '/tmp/*', '*.tmp', 'COMMIT_EDITMSG', 'MERGE_MSG' },
+  callback = function()
+    vim.opt_local.undofile = false
+    vim.opt_local.swapfile = false
+    vim.opt_global.backup = false
+    vim.opt_global.writebackup = false
+  end,
 })
 
 -- disable swap/undo/backup files for large files
 autocmd({ "BufReadPre" }, {
   group = augroup('large_file_group'),
   callback = function()
-    local max_size = 1024 * 1024 * 100  -- 100 MB in bytes
+    local max_size = 1024 * 1024 * 100 -- 100 MB in bytes
     local file = vim.fn.expand("<afile>")
     local size = vim.fn.getfsize(file)
     if size > max_size then
@@ -147,7 +149,7 @@ autocmd({ "BufReadPre" }, {
 
 -- open nvim-tree on startup if no files are opened
 autocmd("VimEnter", {
-	group = augroup('open_nvim_tree'),
+  group = augroup('open_nvim_tree'),
   callback = function()
     if vim.fn.argc() == 0 then
       require('nvim-tree.api').tree.open()
@@ -162,17 +164,6 @@ autocmd({ "BufRead", "BufNewFile" }, {
   command = "set filetype=yaml.ansible",
 })
 
-autocmd("FileType", {
-  group = augroup('yaml_ansible_filetype'),
-  pattern = "yaml.ansible",
-  callback = function()
-    vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { silent = true })
-    vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { silent = true })
-    vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>a", "wbiansible.builtin.<ESC>", { silent = true })
-    vim.opt.colorcolumn = "160"
-  end,
-})
 
 autocmd("FileType", {
   group = augroup('go_filetype'),
@@ -189,28 +180,28 @@ autocmd("LspAttach", {
   group = augroup('lsp_attach'),
   callback = function(event)
     vim.diagnostic.config({
-    virtual_lines = {
-      current_line = true
-    },
-    virtual_text = false,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
+      virtual_lines = {
+        current_line = true
+      },
+      virtual_text = false,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+      float = {
         header = "",
         border = "rounded",
         source = true,
         focusable = true,
-    },
-    signs = {
+      },
+      signs = {
         text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.INFO] = "󰋽 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
+          [vim.diagnostic.severity.ERROR] = "󰅚 ",
+          [vim.diagnostic.severity.WARN] = "󰀪 ",
+          [vim.diagnostic.severity.INFO] = "󰋽 ",
+          [vim.diagnostic.severity.HINT] = "󰌶 ",
         },
-    },
-})
+      },
+    })
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Document" })
     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
@@ -223,26 +214,26 @@ autocmd("LspAttach", {
       -- 1: virtual lines, 2: float, 3: disabled
       if state == 1 then
         -- Show float for current line
-        autocmd( { "CursorHold", "CursorHoldI" }, {
+        autocmd({ "CursorHold", "CursorHoldI" }, {
           group = augroup('diagnostic_float'),
           callback = function()
-            vim.diagnostic.open_float(nil, { focus = false, scope = "line"})
+            vim.diagnostic.open_float(nil, { focus = false, scope = "line" })
           end,
-          }
+        }
         )
-        vim.diagnostic.config({ virtual_lines = false})
+        vim.diagnostic.config({ virtual_lines = false })
         vim.g._diagnostic_toggle_state = 2
         vim.o.updatetime = 100
         vim.notify("Diagnostic float enabled", vim.log.levels.INFO, { render = "minimal" })
       elseif state == 2 then
         -- Disable diagnostics
-        vim.diagnostic.config({ virtual_lines = false})
+        vim.diagnostic.config({ virtual_lines = false })
         vim.g._diagnostic_toggle_state = 3
-        vim.api.nvim_clear_autocmd({ group = 'diagnostic_float'})
+        vim.api.nvim_clear_autocmd({ group = 'diagnostic_float' })
         vim.notify("Diagnostic disabled", vim.log.levels.INFO, { render = "minimal" })
       else
         -- Enable virtual lines for current line
-        vim.diagnostic.config({ virtual_lines = { current_line = true }})
+        vim.diagnostic.config({ virtual_lines = { current_line = true } })
         vim.g._diagnostic_toggle_state = 1
         vim.notify("Diagnostic Virtual lines", vim.log.levels.INFO, { render = "minimal" })
       end
@@ -288,23 +279,23 @@ autocmd("LspAttach", {
 
 -- Go to last loc when opening a buffer, see ':h last-position-jump'
 autocmd('BufReadPost', {
-	group = augroup('last_loc'),
-	callback = function(event)
-		local exclude = { 'gitcommit', 'commit', 'gitrebase' }
-		local buf = event.buf
-		if
-			vim.tbl_contains(exclude, vim.bo[buf].filetype)
-			or vim.b[buf].lazyvim_last_loc
-		then
-			return
-		end
-		vim.b[buf].lazyvim_last_loc = true
-		local mark = vim.api.nvim_buf_get_mark(buf, '"')
-		local lcount = vim.api.nvim_buf_line_count(buf)
-		if mark[1] > 0 and mark[1] <= lcount then
-			pcall(vim.api.nvim_win_set_cursor, 0, mark)
-		end
-	end,
+  group = augroup('last_loc'),
+  callback = function(event)
+    local exclude = { 'gitcommit', 'commit', 'gitrebase' }
+    local buf = event.buf
+    if
+        vim.tbl_contains(exclude, vim.bo[buf].filetype)
+        or vim.b[buf].lazyvim_last_loc
+    then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
 })
 -------------------------------------- user commands ------------------------------------------
 local user_command = vim.api.nvim_create_user_command
@@ -313,3 +304,4 @@ user_command("PrettyPrintAnsibleJSON", "%!ppjson.py|jq '.'", { desc = "PrettyPri
 user_command("UnPrettyPrintJSON", "%!jq -c '.'", { desc = "UnPrettyPrintJSON" })
 user_command("PrettyPrintHTML", "!tidy -mi -html -wrap 0 %", { desc = "PrettyPrintHTML" })
 user_command("PrettyPrintXML", "!tidy -mi -xml -wrap 0 %", { desc = "PrettyPrintXML" })
+user_command("SudoWrite", ":SudaWrite", { desc = "SudoWrite" })
