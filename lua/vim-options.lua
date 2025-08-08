@@ -102,7 +102,7 @@ end
 
 
 -- Set max size before bigfiles options are applied in B
-vim.g.bigfile_size_limit = 1024 * 1024 * 10
+vim.g.bigfile_size_limit = 1024 * 1024 * 50
 
 
 -------------------------------------- autocmds ------------------------------------------
