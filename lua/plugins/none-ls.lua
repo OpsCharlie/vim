@@ -4,7 +4,7 @@ return {
   lazy = true,
   event = { "BufReadPost", "BufNewFile" },
   config = function()
-    local max_size = vim.g.bigfile_size_limit * 1024 * 1024 -- Convert MB to bytes
+    local max_size = vim.g.bigfile_size_limit
     local file = vim.fn.expand("%:p")
     local size = vim.fn.getfsize(file)
 

@@ -101,8 +101,8 @@ if vim.g.neovide == true then
 end
 
 
--- Set max size before bigfiles options are applied in MB
-vim.g.bigfile_size_limit = 50
+-- Set max size before bigfiles options are applied in B
+vim.g.bigfile_size_limit = 1024 * 1024 * 10
 
 
 -------------------------------------- autocmds ------------------------------------------
@@ -133,6 +133,34 @@ autocmd({ 'BufNewFile', 'BufReadPre' }, {
     vim.notify("Swap and undo disabled", vim.log.levels.INFO, { title = "Temp File" })
   end,
 })
+
+
+-- disable swap/undo/backup files for large files
+autocmd("BufReadPre", {
+  group = augroup('large_file_group'),
+  callback = function()
+    local max_size = vim.g.bigfile_size_limit
+    local file = vim.fn.expand("<afile>")
+    local size = vim.fn.getfsize(file)
+    if size > max_size then
+      vim.opt_local.swapfile = false
+      vim.opt_local.undofile = false
+      vim.opt_local.backup = false
+      vim.opt_local.writebackup = false
+      vim.opt_local.syntax = "off"
+      vim.bo.filetype = ""
+      vim.opt_local.completeopt = "" -- Disable completion options
+      pcall(function() require('cmp').setup.buffer { enabled = false } end) -- Disable nvim-cmp
+      vim.notify(
+        ("Big file optimizations applied: %.2f MiB"):format(size / 1024 / 1024),
+        vim.log.levels.WARN,
+        { title = "Big File" }
+      )
+    end
+  end,
+})
+
+
 
 
 -- open nvim-tree on startup if no files are opened
