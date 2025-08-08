@@ -2,6 +2,8 @@ return {
   "m4xshen/hardtime.nvim",
   -- Establish good command workflow and quit bad habit.
   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  lazy = true,
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
     disable_mouse = false,
     max_count = 5,
