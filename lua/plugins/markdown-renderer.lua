@@ -8,6 +8,7 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
+      render_modes = true,
       heading = {
         enabled = true,
         sign = false,
@@ -41,7 +42,25 @@ return {
       { '<leader>mo', '<cmd>UpdateToc<CR>', desc = 'Update table of contents' },
     },
     init = function()
-      vim.g.vmt_auto_update_on_save = 0
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        callback = function()
+          for i = 1, 6 do
+            local group = "@markup.heading." .. i .. ".markdown"
+            -- Resolve linked highlight group colors
+            local existing = vim.api.nvim_get_hl(0, { name = group, link = false })
+
+            if existing and (existing.fg or existing.bg) then
+              local new_hl = vim.tbl_extend("force", existing, {
+                bold = true,
+                underline = true
+              })
+              vim.api.nvim_set_hl(0, group, new_hl)
+            end
+          end
+        end,
+      })
     end,
+
   },
 }
