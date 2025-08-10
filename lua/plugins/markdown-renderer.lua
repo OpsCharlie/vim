@@ -14,13 +14,23 @@ return {
         icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
         position = "inline",
         width = "block",
+        right_pad = 1,
+        border = true,
+        border_virtual = true,
       },
       bullet = {
         enabled = true,
         -- https://www.alt-codes.net/math-symbols-list
         icons = { "•", "•" },
       },
+      code = {
+        sign = false,
+        left_pad = 2,
+      },
     },
+    init = function()
+      vim.api.nvim_set_hl(0, "RenderMarkdownHeading", { bold = true })
+    end,
   },
   {
     'mzlogin/vim-markdown-toc',

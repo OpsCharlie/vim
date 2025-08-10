@@ -82,6 +82,7 @@ return {
           },
           { name = "nvim_lua", priority = 70 },
           { name = "path",     priority = 60 },
+          { name = 'render-markdown', priority = 50  },
           { name = "emoji",  priority = 20 },
         },
       })
