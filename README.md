@@ -3,7 +3,9 @@
 ## Dependencies
 
 ```bash
-sudo apt install curl git gcc jq python3-pip python3-venv ripgrep fd-find inotify-tools
+sudo apt install curl git gcc inotify-tools \
+                 python3-pip python3-venv \
+                 ripgrep fd-find luarocks jq
 ```
 
 ### python env
