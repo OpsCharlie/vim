@@ -34,7 +34,8 @@ opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.timeoutlen = 400
+opt.timeout = true
+opt.timeoutlen = 300
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
