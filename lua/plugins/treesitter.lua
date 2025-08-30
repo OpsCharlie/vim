@@ -16,24 +16,29 @@ return {
   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
   build = ":TSUpdate",
   config = function()
-    local config = require("nvim-treesitter.configs")
-    config.setup({
-      ensure_installed = {},
-      sync_install = false,
-      ignore_install = {},
-      modules = {},
-      auto_install = true,
-      highlight = {
-        enable = true,
-        disable = { "yaml" },
-      },
-      indent = {
-        enable = true,
-        disable = { "yaml" },
-      },
-      matchup = {
-        enable = true,         -- mandatory, false will disable the whole extension
-      },
-    })
+    local file_size = vim.fn.getfsize(vim.fn.expand('%'))
+    local max_size = vim.g.bigfile_size_limit or (1024 * 1024 * 50)
+
+    if file_size < max_size then
+      local config = require("nvim-treesitter.configs")
+      config.setup({
+        ensure_installed = {},
+        sync_install = false,
+        ignore_install = {},
+        modules = {},
+        auto_install = true,
+        highlight = {
+          enable = true,
+          disable = { "yaml" },
+        },
+        indent = {
+          enable = true,
+          disable = { "yaml" },
+        },
+        matchup = {
+          enable = true,         -- mandatory, false will disable the whole extension
+        },
+      })
+    end
   end,
 }
