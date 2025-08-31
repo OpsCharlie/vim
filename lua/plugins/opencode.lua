@@ -22,6 +22,28 @@ return {
     { '<leader>orA', function() require('opencode.api').diff_revert_all_last_session() end,  desc = 'Revert all changes (last session)', },
     { '<leader>orT', function() require('opencode.api').diff_revert_this_last_session() end, desc = 'Revert this file (last session)', },
     { '<leader>ox',  function() require('opencode.api').swap_position() end,                 desc = 'Swap pane position', },
+
+    -- BUILD/PLAN Mode Switching
+    { '<leader>ob',  function()
+      if require('opencode.api').set_mode then
+        require('opencode.api').set_mode('build')
+        vim.notify('OpenCode mode: BUILD', vim.log.levels.INFO)
+      end
+    end, desc = 'Switch to BUILD mode', },
+    { '<leader>oB',  function()
+      if require('opencode.api').set_mode then
+        require('opencode.api').set_mode('plan')
+        vim.notify('OpenCode mode: PLAN', vim.log.levels.INFO)
+      end
+    end, desc = 'Switch to PLAN mode', },
+    { '<leader>om',  function()
+      if require('opencode.api').get_mode and require('opencode.api').set_mode then
+        local current_mode = require('opencode.api').get_mode()
+        local next_mode = current_mode == 'build' and 'plan' or 'build'
+        require('opencode.api').set_mode(next_mode)
+        vim.notify('OpenCode mode: ' .. next_mode:upper(), vim.log.levels.INFO)
+      end
+    end, desc = 'Toggle BUILD/PLAN mode', },
   },
   config = function()
     require("opencode").setup({
