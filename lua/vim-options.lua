@@ -174,6 +174,17 @@ autocmd("VimEnter", {
   end,
 })
 
+
+-- detect filetype if not set
+autocmd("BufReadPost", {
+  callback = function()
+    if vim.bo.filetype == "" then
+      vim.cmd("filetype detect")
+    end
+  end,
+})
+
+
 -- set filetype for specific file patterns
 autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup('set_filetype'),
