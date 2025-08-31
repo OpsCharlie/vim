@@ -1,7 +1,8 @@
 return {
   "shellRaining/hlchunk.nvim",
   -- hlchunk.nvim is a Neovim plugin that highlights the current block of code based on the cursor position.
-  event = { "UIEnter" },
+  enabled = true,
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     require("hlchunk").setup({
       chunk = {
