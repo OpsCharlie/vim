@@ -10,7 +10,7 @@ return {
     "mason-org/mason-lspconfig.nvim",
     -- Integration between Mason and nvim-lspconfig.
     lazy = true,
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "FileType" },
     dependencies = { "neovim/nvim-lspconfig" },
     opts = {},
   },
