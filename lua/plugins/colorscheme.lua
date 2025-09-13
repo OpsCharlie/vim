@@ -10,18 +10,28 @@ return {
       require("catppuccin").setup({
         flavour = "mocha",
         term_colors = true,
+        float = {
+          transparent = false,
+          solid = false,
+        },
         dim_inactive = {
-          enabled = true, -- dims the background color of inactive window
+          enabled = true,
           shade = "dark",
-          percentage = 0.15, -- percentage of the shade to apply to the inactive window
+          percentage = 0.15,
         },
-        color_overrides = {
-          mocha = {
-            base = "#151515",
-            mantle = "#0e0e0e",
-            crust = "#080808",
-          },
-        },
+         styles = {
+           conditionals = {},
+         },
+         custom_highlights = {
+           WinSeparator = { fg = "#777d8f" }, -- Make window separator more prominent
+         },
+        -- color_overrides = {
+        --   mocha = {
+        --     base = "#151515",
+        --     mantle = "#0e0e0e",
+        --     crust = "#080808",
+        --   },
+        -- },
       })
       vim.cmd.colorscheme("catppuccin")
     end,
