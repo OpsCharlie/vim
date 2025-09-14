@@ -84,8 +84,7 @@ return {
     { '<leader>oa', function() require('opencode').ask('@selection: ') end,                       desc = 'Ask opencode about selection', mode = 'v' },
     { '<leader>on', function() require('opencode').command('session_new') end,                    desc = 'New opencode session' },
     { '<leader>oy', function() require('opencode').command('messages_copy') end,                  desc = 'Copy last opencode response' },
-    { '<S-C-u>',    function() require('opencode').command('messages_half_page_up') end,          desc = 'Messages half page up' },
-    { '<S-C-d>',    function() require('opencode').command('messages_half_page_down') end,        desc = 'Messages half page down' },
+
     { '<leader>os', function() require('opencode').select() end,                                  desc = 'Select opencode prompt',       mode = { 'n', 'v' } },
     { '<leader>oe', function() require('opencode').prompt('Explain @cursor and its context') end, desc = 'Explain this code' },
   },
@@ -114,13 +113,14 @@ return {
     vim.api.nvim_create_autocmd("BufEnter", {
       pattern = "term://*opencode*",
       callback = function()
-        vim.keymap.set({'t', 'n'}, '<leader>ot', function() require('opencode').toggle() end, { desc = 'Toggle opencode' })
-        vim.keymap.set({'t', 'n'}, '<C-h>', '<cmd>wincmd h<cr>')
-        vim.keymap.set({'t', 'n'}, '<C-j>', '<cmd>wincmd j<cr>')
-        vim.keymap.set({'t', 'n'}, '<C-k>', '<cmd>wincmd k<cr>')
-        vim.keymap.set({'t', 'n'}, '<C-l>', '<cmd>wincmd l<cr>')
+        vim.o.timeoutlen = 1000
+        vim.keymap.set({ 't' }, '<leader>ot', function() require('opencode').toggle() end, { desc = 'Toggle opencode' })
+        vim.keymap.set({ 't' }, '<C-h>', '<esc><cmd>TmuxNavigateLeft<cr>')
+        vim.keymap.set({ 't' }, '<C-j>', '<esc><cmd>TmuxNavigateDown<cr>')
+        vim.keymap.set({ 't' }, '<C-k>', '<esc><cmd>TmuxNavigateUp<cr>')
+        vim.keymap.set({ 't' }, '<C-l>', '<esc><cmd>TmuxNavigateRight<cr>')
+        vim.keymap.set('t', '<C-w>z', '<C-\\><C-n><cmd>ZoomWinTabToggle<CR>i', { desc = 'Toggle zoom' })
       end,
     })
-
   end,
 }
