@@ -1,5 +1,18 @@
 return {
   enabled = true,
+  icons = {
+    git = {
+      enabled = true,
+      staged = "✓",
+      added = "+",
+      deleted = "✗",
+      modified = "~",
+      renamed = "➜",
+      untracked = "?",
+      ignored = "◌",
+      unmerged = "‼",
+    },
+  },
   sources = {
     explorer = {
       win = {
