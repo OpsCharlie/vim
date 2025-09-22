@@ -23,10 +23,30 @@ return {
     build = "make tiktoken",
     keys = {
       { "<leader>cc", ":CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" },
+      {
+        "<leader>cp",
+        function()
+          require("CopilotChat").select_prompt()
+        end,
+        desc = "Prompt Actions (CopilotChat)",
+        mode = { "n", "v" },
+      },
     },
     opts = {
       -- See Configuration section for options
     },
-    -- See Commands section for default commands if you want to lazy load on them
+    config = function(_, opts)
+      local chat = require("CopilotChat")
+
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "copilot-chat",
+        callback = function()
+          vim.opt_local.relativenumber = false
+          vim.opt_local.number = false
+        end,
+      })
+
+      chat.setup(opts)
+    end,
   },
 }
