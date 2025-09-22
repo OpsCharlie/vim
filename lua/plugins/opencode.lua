@@ -74,9 +74,6 @@
 return {
   'NickvanDyke/opencode.nvim',
   lazy = true,
-  dependencies = {
-    { 'folke/snacks.nvim', opts = { input = { enabled = true } } },
-  },
   keys = {
     { '<leader>ot', function() require('opencode').toggle() end,                                  desc = 'Toggle opencode' },
     { '<leader>oA', function() require('opencode').ask() end,                                     desc = 'Ask opencode' },

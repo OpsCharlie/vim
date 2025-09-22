@@ -164,15 +164,15 @@ autocmd("BufReadPre", {
 
 
 
--- open nvim-tree on startup if no files are opened
-autocmd("VimEnter", {
-  group = augroup('open_nvim_tree'),
-  callback = function()
-    if vim.fn.argc() == 0 then
-      require('nvim-tree.api').tree.open()
-    end
-  end,
-})
+-- open snacks explorer on startup if no files are opened
+-- autocmd("VimEnter", {
+--   group = augroup('open_snacks_explorer'),
+--   callback = function()
+--     if vim.fn.argc() == 0 then
+--       require("snacks").explorer()
+--     end
+--   end,
+-- })
 
 
 -- detect filetype if not set
