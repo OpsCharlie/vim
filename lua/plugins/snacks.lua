@@ -17,7 +17,7 @@ return {
     input = require("config.snacks.input"),
     layout = { enabled = false },
     lazygit = { enabled = false },
-    notifier = { enabled = false },
+    notifier = require("config.snacks.notifier"),
     notify = { enabled = false },
     picker = require("config.snacks.picker"),
     profiler = { enabled = false },
