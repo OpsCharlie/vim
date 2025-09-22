@@ -7,8 +7,10 @@ return {
     vim.g.ansible_unindent_after_newline = 1
     vim.g.ansible_extra_keywords_highlight = 1
     vim.opt.colorcolumn = "160"
-    vim.keymap.set("n", "<leader>n", "i%<BS><BS><BS><BS> | <ESC>", { desc = "Add name prefix", silent = true })
-    vim.keymap.set("i", "<leader>n", "%<BS><BS><BS><BS> |", { desc = "Add name prefix", silent = true })
+    vim.keymap.set({ "n", "i" }, "<leader>n", function()
+      local filename = vim.fn.expand("%:t:r")             -- Get filename without path or extension
+      vim.api.nvim_put({ filename .. " | " }, "c", true, true) -- Insert at cursor
+    end, { desc = "Add name prefix", silent = true })
     vim.keymap.set("n", "<leader>N", ":%s/- name: /- name: %<BS><BS><BS><BS> | /<CR>",
       { desc = "Add buffer name prefix", silent = true })
     vim.keymap.set("n", "<leader>a", "wbiansible.builtin.<ESC>",
@@ -19,7 +21,7 @@ return {
       local cword = vim.fn.expand("<cword>")
 
       -- Create a scratch buffer
-      local buf = vim.api.nvim_create_buf(false, true)   -- unlisted, scratch
+      local buf = vim.api.nvim_create_buf(false, true) -- unlisted, scratch
 
       -- Window size & position
       local width = math.floor(vim.o.columns * 0.8)
