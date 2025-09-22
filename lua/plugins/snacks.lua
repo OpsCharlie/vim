@@ -4,7 +4,7 @@ return {
   lazy = false,
   opts = {
     animate = { enabled = false },
-    bigfile = { enabled = false },
+    bigfile = require("config.snacks.bigfile"),
     bufdelete = { enabled = false },
     dashboard = { enabled = false },
     debug = { enabled = false },
