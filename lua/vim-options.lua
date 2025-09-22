@@ -252,18 +252,18 @@ autocmd("LspAttach", {
         vim.diagnostic.config({ virtual_lines = false })
         vim.g._diagnostic_toggle_state = 2
         vim.o.updatetime = 100
-        vim.notify("Diagnostic float enabled", vim.log.levels.INFO, { render = "minimal" })
+        vim.notify("Diagnostic float enabled", vim.log.levels.INFO, { render = "minimal", title = "Diagnostic" })
       elseif state == 2 then
         -- Disable diagnostics
         vim.diagnostic.config({ virtual_lines = false })
         vim.g._diagnostic_toggle_state = 3
-        vim.api.nvim_clear_autocmd({ group = 'diagnostic_float' })
-        vim.notify("Diagnostic disabled", vim.log.levels.INFO, { render = "minimal" })
+        vim.api.nvim_clear_autocmds({ group = 'diagnostic_float' })
+        vim.notify("Diagnostic disabled", vim.log.levels.INFO, { render = "minimal", title = "Diagnostic" })
       else
         -- Enable virtual lines for current line
         vim.diagnostic.config({ virtual_lines = { current_line = true } })
         vim.g._diagnostic_toggle_state = 1
-        vim.notify("Diagnostic Virtual lines", vim.log.levels.INFO, { render = "minimal" })
+        vim.notify("Diagnostic Virtual lines", vim.log.levels.INFO, { render = "minimal", title = "Diagnostic" })
       end
     end, { desc = "Toggle Diagnostic Display" })
 
