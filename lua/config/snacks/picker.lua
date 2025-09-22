@@ -15,6 +15,11 @@ return {
   },
   sources = {
     explorer = {
+      layout = {
+        layout = {
+          width = 30,
+        }
+      },
       win = {
         list = {
           keys = {
