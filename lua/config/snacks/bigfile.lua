@@ -38,13 +38,6 @@ return {
         vim.bo[ctx.buf].undofile = false
         vim.bo[ctx.buf].completeopt = ""
 
-        -- Disable treesitter highlighting for this buffer (if using nvim-treesitter)
-        local ts_parsers = require("nvim-treesitter.parsers")
-        if ts_parsers.has_parser() then
-          local buf = ctx.buf
-          vim.treesitter.stop(buf)
-        end
-
         -- Disable LSP for this buffer (if LSP client attached)
         local clients = vim.lsp.get_clients({ bufnr = ctx.buf })
         for _, client in pairs(clients) do
@@ -53,14 +46,11 @@ return {
       end
     end)
 
-    local fpath = vim.api.nvim_buf_get_name(ctx.buf)
-    local fsize = vim.fn.getfsize(fpath)
-    if fsize > 0 then
-      vim.notify(
-        string.format("Big file optimizations applied: %.2f MiB", fsize / 1024 / 1024),
-        vim.log.levels.WARN,
-        { title = "Big File" }
-      )
-    end
+		local fsize = vim.fn.getfsize(vim.fn.expand("%"))
+    vim.notify(
+      string.format("Big file optimizations applied: %.2f MiB", fsize / 1024 / 1024),
+      vim.log.levels.WARN,
+      { title = "Big File" }
+    )
   end
 }

@@ -5,8 +5,7 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   config = function()
     local max_size = vim.g.bigfile_size_limit
-    local file = vim.fn.expand("%:p")
-    local size = vim.fn.getfsize(file)
+    local size = vim.fn.getfsize(vim.fn.expand("%"))
 
     local null_ls = require("null-ls")
     local formatting = null_ls.builtins.formatting
