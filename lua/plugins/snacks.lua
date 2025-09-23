@@ -48,6 +48,8 @@ return {
       end,
       desc = "Jump to Snacks Explorer"
     },
+    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep Current Dir" },
     -- buffer
     { "<leader>bd", function() Snacks.bufdelete() end,           desc = "Delete Buffer" },
     -- find
@@ -65,6 +67,9 @@ return {
   },
   init = function()
     vim.o.autochdir = false
+    vim.api.nvim_create_user_command("Snacks", function()
+      Snacks.picker()
+    end, { desc = "Open Snacks Picker" })
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
