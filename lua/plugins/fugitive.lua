@@ -17,14 +17,14 @@ return {
       "Git",
     },
   },
-  {
-    'junegunn/gv.vim',
-    -- Git commit browser
-    dependencies = { 'tpope/vim-fugitive' },
-    lazy = true,
-    cmd = 'GV',
-    keys = {
-      { '<leader>gl', '<cmd>GV<CR>', desc = 'Git log viewer' },
-    },
-  },
+  -- {
+  --   'junegunn/gv.vim',
+  --   -- Git commit browser
+  --   dependencies = { 'tpope/vim-fugitive' },
+  --   lazy = true,
+  --   cmd = 'GV',
+  --   keys = {
+  --     { '<leader>gl', '<cmd>GV<CR>', desc = 'Git log viewer' },
+  --   },
+  -- },
 }

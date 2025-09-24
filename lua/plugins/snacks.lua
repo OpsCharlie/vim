@@ -35,7 +35,8 @@ return {
     zen = { enabled = false },
   },
   keys = {
-    { "<C-n>",      function() Snacks.explorer.open() end,    desc = "Toggle Snacks Explorer" },
+    -- explorer
+    { "<C-n>",      function() Snacks.explorer.open() end,       desc = "Toggle Snacks Explorer" },
     {
       "<M-n>",
       function()
@@ -47,12 +48,20 @@ return {
       end,
       desc = "Jump to Snacks Explorer"
     },
-    { "<leader>lg", function() Snacks.lazygit() end,          desc = "Lazygit" },
-    { "<leader>bd", function() Snacks.bufdelete() end,        desc = "Delete Buffer" },
-    { "<leader>gB", function() Snacks.gitbrowse() end,        desc = "Git Browse",            mode = { "n", "v" } },
-    { "<leader>fb", function() Snacks.picker.buffers() end,   desc = "Buffers" },
-    { "<leader>ff", function() Snacks.picker.files() end,     desc = "Find Files" },
-    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+    -- buffer
+    { "<leader>bd", function() Snacks.bufdelete() end,           desc = "Delete Buffer" },
+    -- find
+    { "<leader>fb", function() Snacks.picker.buffers() end,      desc = "Buffers" },
+    { "<leader>ff", function() Snacks.picker.files() end,        desc = "Find Files" },
+    { "<leader>fg", function() Snacks.picker.git_files() end,    desc = "Find Git Files" },
+    -- git
+    { "<leader>gB", function() Snacks.gitbrowse() end,           desc = "Git Browse Github",     mode = { "n", "v" } },
+    { "<leader>lg", function() Snacks.lazygit() end,             desc = "Lazygit" },
+    { "<leader>gl", function() Snacks.picker.git_log() end,      desc = "Git Log" },
+    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Blame Line" },
+    { "<leader>gb", function() Snacks.git.blame_line() end,      desc = "Git Blame" },
+    { "<leader>gs", function() Snacks.picker.git_status() end,   desc = "Git Status" },
+    { "<leader>gS", function() Snacks.picker.git_stash() end,    desc = "Git Stash" },
   },
   init = function()
     vim.o.autochdir = false
