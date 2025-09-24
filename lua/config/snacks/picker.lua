@@ -13,6 +13,23 @@ return {
       unmerged = "‼",
     },
   },
+  layout = {
+    preset = "telescope",
+  },
+  win = {
+    input = {
+      keys = {
+        ["<Esc>"] = { "close", mode = { "n", "i" } },
+        ["/"] = "toggle_focus",
+        ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+      },
+    },
+    list = {
+      keys = {
+        ["<C-x>"] = { { "pick_win", "edit_split" } },
+      },
+    },
+  },
   sources = {
     explorer = {
       layout = {
@@ -41,8 +58,8 @@ return {
             ["<C-x>"] = { { "pick_win", "edit_split" } },
             ["<C-v>"] = { { "pick_win", "edit_vsplit" } },
             ["<C-c>"] = "tcd",
+            ["<C-n>"] = "close",
             ["<leader>/"] = "picker_grep",
-            ["<c-t>"] = "terminal",
           },
         },
       },

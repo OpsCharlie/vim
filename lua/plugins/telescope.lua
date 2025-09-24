@@ -14,36 +14,36 @@ return {
   event = "VeryLazy",
   cmd = "Telescope",
   keys = {
-    {
-      "<C-S-p>",
-      function() require("telescope.builtin").find_files() end,
-      mode = "n",
-      desc = "Find files",
-    },
-    {
-      "<leader>ff",
-      function() require("telescope.builtin").find_files() end,
-      mode = "n",
-      desc = "Find files",
-    },
-    {
-      "<C-p>",
-      function() require("telescope.builtin").git_files() end,
-      mode = "n",
-      desc = "Find git files",
-    },
-    {
-      "<leader>fg",
-      function() require("telescope.builtin").git_files() end,
-      mode = "n",
-      desc = "Find git files",
-    },
-    {
-      "<leader>fb",
-      function() require("telescope.builtin").buffers() end,
-      mode = "n",
-      desc = "Find buffers",
-    },
+    -- {
+    --   "<C-S-p>",
+    --   function() require("telescope.builtin").find_files() end,
+    --   mode = "n",
+    --   desc = "Find files",
+    -- },
+    -- {
+    --   "<leader>ff",
+    --   function() require("telescope.builtin").find_files() end,
+    --   mode = "n",
+    --   desc = "Find files",
+    -- },
+    -- {
+    --   "<C-p>",
+    --   function() require("telescope.builtin").git_files() end,
+    --   mode = "n",
+    --   desc = "Find git files",
+    -- },
+    -- {
+    --   "<leader>fg",
+    --   function() require("telescope.builtin").git_files() end,
+    --   mode = "n",
+    --   desc = "Find git files",
+    -- },
+    -- {
+    --   "<leader>fb",
+    --   function() require("telescope.builtin").buffers() end,
+    --   mode = "n",
+    --   desc = "Find buffers",
+    -- },
     {
       "<leader>gf",
       function() require("telescope.builtin").live_grep() end,
