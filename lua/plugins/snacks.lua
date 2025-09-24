@@ -34,8 +34,8 @@ return {
     words = { enabled = false },
     zen = { enabled = false },
   },
-   keys = {
-    { "<C-n>", function() Snacks.explorer.open() end, desc = "Toggle Snacks Explorer" },
+  keys = {
+    { "<C-n>",      function() Snacks.explorer.open() end, desc = "Toggle Snacks Explorer" },
     {
       "<M-n>",
       function()
@@ -47,7 +47,8 @@ return {
       end,
       desc = "Jump to Snacks Explorer"
     },
-   },
+    { "<leader>lg", function() Snacks.lazygit() end,       desc = "Lazygit" },
+  },
   init = function()
     vim.o.autochdir = false
     vim.api.nvim_create_autocmd("User", {
