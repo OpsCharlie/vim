@@ -20,12 +20,24 @@ return {
           width = 30,
         }
       },
+      actions = {
+        my_confirm = function(picker, item)
+          if item and item.dir then
+            picker:action("confirm")
+          elseif vim.tbl_count(vim.fn.getbufinfo({ buflisted = true })) == 1 then
+            picker:action("confirm")
+          else
+            picker:action({ "pick_win", "jump" })
+          end
+        end
+      },
       win = {
         list = {
           keys = {
             ["<ESC>"] = false,
             ["<"] = "explorer_up",
             [">"] = "explorer_focus",
+            ["<CR>"] = "my_confirm",
             ["<C-x>"] = { { "pick_win", "edit_split" } },
             ["<C-v>"] = { { "pick_win", "edit_vsplit" } },
             ["<C-c>"] = "tcd",
