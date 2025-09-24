@@ -35,7 +35,7 @@ return {
     zen = { enabled = false },
   },
   keys = {
-    { "<C-n>",      function() Snacks.explorer.open() end, desc = "Toggle Snacks Explorer" },
+    { "<C-n>",      function() Snacks.explorer.open() end,    desc = "Toggle Snacks Explorer" },
     {
       "<M-n>",
       function()
@@ -47,7 +47,12 @@ return {
       end,
       desc = "Jump to Snacks Explorer"
     },
-    { "<leader>lg", function() Snacks.lazygit() end,       desc = "Lazygit" },
+    { "<leader>lg", function() Snacks.lazygit() end,          desc = "Lazygit" },
+    { "<leader>bd", function() Snacks.bufdelete() end,        desc = "Delete Buffer" },
+    { "<leader>gB", function() Snacks.gitbrowse() end,        desc = "Git Browse",            mode = { "n", "v" } },
+    { "<leader>fb", function() Snacks.picker.buffers() end,   desc = "Buffers" },
+    { "<leader>ff", function() Snacks.picker.files() end,     desc = "Find Files" },
+    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
   },
   init = function()
     vim.o.autochdir = false
