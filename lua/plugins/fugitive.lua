@@ -16,6 +16,9 @@ return {
       "Gvdiffsplit",
       "Git",
     },
+    keys = {
+      { '<leader>gD', '<cmd>Gvdiffsplit<CR>', desc = 'Git diff' },
+    },
   },
   -- {
   --   'junegunn/gv.vim',
