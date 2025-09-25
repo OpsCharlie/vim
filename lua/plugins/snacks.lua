@@ -35,6 +35,7 @@ return {
     zen = { enabled = false },
   },
   keys = {
+     { "<leader>t", function() Snacks.terminal.toggle() end, desc = "Terminal Toggle" }, 
     -- explorer
     { "<C-n>",      function() Snacks.explorer.open() end,       desc = "Toggle Snacks Explorer" },
     {
