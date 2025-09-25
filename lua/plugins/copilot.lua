@@ -18,7 +18,7 @@ return {
     dependencies = {
       { "github/copilot.vim" },
       { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
+      -- { "nvim-telescope/telescope.nvim" },
     },
     build = "make tiktoken",
     keys = {

@@ -84,7 +84,7 @@ return {
   },
   init = function()
     vim.o.autochdir = false
-    vim.api.nvim_create_user_command("Snacks", function()
+    vim.api.nvim_create_user_command("Picker", function()
       Snacks.picker()
     end, { desc = "Open Snacks Picker" })
     vim.api.nvim_create_autocmd("User", {
