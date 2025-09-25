@@ -44,25 +44,25 @@ return {
     --   mode = "n",
     --   desc = "Find buffers",
     -- },
-    {
-      "<leader>gf",
-      function() require("telescope.builtin").live_grep() end,
-      mode = "n",
-      desc = "Grep Files Current Dir",
-    },
-    {
-      "<leader>gg",
-      function()
-        local ok, gg = pcall(require, "git_grep")
-        if ok then
-          gg.live_grep()
-        else
-          vim.notify("git_grep extension not available", vim.log.levels.ERROR)
-        end
-      end,
-      mode = "n",
-      desc = "Grep Git repo",
-    },
+    -- {
+    --   "<leader>gf",
+    --   function() require("telescope.builtin").live_grep() end,
+    --   mode = "n",
+    --   desc = "Grep Files Current Dir",
+    -- },
+    -- {
+    --   "<leader>gg",
+    --   function()
+    --     local ok, gg = pcall(require, "git_grep")
+    --     if ok then
+    --       gg.live_grep()
+    --     else
+    --       vim.notify("git_grep extension not available", vim.log.levels.ERROR)
+    --     end
+    --   end,
+    --   mode = "n",
+    --   desc = "Grep Git repo",
+    -- },
     {
       "<leader>lr",
       function() require("telescope.builtin").lsp_references() end,
@@ -73,24 +73,24 @@ return {
       function() require("telescope.builtin").lsp_definitions() end,
       desc = "LSP Definitions",
     },
-    {
-      "<leader>fd",
-      function() require("telescope.builtin").diagnostics() end,
-      mode = "n",
-      desc = "File Diagnostics",
-    },
+    -- {
+    --   "<leader>fd",
+    --   function() require("telescope.builtin").diagnostics() end,
+    --   mode = "n",
+    --   desc = "File Diagnostics",
+    -- },
     {
       "<leader>ls",
       function() require("telescope.builtin").lsp_document_symbols() end,
       mode = "n",
       desc = "List document Symbols",
     },
-    {
-      "<leader>lm",
-      function() require("telescope.builtin").marks() end,
-      mode = "n",
-      desc = "List marks",
-    }
+    -- {
+    --   "<leader>lm",
+    --   function() require("telescope.builtin").marks() end,
+    --   mode = "n",
+    --   desc = "List marks",
+    -- }
   },
   config = function()
     require("telescope").setup({
