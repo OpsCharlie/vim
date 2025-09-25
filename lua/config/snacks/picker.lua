@@ -59,6 +59,7 @@ return {
             ["<C-v>"] = { { "pick_win", "edit_vsplit" } },
             ["<C-c>"] = "tcd",
             ["<C-n>"] = "close",
+            ["<c-t>"] = "tab",
             ["<leader>/"] = "picker_grep",
           },
         },
