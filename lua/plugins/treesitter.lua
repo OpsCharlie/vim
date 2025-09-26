@@ -22,7 +22,7 @@ return {
 		local max_size = vim.g.bigfile_size_limit or (1024 * 1024 * 50)
 
 		if file_size < max_size then
-			local config = require("nvim-treesitter.configs")
+			local config = require("nvim-treesitter.config")
 			config.setup({
 				ensure_installed = {},
 				sync_install = false,
