@@ -13,7 +13,7 @@ return {
     git = { enabled = false },
     gitbrowse = { enabled = false },
     image = { enabled = false },
-    indent = { enabled = false },
+    indent = require("config.snacks.indent"),
     input = require("config.snacks.input"),
     layout = { enabled = false },
     lazygit = { enabled = false },
@@ -84,6 +84,8 @@ return {
   },
   init = function()
     vim.o.autochdir = false
+    vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#3a3a3a", nocombine = true })
+    vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#5b595f", nocombine = true })
     vim.api.nvim_create_user_command("Picker", function()
       Snacks.picker()
     end, { desc = "Open Snacks Picker" })
