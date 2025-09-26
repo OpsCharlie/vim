@@ -3,7 +3,7 @@
 ## Run generate.py
 
 ```sh
-./generate.py --style dictionary --no-description --comment-non-required
+./generate.sh --user --style dictionary --no-description --comment-non-required
 ```
 
 ## Convert to luascript

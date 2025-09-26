@@ -49,6 +49,7 @@ sudo snap install go --classic
 
 ## Mason
 
+In nvim, run `:MasonToolsInstall` and install the following tools:
 ```ini
 ansible-language-server
 bash-debug-adapter
