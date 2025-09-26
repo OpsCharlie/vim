@@ -15,6 +15,43 @@ return {
     opts = {},
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    -- Automatically install and manage LSP servers, DAP servers, linters, and formatters.
+    lazy = true,
+    -- event = { "BufReadPost", "BufNewFile", "FileType" },
+    cmd = { "MasonToolsInstall", "MasonToolsUpdate" },
+    dependencies = { "mason-org/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        "ansible-language-server",
+        "bash-debug-adapter",
+        "bash-language-server",
+        "black",
+        "codespell",
+        "debugpy",
+        "delve",
+        "djlint",
+        "docker-compose-language-service",
+        "golangci-lint",
+        "gopls",
+        "grammarly-languageserver",
+        "jq-lsp",
+        "json-lsp",
+        "lua-language-server",
+        "markdownlint",
+        "php-debug-adapter",
+        "powershell-editor-services",
+        "prettier",
+        "pyright",
+        "ruff",
+        "shellcheck",
+        "shfmt",
+        "systemd-language-server",
+        "systemdlint",
+      },
+    },
+  },
+  {
     "folke/lazydev.nvim",
     -- Useful to load neovim lua environment.
     ft = "lua", -- only load on lua files
