@@ -39,7 +39,7 @@ return {
     cmd = { 'GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc' },
     ft = 'markdown',
     keys = {
-      { '<leader>mo', '<cmd>UpdateToc<CR>', desc = 'Update table of contents' },
+      { '<leader>mo', '<cmd>UpdateToc<CR>', desc = 'Update ToC Markdown' },
     },
     init = function()
       vim.api.nvim_create_autocmd('FileType', {

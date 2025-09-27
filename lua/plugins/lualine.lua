@@ -28,7 +28,7 @@ return {
           },
         },
       },
-      extensions = { "nvim-tree", "quickfix", "nvim-dap-ui", "toggleterm" },
+      extensions = { "nvim-tree", "quickfix", "nvim-dap-ui", "lazy", "mason", "fugitive", "toggleterm" },
     })
   end,
 }

@@ -22,7 +22,7 @@ return {
     },
     build = "make tiktoken",
     keys = {
-      { "<leader>cc", ":CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" },
+      { "<leader>tc", ":CopilotChatToggle<CR>", desc = "Copilot Chat" },
       {
         "<leader>cp",
         function()

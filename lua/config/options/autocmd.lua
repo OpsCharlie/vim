@@ -99,8 +99,8 @@ autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
     vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
-    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "LSP Code Format File" })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action LSP" })
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format File LSP" })
     vim.keymap.set("n", "<leader>D", function()
       local state = vim.g._diagnostic_toggle_state or 1
       -- 1: virtual lines, 2: float, 3: disabled
@@ -129,7 +129,7 @@ autocmd("LspAttach", {
         vim.g._diagnostic_toggle_state = 1
         vim.notify("Diagnostic Virtual lines", vim.log.levels.INFO, { render = "minimal", title = "Diagnostic" })
       end
-    end, { desc = "Toggle Diagnostic Display" })
+    end, { desc = "Diagnostic Display Toggle" })
 
     local function client_supports_method(client, method, bufnr)
       if vim.fn.has 'nvim-0.11' == 1 then

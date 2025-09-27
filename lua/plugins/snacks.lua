@@ -25,9 +25,9 @@ return {
     zen = { enabled = false },
   },
   keys = {
-    { "<leader>t", function() Snacks.terminal.toggle() end, desc = "Terminal Toggle" },
+    { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Toggle Terminal" },
     -- explorer
-    { "<C-n>",     function() Snacks.explorer.open() end,   desc = "Toggle Snacks Explorer" },
+    { "<C-n>",      function() Snacks.explorer.open() end,   desc = "Toggle Snacks Explorer" },
     {
       "<M-n>",
       function()
@@ -82,16 +82,17 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
-        Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.treesitter():map("<leader>uT")
-        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+        Snacks.toggle.diagnostics():map("<leader>td")
+        Snacks.toggle.treesitter():map("<leader>tT")
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>tb")
+        Snacks.toggle.option("wrap", { off = false, on = true, name = "Wrap" }):map("<leader>tw")
 
-        Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
-        Snacks.toggle.inlay_hints():map("<leader>uh")
-        Snacks.toggle.dim():map("<leader>uD")
-        Snacks.toggle.zoom():map("<leader>uz")
-        Snacks.toggle.zen():map("<leader>uZ")
+        -- Snacks.toggle.line_number():map("<leader>tl")
+        Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "ConcealLevel" }):map("<leader>tC")
+        Snacks.toggle.inlay_hints():map("<leader>th")
+        Snacks.toggle.dim():map("<leader>tD")
+        Snacks.toggle.zoom():map("<leader>tz")
+        Snacks.toggle.zen():map("<leader>tZ")
       end,
     })
   end,
