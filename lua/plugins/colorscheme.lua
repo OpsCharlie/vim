@@ -1,5 +1,5 @@
 return {
-  -- Use `:Telescope colorscheme` to preview colorschemes
+  -- Use `:Picker colorscheme` to preview colorschemes
   -- Colorschemes at https://dotfyle.com/neovim/colorscheme/top
   {
     "catppuccin/nvim",

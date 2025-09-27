@@ -1,3 +1,4 @@
+-------------------------------------- load options ------------------------------------------
 require("config.options.options")
 require("config.options.autocmd")
 require("config.options.keymaps")
