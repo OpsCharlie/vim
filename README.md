@@ -81,72 +81,72 @@ systemdlint
 
 ## Keymaps
 
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<ESC><ESC>` | n | Clear search |
-| `<CR>` | n | New line in normal mode |
-| `<SPACE>` | n | Add space in normal mode |
-| `<` | v | Indent line |
-| `>` | v | Indent line |
-| `<C-t>` | n | Tab next |
-| `<C-S-t>` | n | Tab previous |
-| `<C-S-t>` | i | Tab previous |
-| `<C-S-n>` | n | New tab |
-| `n` | n | Center search result |
-| `N` | n | Center search result |
-| `<leader>tn` | n | Toggle numbers |
-| `<leader>tH` | n | Hardtime toggle |
-| `dm` | n | Delete mark on current line |
-| `K` | n | Hover Document (LSP) |
-| `<leader>gd` | n | LSP Definition |
-| `<leader>gr` | n | LSP References |
-| `<leader>r` | n | LSP Rename All References |
-| `<leader>ca` | n | Action LSP |
-| `<leader>cf` | n | Format File LSP |
-| `<leader>D` | n | Diagnostic Display Toggle |
-| `<leader>tt` | n | Toggle Terminal |
-| `<C-n>` | n | Toggle Snacks Explorer |
-| `<M-n>` | n | Jump to Snacks Explorer |
-| `<leader>:` | n | Command History |
-| `<leader>bd` | n | Delete Buffer |
-| `<leader>fb` | n | Find Buffers |
-| `<leader>ff` | n | Find Files |
-| `<leader>fg` | n | Find Git Files |
-| `<leader>fm` | n | Find Marks |
-| `<leader>/` | n | Grep Current Dir |
-| `<leader>gf` | n | Grep Current Dir |
-| `<leader>,` | n | Find Keymaps |
-| `<leader>fs` | n | Find Symbols LSP |
-| `<leader>gB` | n,v | Git Browse Github |
-| `<leader>lg` | n | Lazygit |
-| `<leader>gl` | n | Git Log |
-| `<leader>gL` | n | Git Blame Line |
-| `<leader>gb` | n | Git Blame |
-| `<leader>gs` | n | Git Status |
-| `<leader>gg` | n | Git Grep |
-| `<leader>gS` | n | Git Stash |
-| `<leader>fd` | n | Find Diagnostics Buffer |
-| `gd` | n | Goto Definition LSP |
-| `gD` | n | Goto Declaration LSP |
-| `gr` | n | References LSP |
-| `gI` | n | Goto Implementation LSP |
-| `gy` | n | Goto Type Definition LSP |
-| `<C-w>z` | n | Toggle Zoom |
-| `<S-TAB>` | n | Previous buffer |
-| `<TAB>` | n | Next buffer |
-| `<leader>n` | n,i,ft=ansible | Ansible name task |
-| `<leader>N` | n,ft=ansible | Ansible name all tasks |
-| `<leader>a` | n,ft=ansible | Insert ansible.builtin. |
-| `<leader>ca` | n,ft=ansible | Ansible lint fix |
-| `K` | n,v,ft=ansible | Ansible doc |
-| `<C-+>` | n | Increase Neovide scale |
-| `<C-->` | n | Decrease Neovide scale |
-| `<C-=>` | n | Reset Neovide scale |
-| `<C-J>` | i | Accept copilot suggestion |
-| `<leader>to` | t | Toggle Opencode |
-| `<C-h>` | t | Tmux navigate left |
-| `<C-j>` | t | Tmux navigate down |
-| `<C-k>` | t | Tmux navigate up |
-| `<C-l>` | t | Tmux navigate right |
-| `<C-w>z` | t | Toggle zoom |
-| `<F2>` | n | Format logstash config |
+| Key          | Mode           | Description                 |
+|--------------|----------------|-----------------------------|
+| `<ESC><ESC>` | n              | Clear search                |
+| `<CR>`       | n              | New line in normal mode     |
+| `<SPACE>`    | n              | Add space in normal mode    |
+| `<`          | v              | Indent line                 |
+| `>`          | v              | Indent line                 |
+| `<C-t>`      | n              | Tab next                    |
+| `<C-S-t>`    | n              | Tab previous                |
+| `<C-S-t>`    | i              | Tab previous                |
+| `<C-S-n>`    | n              | New tab                     |
+| `n`          | n              | Center search result        |
+| `N`          | n              | Center search result        |
+| `<leader>tn` | n              | Toggle numbers              |
+| `<leader>tH` | n              | Hardtime toggle             |
+| `dm`         | n              | Delete mark on current line |
+| `K`          | n              | Hover Document (LSP)        |
+| `<leader>gd` | n              | LSP Definition              |
+| `<leader>gr` | n              | LSP References              |
+| `<leader>r`  | n              | LSP Rename All References   |
+| `<leader>ca` | n              | Action LSP                  |
+| `<leader>cf` | n              | Format File LSP             |
+| `<leader>D`  | n              | Diagnostic Display Toggle   |
+| `<leader>tt` | n              | Toggle Terminal             |
+| `<C-n>`      | n              | Toggle Snacks Explorer      |
+| `<M-n>`      | n              | Jump to Snacks Explorer     |
+| `<leader>:`  | n              | Command History             |
+| `<leader>bd` | n              | Delete Buffer               |
+| `<leader>fb` | n              | Find Buffers                |
+| `<leader>ff` | n              | Find Files                  |
+| `<leader>fg` | n              | Find Git Files              |
+| `<leader>fm` | n              | Find Marks                  |
+| `<leader>/`  | n              | Grep Current Dir            |
+| `<leader>gf` | n              | Grep Current Dir            |
+| `<leader>,`  | n              | Find Keymaps                |
+| `<leader>fs` | n              | Find Symbols LSP            |
+| `<leader>gB` | n,v            | Git Browse Github           |
+| `<leader>lg` | n              | Lazygit                     |
+| `<leader>gl` | n              | Git Log                     |
+| `<leader>gL` | n              | Git Blame Line              |
+| `<leader>gb` | n              | Git Blame                   |
+| `<leader>gs` | n              | Git Status                  |
+| `<leader>gg` | n              | Git Grep                    |
+| `<leader>gS` | n              | Git Stash                   |
+| `<leader>fd` | n              | Find Diagnostics Buffer     |
+| `gd`         | n              | Goto Definition LSP         |
+| `gD`         | n              | Goto Declaration LSP        |
+| `gr`         | n              | References LSP              |
+| `gI`         | n              | Goto Implementation LSP     |
+| `gy`         | n              | Goto Type Definition LSP    |
+| `<C-w>z`     | n              | Toggle Zoom                 |
+| `<S-TAB>`    | n              | Previous buffer             |
+| `<TAB>`      | n              | Next buffer                 |
+| `<leader>n`  | n,i,ft=ansible | Ansible name task           |
+| `<leader>N`  | n,ft=ansible   | Ansible name all tasks      |
+| `<leader>a`  | n,ft=ansible   | Insert ansible.builtin.     |
+| `<leader>ca` | n,ft=ansible   | Ansible lint fix            |
+| `K`          | n,v,ft=ansible | Ansible doc                 |
+| `<C-+>`      | n              | Increase Neovide scale      |
+| `<C-->`      | n              | Decrease Neovide scale      |
+| `<C-=>`      | n              | Reset Neovide scale         |
+| `<C-J>`      | i              | Accept copilot suggestion   |
+| `<leader>to` | t              | Toggle Opencode             |
+| `<C-h>`      | t              | Tmux navigate left          |
+| `<C-j>`      | t              | Tmux navigate down          |
+| `<C-k>`      | t              | Tmux navigate up            |
+| `<C-l>`      | t              | Tmux navigate right         |
+| `<C-w>z`     | t              | Toggle zoom                 |
+| `<F2>`       | n              | Format logstash config      |
