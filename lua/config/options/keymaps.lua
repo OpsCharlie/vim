@@ -14,6 +14,7 @@ vim.keymap.set("n", "n", "nzz", { desc = "Center search result" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Center search result" })
 vim.keymap.set("n", "<leader>tn", ":exec &nu==&rnu? 'se nu!' : 'se rnu!'<CR>", { desc = "Toggle numbers" })
 -- vim.keymap.set("n", "<leader>tw", ":set wrap!<CR>", { desc = "Toggle Wrap" })
+vim.keymap.set("n", "<leader>tH", ":Hardtime toggle<CR>", { desc = "Hardtime" })
 
 vim.keymap.set("n", "dm", function()
   local current_line = vim.fn.line('.')
