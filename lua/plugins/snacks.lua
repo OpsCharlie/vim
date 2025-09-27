@@ -76,9 +76,77 @@ return {
     vim.o.autochdir = false
     vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#3a3a3a", nocombine = true })
     vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#5b595f", nocombine = true })
-    vim.api.nvim_create_user_command("Picker", function()
-      Snacks.picker()
-    end, { desc = "Open Snacks Picker" })
+     vim.api.nvim_create_user_command("Picker", function(opts)
+       local args = opts.args
+       if args and args ~= "" then
+         Snacks.picker(args)
+       else
+         Snacks.picker()
+       end
+     end, {
+       desc = "Open Snacks Picker",
+       nargs = "?",
+      complete = function(arg_lead)
+        local sources = {
+          "autocmds",
+          "buffers",
+          "colorschemes",
+          "command_history",
+          "commands",
+          "diagnostics",
+          "diagnostics_buffer",
+          "files",
+          "git_branches",
+          "git_diff",
+          "git_files",
+          "git_grep",
+          "git_log",
+          "git_log_file",
+          "git_log_line",
+          "git_stash",
+          "git_status",
+          "grep",
+          "grep_buffers",
+          "grep_word",
+          "help",
+          "highlights",
+          "icons",
+          "jumps",
+          "keymaps",
+          "lazy",
+          "lines",
+          "loclist",
+          "lsp_declarations",
+          "lsp_definitions",
+          "lsp_implementations",
+          "lsp_references",
+          "lsp_symbols",
+          "lsp_type_definitions",
+          "lsp_workspace_symbols",
+          "man",
+          "marks",
+          "notifications",
+          "projects",
+          "qflist",
+          "recent",
+          "registers",
+          "resume",
+          "search_history",
+          "smart",
+          "undo",
+        }
+        if arg_lead == "" then
+          return sources
+        end
+        local matches = {}
+        for _, source in ipairs(sources) do
+          if source:find(arg_lead, 1, true) then
+            table.insert(matches, source)
+          end
+        end
+        return matches
+      end
+     })
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
