@@ -1,3 +1,4 @@
+#!/bin/bash
 BIN_DIR=~/.local/bin
 [[ -d $BIN_DIR ]] || mkdir -p  $BIN_DIR
 
@@ -5,7 +6,7 @@ ARCH=$(uname -m)
 
 DIR=$(dirname "$(readlink -f "$0")")
 
-if ! curl -s https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${ARCH}.appimage -L -o $BIN_DIR/nvim; then
+if ! curl -s https://github.com/neovim/neovim/releases/latest/download/nvim-linux-"${ARCH}".appimage -L -o $BIN_DIR/nvim; then
     echo "Download failed"
     exit 1
 fi
