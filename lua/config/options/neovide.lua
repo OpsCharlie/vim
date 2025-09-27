@@ -6,4 +6,3 @@ if vim.g.neovide == true then
     { silent = true })
   vim.api.nvim_set_keymap("n", "<C-=>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
 end
-

@@ -11,8 +11,8 @@ return {
   },
   event = "BufReadPost",
   keys = {
-    { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds", },
-    { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds", },
+    { "zR", function() require("ufo").openAllFolds() end,               desc = "Open all folds", },
+    { "zM", function() require("ufo").closeAllFolds() end,              desc = "Close all folds", },
     { "zP", function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Preview fold", },
   },
   opts = {
@@ -24,7 +24,7 @@ return {
   init = function()
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
     -- vim.o.foldcolumn = "1"     -- '0' is not bad
-    vim.o.foldlevel = 99       -- Using ufo provider need a large value, feel free to decrease the value
+    vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
   end,

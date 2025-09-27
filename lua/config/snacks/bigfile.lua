@@ -46,7 +46,7 @@ return {
       end
     end)
 
-		local fsize = vim.fn.getfsize(vim.fn.expand("%"))
+    local fsize = vim.fn.getfsize(vim.fn.expand("%"))
     vim.notify(
       string.format("Big file optimizations applied: %.2f MiB", fsize / 1024 / 1024),
       vim.log.levels.WARN,

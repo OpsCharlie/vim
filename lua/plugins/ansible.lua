@@ -7,7 +7,7 @@ return {
     vim.g.ansible_unindent_after_newline = 1
     vim.g.ansible_extra_keywords_highlight = 1
     vim.opt.colorcolumn = "160"
-    local filename = vim.fn.expand("%:t:r")                  -- Get filename without path or extension
+    local filename = vim.fn.expand("%:t:r")                    -- Get filename without path or extension
     vim.keymap.set({ "n", "i" }, "<leader>n", function()
       vim.api.nvim_put({ filename .. " | " }, "c", true, true) -- Insert at cursor
     end, { desc = "Add name prefix", silent = true })
@@ -53,7 +53,8 @@ return {
           })
           local chan = vim.api.nvim_open_term(buf, {})
           vim.fn.jobstart(
-            { "sh", "-c", "ANSIBLE_FORCE_COLOR=1 TERM=xterm-256color PAGER=cat ansible-doc " .. vim.fn.shellescape(module) },
+            { "sh", "-c", "ANSIBLE_FORCE_COLOR=1 TERM=xterm-256color PAGER=cat ansible-doc " ..
+            vim.fn.shellescape(module) },
             {
               stdout_buffered = true,
               on_stdout = function(_, data, _)

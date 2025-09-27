@@ -190,3 +190,10 @@ autocmd('BufReadPost', {
   end,
 })
 
+-- highlight yanked text
+autocmd('TextYankPost', {
+  group = augroup('highlight_yank'),
+  callback = function()
+    vim.highlight.on_yank({ timeout = 250 })
+  end,
+})

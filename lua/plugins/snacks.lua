@@ -88,7 +88,8 @@ return {
         Snacks.toggle.option("wrap", { off = false, on = true, name = "Wrap" }):map("<leader>tw")
 
         -- Snacks.toggle.line_number():map("<leader>tl")
-        Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "ConcealLevel" }):map("<leader>tC")
+        Snacks.toggle.option("conceallevel",
+          { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "ConcealLevel" }):map("<leader>tC")
         Snacks.toggle.inlay_hints():map("<leader>th")
         Snacks.toggle.dim():map("<leader>tD")
         Snacks.toggle.zoom():map("<leader>tz")

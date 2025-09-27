@@ -19,12 +19,12 @@ return {
           shade = "dark",
           percentage = 0.15,
         },
-         styles = {
-           conditionals = {},
-         },
-         custom_highlights = {
-           WinSeparator = { fg = "#777d8f" }, -- Make window separator more prominent
-         },
+        styles = {
+          conditionals = {},
+        },
+        custom_highlights = {
+          WinSeparator = { fg = "#777d8f" },  -- Make window separator more prominent
+        },
         -- color_overrides = {
         --   mocha = {
         --     base = "#151515",

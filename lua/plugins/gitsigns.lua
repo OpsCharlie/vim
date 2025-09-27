@@ -3,14 +3,14 @@ return {
   -- Git integration for buffers
   ft = { "gitcommit", "diff" },
   keys = {
-    { "<leader>gj", mode = "n", "<cmd>Gitsigns next_hunk<CR>",       desc = "Git Next Hunk" },
-    { "<leader>gk", mode = "n", "<cmd>Gitsigns prev_hunk<CR>",       desc = "Git Previous Hunk" },
-  --   { "<leader>gs", mode = "n", "<cmd>Gitsigns stage_hunk<CR>",      desc = "Git Stage Hunk" },
-  --   { "<leader>gu", mode = "n", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Git Undo Stage Hunk" },
-  --   { "<leader>gr", mode = "n", "<cmd>Gitsigns reset_hunk<CR>",      desc = "Git Reset Hunk" },
-  --   { "<leader>gR", mode = "n", "<cmd>Gitsigns reset_buffer<CR>",    desc = "Git Reset buffer" },
-  --   { "<leader>gp", mode = "n", "<cmd>Gitsigns preview_hunk<CR>",    desc = "Git Preview hunk" },
-  --   { "<leader>gb", mode = "n", "<cmd>Gitsigns blame_line<CR>",      desc = "Git Blame line" },
+    { "<leader>gj", mode = "n", "<cmd>Gitsigns next_hunk<CR>", desc = "Git Next Hunk" },
+    { "<leader>gk", mode = "n", "<cmd>Gitsigns prev_hunk<CR>", desc = "Git Previous Hunk" },
+    --   { "<leader>gs", mode = "n", "<cmd>Gitsigns stage_hunk<CR>",      desc = "Git Stage Hunk" },
+    --   { "<leader>gu", mode = "n", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Git Undo Stage Hunk" },
+    --   { "<leader>gr", mode = "n", "<cmd>Gitsigns reset_hunk<CR>",      desc = "Git Reset Hunk" },
+    --   { "<leader>gR", mode = "n", "<cmd>Gitsigns reset_buffer<CR>",    desc = "Git Reset buffer" },
+    --   { "<leader>gp", mode = "n", "<cmd>Gitsigns preview_hunk<CR>",    desc = "Git Preview hunk" },
+    --   { "<leader>gb", mode = "n", "<cmd>Gitsigns blame_line<CR>",      desc = "Git Blame line" },
   },
   init = function()
     -- load gitsigns only when a git file is opened
