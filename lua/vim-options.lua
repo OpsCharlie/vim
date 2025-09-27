@@ -9,7 +9,7 @@ opt.cursorline = true
 -- Indenting
 opt.expandtab = true
 opt.shiftwidth = 2
-opt.smartindent = true
+opt.smartindent = false -- use treesitter for indenting
 opt.tabstop = 2
 opt.softtabstop = 2
 
@@ -76,11 +76,11 @@ vim.keymap.set("n", "<leader>n", ":exec &nu==&rnu? 'se nu!' : 'se rnu!'<CR>", { 
 -- opt.foldmethod = "expr"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldenable = false
-opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
-opt.foldcolumn = '1' -- '0' is not bad
-opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-opt.foldlevelstart = 99
-opt.foldenable = true
+-- opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
+-- opt.foldcolumn = '1' -- '0' is not bad
+-- opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+-- opt.foldlevelstart = 99
+-- opt.foldenable = true
 
 -- Nvimtree
 vim.g.loaded_netrw = 1
