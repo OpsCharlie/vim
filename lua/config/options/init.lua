@@ -1,0 +1,5 @@
+require("config.options.options")
+require("config.options.autocmd")
+require("config.options.keymaps")
+require("config.options.neovide")
+require("config.options.usercmd")
