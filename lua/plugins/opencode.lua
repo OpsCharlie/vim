@@ -111,7 +111,7 @@ return {
       pattern = "term://*opencode*",
       callback = function()
         vim.o.timeoutlen = 1000
-        vim.keymap.set({ 't' }, '<leader>ut', function() require('opencode').toggle() end, { desc = 'Toggle opencode' })
+        vim.keymap.set({ 't' }, '<leader>to', function() require('opencode').toggle() end, { desc = 'Toggle Opencode' })
         vim.keymap.set({ 't' }, '<C-h>', '<esc><cmd>TmuxNavigateLeft<cr>')
         vim.keymap.set({ 't' }, '<C-j>', '<esc><cmd>TmuxNavigateDown<cr>')
         vim.keymap.set({ 't' }, '<C-k>', '<esc><cmd>TmuxNavigateUp<cr>')
