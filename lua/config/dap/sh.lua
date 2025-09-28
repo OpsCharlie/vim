@@ -2,7 +2,7 @@ local dap = require("dap")
 
 dap.adapters.bashdb = {
   type = "executable",
-  command = "bash-debug-adapter",
+  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
   name = "bashdb",
 }
 
@@ -14,7 +14,6 @@ dap.configurations.sh = {
     showDebugOutput = true,
     pathBashdb = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
     pathBashdbLib = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir",
-    trace = true,
     file = "${file}",
     program = "${file}",
     cwd = "${workspaceFolder}",
@@ -22,7 +21,11 @@ dap.configurations.sh = {
     pathBash = "/bin/bash",
     pathMkfifo = "mkfifo",
     pathPkill = "pkill",
-    args = { "-q" },
+    -- args = {},
+    args = function()
+      local input = vim.fn.input("Args: ")
+      return vim.fn.split(input, " ", true)
+    end,
     env = {},
     terminalKind = "integrated",
   },
