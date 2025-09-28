@@ -46,6 +46,7 @@ return {
         "ruff",
         "shellcheck",
         "shfmt",
+        "shellharden",
         "systemd-language-server",
         "systemdlint",
       },

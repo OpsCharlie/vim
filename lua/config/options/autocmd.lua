@@ -58,6 +58,18 @@ autocmd({ "BufRead", "BufNewFile" }, {
 
 
 autocmd("FileType", {
+  group = augroup('sh_filetype'),
+  pattern = "sh",
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.shiftwidth = 4
+  end,
+})
+
+
+autocmd("FileType", {
   group = augroup('go_filetype'),
   pattern = "go",
   callback = function()

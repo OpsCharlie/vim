@@ -19,7 +19,10 @@ return {
       formatting.black,
 
       -- Shell
-      formatting.shfmt,
+      formatting.shellharden,
+      formatting.shfmt.with({
+        extra_args = { "-i", "4", "-ci" },
+      }),
 
       -- JS, YAML, HTML, Markdown
       null_ls.builtins.formatting.prettier,
