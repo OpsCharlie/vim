@@ -20,6 +20,6 @@ return {
       { "<leader>du", function() require("dapui").toggle({}) end,        desc = "Dap UI" },
     },
     config = function()
-      require("config.debug")
+      require("config.dap")
     end,
 }

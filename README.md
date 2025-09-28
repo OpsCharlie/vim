@@ -74,6 +74,7 @@ prettier
 pyright
 ruff
 shellcheck
+shellharden
 shfmt
 systemd-language-server
 systemdlint
