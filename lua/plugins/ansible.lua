@@ -7,11 +7,12 @@ return {
     vim.g.ansible_unindent_after_newline = 1
     vim.g.ansible_extra_keywords_highlight = 1
     vim.opt.colorcolumn = "160"
-    local filename = vim.fn.expand("%:t:r")                    -- Get filename without path or extension
     vim.keymap.set({ "n", "i" }, "<leader>n", function()
+      local filename = vim.fn.expand("%:t:r")                    -- Get current buffer's filename
       vim.api.nvim_put({ filename .. " | " }, "c", true, true) -- Insert at cursor
     end, { desc = "Add name prefix", silent = true })
     vim.keymap.set("n", "<leader>N", function()
+      local filename = vim.fn.expand("%:t:r")
       vim.cmd("silent! %s/- name: /- name: " .. filename .. " | /g")
     end, { desc = "Add buffer name prefix", silent = true })
     vim.keymap.set("n", "<leader>a", "wbiansible.builtin.<ESC>",
