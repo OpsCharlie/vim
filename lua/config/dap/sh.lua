@@ -21,7 +21,6 @@ dap.configurations.sh = {
     pathBash = "/bin/bash",
     pathMkfifo = "mkfifo",
     pathPkill = "pkill",
-    -- args = {},
     args = function()
       local input = vim.fn.input("Args: ")
       return vim.fn.split(input, " ", true)

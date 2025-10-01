@@ -1,5 +1,5 @@
 #!/bin/bash
-BIN_DIR=~/.local/bin
+BIN_DIR=~/bin
 [[ -d $BIN_DIR ]] || mkdir -p  $BIN_DIR
 
 ARCH=$(uname -m)
