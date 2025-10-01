@@ -76,16 +76,16 @@ return {
     vim.o.autochdir = false
     vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#3a3a3a", nocombine = true })
     vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#5b595f", nocombine = true })
-     vim.api.nvim_create_user_command("Picker", function(opts)
-       local args = opts.args
-       if args and args ~= "" then
-         Snacks.picker(args)
-       else
-         Snacks.picker()
-       end
-     end, {
-       desc = "Open Snacks Picker",
-       nargs = "?",
+    vim.api.nvim_create_user_command("Picker", function(opts)
+      local args = opts.args
+      if args and args ~= "" then
+        Snacks.picker(args)
+      else
+        Snacks.picker()
+      end
+    end, {
+      desc = "Open Snacks Picker",
+      nargs = "?",
       complete = function(arg_lead)
         local sources = {
           "autocmds",
@@ -146,7 +146,7 @@ return {
         end
         return matches
       end
-     })
+    })
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
