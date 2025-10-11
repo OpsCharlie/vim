@@ -11,8 +11,8 @@ return {
       end,
     },
   },
-  branch = "main",
-  version = false,            -- last release is way too old and doesn't work on Windows
+  -- branch = "main",
+  -- version = false,            -- last release is way too old and doesn't work on Windows
   lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
   event = { "BufReadPost", "BufNewFile" },
   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -22,13 +22,16 @@ return {
     local max_size = vim.g.bigfile_size_limit or (1024 * 1024 * 50)
 
     if file_size < max_size then
-      local config = require("nvim-treesitter.config")
+      local config = require("nvim-treesitter.configs")
       config.setup({
         ensure_installed = {},
         sync_install = false,
         ignore_install = {},
         modules = {},
         auto_install = true,
+        filetype = {
+          ["yaml.ansible"] = "yaml",
+        },
         highlight = {
           enable = true,
           disable = { "yaml" },
