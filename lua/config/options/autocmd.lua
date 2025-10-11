@@ -111,7 +111,9 @@ autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
     vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action LSP" })
+    if vim.bo.filetype ~= "yaml.ansible" then
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action LSP" })
+    end
     vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format File LSP" })
     vim.keymap.set("n", "<leader>D", function()
       local state = vim.g._diagnostic_toggle_state or 1
