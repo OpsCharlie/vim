@@ -150,7 +150,7 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
-        Snacks.toggle.diagnostics():map("<leader>td")
+        -- Snacks.toggle.diagnostics():map("<leader>td")
         Snacks.toggle.treesitter():map("<leader>tT")
         Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>tb")
         Snacks.toggle.option("wrap", { off = false, on = true, name = "Wrap" }):map("<leader>tw")
