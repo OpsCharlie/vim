@@ -5,6 +5,9 @@ return {
   keys = {
     { "<leader>gj", mode = "n", "<cmd>Gitsigns next_hunk<CR>", desc = "Git Next Hunk" },
     { "<leader>gk", mode = "n", "<cmd>Gitsigns prev_hunk<CR>", desc = "Git Previous Hunk" },
+    { '<leader>gD', mode = "n", "<cmd>Gitsigns diffthis<CR>",  desc = 'Git diff' },
+    { '<leader>gq', mode = "n", "<cmd>lua require'gitsigns'.setqflist()<CR>",  desc = 'Git qflist' },
+    { '<leader>gQ', mode = "n", "<cmd>lua require'gitsigns'.setqflist('all')<CR>",  desc = 'Git qflist all' },
     --   { "<leader>gs", mode = "n", "<cmd>Gitsigns stage_hunk<CR>",      desc = "Git Stage Hunk" },
     --   { "<leader>gu", mode = "n", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Git Undo Stage Hunk" },
     --   { "<leader>gr", mode = "n", "<cmd>Gitsigns reset_hunk<CR>",      desc = "Git Reset Hunk" },
@@ -40,6 +43,31 @@ return {
         changedelete = { text = "~" },
         untracked = { text = "?" },
       },
+      vim.api.nvim_create_user_command("GDiff", ":Gitsigns diffthis", { desc = "Git diff (Gitsigns)" }),
+      vim.api.nvim_create_user_command("GRead", ":Gitsigns reset_buffer", { desc = "Git reset buffer (Gitsigns)" }),
+      vim.api.nvim_create_user_command("Git", function(opts)
+        local cmd = { "git" }
+        for _, arg in ipairs(opts.fargs) do
+          table.insert(cmd, arg)
+        end
+        vim.fn.jobstart(cmd, {
+          stdout_buffered = true,
+          on_stdout = function(_, data)
+            if data then
+              vim.schedule(function()
+                vim.api.nvim_echo({ { table.concat(data, "\n"), "Normal" } }, false, {})
+              end)
+            end
+          end,
+          on_stderr = function(_, data)
+            if data then
+              vim.schedule(function()
+                vim.api.nvim_echo({ { table.concat(data, "\n"), "ErrorMsg" } }, false, {})
+              end)
+            end
+          end,
+        })
+      end, { desc = "Run git command", nargs = "+", complete = "shellcmd" })
     })
   end,
 }
