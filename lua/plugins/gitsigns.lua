@@ -1,7 +1,8 @@
 return {
   "lewis6991/gitsigns.nvim",
   -- Git integration for buffers
-  ft = { "gitcommit", "diff" },
+  -- ft = { "gitcommit", "diff" },
+  event = { "BufReadPre", "BufNewFile" },
   keys = {
     { "<leader>gj", mode = "n", "<cmd>Gitsigns next_hunk<CR>", desc = "Git Next Hunk" },
     { "<leader>gk", mode = "n", "<cmd>Gitsigns prev_hunk<CR>", desc = "Git Previous Hunk" },
@@ -15,24 +16,24 @@ return {
     --   { "<leader>gp", mode = "n", "<cmd>Gitsigns preview_hunk<CR>",    desc = "Git Preview hunk" },
     --   { "<leader>gb", mode = "n", "<cmd>Gitsigns blame_line<CR>",      desc = "Git Blame line" },
   },
-  init = function()
-    -- load gitsigns only when a git file is opened
-    vim.api.nvim_create_autocmd({ "BufRead" }, {
-      group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-      callback = function()
-        vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
-          on_exit = function(_, return_code)
-            if return_code == 0 then
-              vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
-              vim.schedule(function()
-                require("lazy").load({ plugins = { "gitsigns.nvim" } })
-              end)
-            end
-          end,
-        })
-      end,
-    })
-  end,
+  -- init = function()
+  --   -- load gitsigns only when a git file is opened
+  --   vim.api.nvim_create_autocmd({ "BufRead" }, {
+  --     group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+  --     callback = function()
+  --       vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
+  --         on_exit = function(_, return_code)
+  --           if return_code == 0 then
+  --             vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+  --             vim.schedule(function()
+  --               require("lazy").load({ plugins = { "gitsigns.nvim" } })
+  --             end)
+  --           end
+  --         end,
+  --       })
+  --     end,
+  --   })
+  -- end,
   config = function()
     require("gitsigns").setup({
       signs = {
