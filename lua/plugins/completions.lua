@@ -25,7 +25,19 @@ return {
       cmp.setup({
         completion = {
           completeopt = "menu,menuone,preview,noselect",
+          keyword_length = 3,
         },
+        enabled = function()
+          local line = vim.api.nvim_get_current_line()
+          local col = vim.fn.col('.') - 1
+          local prefix = line:sub(1, col)
+          -- Allow completion with any length if line starts with ':'
+          if prefix:match("^:%S*") then
+            return true
+          end
+          -- Otherwise, require at least 3 characters before cursor
+          return #prefix >= 3
+        end,
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
