@@ -44,8 +44,8 @@ return {
         changedelete = { text = "~" },
         untracked = { text = "?" },
       },
-      vim.api.nvim_create_user_command("GDiff", ":Gitsigns diffthis", { desc = "Git diff (Gitsigns)" }),
-      vim.api.nvim_create_user_command("GRead", ":Gitsigns reset_buffer", { desc = "Git reset buffer (Gitsigns)" }),
+      vim.api.nvim_create_user_command("Gdiff", ":Gitsigns diffthis", { desc = "Git diff (Gitsigns)" }),
+      vim.api.nvim_create_user_command("Gread", ":Gitsigns reset_buffer", { desc = "Git reset buffer (Gitsigns)" }),
       vim.api.nvim_create_user_command("Git", function(opts)
         local cmd = { "git" }
         for _, arg in ipairs(opts.fargs) do
