@@ -59,12 +59,43 @@ return {
           delete_buffer_on_left_click = true,
         },
       },
+      tabs = {
+        placement = "right",
+        components = {
+          {
+             text = function(tab)
+               local tabpages = vim.api.nvim_list_tabpages()
+               if #tabpages > 1 then
+                 local tabpage = tabpages[tab.number]
+                 local windows = vim.api.nvim_tabpage_list_wins(tabpage)
+                 local unique_buffers = {}
+                 for _, win in ipairs(windows) do
+                   local buf = vim.api.nvim_win_get_buf(win)
+                   if vim.api.nvim_get_option_value('buftype', { buf = buf }) == '' then
+                     unique_buffers[buf] = true
+                   end
+                 end
+                 local buf_count = vim.tbl_count(unique_buffers)
+                 return "｜Tab " .. tab.number .. ":" .. buf_count .. " "
+               else
+                 return ""
+               end
+             end,
+            fg = function(tab)
+              return tab.is_active and get_hex("Normal", "fg") or get_hex("Comment", "fg")
+            end,
+            bold = function(tab)
+              return tab.is_active
+            end,
+          },
+        },
+      },
     })
   end,
   vim.keymap.set("n", "<S-TAB>", function()
-    require("cokeline.mappings").by_step("focus", "-1")
+    require("cokeline.mappings").by_step("focus", -1)
   end, { desc = "Previous buffer" }),
   vim.keymap.set("n", "<TAB>", function()
-    require("cokeline.mappings").by_step("focus", "1")
+    require("cokeline.mappings").by_step("focus", 1)
   end, { desc = "Next buffer" }),
 }
