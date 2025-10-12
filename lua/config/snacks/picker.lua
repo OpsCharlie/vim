@@ -46,6 +46,10 @@ return {
           else
             picker:action({ "pick_win", "jump" })
           end
+        end,
+        my_tcd = function(picker, item)
+          picker:action("tcd")
+          Snacks.notifier.notify("Changed directory to: " .. vim.fn.getcwd(), "info")
         end
       },
       win = {
@@ -57,7 +61,7 @@ return {
             ["<CR>"] = "my_confirm",
             ["<C-x>"] = { { "pick_win", "edit_split" } },
             ["<C-v>"] = { { "pick_win", "edit_vsplit" } },
-            ["<C-c>"] = "tcd",
+            ["<C-c>"] = "my_tcd",
             ["<C-n>"] = "close",
             ["<c-t>"] = "tab",
             ["<leader>/"] = "picker_grep",
