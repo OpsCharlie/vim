@@ -8,7 +8,7 @@ return {
     vim.g.ansible_extra_keywords_highlight = 1
     vim.opt.colorcolumn = "160"
     vim.keymap.set({ "n", "i" }, "<leader>n", function()
-      local filename = vim.fn.expand("%:t:r")                    -- Get current buffer's filename
+      local filename = vim.fn.expand("%:t:r")                  -- Get current buffer's filename
       vim.api.nvim_put({ filename .. " | " }, "c", true, true) -- Insert at cursor
     end, { desc = "Add name prefix", silent = true })
     vim.keymap.set("n", "<leader>N", function()
@@ -23,6 +23,22 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "yaml.ansible",
       callback = function(ev)
+        -- make 'gf' work from include_tasks
+        local function find_tasks_dir(filepath)
+          local dir = vim.fn.fnamemodify(filepath, ':h')
+          while dir ~= '/' do
+            if vim.fn.isdirectory(dir .. '/tasks') == 1 then
+              return dir .. '/tasks'
+            end
+            dir = vim.fn.fnamemodify(dir, ':h')
+          end
+          return nil
+        end
+        local tasks_dir = find_tasks_dir(vim.fn.expand('%:p'))
+        if tasks_dir then
+          vim.opt_local.path:append(tasks_dir)
+        end
+
         vim.keymap.set({ 'n', 'v' }, 'K', function()
           local mode = vim.fn.mode(true)
           local module
