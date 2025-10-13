@@ -8,7 +8,7 @@ return {
     dashboard = { enabled = false },
     debug = { enabled = false },
     explorer = require("config.snacks.explorer"),
-    image = { enabled = false },
+    image = require("config.snacks.image"),
     indent = require("config.snacks.indent"),
     input = require("config.snacks.input"),
     lazygit = { enabled = false },
