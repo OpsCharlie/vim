@@ -70,8 +70,8 @@ autocmd("FileType", {
 
 
 autocmd("FileType", {
-  group = augroup('go_filetype'),
-  pattern = "go",
+  group = augroup('spaces_filetype'),
+  pattern = { "go", "sh", "bash" },
   callback = function()
     vim.opt_local.expandtab = false
     vim.opt_local.tabstop = 4
