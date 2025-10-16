@@ -28,6 +28,10 @@ return {
           keyword_length = 3,
         },
         enabled = function()
+          -- Disable completion in snacks picker input
+          if vim.b.snacks_picker_input then
+            return false
+          end
           local line = vim.api.nvim_get_current_line()
           local col = vim.fn.col('.') - 1
           local prefix = line:sub(1, col)

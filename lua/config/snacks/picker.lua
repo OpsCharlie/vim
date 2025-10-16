@@ -23,6 +23,10 @@ return {
         ["/"] = "toggle_focus",
         ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
       },
+      b = {
+        complete = "",
+        snacks_picker_input = true,
+      },
     },
     list = {
       keys = {
