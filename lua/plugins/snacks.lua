@@ -59,7 +59,6 @@ return {
     { "<leader>gb", function() Snacks.git.blame_line() end,              desc = "Git Blame" },
     { "<leader>gs", function() Snacks.picker.git_status() end,           desc = "Git Status" },
     { "<leader>gg", function() Snacks.picker.git_grep() end,             desc = "Git Grep" },
-    { "<leader>gf", function() Snacks.picker.grep() end,                 desc = "Grep Current Dir" },
     { "<leader>gS", function() Snacks.picker.git_stash() end,            desc = "Git Stash" },
     -- diagnostics
     { "<leader>fd", function() Snacks.picker.diagnostics_buffer() end,   desc = "Find Diagnostics Buffer" },
