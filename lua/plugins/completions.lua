@@ -25,7 +25,23 @@ return {
       cmp.setup({
         completion = {
           completeopt = "menu,menuone,preview,noselect",
+          keyword_length = 3,
         },
+        enabled = function()
+          -- Disable completion in snacks picker input
+          if vim.b.snacks_picker_input then
+            return false
+          end
+          local line = vim.api.nvim_get_current_line()
+          local col = vim.fn.col('.') - 1
+          local prefix = line:sub(1, col)
+          -- Allow completion with any length if line starts with ':'
+          if prefix:match("^:%S*") then
+            return true
+          end
+          -- Otherwise, require at least 3 characters before cursor
+          return #prefix >= 3
+        end,
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -80,10 +96,10 @@ return {
               end,
             },
           },
-          { name = "nvim_lua", priority = 70 },
-          { name = "path",     priority = 60 },
-          { name = 'render-markdown', priority = 50  },
-          { name = "emoji",  priority = 20 },
+          { name = "nvim_lua",        priority = 70 },
+          { name = "path",            priority = 60 },
+          { name = 'render-markdown', priority = 50 },
+          { name = "emoji",           priority = 20 },
         },
       })
     end,
