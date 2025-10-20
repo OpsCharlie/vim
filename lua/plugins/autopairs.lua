@@ -4,7 +4,10 @@ return {
   event = "InsertEnter",
   config = function()
     require("nvim-autopairs").setup({
-      fast_wrap = {},
+      fast_wrap = {
+        map = '<M-e>',
+      },
+      check_ts = true,
       disable_filetype = { "TelescopePrompt", "vim" },
     })
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
