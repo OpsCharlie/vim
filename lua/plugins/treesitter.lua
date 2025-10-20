@@ -1,19 +1,10 @@
-return {
-  "nvim-treesitter/nvim-treesitter",
-  -- Nvim Treesitter configurations and abstraction layer
-  dependencies = {
-    {
-      "nvim-treesitter/nvim-treesitter-context",
-      -- Show context of the current function in the top of the screen
-      event = { "BufReadPost", "BufNewFile" },
-      opts = function()
-        return { mode = 'cursor', max_lines = 3 }
-      end,
-    },
-  },
-  lazy = true,
-  event = { "BufReadPost", "BufNewFile" },
-  cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+ return {
+   "nvim-treesitter/nvim-treesitter",
+   -- Nvim Treesitter configurations and abstraction layer
+   -- dependencies = {
+   --   { "nvim-treesitter/nvim-treesitter-context", },
+   -- },
+  lazy = false,
   build = ":TSUpdate",
   config = function()
     local file_size = vim.fn.getfsize(vim.fn.expand('%'))
@@ -22,7 +13,29 @@ return {
     if file_size < max_size then
       local config = require("nvim-treesitter.configs")
       config.setup({
-        ensure_installed = {},
+         ensure_installed = {
+           "bash",
+           "desktop",
+           "go",
+           "json",
+           "lua",
+           "markdown",
+           "markdown_inline",
+           "php",
+           "powershell",
+           "python",
+           "yaml",
+           "diff",
+           "dockerfile",
+           "git_config",
+           "gitcommit",
+           "gitignore",
+           "jinja",
+           "jinja_inline",
+           "terraform",
+           "vim",
+           "vimdoc",
+         },
         sync_install = false,
         ignore_install = {},
         modules = {},
