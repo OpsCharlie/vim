@@ -74,18 +74,15 @@
 return {
   'NickvanDyke/opencode.nvim',
   lazy = true,
-  dependencies = {
-    { 'folke/snacks.nvim', opts = { input = { enabled = true } } },
-  },
   keys = {
-    { '<leader>ot', function() require('opencode').toggle() end,                                  desc = 'Toggle opencode' },
-    { '<leader>oA', function() require('opencode').ask() end,                                     desc = 'Ask opencode' },
-    { '<leader>oa', function() require('opencode').ask('@cursor: ') end,                          desc = 'Ask opencode about this',      mode = 'n' },
-    { '<leader>oa', function() require('opencode').ask('@selection: ') end,                       desc = 'Ask opencode about selection', mode = 'v' },
-    { '<leader>on', function() require('opencode').command('session_new') end,                    desc = 'New opencode session' },
-    { '<leader>oy', function() require('opencode').command('messages_copy') end,                  desc = 'Copy last opencode response' },
+    { '<leader>to', function() require('opencode').toggle() end,                                  desc = 'Opencode' },
+    { '<leader>oA', function() require('opencode').ask() end,                                     desc = 'Ask Opencode' },
+    { '<leader>oa', function() require('opencode').ask('@cursor: ') end,                          desc = 'Ask Opencode about this',      mode = 'n' },
+    { '<leader>oa', function() require('opencode').ask('@selection: ') end,                       desc = 'Ask Opencode about selection', mode = 'v' },
+    { '<leader>on', function() require('opencode').command('session_new') end,                    desc = 'New Opencode session' },
+    { '<leader>oy', function() require('opencode').command('messages_copy') end,                  desc = 'Copy last Opencode response' },
 
-    { '<leader>os', function() require('opencode').select() end,                                  desc = 'Select opencode prompt',       mode = { 'n', 'v' } },
+    { '<leader>os', function() require('opencode').select() end,                                  desc = 'Select Opencode prompt',       mode = { 'n', 'v' } },
     { '<leader>oe', function() require('opencode').prompt('Explain @cursor and its context') end, desc = 'Explain this code' },
   },
   config = function()
@@ -114,7 +111,7 @@ return {
       pattern = "term://*opencode*",
       callback = function()
         vim.o.timeoutlen = 1000
-        vim.keymap.set({ 't' }, '<leader>ot', function() require('opencode').toggle() end, { desc = 'Toggle opencode' })
+        vim.keymap.set({ 't' }, '<leader>to', function() require('opencode').toggle() end, { desc = 'Toggle Opencode' })
         vim.keymap.set({ 't' }, '<C-h>', '<esc><cmd>TmuxNavigateLeft<cr>')
         vim.keymap.set({ 't' }, '<C-j>', '<esc><cmd>TmuxNavigateDown<cr>')
         vim.keymap.set({ 't' }, '<C-k>', '<esc><cmd>TmuxNavigateUp<cr>')
