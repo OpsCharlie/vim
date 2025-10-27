@@ -60,6 +60,9 @@ return {
     { "<leader>gs", function() Snacks.picker.git_status() end,           desc = "Git Status" },
     { "<leader>gg", function() Snacks.picker.git_grep() end,             desc = "Git Grep" },
     { "<leader>gS", function() Snacks.picker.git_stash() end,            desc = "Git Stash" },
+    -- bookmarks
+    { "<leader>ba", function() require("config.snacks.bookmarks").add_bookmark() end, desc = "Add Bookmark" },
+    { "<leader>fb", function() Snacks.picker({ source = "bookmarks" }) end, desc = "Find Bookmarks" },
     -- diagnostics
     { "<leader>fd", function() Snacks.picker.diagnostics_buffer() end,   desc = "Find Diagnostics Buffer" },
     -- LSP
@@ -88,6 +91,7 @@ return {
       complete = function(arg_lead)
         local sources = {
           "autocmds",
+          "bookmarks",
           "buffers",
           "colorschemes",
           "command_history",
@@ -161,6 +165,35 @@ return {
         Snacks.toggle.dim():map("<leader>tD")
         Snacks.toggle.zoom():map("<leader>tz")
         Snacks.toggle.zen():map("<leader>tZ")
+
+        -- Add bookmarks source
+        Snacks.config.picker.sources.bookmarks = {
+          finder = function()
+            return require("config.snacks.bookmarks").get_items()
+          end,
+          actions = {
+            confirm = function(picker, item)
+              if item and item.dir then
+                Snacks.explorer.open({ cwd = item.file })
+                picker:close()
+              end
+            end,
+            remove = function(picker, item)
+              if item then
+                require("config.snacks.bookmarks").remove_bookmark(item.file)
+                picker:find()
+              end
+            end,
+          },
+          win = {
+            list = {
+              keys = {
+                ["<CR>"] = "confirm",
+                ["d"] = "remove",
+              },
+            },
+          },
+        }
       end,
     })
   end,
