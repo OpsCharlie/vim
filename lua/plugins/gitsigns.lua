@@ -16,24 +16,6 @@ return {
     --   { "<leader>gp", mode = "n", "<cmd>Gitsigns preview_hunk<CR>",    desc = "Git Preview hunk" },
     --   { "<leader>gb", mode = "n", "<cmd>Gitsigns blame_line<CR>",      desc = "Git Blame line" },
   },
-  -- init = function()
-  --   -- load gitsigns only when a git file is opened
-  --   vim.api.nvim_create_autocmd({ "BufRead" }, {
-  --     group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-  --     callback = function()
-  --       vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
-  --         on_exit = function(_, return_code)
-  --           if return_code == 0 then
-  --             vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
-  --             vim.schedule(function()
-  --               require("lazy").load({ plugins = { "gitsigns.nvim" } })
-  --             end)
-  --           end
-  --         end,
-  --       })
-  --     end,
-  --   })
-  -- end,
   config = function()
     require("gitsigns").setup({
       signs = {
@@ -46,6 +28,26 @@ return {
       },
       vim.api.nvim_create_user_command("Gdiff", ":Gitsigns diffthis", { desc = "Git diff (Gitsigns)" }),
       vim.api.nvim_create_user_command("Gread", ":Gitsigns reset_buffer", { desc = "Git reset buffer (Gitsigns)" }),
+      vim.api.nvim_create_user_command("Gadd", function()
+        local file = vim.api.nvim_buf_get_name(0)
+        if file == "" then
+          vim.api.nvim_echo({ { "No file associated with current buffer.", "ErrorMsg" } }, false, {})
+          return
+        end
+        vim.fn.jobstart({ "git", "add", file }, {
+          on_exit = function(_, code)
+            if code == 0 then
+              vim.schedule(function()
+                vim.api.nvim_echo({ { "Added: " .. file, "Normal" } }, false, {})
+              end)
+            else
+              vim.schedule(function()
+                vim.api.nvim_echo({ { "Failed to add: " .. file, "ErrorMsg" } }, false, {})
+              end)
+            end
+          end,
+        })
+      end, { desc = "Git add current buffer" }),
       vim.api.nvim_create_user_command("Git", function(opts)
         local cmd = { "git" }
         for _, arg in ipairs(opts.fargs) do
