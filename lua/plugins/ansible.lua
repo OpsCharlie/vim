@@ -17,9 +17,7 @@ return {
     end, { desc = "Add buffer name prefix", silent = true })
     vim.keymap.set("n", "<leader>a", "wbiansible.builtin.<ESC>",
       { desc = "Add FQCN for builtin module", silent = true })
-    vim.keymap.set('n', '<leader>ca', ':!ansible-lint --fix % &>/dev/null<CR>', { desc = "Action ansiblelint", buffer = true })
-
-    -- Set 'K' mapping for every yaml.ansible buffer using autocmd
+    -- Set 'K' and 'ca' mappings for every yaml.ansible buffer using autocmd
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "yaml.ansible",
       callback = function(ev)
@@ -38,6 +36,8 @@ return {
         if tasks_dir then
           vim.opt_local.path:append(tasks_dir)
         end
+
+        vim.keymap.set('n', '<leader>ca', ':!ansible-lint --fix % &>/dev/null<CR>', { desc = "Action ansiblelint", buffer = ev.buf })
 
         vim.keymap.set({ 'n', 'v' }, 'K', function()
           local mode = vim.fn.mode(true)
