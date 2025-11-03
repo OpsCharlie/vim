@@ -36,7 +36,7 @@ download_nvim() {
 }
 
 if command -v "$BIN_DIR/nvim" >/dev/null 2>&1; then
-    INSTALLED_VERSION=$("$BIN_DIR/nvim" --version | head -n1 | awk '{print $2}')
+    INSTALLED_VERSION=$("$BIN_DIR/nvim" --version | grep NVIM | awk '{print $2}')
     LATEST_VERSION=$(get_latest_version)
     if [ "$INSTALLED_VERSION" = "$LATEST_VERSION" ]; then
         echo "Latest version already installed"
