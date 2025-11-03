@@ -24,6 +24,7 @@
            "php",
            "powershell",
            "python",
+           "regex",
            "yaml",
            "diff",
            "dockerfile",
