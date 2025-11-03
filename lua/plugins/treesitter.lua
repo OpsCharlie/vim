@@ -1,9 +1,9 @@
  return {
    "nvim-treesitter/nvim-treesitter",
    -- Nvim Treesitter configurations and abstraction layer
-   dependencies = {
-     { "nvim-treesitter/nvim-treesitter-context", },
-   },
+   -- dependencies = {
+   --   { "nvim-treesitter/nvim-treesitter-context", },
+   -- },
   lazy = false,
   build = ":TSUpdate",
   config = function()
