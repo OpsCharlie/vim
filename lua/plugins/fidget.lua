@@ -4,6 +4,8 @@ return {
   lazy = true,
   event = { "BufReadPost", "BufNewFile" },
   opts = {
-    -- options
+    notifications = {
+      override_vim_notify =true,
+    },
   },
 }
