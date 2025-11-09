@@ -22,7 +22,7 @@ return {
         },
         input_window = {
           ['<cr>'] = { 'submit_input_prompt', mode = { 'n' } },        -- Submit prompt (normal mode)
-          ['<esc>'] = { 'close' },                                     -- Close UI windows
+          ['<esc>'] = false,
           ['<C-c>'] = { 'cancel' },                                    -- Cancel opencode request while it is running,
           ['~'] = { 'mention_file', mode = 'i' },                      -- Pick a file and add to context. See File Mentions section
           ['@'] = { 'mention', mode = 'i' },                           -- Insert mention (file/agent)
