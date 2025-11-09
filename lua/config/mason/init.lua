@@ -16,6 +16,7 @@ return {
     "json-lsp",
     "lua-language-server",
     "markdownlint",
+    "mbake",
     "php-debug-adapter",
     "powershell-editor-services",
     "prettier",

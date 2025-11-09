@@ -12,6 +12,44 @@ return {
     local diagnostics = null_ls.builtins.diagnostics
     local completion = null_ls.builtins.completion
 
+    -- Custom sources
+    local mbake_format = {
+      method = null_ls.methods.FORMATTING,
+      filetypes = { "make" },
+      generator = null_ls.generator({
+        command = "mbake",
+        args = { "format", "-" },
+        to_stdin = true,
+        format = "raw",
+        on_output = function(params, done)
+          done(params.output)
+        end,
+      }),
+    }
+
+    local mbake_diagnostics = {
+      method = null_ls.methods.DIAGNOSTICS,
+      filetypes = { "make" },
+      generator = null_ls.generator({
+        command = "mbake",
+        args = { "validate", "$FILENAME" },
+        from_stderr = true,
+        format = "line",
+        on_output = function(line)
+          local lnum, message = line:match("(%d+): (.+)")
+          if lnum and message then
+            return {
+              row = tonumber(lnum),
+              col = 1,
+              message = message,
+              severity = vim.diagnostic.severity.ERROR,
+              source = "mbake",
+            }
+          end
+        end,
+      }),
+    }
+
     -- Default sources
     local sources = {
       -- Python
@@ -38,6 +76,10 @@ return {
       }),
       diagnostics.djlint,
       formatting.gofmt,
+
+      -- Makefile
+      mbake_format,
+      mbake_diagnostics,
 
       -- Spelling
       completion.spell,
