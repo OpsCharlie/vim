@@ -14,7 +14,7 @@ opt.smartindent = false -- use treesitter for indenting
 opt.tabstop = 2
 opt.softtabstop = 2
 
-opt.listchars = { tab = "» ", extends = "›", precedes = "‹", nbsp = "·", trail = "·" }
+opt.listchars = { tab = " »", extends = "›", precedes = "‹", nbsp = "·", trail = "·" }
 opt.list = true
 opt.ignorecase = true
 opt.smartcase = true
