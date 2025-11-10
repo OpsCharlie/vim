@@ -10,7 +10,6 @@ ARCH=$(uname -m)
 DIR=$(dirname "$(readlink -f "$0")")
 NVIM_CONFIG="$HOME/.config/nvim"
 
-
 check_deps() {
     for cmd in curl jq; do
         command -v "$cmd" >/dev/null 2>&1 || {
@@ -20,11 +19,9 @@ check_deps() {
     done
 }
 
-
 get_latest_version() {
     curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r .tag_name
 }
-
 
 download_nvim() {
     local version="$1"
@@ -55,7 +52,6 @@ config() {
         ln -s "$DIR" "$NVIM_CONFIG"
     fi
 }
-
 
 main() {
     check_deps
