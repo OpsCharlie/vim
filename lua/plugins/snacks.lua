@@ -18,7 +18,7 @@ return {
     profiler = { enabled = false },
     quickfile = { enabled = false },
     scope = { enabled = false },
-    scratch = { enabled = false },
+    scratch = require("config.snacks.scratch"),
     statuscolumn = require("config.snacks.statuscolumn"),
     terminal = require("config.snacks.terminal"),
     words = require("config.snacks.words"),
@@ -71,6 +71,9 @@ return {
     { "gr",         function() Snacks.picker.lsp_references() end,       nowait = true,                      desc = "References LSP" },
     { "gI",         function() Snacks.picker.lsp_implementations() end,  desc = "Goto Implementation LSP" },
     { "gy",         function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition LSP" },
+    -- Scratch
+    { "<leader>sb", function() Snacks.scratch() end,                     desc = "Scratch Buffer" },
+    { "<leader>sf", function() Snacks.scratch.select() end,              desc = "Find Scratch Buffer" },
     -- Other
     { "<C-w>z",     function() Snacks.zen.zoom() end,                    desc = "Toggle Zoom" },
     { "<leader>tW", function()
