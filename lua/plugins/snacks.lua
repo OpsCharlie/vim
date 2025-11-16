@@ -21,7 +21,7 @@ return {
     scratch = { enabled = false },
     statuscolumn = require("config.snacks.statuscolumn"),
     terminal = require("config.snacks.terminal"),
-    words = { enabled = false },
+    words = require("config.snacks.words"),
     zen = { enabled = false },
   },
   keys = {
@@ -73,6 +73,13 @@ return {
     { "gy",         function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition LSP" },
     -- Other
     { "<C-w>z",     function() Snacks.zen.zoom() end,                    desc = "Toggle Zoom" },
+    { "<leader>tW", function()
+      if Snacks.words.is_enabled() then
+        Snacks.words.disable()
+      else
+        Snacks.words.enable()
+      end
+    end, desc = "Toggle Words (LSP reference highlights)" },
   },
   init = function()
     vim.o.autochdir = false
