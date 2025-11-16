@@ -184,3 +184,19 @@ autocmd('TextYankPost', {
     vim.highlight.on_yank({ timeout = 250 })
   end,
 })
+
+-- Terminal navigation for snacks terminals (skip lazygit)
+autocmd("TermOpen", {
+  group = augroup('snacks_terminal_nav'),
+  callback = function(ev)
+    if vim.bo[ev.buf].filetype == "snacks_terminal" then
+      local snacks_term = vim.b[ev.buf].snacks_terminal
+      if snacks_term and not (snacks_term.cmd == "lazygit" or (type(snacks_term.cmd) == "table" and snacks_term.cmd[1] == "lazygit")) then
+        vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { buffer = ev.buf, desc = "Go to Left Window" })
+        vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { buffer = ev.buf, desc = "Go to Lower Window" })
+        vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { buffer = ev.buf, desc = "Go to Upper Window" })
+        vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { buffer = ev.buf, desc = "Go to Right Window" })
+      end
+    end
+  end,
+})
