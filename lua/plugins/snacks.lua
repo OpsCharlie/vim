@@ -62,7 +62,7 @@ return {
     { "<leader>gS", function() Snacks.picker.git_stash() end,            desc = "Git Stash" },
     -- bookmarks
     { "<leader>ba", function() require("config.snacks.bookmarks").add_bookmark() end, desc = "Add Bookmark" },
-    { "<leader>fb", function() Snacks.picker({ source = "bookmarks" }) end, desc = "Find Bookmarks" },
+    { "<leader>fB", function() Snacks.picker({ source = "bookmarks" }) end, desc = "Find Bookmarks" },
     -- diagnostics
     { "<leader>fd", function() Snacks.picker.diagnostics_buffer() end,   desc = "Find Diagnostics Buffer" },
     -- LSP
