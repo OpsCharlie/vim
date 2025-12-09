@@ -82,7 +82,7 @@ autocmd("FileType", {
 
 autocmd("LspAttach", {
   group = augroup('lsp_attach'),
-  callback = function(event)
+  callback = function()
     vim.diagnostic.config({
       virtual_lines = {
         current_line = true
@@ -108,8 +108,6 @@ autocmd("LspAttach", {
     })
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Document" })
-    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
-    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "LSP References" })
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
     if vim.bo.filetype ~= "yaml.ansible" then
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action LSP" })
@@ -144,14 +142,6 @@ autocmd("LspAttach", {
         vim.notify("Diagnostic Virtual lines", vim.log.levels.INFO, { render = "minimal", title = "Diagnostic" })
       end
     end, { desc = "Diagnostic Display Toggle" })
-
-    local function client_supports_method(client, method, bufnr)
-      if vim.fn.has 'nvim-0.11' == 1 then
-        return client:supports_method(method, bufnr)
-      else
-        return client.supports_method(method, { bufnr = bufnr })
-      end
-    end
   end,
 })
 
