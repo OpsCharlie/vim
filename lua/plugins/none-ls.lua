@@ -16,14 +16,12 @@ return {
     local mbake_format = {
       method = null_ls.methods.FORMATTING,
       filetypes = { "make" },
-      generator = null_ls.generator({
+      generator = null_ls.formatter({
         command = "mbake",
-        args = { "format", "-" },
-        to_stdin = true,
-        format = "raw",
-        on_output = function(params, done)
-          done(params.output)
+        args = function(params)
+          return { "format", params.temp_path }
         end,
+        to_temp_file = true,
       }),
     }
 
@@ -36,10 +34,18 @@ return {
         from_stderr = true,
         format = "line",
         on_output = function(line)
-          local lnum, message = line:match("(%d+): (.+)")
-          if lnum and message then
+          -- Try several common formats
+          local lnum, msg =
+              line:match("^%d+:%s*(.+)$") or
+              line:match("^%d+:%s*(.+)$")
+
+          local row, message =
+              line:match(":(%d+):%s*(.+)") or
+              line:match("^(%d+):%s*(.+)")
+
+          if row and message then
             return {
-              row = tonumber(lnum),
+              row = tonumber(row),
               col = 1,
               message = message,
               severity = vim.diagnostic.severity.ERROR,
