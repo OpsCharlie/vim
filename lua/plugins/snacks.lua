@@ -25,7 +25,6 @@ return {
     zen = { enabled = false },
   },
   keys = {
-    { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Toggle Terminal" },
     -- explorer
     { "<C-n>",      function() Snacks.explorer.open() end,   desc = "Toggle Snacks Explorer" },
     {
@@ -76,6 +75,7 @@ return {
     { "<leader>sf", function() Snacks.scratch.select() end,              desc = "Find Scratch Buffer" },
     -- Other
     { "<C-w>z",     function() Snacks.zen.zoom() end,                    desc = "Toggle Zoom" },
+    { "<leader>tt", function() Snacks.terminal.toggle() end,             desc = "Toggle Terminal" },
     { "<leader>tW", function()
       if Snacks.words.is_enabled() then
         Snacks.words.disable()
