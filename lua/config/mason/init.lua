@@ -25,7 +25,7 @@ return {
     "shellcheck",
     "shfmt",
     "shellharden",
-    "systemd-language-server",
+    "systemd-lsp",
     "systemdlint",
   },
 }
