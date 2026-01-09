@@ -58,5 +58,11 @@ opt.undofile = true
 opt.undolevels = 1000
 opt.undoreload = 10000
 
+-- Session options for persistence
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
+
+-- Create scratch directory for unnamed buffers
+vim.fn.mkdir(home .. "/.vim/scratch", "p")
+
 -- Set max size before bigfiles options are applied in B
 g.bigfile_size_limit = 1024 * 1024 * 10
