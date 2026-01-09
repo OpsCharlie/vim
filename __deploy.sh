@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-BIN_DIR="$HOME/bin"
+BIN_DIR="$HOME/.local/bin"
 [[ -d "$BIN_DIR" ]] || mkdir -p "$BIN_DIR"
 
 ARCH=$(uname -m)
