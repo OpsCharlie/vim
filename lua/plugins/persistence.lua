@@ -101,8 +101,11 @@ return {
 
         if is_scratch and filepath ~= "" then
           -- Confirm before deleting scratch file
-          vim.ui.input({ prompt = "Delete scratch file? (y/n): " .. filepath .. " " }, function(input)
-            if input and input:lower() == "y" then
+          vim.ui.select({"Yes", "No"}, {
+            prompt = "Delete scratch file? " .. filepath,
+            kind = "confirmation",
+          }, function(choice)
+            if choice == "Yes" then
               local success, err = os.remove(filepath)
               if success then
                 vim.notify("Deleted scratch file: " .. filepath, vim.log.levels.INFO)
