@@ -65,7 +65,7 @@ return {
       -- Shell
       formatting.shellharden,
       formatting.shfmt.with({
-        extra_args = { "-i", "4", "-ci" },
+        extra_args = { "-i", "2", "-ci" },
       }),
 
       -- JS, YAML, HTML, Markdown

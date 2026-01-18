@@ -58,20 +58,20 @@ autocmd({ "BufRead", "BufNewFile" }, {
 
 
 autocmd("FileType", {
-  group = augroup('sh_filetype'),
-  pattern = "sh",
+  group = augroup('spaces_filetype'),
+  pattern = { "sh", "bash" },
   callback = function()
-    vim.opt_local.expandtab = false
-    vim.opt_local.tabstop = 4
-    vim.opt_local.softtabstop = 4
-    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
   end,
 })
 
 
 autocmd("FileType", {
-  group = augroup('spaces_filetype'),
-  pattern = { "go", "sh", "bash" },
+  group = augroup('tabs_filetype'),
+  pattern = { "go" },
   callback = function()
     vim.opt_local.expandtab = false
     vim.opt_local.tabstop = 4
