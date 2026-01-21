@@ -1,5 +1,8 @@
+-- Disabled: replaced by smart-splits.nvim which supports both tmux and kitty
+-- To re-enable, set enabled = true
 return {
   "christoomey/vim-tmux-navigator",
+  enabled = false,
   -- The plugin will allow you to navigate seamlessly between vim and tmux splits
   lazy = true,
   cmd = {
