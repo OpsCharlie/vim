@@ -27,5 +27,6 @@ return {
     "shellharden",
     "systemd-lsp",
     "systemdlint",
+    "terraformls",
   },
 }
