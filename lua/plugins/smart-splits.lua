@@ -14,7 +14,8 @@ return {
       -- Default amount for resize commands
       default_amount = 3,
       -- whether to wrap to opposite side when cursor is at edge
-      at_edge = "wrap",
+      -- Note: "wrap" not supported by Kitty, use "stop" or "split"
+      at_edge = "stop",
       -- Multiplexer integration - auto-detects tmux, kitty, wezterm
       multiplexer_integration = nil, -- auto-detect
       -- Disable multiplexer navigation when zoomed (tmux)
