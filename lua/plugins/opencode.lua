@@ -4,6 +4,7 @@ return {
   "sudo-tee/opencode.nvim",
   keys = {
     { '<leader>to', desc = 'Toggle opencode' },
+    { '<leader>o/', desc = 'OC quick_chat', mode = { 'n', 'x' } },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
