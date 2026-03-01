@@ -28,5 +28,6 @@ return {
     "systemd-lsp",
     "systemdlint",
     "terraformls",
+    "tree-sitter-cli",
   },
 }
