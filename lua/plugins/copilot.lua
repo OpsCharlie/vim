@@ -31,6 +31,20 @@ return {
         desc = "Prompt Actions (CopilotChat)",
         mode = { "n", "v" },
       },
+      {
+        "<leader>cq",
+        function()
+          vim.ui.input({
+            prompt = "Quick Chat: ",
+          }, function(input)
+            if input ~= "" then
+              require("CopilotChat").ask(input)
+            end
+          end)
+        end,
+        desc = "Quick Chat (CopilotChat)",
+        mode = { "n", "x" },
+      },
     },
     opts = {
       -- See Configuration section for options
