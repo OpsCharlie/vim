@@ -6,7 +6,7 @@ return {
   config = function()
     vim.g.ansible_unindent_after_newline = 1
     vim.g.ansible_extra_keywords_highlight = 1
-    vim.opt.colorcolumn = "160"
+    vim.opt.colorcolumn = "120"
     vim.keymap.set({ "n", "i" }, "<leader>n", function()
       local filename = vim.fn.expand("%:t:r")                  -- Get current buffer's filename
       vim.api.nvim_put({ filename .. " | " }, "c", true, true) -- Insert at cursor
