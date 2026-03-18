@@ -2,6 +2,7 @@ return {
   "windwp/nvim-autopairs",
   lazy = true,
   event = "InsertEnter",
+  dependencies = { "saghen/blink.cmp" },
   config = function()
     require("nvim-autopairs").setup({
       fast_wrap = {
@@ -10,8 +11,29 @@ return {
       check_ts = true,
       disable_filetype = { "TelescopePrompt", "vim" },
     })
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "BlinkCmpAccept",
+      callback = function()
+        local ok, cmp = pcall(require, "blink.cmp")
+        if not ok then
+          return
+        end
+
+        local item = cmp.get_selected_item()
+        if not item then
+          return
+        end
+
+        local kind = item.kind
+        local kinds = vim.lsp.protocol.CompletionItemKind
+        if kind ~= kinds.Function and kind ~= kinds.Method then
+          return
+        end
+
+        local keys = vim.keycode("()") .. vim.keycode("<Left>")
+        vim.api.nvim_feedkeys(keys, "i", false)
+      end,
+    })
 
     -- Add spaces between parentheses
     local npairs = require("nvim-autopairs")

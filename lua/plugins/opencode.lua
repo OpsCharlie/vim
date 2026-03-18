@@ -15,7 +15,7 @@ return {
   config = function()
     require("opencode").setup({
       preferred_picker = 'snacks',
-      preferred_completion = 'nvim-cmp',
+      preferred_completion = 'blink',
       default_mode = 'plan',
       keymap = {
         editor = {
@@ -33,20 +33,20 @@ return {
           ['<M-m>'] = { 'switch_mode' },                               -- Switch between modes (build/plan)
           ['<tab>'] = {
             function()
-              local cmp = require('cmp')
-              if cmp.visible() then
-                cmp.select_next_item()
+              local cmp = require('blink.cmp')
+              if cmp.is_menu_visible() then
+                cmp.select_next()
               else
-                cmp.complete()
+                cmp.show()
               end
             end,
             mode = { 'i', 's' },
           }, -- Tab completion
           ['<S-Tab>'] = {
             function()
-              local cmp = require('cmp')
-              if cmp.visible() then
-                cmp.select_prev_item()
+              local cmp = require('blink.cmp')
+              if cmp.is_menu_visible() then
+                cmp.select_prev()
                 return ''
               end
               return '<S-Tab>'

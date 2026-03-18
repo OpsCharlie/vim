@@ -1,147 +1,93 @@
 return {
-  -- cmp and lsp setup
   {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
+    version = "1.*",
     lazy = true,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-nvim-lua",
       { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
-      "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-      "hrsh7th/cmp-emoji",
     },
     config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-
       require("luasnip.loaders.from_vscode").lazy_load({
         paths = vim.fn.stdpath("config") .. "/vim-snippets/luasnippets",
       })
 
-      cmp.setup({
-        completion = {
-          completeopt = "menu,menuone,preview,noselect",
-          keyword_length = 3,
-        },
+      require("blink.cmp").setup({
         enabled = function()
-          -- Disable completion in snacks picker input
-          if vim.b.snacks_picker_input then
-            return false
-          end
-          local line = vim.api.nvim_get_current_line()
-          local col = vim.fn.col('.') - 1
-          local prefix = line:sub(1, col)
-          -- Allow completion with any length if line starts with ':'
-          if prefix:match("^:%S*") then
-            return true
-          end
-          -- Otherwise, require at least 3 characters before cursor
-          return #prefix >= 3
+          return not vim.b.snacks_picker_input
         end,
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
+        snippets = {
+          preset = "luasnip",
         },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+        keymap = {
+          preset = "none",
+          ["<CR>"] = { "accept", "fallback" },
+          ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+          ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+          ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+          ["<C-f>"] = { "scroll_documentation_down", "fallback" },
         },
-        preselect = cmp.PreselectMode.None,
-        mapping = {
-          ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = false,
-          }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        },
-        sources = {
-          { name = "luasnip",                 priority = 100 }, -- For luasnip users.
-          { name = "nvim_lsp",                priority = 90 },
-          { name = "nvim_lsp_signature_help", priority = 80 },
-          {
-            name = "buffer",
-            priority = 95,
-            option = {
-              -- Returns a list of buffer numbers that are currently visible in open windows.
-              get_bufnrs = function()
-                local bufs = {}
-                for _, win in ipairs(vim.api.nvim_list_wins()) do
-                  bufs[vim.api.nvim_win_get_buf(win)] = true
-                end
-                return vim.tbl_keys(bufs)
-              end,
+        completion = {
+          list = {
+            selection = {
+              preselect = false,
+              auto_insert = false,
             },
           },
-          { name = "nvim_lua",        priority = 70 },
-          { name = "path",            priority = 60 },
-          { name = 'render-markdown', priority = 50 },
-          { name = "emoji",           priority = 20 },
+          menu = {
+            border = "rounded",
+            draw = {
+              columns = {
+                { "label", "label_description", gap = 1 },
+                { "kind_icon", "kind" },
+              },
+            },
+          },
+          documentation = {
+            auto_show = false,
+            window = {
+              border = "rounded",
+            },
+          },
+        },
+        signature = {
+          enabled = true,
+          window = {
+            border = "rounded",
+          },
+        },
+        sources = {
+          default = { "snippets", "lsp", "path", "buffer" },
+          providers = {
+            lsp = {
+              min_keyword_length = 3,
+              fallbacks = {},
+            },
+            snippets = {
+              min_keyword_length = 3,
+            },
+            path = {
+              min_keyword_length = 3,
+            },
+            buffer = {
+              min_keyword_length = 3,
+              opts = {
+                get_bufnrs = function()
+                  local bufs = {}
+                  for _, win in ipairs(vim.api.nvim_list_wins()) do
+                    bufs[vim.api.nvim_win_get_buf(win)] = true
+                  end
+                  return vim.tbl_keys(bufs)
+                end,
+              },
+            },
+          },
+        },
+        cmdline = {
+          enabled = true,
         },
       })
-
-      vim.schedule(function()
-        vim.keymap.set({ "i", "s" }, "<CR>", function()
-          if cmp.visible() then
-            cmp.confirm({
-              behavior = cmp.ConfirmBehavior.Insert,
-              select = false,
-            })
-          elseif vim.fn.pumvisible() == 1 then
-            vim.api.nvim_feedkeys(vim.keycode("<C-y>"), "n", true)
-          else
-            vim.api.nvim_feedkeys(vim.keycode("<CR>"), "n", true)
-          end
-        end, { silent = true })
-
-        vim.keymap.set({ "i", "s" }, "<Tab>", function()
-          if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-          elseif vim.fn.pumvisible() == 1 then
-            vim.api.nvim_feedkeys(vim.keycode("<C-n>"), "n", true)
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            vim.api.nvim_feedkeys(vim.keycode("<Tab>"), "n", true)
-          end
-        end, { silent = true })
-
-        vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-          if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-          elseif vim.fn.pumvisible() == 1 then
-            vim.api.nvim_feedkeys(vim.keycode("<C-p>"), "n", true)
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            vim.api.nvim_feedkeys(vim.keycode("<S-Tab>"), "n", true)
-          end
-        end, { silent = true })
-      end)
     end,
   },
 }

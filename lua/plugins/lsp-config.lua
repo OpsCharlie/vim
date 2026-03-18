@@ -11,8 +11,20 @@ return {
     -- Integration between Mason and nvim-lspconfig.
     lazy = true,
     event = { "BufReadPost", "BufNewFile", "FileType" },
-    dependencies = { "neovim/nvim-lspconfig" },
-    opts = {},
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "saghen/blink.cmp",
+    },
+    opts = {
+      automatic_enable = true,
+    },
+    config = function(_, opts)
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+      })
+
+      require("mason-lspconfig").setup(opts)
+    end,
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
