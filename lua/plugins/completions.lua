@@ -36,7 +36,7 @@ return {
           },
         },
         documentation = {
-          auto_show = false,
+          auto_show = true,
           window = {
             border = "rounded",
           },
