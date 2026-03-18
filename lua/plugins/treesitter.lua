@@ -24,15 +24,15 @@ return {
       end
     end,
   },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    lazy = true,
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      enable = true,
-      max_lines = 3,
-      trim_scope = "outer",
-    },
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   lazy = true,
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   opts = {
+  --     enable = true,
+  --     max_lines = 3,
+  --     trim_scope = "outer",
+  --   },
+  -- },
 }
