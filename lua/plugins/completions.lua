@@ -18,6 +18,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+
       require("luasnip.loaders.from_vscode").lazy_load({
         paths = vim.fn.stdpath("config") .. "/vim-snippets/luasnippets",
       })
@@ -57,7 +58,7 @@ return {
             behavior = cmp.ConfirmBehavior.Insert,
             select = false,
           }),
-          ["<Tab>"] = function(fallback)
+          ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -65,8 +66,8 @@ return {
             else
               fallback()
             end
-          end,
-          ["<S-Tab>"] = function(fallback)
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -74,7 +75,7 @@ return {
             else
               fallback()
             end
-          end,
+          end, { "i", "s" }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
         },
@@ -102,6 +103,45 @@ return {
           { name = "emoji",           priority = 20 },
         },
       })
+
+      vim.schedule(function()
+        vim.keymap.set({ "i", "s" }, "<CR>", function()
+          if cmp.visible() then
+            cmp.confirm({
+              behavior = cmp.ConfirmBehavior.Insert,
+              select = false,
+            })
+          elseif vim.fn.pumvisible() == 1 then
+            vim.api.nvim_feedkeys(vim.keycode("<C-y>"), "n", true)
+          else
+            vim.api.nvim_feedkeys(vim.keycode("<CR>"), "n", true)
+          end
+        end, { silent = true })
+
+        vim.keymap.set({ "i", "s" }, "<Tab>", function()
+          if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          elseif vim.fn.pumvisible() == 1 then
+            vim.api.nvim_feedkeys(vim.keycode("<C-n>"), "n", true)
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            vim.api.nvim_feedkeys(vim.keycode("<Tab>"), "n", true)
+          end
+        end, { silent = true })
+
+        vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+          if cmp.visible() then
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          elseif vim.fn.pumvisible() == 1 then
+            vim.api.nvim_feedkeys(vim.keycode("<C-p>"), "n", true)
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            vim.api.nvim_feedkeys(vim.keycode("<S-Tab>"), "n", true)
+          end
+        end, { silent = true })
+      end)
     end,
   },
 }
