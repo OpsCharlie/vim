@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import json
 import os
 import os.path
 import ansible
@@ -7,9 +8,11 @@ from packaging import version
 import ansible.modules
 from ansible.utils.plugin_docs import get_docstring
 from ansible.plugins.loader import fragment_loader
-from typing import Any, List
+from typing import Any, List, Dict
 
 OUTPUT_FILENAME = "ansible.snippets"
+OUTPUT_FILENAME_VSCODE = "../ansible.json"
+OUTPUT_FORMAT = ["snipmate", "vscode"]
 OUTPUT_STYLE = ["multiline", "dictionary"]
 HEADER = [
     "# NOTE: This file is auto-generated. Modifications may be overwritten.",
@@ -60,10 +63,10 @@ def get_files_collections(user: bool = False) -> List[str]:
     """
 
     if user:
-        collection_path = '~/.ansible/collections/ansible_collections/'
+        collection_path = "~/.ansible/collections/ansible_collections/"
     else:
         # collection_path = '~/.local/lib/python3.11/site-packages/ansible_collections'
-        collection_path = '/usr/share/ansible/collections/ansible_collections/'
+        collection_path = "/usr/share/ansible/collections/ansible_collections/"
 
     file_names: List[str] = []
     for root, dirs, files in os.walk(os.path.expanduser(collection_path)):
@@ -74,7 +77,9 @@ def get_files_collections(user: bool = False) -> List[str]:
         file_names += [
             f"{root}/{file_name}"
             for file_name in files_without_symlinks
-            if file_name.endswith(".py") and not file_name.startswith("__init__") and "plugins/modules" in root
+            if file_name.endswith(".py")
+            and not file_name.startswith("__init__")
+            and "plugins/modules" in root
         ]
     return sorted(file_names)
 
@@ -118,11 +123,35 @@ def escape_strings(escapist: str) -> str:
 
     return (
         escapist.replace("\\", "\\\\")
-                .replace("`", r"\`")
-                .replace("{", r"\{")
-                .replace("}", r"\}")
-                .replace("$", r"\$")
-                .replace("\"", "'")
+        .replace("`", r"\`")
+        .replace("{", r"\{")
+        .replace("}", r"\}")
+        .replace("$", r"\$")
+        .replace('"', "'")
+    )
+
+
+def escape_strings_vscode(escapist: str) -> str:
+    r"""Escape strings for VSCode JSON format
+
+    Escapes instances of \ and "
+
+    Parameters
+    ----------
+    escapist: str
+        A string to apply string replacement on
+
+    Returns
+    -------
+    str
+        The input string with all defined replacements applied
+    """
+    return (
+        escapist.replace("\\", "\\\\")
+        .replace('"', '\\"')
+        .replace("\n", "\\n")
+        .replace("\t", "\\t")
+        .replace("$", "\\$")
     )
 
 
@@ -201,6 +230,63 @@ def option_data_to_snippet_completion(option_data: Any) -> str:
     return ""
 
 
+def option_data_to_snippet_completion_vscode(option_data: Any) -> str:
+    """Convert Ansible option info into a string for VSCode JSON snippets
+
+    Parameters
+    ----------
+    option_data: Any
+        The option parameters
+
+    Returns
+    -------
+    str
+        A string representing one formatted option parameter
+    """
+    default = option_data.get("default")
+    choices = option_data.get("choices")
+    option_type = option_data.get("type")
+
+    # if the option is of type "bool" return "yes" or "no"
+    if option_type and "bool" in option_type:
+        if default in [True, "True", "true", "yes"]:
+            return "true"
+        if default in [False, "False", "false", "no"]:
+            return "false"
+
+    # if there is no default and no choices, return empty
+    if not choices and default is None:
+        return ""
+
+    # if there is a default but no choices return the default as string
+    if default is not None and not choices:
+        if len(str(default)) == 0:
+            return ""
+        else:
+            return str(default)
+
+    # if there is a default and there are choices return the list of choices
+    # with the default prefixed with #
+    if default is not None and choices:
+        if isinstance(default, list):
+            prefixed_choices = [
+                f"#{choice}" if choice in default else f"{choice}" for choice in choices
+            ]
+            return str(prefixed_choices)
+        else:
+            prefixed_choices = [
+                f"#{choice}" if str(choice) == str(default) else f"{choice}"
+                for choice in choices
+            ]
+            return "|".join(prefixed_choices)
+
+    # if there are choices but no default, return the choices as pipe separated
+    if choices and default is None:
+        return "|".join([str(choice) for choice in choices])
+
+    return ""
+
+
 def module_options_to_snippet_options(module_options: Any) -> List[str]:
     """Convert module options to UltiSnips snippet options
 
@@ -258,6 +344,56 @@ def module_options_to_snippet_options(module_options: Any) -> List[str]:
     return options
 
 
+def module_options_to_snippet_options_vscode(module_options: Any) -> List[str]:
+    """Convert module options to VSCode JSON snippet options
+
+    Parameters
+    ----------
+    module_options: Any
+        The "options" attribute of an AnsibleMapping object
+
+    Returns
+    -------
+    List[str]
+        A list of strings representing converted options for VSCode JSON
+    """
+    options: List[str] = []
+
+    if not module_options:
+        return options
+
+    # order by option name
+    module_options = sorted(module_options.items(), key=lambda x: x[0])
+    # order by "required" attribute
+    module_options = sorted(
+        module_options, key=lambda x: x[1].get("required", False), reverse=True
+    )
+
+    first_non_required = True
+    for index, (name, option_data) in enumerate(module_options, start=1):
+        if not name and not option_data:
+            continue
+        else:
+            # add blank line between required and non-required options
+            if not option_data.get("required") and first_non_required:
+                options += [""]
+                first_non_required = False
+
+            completion = option_data_to_snippet_completion_vscode(option_data)
+            comment_char = (
+                "#"
+                if not option_data.get("required") and args.comment_non_required
+                else ""
+            )
+
+            if name == "free_form":
+                options += [f"\t{comment_char}{name}: ${{{index}:{completion}}}"]
+            else:
+                options += [f"\t{comment_char}{name}: ${{{index}:{completion}}}"]
+
+    return options
+
+
 def convert_docstring_to_snippet(convert_docstring: Any, collection_name) -> List[str]:
     """Converts data about an Ansible module into an UltiSnips snippet string
 
@@ -287,23 +423,76 @@ def convert_docstring_to_snippet(convert_docstring: Any, collection_name) -> Lis
         else:
             snippet_module_name = f"{collection_name}.{module_name}:"
 
-        snippet += [f'snippet {module_name} "{escape_strings(module_short_description)}" {snippet_options}']
+        snippet += [
+            f'snippet {module_name} "{escape_strings(module_short_description)}" {snippet_options}'
+        ]
         if args.style == "dictionary":
             snippet += [f"{snippet_module_name}"]
         else:
-            snippet += [f"{snippet_module_name}:{' >' if convert_docstring.get('options') else ''}"]
-        module_options = module_options_to_snippet_options(convert_docstring.get("options"))
+            snippet += [
+                f"{snippet_module_name}:{' >' if convert_docstring.get('options') else ''}"
+            ]
+        module_options = module_options_to_snippet_options(
+            convert_docstring.get("options")
+        )
         snippet += module_options
         snippet += ["endsnippet"]
 
     return snippet
 
-def get_collection_name(filepath:str) -> str:
-    """ Returns the collection name for a full file path """
 
-    path_splitted = filepath.split('/')
+def convert_docstring_to_snippet_vscode(
+    convert_docstring: Any, collection_name
+) -> Dict[str, Any]:
+    """Converts data about an Ansible module into a VSCode JSON snippet
 
-    collection_top_folder_index = path_splitted.index('ansible_collections')
+    Parameters
+    ----------
+    convert_docstring: Any
+        An AnsibleMapping object representing the docstring for an Ansible
+        module
+
+    Returns
+    -------
+    Dict[str, Any]
+        A dict representing a VSCode JSON compatible snippet
+    """
+    if "module" not in convert_docstring.keys():
+        return {}
+
+    module_name = convert_docstring["module"]
+    module_short_description = convert_docstring.get("short_description", "")
+
+    # use only the module name if ansible version < 2.10
+    if version.parse(ANSIBLE_VERSION) < version.parse("2.10"):
+        snippet_module_name = f"{module_name}:"
+    else:
+        snippet_module_name = f"{collection_name}.{module_name}:"
+
+    body = [snippet_module_name]
+    module_options = module_options_to_snippet_options_vscode(
+        convert_docstring.get("options")
+    )
+    body.extend(module_options)
+    body = [line for line in body if line.strip()]  # Remove empty lines
+
+    return {
+        module_name: {
+            "prefix": module_name,
+            "body": body,
+            "description": module_short_description[:100]
+            if module_short_description
+            else "",
+        }
+    }
+
+
+def get_collection_name(filepath: str) -> str:
+    """Returns the collection name for a full file path"""
+
+    path_splitted = filepath.split("/")
+
+    collection_top_folder_index = path_splitted.index("ansible_collections")
     collection_namespace = path_splitted[collection_top_folder_index + 1]
     collection_name = path_splitted[collection_top_folder_index + 2]
 
@@ -312,12 +501,17 @@ def get_collection_name(filepath:str) -> str:
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--output",
         help=f"Output filename (default: {OUTPUT_FILENAME})",
         default=OUTPUT_FILENAME,
+    )
+    parser.add_argument(
+        "--format",
+        help=f"Output format (default: {OUTPUT_FORMAT[0]})",
+        choices=OUTPUT_FORMAT,
+        default=OUTPUT_FORMAT[0],
     )
     parser.add_argument(
         "--style",
@@ -326,32 +520,32 @@ if __name__ == "__main__":
         default=OUTPUT_STYLE[0],
     )
     parser.add_argument(
-        '--user',
-        help="Include user modules",
-        action="store_true",
-        default=False
+        "--user", help="Include user modules", action="store_true", default=False
     )
     parser.add_argument(
-        '--no-description',
+        "--no-description",
         help="Remove options description",
         action="store_true",
-        default=False
+        default=False,
     )
     parser.add_argument(
-        '--comment-non-required',
+        "--comment-non-required",
         help="Comment non-required options",
         action="store_true",
-        default=False
+        default=False,
     )
     args = parser.parse_args()
 
-
     if version.parse(ANSIBLE_VERSION) < version.parse("2.10"):
         print(f"ansible version {ANSIBLE_VERSION} doesn't support FQCN")
-        print("generated snippets will only use the module name e.g. 'yum' instead of 'ansible.builtin.yum'")
+        print(
+            "generated snippets will only use the module name e.g. 'yum' instead of 'ansible.builtin.yum'"
+        )
     else:
         print(f"ansible version {ANSIBLE_VERSION} supports using FQCN")
-        print("Generated snippets will use FQCN e.g. 'ansible.builtin.yum' instead of 'yum'")
+        print(
+            "Generated snippets will use FQCN e.g. 'ansible.builtin.yum' instead of 'yum'"
+        )
         print("Still, you only need to type 'yum' to trigger the snippet")
 
     modules_docstrings = []
@@ -360,7 +554,7 @@ if __name__ == "__main__":
     for f in builtin_modules_paths:
         docstring_builtin = get_module_docstring(f)
         if docstring_builtin and docstring_builtin not in modules_docstrings:
-            docstring_builtin['collection_name'] = "ansible.builtin"
+            docstring_builtin["collection_name"] = "ansible.builtin"
             modules_docstrings.append(docstring_builtin)
 
     system_modules_paths = get_files_collections()
@@ -369,7 +563,7 @@ if __name__ == "__main__":
             docstring_system = get_module_docstring(f)
             if docstring_system and docstring_system not in modules_docstrings:
                 collection_name = get_collection_name(f)
-                docstring_system['collection_name'] = collection_name
+                docstring_system["collection_name"] = collection_name
                 modules_docstrings.append(docstring_system)
         except:
             print("Error ", f)
@@ -381,14 +575,38 @@ if __name__ == "__main__":
                 docstring_user = get_module_docstring(f)
                 if docstring_user and docstring_user not in modules_docstrings:
                     collection_name = get_collection_name(f)
-                    docstring_user['collection_name'] = collection_name
+                    docstring_user["collection_name"] = collection_name
                     modules_docstrings.append(docstring_user)
             except:
                 print("Error ", f)
 
-    with open(args.output, "w") as f:
-        f.writelines(f"{header}\n" for header in HEADER)
-        for docstring in modules_docstrings:
-            f.writelines(
-                f"{line}\n" for line in convert_docstring_to_snippet(docstring, docstring.get("collection_name"))
+    if args.format == "vscode":
+        if args.output == OUTPUT_FILENAME:
+            output_file = OUTPUT_FILENAME_VSCODE
+        else:
+            output_file = (
+                args.output.replace(".snippets", ".json")
+                if args.output.endswith(".snippets")
+                else args.output
             )
+            if not output_file.endswith(".json"):
+                output_file = output_file + ".json"
+        all_snippets = {}
+        for docstring in modules_docstrings:
+            snippet = convert_docstring_to_snippet_vscode(
+                docstring, docstring.get("collection_name")
+            )
+            all_snippets.update(snippet)
+        with open(output_file, "w") as f:
+            json.dump(all_snippets, f, indent=2)
+        print(f"Generated {len(all_snippets)} snippets to {output_file}")
+    else:
+        with open(args.output, "w") as f:
+            f.writelines(f"{header}\n" for header in HEADER)
+            for docstring in modules_docstrings:
+                f.writelines(
+                    f"{line}\n"
+                    for line in convert_docstring_to_snippet(
+                        docstring, docstring.get("collection_name")
+                    )
+                )
