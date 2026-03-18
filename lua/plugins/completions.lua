@@ -5,21 +5,14 @@ return {
     lazy = true,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
       "rafamadriz/friendly-snippets",
     },
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load({
-        paths = vim.fn.stdpath("config") .. "/vim-snippets/luasnippets",
-      })
 
       require("blink.cmp").setup({
         enabled = function()
           return not vim.b.snacks_picker_input
         end,
-        snippets = {
-          preset = "luasnip",
-        },
         keymap = {
           preset = "none",
           ["<CR>"] = { "accept", "fallback" },
@@ -60,12 +53,16 @@ return {
         sources = {
           default = { "snippets", "lsp", "path", "buffer" },
           providers = {
+            snippets = {
+              opts = {
+                search_paths = {
+                  vim.fn.stdpath("config") .. "/vim-snippets/luasnippets",
+                },
+              },
+            },
             lsp = {
               min_keyword_length = 3,
               fallbacks = {},
-            },
-            snippets = {
-              min_keyword_length = 3,
             },
             path = {
               min_keyword_length = 3,
