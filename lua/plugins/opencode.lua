@@ -5,6 +5,7 @@ return {
   keys = {
     { '<leader>to', desc = 'Toggle opencode' },
     { '<leader>o/', desc = 'OC quick_chat', mode = { 'n', 'x' } },
+    { '<leader>ocm', desc = 'OC commit message' },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -13,6 +14,8 @@ return {
     -- 'nvim-telescope/telescope.nvim',
   },
   config = function()
+    local opencode_config = require('config.opencode')
+
     require("opencode").setup({
       preferred_picker = 'snacks',
       preferred_completion = 'blink',
@@ -20,6 +23,7 @@ return {
       keymap = {
         editor = {
           ["<leader>to"] = { "toggle" },
+          ['<leader>ocm'] = { opencode_config.run_commit_message_prompt, desc = 'OC commit message' },
         },
         input_window = {
           ['<cr>'] = { 'submit_input_prompt', mode = { 'n' } },        -- Submit prompt (normal mode)
@@ -87,6 +91,8 @@ return {
         end
       end,
     })
+
+    opencode_config.setup_user_commands()
 
     -- vim.api.nvim_create_autocmd("BufEnter", {
     --   pattern = "opencode://input",
