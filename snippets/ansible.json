@@ -1023,7 +1023,7 @@
       "\t#attributes: ${3:}",
       "\t#backup: ${4:false}",
       "\t#block_end_string: ${5:%\\}}",
-      "\t#block_start_string: \\${6:{%\\}",
+      "\t#block_start_string: ${6:{%}",
       "\t#comment_end_string: ${7:}",
       "\t#comment_start_string: ${8:}",
       "\t#follow: ${9:false}",
@@ -1031,7 +1031,7 @@
       "\t#group: ${11:}",
       "\t#lstrip_blocks: ${12:false}",
       "\t#mode: ${13:}",
-      "\t#newline_sequence: ${14:#\\n|\\r|\\r\\n}",
+      "\t#newline_sequence: ${14:} # \\n|\\r|\\r\\n",
       "\t#output_encoding: ${15:utf-8}",
       "\t#owner: ${16:}",
       "\t#selevel: ${17:}",
@@ -1042,7 +1042,7 @@
       "\t#unsafe_writes: ${22:false}",
       "\t#validate: ${23:}",
       "\t#variable_end_string: ${24:\\}\\}}",
-      "\t#variable_start_string: \\${25:{{\\}"
+      "\t#variable_start_string: ${25:{{}}"
     ]
   },
   "unarchive": {
@@ -1995,14 +1995,14 @@
       "\tsrc: ${2:}",
       "\t#backup: ${3:false}",
       "\t#block_end_string: ${4:%\\}}",
-      "\t#block_start_string: \\${5:{%\\}",
+      "\t#block_start_string: ${5:{%}",
       "\t#force: ${6:true}",
       "\t#lstrip_blocks: ${7:false}",
-      "\t#newline_sequence: ${8:\\n|\\r|#\\r\\n}",
+      "\t#newline_sequence: ${8:} # \\n|\\r|\\r\\n",
       "\t#output_encoding: ${9:utf-8}",
       "\t#trim_blocks: ${10:true}",
       "\t#variable_end_string: ${11:\\}\\}}",
-      "\t#variable_start_string: \\${12:{{\\}"
+      "\t#variable_start_string: ${12:{{}}"
     ]
   },
   "win_updates": {
