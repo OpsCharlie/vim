@@ -24,6 +24,18 @@ return {
     keys = {
       { "<leader>tc", ":CopilotChatToggle<CR>", desc = "Copilot Chat" },
       {
+        "<leader>gc",
+        function()
+          require("CopilotChat").open({
+            window = {
+              layout = "float",
+            },
+          })
+          require("CopilotChat").ask("/Commit")
+        end,
+        desc = "Commit message (CopilotChat)",
+      },
+      {
         "<leader>cp",
         function()
           require("CopilotChat").select_prompt()
