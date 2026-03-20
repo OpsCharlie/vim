@@ -83,14 +83,6 @@ return {
       },
     })
 
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "OpencodeEvent",
-      callback = function(args)
-        if args.data.type == "session.idle" then
-          vim.notify("OpenCode finished responding", vim.log.levels.INFO)
-        end
-      end,
-    })
 
     opencode_config.setup_user_commands()
 

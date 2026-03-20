@@ -24,6 +24,15 @@ function M.setup_user_commands()
     desc = 'Write a commit message with OpenCode',
     nargs = '*',
   })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "OpencodeEvent",
+    callback = function(args)
+      if args.data.type == "session.idle" then
+        vim.notify("OpenCode finished responding", vim.log.levels.INFO)
+      end
+    end,
+  })
 end
 
 return M
