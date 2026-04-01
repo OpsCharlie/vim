@@ -26,6 +26,7 @@ return {
     wk.add({
       { "<leader>t", group = "Toggle" },
       { "<leader>c", group = "Code" },
+      { "<leader>g", group = "Git/Grep" },
       { "<leader>d", group = "Dap" },
       { "<leader>o", group = "Opencode" },
     })
