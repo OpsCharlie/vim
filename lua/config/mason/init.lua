@@ -11,7 +11,6 @@ return {
     "docker-compose-language-service",
     "golangci-lint",
     "gopls",
-    "grammarly-languageserver",
     "jq-lsp",
     "json-lsp",
     "lua-language-server",
