@@ -1,7 +1,7 @@
 local M = {}
 
 function M.run_commit_message_prompt(extra)
-  local prompt = [[Write a commit message for the current change using Commitizen / Conventional Commits format.
+  local prompt = [[Write a commit message for the current staged change using Commitizen / Conventional Commits format.
 
 Requirements:
 - Keep the title under 50 characters.
