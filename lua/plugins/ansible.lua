@@ -2,8 +2,9 @@ return {
   "pearofducks/ansible-vim",
   -- Syntax plugin for Ansible 2.x, it supports YAML playbooks, Jinja2 templates, and Ansible's hosts files.
   lazy = true,
-  ft = "yaml.ansible",
+  ft = "ansible",
   config = function()
+    require('ansible').setup()
     vim.g.ansible_unindent_after_newline = 1
     vim.g.ansible_extra_keywords_highlight = 1
     vim.opt.colorcolumn = "120"
@@ -17,9 +18,9 @@ return {
     end, { desc = "Add buffer name prefix", silent = true })
     vim.keymap.set("n", "<leader>a", "wbiansible.builtin.<ESC>",
       { desc = "Add FQCN for builtin module", silent = true })
-    -- Set 'K' and 'ca' mappings for every yaml.ansible buffer using autocmd
+    -- Set 'K' and 'ca' mappings for every ansible buffer using autocmd
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = "yaml.ansible",
+      pattern = "ansible",
       callback = function(ev)
         -- make 'gf' work from include_tasks
         local function find_tasks_dir(filepath)

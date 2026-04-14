@@ -53,7 +53,7 @@ autocmd("BufReadPost", {
 autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup('set_filetype'),
   pattern = { "*/ansible/*.yml", "*/ansible/hosts" },
-  command = "set filetype=yaml.ansible",
+  command = "set filetype=ansible",
 })
 
 
@@ -109,7 +109,7 @@ autocmd("LspAttach", {
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Document" })
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
-    if vim.bo.filetype ~= "yaml.ansible" then
+    if vim.bo.filetype ~= "ansible" then
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action LSP" })
     end
     vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format File LSP" })
