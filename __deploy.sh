@@ -54,18 +54,21 @@ config() {
 }
 
 main() {
-    check_deps
+    # Detect Arch Linux
+    if [[ ! -f /etc/arch-release ]]; then
+      check_deps
 
-    LATEST_VERSION=$(get_latest_version)
-    if [[ -x "$BIN_DIR/nvim" ]]; then
-        INSTALLED_VERSION=$("$BIN_DIR/nvim" --version | grep NVIM | awk '{print $2}')
-        if [ "$INSTALLED_VERSION" = "$LATEST_VERSION" ]; then
-            echo "Latest version already installed"
-        else
-            download_nvim "$LATEST_VERSION"
-        fi
-    else
-        download_nvim "$LATEST_VERSION"
+      LATEST_VERSION=$(get_latest_version)
+      if [[ -x "$BIN_DIR/nvim" ]]; then
+          INSTALLED_VERSION=$("$BIN_DIR/nvim" --version | grep NVIM | awk '{print $2}')
+          if [ "$INSTALLED_VERSION" = "$LATEST_VERSION" ]; then
+              echo "Latest version already installed"
+          else
+              download_nvim "$LATEST_VERSION"
+          fi
+      else
+          download_nvim "$LATEST_VERSION"
+      fi
     fi
 
     config
