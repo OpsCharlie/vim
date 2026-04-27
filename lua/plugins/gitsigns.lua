@@ -12,6 +12,7 @@ return {
     { "<leader>ga", mode = "n", "<cmd>Gitsigns stage_hunk<CR>",                    desc = "Git Add Hunk" },
     { "<leader>gA", mode = "n", "<cmd>Gitsigns stage_buffer<CR>",                  desc = "Git Add Buffer" },
     { "<leader>gp", mode = "n", "<cmd>Gitsigns preview_hunk<CR>",                  desc = "Git Preview hunk" },
+    { "dp", mode = "n", "<cmd>diffput<CR>",                                        desc = "Diff put" },
     --   { "<leader>gu", mode = "n", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Git Undo Stage Hunk" },
     --   { "<leader>gr", mode = "n", "<cmd>Gitsigns reset_hunk<CR>",      desc = "Git Reset Hunk" },
     --   { "<leader>gR", mode = "n", "<cmd>Gitsigns reset_buffer<CR>",    desc = "Git Reset buffer" },
