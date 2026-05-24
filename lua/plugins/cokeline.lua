@@ -23,7 +23,7 @@ return {
       },
       components = {
         {
-          text = "｜",
+          text = " │ ",
         },
         {
           text = function(buffer)

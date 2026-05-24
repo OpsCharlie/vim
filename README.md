@@ -5,7 +5,7 @@
 ```bash
 sudo apt install curl git gcc inotify-tools \
                  python3-pip python3-venv \
-                 ripgrep fd-find luarocks jq
+                 ripgrep fd-find luarocks jq rust
 ```
 
 ### python env
