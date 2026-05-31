@@ -1,7 +1,7 @@
 return {
   "NvChad/nvim-colorizer.lua",
   -- A high-performance color highlighter
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  event = { "FileType" },
   config = function()
     require("colorizer").setup({
       filetypes = { "*", "!prompt", "!popup" },
