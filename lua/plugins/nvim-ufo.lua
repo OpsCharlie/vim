@@ -16,7 +16,10 @@ return {
     { "zP", function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Preview fold", },
   },
   opts = {
-    provider_selector = function()
+    provider_selector = function(bufnr, filetype, buftype)
+      if filetype == "opencode_output" then
+        return ""
+      end
       return { "treesitter", "indent" }
     end,
   },

@@ -3,8 +3,8 @@
 return {
   "sudo-tee/opencode.nvim",
   keys = {
-    { '<leader>to', desc = 'Toggle opencode' },
-    { '<leader>o/', desc = 'OC quick_chat', mode = { 'n', 'x' } },
+    { '<leader>to',  desc = 'Toggle opencode' },
+    { '<leader>o/',  desc = 'OC quick_chat',    mode = { 'n', 'x' } },
     { '<leader>ocm', desc = 'OC commit message' },
   },
   dependencies = {
@@ -69,6 +69,11 @@ return {
         input = {
           text = {
             wrap = false, -- Wraps text inside input window
+          },
+        },
+        output = {
+          tools = {
+            use_folds = false,
           },
         },
       },
