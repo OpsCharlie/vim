@@ -1,20 +1,8 @@
 local M = {}
 
 function M.run_commit_message_prompt(extra)
-  local prompt = [[Write a commit message for the current staged change using Commitizen / Conventional Commits format.
-
-Requirements:
-- Keep the title under 50 characters.
-- Wrap the body at 72 characters.
-- Output as a `gitcommit` fenced code block.
-- Copy the plain text version to the clipboard.
-- Return only the commit message.]]
-
-  if extra and extra ~= '' then
-    prompt = prompt .. '\n\nAdditional context:\n' .. extra
-  end
-
-  require('opencode.api').run(prompt, { agent = 'build' })
+  local args = extra and extra ~= '' and vim.split(extra, ' ') or {}
+  require('opencode.api').run_user_command('commit', args)
 end
 
 function M.setup_user_commands()
