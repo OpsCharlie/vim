@@ -1,7 +1,8 @@
 return {
   "mrjones2014/smart-splits.nvim",
   -- Seamless navigation between nvim and tmux/kitty/wezterm panes
-  lazy = false,
+  lazy = true,
+  event = "VeryLazy",
   build = "./kitty/install-kittens.bash",
   config = function()
     local smart_splits = require("smart-splits")
