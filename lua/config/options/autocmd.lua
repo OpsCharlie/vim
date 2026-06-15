@@ -127,7 +127,6 @@ autocmd("LspAttach", {
         )
         vim.diagnostic.config({ virtual_lines = false })
         vim.g._diagnostic_toggle_state = 2
-        vim.o.updatetime = 100
         vim.notify("Diagnostic float enabled", vim.log.levels.INFO, { render = "minimal", title = "Diagnostic" })
       elseif state == 2 then
         -- Disable diagnostics
