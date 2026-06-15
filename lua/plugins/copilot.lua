@@ -4,12 +4,14 @@ return {
     -- GitHub Copilot for Vim
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
+    init = function()
+      vim.g.copilot_no_tab_map = true
+    end,
     config = function()
       vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
         expr = true,
         replace_keycodes = false,
       })
-      vim.g.copilot_no_tab_map = true
     end,
   },
   {
@@ -31,7 +33,9 @@ return {
               layout = "float",
             },
           })
-          require("CopilotChat").ask("/Commit")
+          vim.schedule(function()
+            require("CopilotChat").ask("/Commit")
+          end)
         end,
         desc = "Commit message (CopilotChat)",
       },
@@ -49,7 +53,7 @@ return {
           vim.ui.input({
             prompt = "Quick Chat: ",
           }, function(input)
-            if input ~= "" then
+            if input and input ~= "" then
               require("CopilotChat").ask(input)
             end
           end)
