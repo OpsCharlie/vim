@@ -59,7 +59,7 @@ return {
       },
     },
     opts = {
-      -- See Configuration section for options
+      model = "claude-sonnet-4.6",
     },
     config = function(_, opts)
       local chat = require("CopilotChat")

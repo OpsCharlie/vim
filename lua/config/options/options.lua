@@ -21,7 +21,6 @@ opt.list = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
-opt.autochdir = true
 opt.smoothscroll = true
 opt.scrolloff = 4
 
@@ -39,7 +38,6 @@ opt.relativenumber = true
 -- disable nvim intro
 opt.shortmess:append({ s = true, I = true })
 
-opt.signcolumn = "yes"
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
