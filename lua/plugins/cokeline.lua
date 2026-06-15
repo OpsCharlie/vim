@@ -91,11 +91,12 @@ return {
         },
       },
     })
+
+    vim.keymap.set("n", "<S-TAB>", function()
+      require("cokeline.mappings").by_step("focus", -1)
+    end, { desc = "Previous buffer" })
+    vim.keymap.set("n", "<TAB>", function()
+      require("cokeline.mappings").by_step("focus", 1)
+    end, { desc = "Next buffer" })
   end,
-  vim.keymap.set("n", "<S-TAB>", function()
-    require("cokeline.mappings").by_step("focus", -1)
-  end, { desc = "Previous buffer" }),
-  vim.keymap.set("n", "<TAB>", function()
-    require("cokeline.mappings").by_step("focus", 1)
-  end, { desc = "Next buffer" }),
 }
