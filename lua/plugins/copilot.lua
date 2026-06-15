@@ -2,7 +2,6 @@ return {
   {
     "github/copilot.vim",
     -- GitHub Copilot for Vim
-    lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     init = function()
       vim.g.copilot_no_tab_map = true
@@ -28,14 +27,11 @@ return {
       {
         "<leader>gc",
         function()
-          require("CopilotChat").open({
+          require("CopilotChat").ask("/Commit", {
             window = {
               layout = "float",
             },
           })
-          vim.schedule(function()
-            require("CopilotChat").ask("/Commit")
-          end)
         end,
         desc = "Commit message (CopilotChat)",
       },
@@ -54,7 +50,9 @@ return {
             prompt = "Quick Chat: ",
           }, function(input)
             if input and input ~= "" then
-              require("CopilotChat").ask(input)
+              require("CopilotChat").ask(input, {
+                selection = require("CopilotChat.select").visual,
+              })
             end
           end)
         end,
@@ -68,7 +66,7 @@ return {
     config = function(_, opts)
       local chat = require("CopilotChat")
 
-      vim.api.nvim_create_autocmd("BufEnter", {
+      vim.api.nvim_create_autocmd("FileType", {
         pattern = "copilot-chat",
         callback = function()
           vim.opt_local.relativenumber = false
