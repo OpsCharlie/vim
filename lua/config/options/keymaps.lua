@@ -1,8 +1,18 @@
 -------------------------------------- keymaps ------------------------------------------
 
 vim.keymap.set("n", "<ESC><ESC>", ":nohlsearch<CR>", { silent = true, desc = "Clear search" })
-vim.keymap.set("n", "<CR>", "i<CR><ESC>", { silent = true, desc = "New line in normal mode" })
-vim.keymap.set("n", "<SPACE>", "i <ESC>l", { silent = true, desc = "Add space in normal mode" })
+vim.keymap.set("n", "<CR>", function()
+  if vim.bo.buftype == "" then
+    return "i<CR><ESC>"
+  end
+  return "<CR>"
+end, { silent = true, expr = true, desc = "New line in normal mode" })
+vim.keymap.set("n", "<SPACE>", function()
+  if vim.bo.buftype == "" then
+    return "i <ESC>l"
+  end
+  return "<SPACE>"
+end, { silent = true, expr = true, desc = "Add space in normal mode" })
 vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Indent line" })
 vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent line" })
 vim.keymap.set("n", "<C-t>", ":tabnext<CR>", { silent = true })
