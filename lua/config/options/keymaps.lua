@@ -27,6 +27,10 @@ vim.keymap.set("n", "<leader>tn", ":exec &nu==&rnu? 'se nu!' : 'se rnu!'<CR>", {
 vim.keymap.set("n", "<leader>tH", ":Hardtime toggle<CR>", { desc = "Hardtime" })
 vim.keymap.set("n", "gp", "`[v`]", { desc = "Previous visual selection" })
 
+-- Native comment toggling (gc/gcc, built in since 0.10)
+vim.keymap.set("n", "<C-e>", "gcc", { remap = true, desc = "Comment toggle current line" })
+vim.keymap.set("v", "<C-e>", "gc", { remap = true, desc = "Comment toggle lines" })
+
 
 vim.keymap.set("n", "dm", function()
   local current_line = vim.fn.line('.')

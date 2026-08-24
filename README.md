@@ -124,7 +124,7 @@ systemdlint
 | `<leader>N`  | n,ft=ansible   | Ansible name all tasks                  |
 | `<leader>a`  | n,ft=ansible   | Insert ansible.builtin.                 |
 | `<leader>ba` | n              | Bookmark Add                            |
-| `<leader>bd` | n              | Buffer Delete                           |
+| `<leader>bd` | n              | Buffer Delete (and file if scratch)     |
 | `<leader>ca` | n              | Code Action LSP / Ansible lint fix      |
 | `<leader>ca` | n,ft=ansible   | Ansible lint fix                        |
 | `<leader>cf` | n              | Code Format File LSP                    |

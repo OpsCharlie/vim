@@ -119,7 +119,7 @@ return {
           end)
         else
           -- Normal buffer delete
-          vim.cmd("bdelete")
+          Snacks.bufdelete()
         end
       end,
       desc = "Delete Buffer (and file if scratch)",

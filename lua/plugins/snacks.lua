@@ -39,8 +39,6 @@ return {
       desc = "Jump to Snacks Explorer"
     },
     { "<leader>:",  function() Snacks.picker.command_history() end,      desc = "Command History" },
-    -- buffer
-    { "<leader>bd", function() Snacks.bufdelete() end,                   desc = "Delete Buffer" },
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end,              desc = "Find Buffers" },
     { "<leader>ff", function() Snacks.picker.files() end,                desc = "Find Files" },
