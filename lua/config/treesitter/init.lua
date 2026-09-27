@@ -23,10 +23,4 @@ return {
     "vim",
     "vimdoc",
   },
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
 }
