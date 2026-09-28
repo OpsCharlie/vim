@@ -1,6 +1,7 @@
 return {
   "folke/persistence.nvim",
   event = "BufReadPre",
+  dependencies = { "folke/snacks.nvim" },
   opts = {},
   init = function()
     local scratch_dir = vim.fn.expand("~/.vim/scratch")

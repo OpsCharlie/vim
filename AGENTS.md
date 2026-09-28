@@ -98,6 +98,11 @@ Each module's config lives in `lua/config/snacks/<module>.lua` and is `require`d
 
 Uses `preset = "telescope"` layout. Custom explorer actions: `my_confirm` (opens dirs in explorer, single file in pick_win), `my_tcd` (tcd from explorer). Input `<Esc>` closes, `/` toggles focus.
 
+## Statusline & Buffers
+
+- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) (`lua/plugins/lualine.lua`) — statusline only. Shows the full file path, colored red when modified / orange when readonly.
+- [bufferline.nvim](https://github.com/akinsho/bufferline.nvim) (`lua/plugins/bufferline.lua`) — tabline/bufferline. Unique names on duplicate filenames (`show_duplicate_prefix`), LSP diagnostics per buffer, close icons, `<Tab>`/`<S-Tab>` to cycle buffers. Modified indicator recolored red via `highlights.modified*`.
+
 ## Completion: blink.cmp
 
 [blink.cmp](https://github.com/saghen/blink.cmp) provides LSP, snippet, path, and buffer completion. Configured in `lua/plugins/completions.lua`.
@@ -124,7 +129,7 @@ Selection: `preselect = false, auto_insert = false`. Documentation auto-shows on
 Uses [mason.nvim](https://github.com/mason-org/mason.nvim) + [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim) + [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim).
 
 - `mason.nvim` — Installs LSP servers, linters, formatters, DAP adapters to `stdpath("data")/mason/`
-- `mason-lspconfig.nvim` — Automatically enables `vim.lsp.config` for installed servers; `automatic_installation = true`
+- `mason-lspconfig.nvim` — Automatically enables `vim.lsp.config` for installed servers; `automatic_enable = true`
 - `mason-tool-installer.nvim` — Ensures the tool list in `lua/config/mason/init.lua` is installed. Run `:MasonToolsInstall`
 
 ### LSP servers installed

@@ -82,7 +82,7 @@ autocmd("FileType", {
 
 autocmd("LspAttach", {
   group = augroup('lsp_attach'),
-  callback = function()
+  callback = function(event)
     vim.diagnostic.config({
       virtual_lines = {
         current_line = true
@@ -107,12 +107,13 @@ autocmd("LspAttach", {
       },
     })
 
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Document" })
-    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP Rename All References" })
-    if vim.bo.filetype ~= "ansible" then
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action LSP" })
+    local buf = event.buf
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf, desc = "Hover Document" })
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = buf, desc = "LSP Rename All References" })
+    if vim.bo[buf].filetype ~= "ansible" then
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = buf, desc = "Action LSP" })
     end
-    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format File LSP" })
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { buffer = buf, desc = "Format File LSP" })
     vim.keymap.set("n", "<leader>D", function()
       local state = vim.g._diagnostic_toggle_state or 1
       -- 1: virtual lines, 2: float, 3: disabled
