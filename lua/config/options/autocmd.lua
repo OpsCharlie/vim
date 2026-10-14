@@ -108,11 +108,13 @@ autocmd("LspAttach", {
     })
 
     local buf = event.buf
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf, desc = "Hover Document" })
-    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = buf, desc = "LSP Rename All References" })
+    -- ansible.lua sets its own buffer-local K (ansible-doc) and <leader>ca
+    -- (ansible-lint) for ansible buffers; don't clobber them here.
     if vim.bo[buf].filetype ~= "ansible" then
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf, desc = "Hover Document" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = buf, desc = "Action LSP" })
     end
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = buf, desc = "LSP Rename All References" })
     vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { buffer = buf, desc = "Format File LSP" })
     vim.keymap.set("n", "<leader>D", function()
       local state = vim.g._diagnostic_toggle_state or 1
